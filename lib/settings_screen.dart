@@ -2,8 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:weatherfast/help_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-class SettingsScreen extends StatelessWidget {
+import 'services/global_data.dart';
+import 'services/preferences_service.dart';
+
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  late bool _useFahrenheit;
+
+  @override
+  void initState() {
+    super.initState();
+    _useFahrenheit = GlobalData.useFahrenheit;
+  }
+
+  Future<void> _toggleUnit(bool value) async {
+    await PreferencesService.saveUseFahrenheit(value);
+    setState(() {
+      _useFahrenheit = value;
+      GlobalData.useFahrenheit = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +36,52 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar.large(
-            title: const Text('Settings'),
-            pinned: true,
-          ),
+          SliverAppBar.large(title: const Text('Settings'), pinned: true),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Units Section
+                  Text(
+                    'Units',
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Card(
+                    child: SwitchListTile(
+                      secondary: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: colorScheme.tertiaryContainer,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.thermostat_rounded,
+                          color: colorScheme.onTertiaryContainer,
+                        ),
+                      ),
+                      title: const Text('Use Fahrenheit'),
+                      subtitle: Text(
+                        _useFahrenheit ? 'Showing °F' : 'Showing °C',
+                      ),
+                      value: _useFahrenheit,
+                      onChanged: _toggleUnit,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
                   // About Section
                   Text(
                     'About',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Card(
@@ -51,8 +104,9 @@ class SettingsScreen extends StatelessWidget {
                             future: PackageInfo.fromPlatform(),
                             builder: (context, snapshot) {
                               return Text(
-                                  "View licenses for open-source packages"
-                                  "${snapshot.hasData ? ' used in WeatherFast ${snapshot.data!.version}' : ''}.");
+                                "View licenses for open-source packages"
+                                "${snapshot.hasData ? ' used in WeatherFast ${snapshot.data!.version}' : ''}.",
+                              );
                             },
                           ),
                           trailing: const Icon(Icons.chevron_right_rounded),
@@ -79,9 +133,9 @@ class SettingsScreen extends StatelessWidget {
                   Text(
                     'Support',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Card(
@@ -128,12 +182,13 @@ class SettingsScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           'WeatherFast',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.onSurface
-                                        .withValues(alpha: 0.6),
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.6,
+                                ),
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         FutureBuilder<PackageInfo>(
@@ -144,12 +199,11 @@ class SettingsScreen extends StatelessWidget {
                             }
                             return Text(
                               'Version ${snapshot.data!.version} (${snapshot.data!.buildNumber})',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
-                                    color: colorScheme.onSurface
-                                        .withValues(alpha: 0.5),
+                                    color: colorScheme.onSurface.withValues(
+                                      alpha: 0.5,
+                                    ),
                                   ),
                             );
                           },

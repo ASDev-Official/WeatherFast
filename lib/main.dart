@@ -4,11 +4,14 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 
 import 'detail_screen.dart';
+import 'services/global_data.dart';
+import 'services/preferences_service.dart';
 import 'settings_screen.dart';
 import 'weather_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   runApp(const WeatherFastApp());
 }
 
@@ -43,9 +46,7 @@ class WeatherFastApp extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         color: colorScheme.surface.withValues(alpha: 0.9),
         surfaceTintColor: surfaceTint,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -62,8 +63,10 @@ class WeatherFastApp extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: colorScheme.primary, width: 1.2),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 14,
+        ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: colorScheme.secondaryContainer,
@@ -93,15 +96,17 @@ class WeatherFastApp extends StatelessWidget {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           side: BorderSide(color: colorScheme.outlineVariant),
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         ),
@@ -149,9 +154,11 @@ class WeatherFastApp extends StatelessWidget {
 
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        final lightScheme = lightDynamic ??
+        final lightScheme =
+            lightDynamic ??
             ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.light);
-        final darkScheme = darkDynamic ??
+        final darkScheme =
+            darkDynamic ??
             ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.dark);
 
         return MaterialApp(
@@ -194,10 +201,7 @@ class _WeatherShellState extends State<WeatherShell> {
 
     return Scaffold(
       extendBody: true,
-      body: IndexedStack(
-        index: _index,
-        children: pages,
-      ),
+      body: IndexedStack(index: _index, children: pages),
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
@@ -210,11 +214,17 @@ class _WeatherShellState extends State<WeatherShell> {
             onDestinationSelected: (value) => setState(() => _index = value),
             destinations: const [
               NavigationDestination(
-                  icon: Icon(Icons.home_rounded), label: 'Home'),
+                icon: Icon(Icons.home_rounded),
+                label: 'Home',
+              ),
               NavigationDestination(
-                  icon: Icon(Icons.timeline_rounded), label: 'Insights'),
+                icon: Icon(Icons.timeline_rounded),
+                label: 'Insights',
+              ),
               NavigationDestination(
-                  icon: Icon(Icons.settings_rounded), label: 'Settings'),
+                icon: Icon(Icons.settings_rounded),
+                label: 'Settings',
+              ),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'services/global_data.dart';
 import 'services/weather_insights_service.dart';
 import 'time_service.dart';
 import 'ui/animated_weather_backdrop.dart';
@@ -126,9 +127,9 @@ class _DetailScreenState extends State<DetailScreen>
         setState(() {
           _isLoading = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load Insights: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to load Insights: $e')));
       }
     }
   }
@@ -154,16 +155,16 @@ class _DetailScreenState extends State<DetailScreen>
       if (mounted) {
         setState(() {
           _insightsSummary = insights['summary'] as String;
-          _recommendations =
-              (insights['recommendations'] as List).cast<String>();
-          _activities =
-              (insights['activities'] as List).cast<Map<String, String>>();
-          _healthTips =
-              (insights['healthTips'] as List).cast<Map<String, String>>();
-          _clothingAdvice =
-              (insights['clothingAdvice'] as Map).cast<String, String>();
-          _hourlyInsights =
-              (insights['hourlyInsights'] as List).cast<Map<String, dynamic>>();
+          _recommendations = (insights['recommendations'] as List)
+              .cast<String>();
+          _activities = (insights['activities'] as List)
+              .cast<Map<String, String>>();
+          _healthTips = (insights['healthTips'] as List)
+              .cast<Map<String, String>>();
+          _clothingAdvice = (insights['clothingAdvice'] as Map)
+              .cast<String, String>();
+          _hourlyInsights = (insights['hourlyInsights'] as List)
+              .cast<Map<String, dynamic>>();
           _weekAhead = (insights['weekAhead'] as Map).cast<String, String>();
           _bestTimes = (insights['bestTimes'] as Map).cast<String, String>();
         });
@@ -185,14 +186,12 @@ class _DetailScreenState extends State<DetailScreen>
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Theme.of(context)
-                      .colorScheme
-                      .tertiaryContainer
-                      .withValues(alpha: 0.6),
-                  Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withValues(alpha: 0.4),
+                  Theme.of(
+                    context,
+                  ).colorScheme.tertiaryContainer.withValues(alpha: 0.6),
+                  Theme.of(
+                    context,
+                  ).colorScheme.primaryContainer.withValues(alpha: 0.4),
                 ],
               ),
             ),
@@ -202,18 +201,19 @@ class _DetailScreenState extends State<DetailScreen>
               children: [
                 Row(
                   children: [
-                    Icon(Icons.lightbulb_outlined,
-                        color: Theme.of(context).colorScheme.primary),
+                    Icon(
+                      Icons.lightbulb_outlined,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Weather Insights',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
+                        style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface),
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                       ),
                     ),
                   ],
@@ -225,41 +225,45 @@ class _DetailScreenState extends State<DetailScreen>
                       ? 'Analyzing conditions...'
                       : _insightsSummary,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                      height: 1.4),
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                    height: 1.4,
+                  ),
                 ),
                 if (_aqi != null && _aqi! > 0) ...[
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Icon(Icons.air_outlined,
-                          color: Theme.of(context).colorScheme.primary),
+                      Icon(
+                        Icons.air_outlined,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Air Quality',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge
-                            ?.copyWith(fontWeight: FontWeight.w600),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '$_aqi • ${_aqiText.isNotEmpty ? _aqiText : 'AQI'}',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimaryContainer,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ],
@@ -268,27 +272,28 @@ class _DetailScreenState extends State<DetailScreen>
                 if (_recommendations.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   // Recommendations
-                  ..._recommendations.map((rec) => Padding(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                rec,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurfaceVariant,
-                                        height: 1.4),
-                              ),
+                  ..._recommendations.map(
+                    (rec) => Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              rec,
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
+                                    height: 1.4,
+                                  ),
                             ),
-                          ],
-                        ),
-                      )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ],
             ),
@@ -311,14 +316,16 @@ class _DetailScreenState extends State<DetailScreen>
             children: [
               Row(
                 children: [
-                  Icon(Icons.directions_walk,
-                      color: Theme.of(context).colorScheme.primary),
+                  Icon(
+                    Icons.directions_walk,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Activity Suggestions',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -343,23 +350,17 @@ class _DetailScreenState extends State<DetailScreen>
                             children: [
                               Text(
                                 activity['title'] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                style: Theme.of(context).textTheme.titleSmall
+                                    ?.copyWith(fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 activity['description'] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
+                                style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurfaceVariant,
                                     ),
                               ),
                             ],
@@ -401,14 +402,16 @@ class _DetailScreenState extends State<DetailScreen>
             children: [
               Row(
                 children: [
-                  Icon(Icons.health_and_safety,
-                      color: Theme.of(context).colorScheme.primary),
+                  Icon(
+                    Icons.health_and_safety,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Health & Safety',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -449,9 +452,7 @@ class _DetailScreenState extends State<DetailScreen>
                             children: [
                               Text(
                                 tip['title'] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
+                                style: Theme.of(context).textTheme.titleSmall
                                     ?.copyWith(
                                       fontWeight: FontWeight.w600,
                                       color: indicatorColor,
@@ -460,13 +461,11 @@ class _DetailScreenState extends State<DetailScreen>
                               const SizedBox(height: 4),
                               Text(
                                 tip['description'] ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
+                                style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurfaceVariant,
                                     ),
                               ),
                             ],
@@ -507,20 +506,20 @@ class _DetailScreenState extends State<DetailScreen>
                     Text(
                       'What to Wear',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSecondaryContainer,
-                          ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSecondaryContainer,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       _clothingAdvice['advice'] ?? '',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSecondaryContainer,
-                          ),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSecondaryContainer,
+                      ),
                     ),
                   ],
                 ),
@@ -545,12 +544,17 @@ class _DetailScreenState extends State<DetailScreen>
             children: [
               Text(
                 'Today\'s Timeline',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               ..._hourlyInsights.map((insight) {
+                final tempC = (insight['temp'] as num?)?.toDouble() ?? 0;
+                final displayTemp = GlobalData.useFahrenheit
+                    ? ((tempC * 9 / 5) + 32).round()
+                    : tempC.round();
+                final unit = GlobalData.useFahrenheit ? 'F' : 'C';
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Row(
@@ -558,40 +562,46 @@ class _DetailScreenState extends State<DetailScreen>
                       Container(
                         width: 80,
                         padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
+                          vertical: 8,
+                          horizontal: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Text(
-                          insight['time'] ?? '',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimaryContainer,
-                                  ),
-                          textAlign: TextAlign.center,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            insight['time'] ?? '',
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimaryContainer,
+                                ),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        '${insight['temp']}°',
+                        '$displayTemp°$unit',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
                           insight['insight'] ?? '',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                         ),
                       ),
                     ],
@@ -619,16 +629,17 @@ class _DetailScreenState extends State<DetailScreen>
             children: [
               Row(
                 children: [
-                  Icon(Icons.calendar_month,
-                      color: Theme.of(context).colorScheme.onTertiaryContainer),
+                  Icon(
+                    Icons.calendar_month,
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     'Week Ahead',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color:
-                              Theme.of(context).colorScheme.onTertiaryContainer,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onTertiaryContainer,
+                    ),
                   ),
                 ],
               ),
@@ -636,9 +647,9 @@ class _DetailScreenState extends State<DetailScreen>
               Text(
                 _weekAhead['summary'] ?? '',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onTertiaryContainer,
-                      height: 1.5,
-                    ),
+                  color: Theme.of(context).colorScheme.onTertiaryContainer,
+                  height: 1.5,
+                ),
               ),
             ],
           ),
@@ -676,16 +687,15 @@ class _DetailScreenState extends State<DetailScreen>
                     Text(
                       _bestTimes['title'] ?? '',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       _bestTimes['description'] ?? '',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
@@ -787,11 +797,10 @@ class _DetailScreenState extends State<DetailScreen>
               Text(
                 _locationName!,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.7),
-                    ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
               ),
           ],
         ),

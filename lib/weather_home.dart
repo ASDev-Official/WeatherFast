@@ -51,10 +51,9 @@ class _WeatherHomeState extends State<WeatherHome> {
                   height: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 ),
-                backgroundColor: Theme.of(context)
-                    .colorScheme
-                    .surface
-                    .withValues(alpha: 0.9),
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surface.withValues(alpha: 0.9),
               ),
             ),
           ),
@@ -77,8 +76,9 @@ class _WeatherHomeState extends State<WeatherHome> {
         _weatherData = GlobalData.preloadedWeatherData;
         _forecastData = GlobalData.preloadedForecastData;
         _currentLocation = _weatherData?['location']?['name'];
-        _localTime =
-            DateTime.tryParse(_weatherData?['location']?['localtime'] ?? '');
+        _localTime = DateTime.tryParse(
+          _weatherData?['location']?['localtime'] ?? '',
+        );
         _isDaytime = _weatherData?['current']?['is_day'] == 1;
       });
       GlobalData.hasPreloaded = false;
@@ -128,9 +128,9 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   void _showError(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> _onRefresh() async {
@@ -256,12 +256,19 @@ class _WeatherHomeState extends State<WeatherHome> {
     final condition =
         _weatherData?['current']?['condition']?['text'] ?? 'Clear';
     final isDaytime = _isDaytime ?? true;
-    final temp = _weatherData?['current']?['temp_c'];
+    final useFahrenheit = GlobalData.useFahrenheit;
+    final temp = useFahrenheit
+        ? _weatherData?['current']?['temp_f']
+        : _weatherData?['current']?['temp_c'];
     final today =
         _firstOrNull(_forecastData?['forecast']?['forecastday'] as List?)
             as Map?;
-    final maxToday = today?['day']?['maxtemp_c'];
-    final minToday = today?['day']?['mintemp_c'];
+    final maxToday = useFahrenheit
+        ? today?['day']?['maxtemp_f']
+        : today?['day']?['maxtemp_c'];
+    final minToday = useFahrenheit
+        ? today?['day']?['mintemp_f']
+        : today?['day']?['mintemp_c'];
 
     // AppBar fade animation
 
@@ -308,8 +315,8 @@ class _WeatherHomeState extends State<WeatherHome> {
                     Text(
                       '${DateFormat('EEEE, MMM d').format(_localTime!)} • ${DateFormat('h:mm a').format(_localTime!)}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                 ],
               ),
@@ -360,19 +367,11 @@ class _WeatherHomeState extends State<WeatherHome> {
                   ),
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    sliver: SliverToBoxAdapter(
-                      child: _buildMetricsGrid(),
-                    ),
+                    sliver: SliverToBoxAdapter(child: _buildMetricsGrid()),
                   ),
-                  SliverToBoxAdapter(
-                    child: _buildHourlyStrip(),
-                  ),
-                  SliverToBoxAdapter(
-                    child: _buildDailyForecast(),
-                  ),
-                  SliverToBoxAdapter(
-                    child: _buildInsights(),
-                  ),
+                  SliverToBoxAdapter(child: _buildHourlyStrip()),
+                  SliverToBoxAdapter(child: _buildDailyForecast()),
+                  SliverToBoxAdapter(child: _buildInsights()),
                   const SliverToBoxAdapter(child: SizedBox(height: 24)),
                 ],
               ),
@@ -443,11 +442,10 @@ class _WeatherHomeState extends State<WeatherHome> {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Text(
-                              DateFormat('EEE, MMM d • h:mm a')
-                                  .format(localDateTime),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
+                              DateFormat(
+                                'EEE, MMM d • h:mm a',
+                              ).format(localDateTime),
+                              style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: scheme.onSurfaceVariant),
                             ),
                           ],
@@ -469,10 +467,10 @@ class _WeatherHomeState extends State<WeatherHome> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        temp != null ? '${temp.round()}°' : '--',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
+                        temp != null
+                            ? '${temp.round()}°${GlobalData.useFahrenheit ? 'F' : 'C'}'
+                            : '--',
+                        style: Theme.of(context).textTheme.displayMedium
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(width: 12),
@@ -484,9 +482,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                               'H ${high != null ? high.round() : '--'}°  ·  L ${low != null ? low.round() : '--'}°',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
+                              style: Theme.of(context).textTheme.titleMedium
                                   ?.copyWith(color: scheme.onSurfaceVariant),
                             ),
                             const SizedBox(height: 6),
@@ -494,9 +490,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                               _insightForWeather(condition),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
+                              style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(color: scheme.primary),
                             ),
                           ],
@@ -520,7 +514,8 @@ class _WeatherHomeState extends State<WeatherHome> {
     final items = [
       _MetricTile(
         label: 'Feels like',
-        value: '${current['feelslike_c']?.round() ?? '--'}°',
+        value:
+            '${(GlobalData.useFahrenheit ? current['feelslike_f'] : current['feelslike_c'])?.round() ?? '--'}°${GlobalData.useFahrenheit ? 'F' : 'C'}',
         icon: Icons.thermostat,
       ),
       _MetricTile(
@@ -558,10 +553,12 @@ class _WeatherHomeState extends State<WeatherHome> {
       spacing: 12,
       runSpacing: 12,
       children: items
-          .map((item) => SizedBox(
-                width: (MediaQuery.of(context).size.width - 16 * 2 - 12) / 2,
-                child: item,
-              ))
+          .map(
+            (item) => SizedBox(
+              width: (MediaQuery.of(context).size.width - 16 * 2 - 12) / 2,
+              child: item,
+            ),
+          )
           .toList(),
     );
   }
@@ -573,7 +570,7 @@ class _WeatherHomeState extends State<WeatherHome> {
 
     final locationTime =
         DateTime.tryParse(_weatherData?['location']?['localtime'] ?? '') ??
-            DateTime.now();
+        DateTime.now();
     final now = DateTime.now();
 
     // Group hourly data by day
@@ -586,10 +583,7 @@ class _WeatherHomeState extends State<WeatherHome> {
           final dateKey =
               '${hourTime.year}-${hourTime.month.toString().padLeft(2, '0')}-${hourTime.day.toString().padLeft(2, '0')}';
           hoursByDay.putIfAbsent(dateKey, () => []);
-          hoursByDay[dateKey]!.add({
-            'time': hourTime,
-            'data': hour,
-          });
+          hoursByDay[dateKey]!.add({'time': hourTime, 'data': hour});
         }
       }
     }
@@ -637,7 +631,9 @@ class _WeatherHomeState extends State<WeatherHome> {
         for (var hourEntry in hours) {
           final hourTime = hourEntry['time'] as DateTime;
           final hourData = hourEntry['data'];
-          final temp = hourData['temp_c'];
+          final temp = GlobalData.useFahrenheit
+              ? hourData['temp_f']
+              : hourData['temp_c'];
           final condition = hourData['condition']['text'] as String;
           final precip =
               hourData['chance_of_rain'] ?? hourData['chance_of_snow'] ?? 0;
@@ -646,6 +642,7 @@ class _WeatherHomeState extends State<WeatherHome> {
             _ForecastChip(
               label: DateFormat('h a').format(hourTime),
               value: '${temp.round()}°',
+
               icon: _iconForCondition(condition),
               caption: '$precip% precip',
             ),
@@ -663,11 +660,15 @@ class _WeatherHomeState extends State<WeatherHome> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
-                Icon(Icons.access_time,
-                    color: Theme.of(context).colorScheme.primary),
+                Icon(
+                  Icons.access_time,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 const SizedBox(width: 8),
-                Text('Hourly Forecast',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Hourly Forecast',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ],
             ),
           ),
@@ -704,18 +705,26 @@ class _WeatherHomeState extends State<WeatherHome> {
         children: [
           Row(
             children: [
-              Icon(Icons.calendar_month,
-                  color: Theme.of(context).colorScheme.primary),
+              Icon(
+                Icons.calendar_month,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               const SizedBox(width: 8),
-              Text('Next 6 days',
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Next 6 days',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ],
           ),
           const SizedBox(height: 12),
           ...list.map((day) {
             final date = DateTime.parse(day['date']);
-            final hi = day['day']['maxtemp_c'];
-            final lo = day['day']['mintemp_c'];
+            final hi = GlobalData.useFahrenheit
+                ? day['day']['maxtemp_f']
+                : day['day']['maxtemp_c'];
+            final lo = GlobalData.useFahrenheit
+                ? day['day']['mintemp_f']
+                : day['day']['mintemp_c'];
             final condition = day['day']['condition']['text'] as String;
             final rain = day['day']['daily_chance_of_rain'];
 
@@ -729,7 +738,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                 subtitle: '$rain% precip',
               ),
             );
-          })
+          }),
         ],
       ),
     );
@@ -751,11 +760,15 @@ class _WeatherHomeState extends State<WeatherHome> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.lightbulb,
-                      color: Theme.of(context).colorScheme.primary),
+                  Icon(
+                    Icons.lightbulb,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(width: 8),
-                  Text('Today’s suggestion',
-                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    'Today’s suggestion',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -765,9 +778,10 @@ class _WeatherHomeState extends State<WeatherHome> {
                 Text(
                   futureAdvice,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ]
+              ],
             ],
           ),
         ),
@@ -860,7 +874,8 @@ class _CollapsibleDateHeader extends StatelessWidget {
     final isToday =
         date.year == now.year && date.month == now.month && date.day == now.day;
     final tomorrow = now.add(const Duration(days: 1));
-    final isTomorrow = date.year == tomorrow.year &&
+    final isTomorrow =
+        date.year == tomorrow.year &&
         date.month == tomorrow.month &&
         date.day == tomorrow.day;
 
@@ -903,9 +918,9 @@ class _CollapsibleDateHeader extends StatelessWidget {
                 Text(
                   dateLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: scheme.onPrimaryContainer,
-                      ),
+                    fontWeight: FontWeight.bold,
+                    color: scheme.onPrimaryContainer,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -954,10 +969,9 @@ class _MetricTile extends StatelessWidget {
                   Text(label, style: Theme.of(context).textTheme.bodyMedium),
                   Text(
                     value,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
@@ -1002,20 +1016,18 @@ class _ForecastChip extends StatelessWidget {
                   const SizedBox(width: 6),
                   Text(
                     value,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 6),
               Text(
                 caption,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: scheme.onSurfaceVariant),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: scheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -1051,10 +1063,9 @@ class _DailyTile extends StatelessWidget {
         subtitle: Text(subtitle),
         trailing: Text(
           '${hi != null ? hi.round() : '--'}° / ${lo != null ? lo.round() : '--'}°',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
       ),
     );
