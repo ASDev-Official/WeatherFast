@@ -8,8 +8,8 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    const featureRequestUrl = 'https://forms.gle/yWgLvBr2vMagmFbQ8';
-    const bugReportUrl = 'https://forms.gle/vmdA2oyWtLtDu8jA8';
+    const featureRequestUrl = 'https://asdev.fillout.com/wf-fr';
+    const bugReportUrl = 'https://asdev.fillout.com/wf-br';
 
     final List<Map<String, dynamic>> items = [
       {
@@ -46,9 +46,9 @@ class HelpScreen extends StatelessWidget {
                   Text(
                     'Support',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Card(
@@ -61,10 +61,7 @@ class HelpScreen extends StatelessWidget {
                               color: item['color'],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Icon(
-                              item['icon'],
-                              color: item['iconColor'],
-                            ),
+                            child: Icon(item['icon'], color: item['iconColor']),
                           ),
                           title: Text(item['title']),
                           subtitle: Text(item['subtitle']),
@@ -94,12 +91,13 @@ class HelpScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         Text(
                           'WeatherFast',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.onSurface
-                                        .withValues(alpha: 0.6),
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: colorScheme.onSurface.withValues(
+                                  alpha: 0.6,
+                                ),
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ],
                     ),
