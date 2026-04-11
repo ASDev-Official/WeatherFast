@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Widget Text Colors -->
+    <color name="widget_text_primary">#FFFFFF</color>
+    <color name="widget_text_secondary">#CCCCCC</color>
+    <color name="widget_text_tertiary">#666666</color>
+
+    <!-- Widget Icon Color -->
+    <color name="widget_icon_color">#F3CD3D</color>
+
+    <!-- Widget Padding and Sizing -->
+    <dimen name="widget_padding">12dp</dimen>
+    <dimen name="widget_card_padding">10dp</dimen>
+    <dimen name="widget_section_margin">12dp</dimen>
+
+    <!-- Header Sizing -->
+    <dimen name="widget_header_location_size">16sp</dimen>
+    <dimen name="widget_header_condition_size">12sp</dimen>
+    <dimen name="widget_header_temp_size">32sp</dimen>
+    <dimen name="widget_header_high_low_size">11sp</dimen>
+
+    <!-- Section Title Sizing -->
+    <dimen name="widget_section_title_size">14sp</dimen>
+
+    <!-- Hourly Card Sizing -->
+    <dimen name="widget_hourly_card_width">100dp</dimen>
+    <dimen name="widget_hourly_time_size">11sp</dimen>
+    <dimen name="widget_hourly_temp_size">13sp</dimen>
+    <dimen name="widget_hourly_caption_size">9sp</dimen>
+
+    <!-- Daily Card Sizing -->
+    <dimen name="widget_daily_name_size">12sp</dimen>
+    <dimen name="widget_daily_temp_size">12sp</dimen>
+    <dimen name="widget_daily_caption_size">10sp</dimen>
+</resources>

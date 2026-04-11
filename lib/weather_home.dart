@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 import 'services/global_data.dart';
+import 'services/widget_refresh_service.dart';
 import 'time_service.dart';
 import 'ui/animated_weather_backdrop.dart';
 import 'weather_service.dart';
@@ -168,6 +169,10 @@ class _WeatherHomeState extends State<WeatherHome> {
         _localTime = localTime;
         _isDaytime = isDaytime;
       });
+      await WidgetRefreshService.storeAndRefresh(
+        weatherData: weather,
+        useFahrenheit: GlobalData.useFahrenheit,
+      );
       // Notify parent of location change
       if (locationName != null && locationName.isNotEmpty) {
         widget.onLocationSelected(locationName);

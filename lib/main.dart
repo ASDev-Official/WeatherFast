@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'detail_screen.dart';
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
+import 'services/widget_refresh_service.dart';
 import 'settings_screen.dart';
 import 'weather_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await WidgetRefreshService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   runApp(const WeatherFastApp());
 }

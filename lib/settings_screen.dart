@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:weatherfast/help_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
+import 'services/widget_refresh_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -14,6 +16,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool _useFahrenheit;
+  bool _isRefreshingWidgets = false;
 
   @override
   void initState() {
@@ -23,10 +26,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _toggleUnit(bool value) async {
     await PreferencesService.saveUseFahrenheit(value);
+    await WidgetRefreshService.refreshFromBackground();
     setState(() {
       _useFahrenheit = value;
       GlobalData.useFahrenheit = value;
     });
+  }
+
+  Future<void> _forceRefreshWidgets() async {
+    if (_isRefreshingWidgets) {
+      return;
+    }
+
+    setState(() {
+      _isRefreshingWidgets = true;
+    });
+
+    try {
+      await WidgetRefreshService.refreshFromBackground();
+      if (!mounted) {
+        return;
+      }
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Widgets refreshed')));
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Widget refresh failed: $error')));
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isRefreshingWidgets = false;
+        });
+      }
+    }
   }
 
   @override
@@ -128,6 +167,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
+
+                  if (kDebugMode) ...[
+                    Text(
+                      'Debug',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Card(
+                      child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.sync_rounded,
+                            color: colorScheme.onErrorContainer,
+                          ),
+                        ),
+                        title: const Text('Force refresh widgets'),
+                        subtitle: const Text(
+                          'Reload widget data (USE SPARINGLY!!!)',
+                        ),
+                        trailing: _isRefreshingWidgets
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Icon(Icons.chevron_right_rounded),
+                        onTap: _isRefreshingWidgets
+                            ? null
+                            : _forceRefreshWidgets,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
 
                   // Support Section
                   Text(

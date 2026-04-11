@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/weather_widget_small_description"
+    android:initialLayout="@layout/weather_widget_host"
+    android:configure="com.aadishsamir.weatherfast.WeatherWidgetConfigureActivity"
+    android:minWidth="110dp"
+    android:minHeight="90dp"
+    android:previewImage="@mipmap/ic_launcher"
+    android:previewLayout="@layout/weather_widget_preview_small"
+    android:resizeMode="none"
+    android:widgetFeatures="reconfigurable"
+    android:targetCellWidth="2"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen" />

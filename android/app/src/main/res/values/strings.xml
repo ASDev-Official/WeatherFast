@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weather_widget_small_description">WeatherFast compact weather widget</string>
+    <string name="weather_widget_medium_description">WeatherFast medium weather widget</string>
+    <string name="weather_widget_large_description">WeatherFast large weather widget</string>
+</resources>

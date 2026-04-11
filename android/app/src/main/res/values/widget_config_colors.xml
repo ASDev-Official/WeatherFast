@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wf_widget_cfg_surface">#FFF4FAFF</color>
+    <color name="wf_widget_cfg_border">#332A6B8A</color>
+    <color name="wf_widget_cfg_header_start">#FF2F7FAE</color>
+    <color name="wf_widget_cfg_header_end">#FF1B5E86</color>
+    <color name="wf_widget_cfg_header_text">#FFFFFFFF</color>
+    <color name="wf_widget_cfg_body_text">#FF143345</color>
+    <color name="wf_widget_cfg_muted_text">#FF4B6574</color>
+    <color name="wf_widget_cfg_card">#FFFFFFFF</color>
+    <color name="wf_widget_cfg_card_stroke">#1F1F5A78</color>
+    <color name="wf_widget_cfg_button_primary">#FF1E6D9A</color>
+    <color name="wf_widget_cfg_button_primary_text">#FFFFFFFF</color>
+    <color name="wf_widget_cfg_button_secondary">#FFE6F0F8</color>
+    <color name="wf_widget_cfg_button_secondary_text">#FF1A4A66</color>
+</resources>
