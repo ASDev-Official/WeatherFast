@@ -25,7 +25,7 @@ cd asdev-weatherfast
 flutter pub get
 ```
 
-2. Run
+1. Run
 
 ```bash
 flutter run
@@ -50,6 +50,32 @@ Platform targets: android, ios, web, macos, windows (enable the desired platform
 - `lib/ui/` — animated weather backdrop and shared UI pieces
 - `lib/settings_screen.dart` — settings, license, help
 - `assets/` — icons, backgrounds, profile art
+
+## Widgets
+
+### In-app Flutter widgets
+
+- `WeatherFastApp` (`lib/main.dart`) initializes app theme and dynamic colors.
+- `WeatherShell` (`lib/main.dart`) hosts the bottom navigation shell (Home, Insights, Settings).
+- `WeatherHome` (`lib/weather_home.dart`) is the main weather screen with search, current conditions, hourly strip, and daily forecast.
+- `DetailScreen` (`lib/detail_screen.dart`) renders AI insights, recommendations, and deeper forecast details.
+- `SettingsScreen` (`lib/settings_screen.dart`) manages app preferences and debug widget refresh actions.
+- `HelpScreen` (`lib/help_screen.dart`) shows support actions and routes to feedback forms.
+- `WebViewScreen` (`lib/webview_screen.dart`) opens external support/reporting links inside the app.
+- `AnimatedWeatherBackdrop` (`lib/ui/animated_weather_backdrop.dart`) paints weather-reactive animated backgrounds.
+
+Reusable UI widgets used in forecast presentation:
+
+- `_CollapsibleDateHeader`, `_MetricTile`, `_ForecastChip`, `_DailyTile` in `lib/weather_home.dart`.
+
+### Home screen widgets (Android/iOS)
+
+WeatherFast also supports platform home screen widgets, powered by `home_widget` and refreshed via `workmanager`.
+
+- Refresh service: `lib/services/widget_refresh_service.dart`
+- Data is stored whenever weather updates are fetched in `WeatherHome`.
+- Periodic background refresh is scheduled every 15 minutes (with connectivity constraints).
+- In debug builds, Settings includes a "Force refresh widgets" action.
 
 ## Notes
 
