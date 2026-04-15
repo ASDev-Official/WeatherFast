@@ -4,9 +4,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 import 'services/global_data.dart';
+import 'services/preferences_service.dart';
+import 'services/weather_cache_service.dart';
 import 'services/widget_refresh_service.dart';
-import 'time_service.dart';
 import 'ui/animated_weather_backdrop.dart';
+import 'ui/open_meteo_attribution.dart';
+import 'time_utils.dart';
 import 'weather_service.dart';
 
 class WeatherHome extends StatefulWidget {
@@ -21,10 +24,10 @@ class WeatherHome extends StatefulWidget {
 class _WeatherHomeState extends State<WeatherHome> {
   OverlayEntry? _updatingOverlay;
   final _weatherService = WeatherService();
-  final _timeService = TimeService();
   final TextEditingController _searchController = TextEditingController();
 
   String? _currentLocation;
+  String? _currentLocationQuery;
   Map<String, dynamic>? _weatherData;
   Map<String, dynamic>? _forecastData;
   DateTime? _localTime;
@@ -72,20 +75,7 @@ class _WeatherHomeState extends State<WeatherHome> {
   @override
   void initState() {
     super.initState();
-    if (GlobalData.hasPreloaded && GlobalData.preloadedWeatherData != null) {
-      setState(() {
-        _weatherData = GlobalData.preloadedWeatherData;
-        _forecastData = GlobalData.preloadedForecastData;
-        _currentLocation = _weatherData?['location']?['name'];
-        _localTime = DateTime.tryParse(
-          _weatherData?['location']?['localtime'] ?? '',
-        );
-        _isDaytime = _weatherData?['current']?['is_day'] == 1;
-      });
-      GlobalData.hasPreloaded = false;
-    } else {
-      _fetchWeatherForCurrentLocation();
-    }
+    _hydrateAndRefresh();
   }
 
   @override
@@ -95,8 +85,58 @@ class _WeatherHomeState extends State<WeatherHome> {
     super.dispose();
   }
 
-  Future<void> _fetchWeatherForCurrentLocation() async {
-    _showUpdatingOverlay();
+  Future<void> _hydrateAndRefresh() async {
+    String? initialQuery;
+    var hasInitialData = false;
+
+    if (GlobalData.hasPreloaded && GlobalData.preloadedWeatherData != null) {
+      hasInitialData = true;
+      if (mounted) {
+        setState(() {
+          _weatherData = GlobalData.preloadedWeatherData;
+          _forecastData = GlobalData.preloadedForecastData;
+          _currentLocation = _weatherData?['location']?['name'];
+          _localTime = _resolveLocalTime(_weatherData);
+          _isDaytime = _weatherData?['current']?['is_day'] == 1;
+        });
+      }
+      initialQuery = await PreferencesService.loadLastLocationQuery();
+      GlobalData.hasPreloaded = false;
+    } else {
+      final snapshot = await WeatherCacheService.loadSnapshot();
+      if (snapshot != null) {
+        hasInitialData = true;
+        initialQuery = snapshot.locationQuery;
+        if (mounted) {
+          setState(() {
+            _weatherData = snapshot.weatherData;
+            _forecastData = snapshot.forecastData;
+            _currentLocation = snapshot.weatherData['location']?['name'];
+            _currentLocationQuery = snapshot.locationQuery;
+            _localTime = _resolveLocalTime(snapshot.weatherData);
+            _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
+          });
+        }
+      }
+
+      initialQuery ??= await PreferencesService.loadLastLocationQuery();
+    }
+
+    if (initialQuery != null && initialQuery.isNotEmpty) {
+      _currentLocationQuery = initialQuery;
+      await _fetchWeather(initialQuery, showOverlay: !hasInitialData);
+      return;
+    }
+
+    await _fetchWeatherForCurrentLocation(showOverlay: !hasInitialData);
+  }
+
+  Future<void> _fetchWeatherForCurrentLocation({
+    bool showOverlay = true,
+  }) async {
+    if (showOverlay) {
+      _showUpdatingOverlay();
+    }
     try {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
@@ -120,11 +160,13 @@ class _WeatherHomeState extends State<WeatherHome> {
         ),
       );
       final coords = '${position.latitude},${position.longitude}';
-      await _fetchWeather(coords);
+      await _fetchWeather(coords, showOverlay: showOverlay);
     } catch (e) {
       _showError('Unable to fetch location weather. Please try again.');
     } finally {
-      _removeUpdatingOverlay();
+      if (showOverlay) {
+        _removeUpdatingOverlay();
+      }
     }
   }
 
@@ -135,30 +177,27 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   Future<void> _onRefresh() async {
-    if (_currentLocation != null) {
+    if (_currentLocationQuery != null) {
+      await _fetchWeather(_currentLocationQuery!);
+    } else if (_currentLocation != null) {
       await _fetchWeather(_currentLocation!);
     } else {
       await _fetchWeatherForCurrentLocation();
     }
   }
 
-  Future<void> _fetchWeather(String location) async {
+  Future<void> _fetchWeather(String location, {bool showOverlay = true}) async {
     if (!mounted) return;
-    _showUpdatingOverlay();
+    if (showOverlay) {
+      _showUpdatingOverlay();
+    }
     setState(() => _isRefreshing = true);
 
     try {
       final weather = await _weatherService.fetchWeather(location);
       final forecast = await _weatherService.fetchForecast(location);
-
-      DateTime? localTime;
-      bool? isDaytime;
-      final tz = weather['location']?['tz_id'] as String?;
-      if (tz != null && tz.isNotEmpty) {
-        final timeData = await _timeService.getTimeForLocation(tz);
-        localTime = timeData['datetime'] as DateTime?;
-        isDaytime = timeData['isDaytime'] as bool?;
-      }
+      final localTime = _resolveLocalTime(weather);
+      final isDaytime = weather['current']?['is_day'] == 1;
 
       if (!mounted) return;
       final locationName = weather['location']?['name'] as String?;
@@ -166,9 +205,16 @@ class _WeatherHomeState extends State<WeatherHome> {
         _weatherData = weather;
         _forecastData = forecast;
         _currentLocation = locationName;
+        _currentLocationQuery = location;
         _localTime = localTime;
         _isDaytime = isDaytime;
       });
+      await PreferencesService.saveLastLocationQuery(location);
+      await WeatherCacheService.saveSnapshot(
+        locationQuery: location,
+        weatherData: weather,
+        forecastData: forecast,
+      );
       await WidgetRefreshService.storeAndRefresh(
         weatherData: weather,
         useFahrenheit: GlobalData.useFahrenheit,
@@ -181,7 +227,9 @@ class _WeatherHomeState extends State<WeatherHome> {
       if (mounted) _showError('Failed to load weather: $e');
     } finally {
       if (mounted) setState(() => _isRefreshing = false);
-      _removeUpdatingOverlay();
+      if (showOverlay) {
+        _removeUpdatingOverlay();
+      }
     }
   }
 
@@ -377,6 +425,8 @@ class _WeatherHomeState extends State<WeatherHome> {
                   SliverToBoxAdapter(child: _buildHourlyStrip()),
                   SliverToBoxAdapter(child: _buildDailyForecast()),
                   SliverToBoxAdapter(child: _buildInsights()),
+                  if (_weatherData != null)
+                    const SliverToBoxAdapter(child: OpenMeteoAttribution()),
                   const SliverToBoxAdapter(child: SizedBox(height: 24)),
                 ],
               ),
@@ -388,23 +438,28 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   Widget _buildLoadingCard() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Card(
-        child: SizedBox(
-          height: 180,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 12),
-                Text('Loading the sky for you…'),
-              ],
+    return const Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Card(
+            child: SizedBox(
+              height: 180,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 12),
+                    Text('Loading the sky for you…'),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        OpenMeteoAttribution(),
+      ],
     );
   }
 
@@ -573,9 +628,7 @@ class _WeatherHomeState extends State<WeatherHome> {
         _forecastData?['forecast']?['forecastday'] as List? ?? [];
     if (forecastDays.isEmpty) return const SizedBox.shrink();
 
-    final locationTime =
-        DateTime.tryParse(_weatherData?['location']?['localtime'] ?? '') ??
-        DateTime.now();
+    final locationTime = _resolveLocalTime(_weatherData);
     final now = DateTime.now();
 
     // Group hourly data by day
@@ -814,7 +867,7 @@ class _WeatherHomeState extends State<WeatherHome> {
     final hours = _forecastData?['forecast']?['forecastday']?[0]?['hour'] ?? [];
     if (hours.isEmpty) return null;
 
-    final now = _localTime ?? DateTime.now();
+    final now = _localTime ?? _resolveLocalTime(_weatherData);
     final target = now.add(const Duration(hours: 3));
     Map<String, dynamic>? futureHour;
     for (final hour in hours) {
@@ -858,6 +911,16 @@ class _WeatherHomeState extends State<WeatherHome> {
       return Icons.water_rounded;
     }
     return Icons.wb_sunny_rounded;
+  }
+
+  DateTime _resolveLocalTime(Map<String, dynamic>? weatherData) {
+    final tzId = weatherData?['location']?['tz_id']?.toString() ?? '';
+    if (tzId.isNotEmpty) {
+      return TimeUtils.getLocalTime(tzId);
+    }
+
+    final localtime = weatherData?['location']?['localtime']?.toString() ?? '';
+    return DateTime.tryParse(localtime) ?? DateTime.now();
   }
 }
 

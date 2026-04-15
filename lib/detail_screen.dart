@@ -4,6 +4,7 @@ import 'services/global_data.dart';
 import 'services/weather_insights_service.dart';
 import 'time_service.dart';
 import 'ui/animated_weather_backdrop.dart';
+import 'ui/open_meteo_attribution.dart';
 import 'weather_service.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -777,7 +778,18 @@ class _DetailScreenState extends State<DetailScreen>
     if (_isLoading) {
       return Scaffold(
         appBar: animatedAppBar(child: const Text('Insights')),
-        body: const Center(child: CircularProgressIndicator()),
+        body: const SafeArea(
+          child: Column(
+            children: [
+              Spacer(),
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Loading weather insights...'),
+              Spacer(),
+              OpenMeteoAttribution(padding: EdgeInsets.fromLTRB(16, 0, 16, 16)),
+            ],
+          ),
+        ),
       );
     }
 
@@ -834,6 +846,9 @@ class _DetailScreenState extends State<DetailScreen>
                           SliverToBoxAdapter(child: _buildHourlyInsightsCard()),
                           SliverToBoxAdapter(child: _buildHealthTipsCard()),
                           SliverToBoxAdapter(child: _buildWeekAheadCard()),
+                          const SliverToBoxAdapter(
+                            child: OpenMeteoAttribution(),
+                          ),
 
                           const SliverToBoxAdapter(child: SizedBox(height: 24)),
                         ],

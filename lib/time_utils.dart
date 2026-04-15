@@ -12,6 +12,10 @@ class TimeUtils {
   }
 
   static DateTime getLocalTime(String tzId) {
+    if (!_initialized) {
+      tzdata.initializeTimeZones();
+      _initialized = true;
+    }
     final location = tz.getLocation(tzId);
     return tz.TZDateTime.now(location);
   }

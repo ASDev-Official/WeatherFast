@@ -8,10 +8,12 @@ import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/widget_refresh_service.dart';
 import 'settings_screen.dart';
+import 'time_utils.dart';
 import 'weather_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await TimeUtils.initialize();
   await WidgetRefreshService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   runApp(const WeatherFastApp());

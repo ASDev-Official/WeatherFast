@@ -5,6 +5,7 @@ import 'package:workmanager/workmanager.dart';
 
 import 'global_data.dart';
 import 'preferences_service.dart';
+import 'weather_cache_service.dart';
 import '../weather_service.dart';
 
 const String _refreshTaskName = 'weatherfast_widget_refresh';
@@ -362,9 +363,18 @@ class WidgetRefreshService {
     }
 
     final useFahrenheit = await PreferencesService.loadUseFahrenheit();
-    final weatherData = await WeatherService().fetchWeather(location);
+    final weatherService = WeatherService();
+    final weatherData = await weatherService.fetchWeather(location);
+    final forecastData = await weatherService.fetchForecast(location);
 
     GlobalData.useFahrenheit = useFahrenheit;
+
+    await PreferencesService.saveLastLocationQuery(location);
+    await WeatherCacheService.saveSnapshot(
+      locationQuery: location,
+      weatherData: weatherData,
+      forecastData: forecastData,
+    );
 
     await storeAndRefresh(
       weatherData: weatherData,
