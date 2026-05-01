@@ -92,6 +92,7 @@ class SingaporeWeatherService {
         'tz_id': 'Asia/Singapore',
         'localtime': current['localtime'],
       },
+      'source': 'nea',
       'current': currentData,
       'widget_next_hours': hourly,
       'widget_next_days': daily,
