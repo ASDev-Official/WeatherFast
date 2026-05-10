@@ -61,7 +61,7 @@ abstract class WeatherFastWidgetProviderBase(
         val profile = resolveSizeProfile(context, widgetId, widgetOptions)
 
         bindData(context, views, widgetData)
-        applySizeLayout(context, views, profile)
+        applySizeLayout(context, views, profile, widgetData)
         applyResponsiveTextSizes(context, views, profile)
         applyAppearance(context, views, profile)
 
@@ -78,8 +78,7 @@ abstract class WeatherFastWidgetProviderBase(
             views.setInt(R.id.widget_root, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
             views.setInt(R.id.widget_hourly_strip, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
             views.setInt(R.id.widget_hourly_strip_2, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
-            views.setInt(R.id.widget_hourly_strip_3, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
-            views.setInt(R.id.widget_hourly_strip_4, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
+            views.setInt(R.id.widget_hourly_strip_sg, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
             views.setInt(R.id.widget_day_card_1, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
             views.setInt(R.id.widget_day_card_2, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
             views.setInt(R.id.widget_day_card_3, "setBackgroundColor", android.graphics.Color.TRANSPARENT)
@@ -91,8 +90,7 @@ abstract class WeatherFastWidgetProviderBase(
             views.setInt(R.id.widget_root, "setBackgroundResource", R.drawable.weather_widget_gradient_background)
             views.setInt(R.id.widget_hourly_strip, "setBackgroundResource", R.drawable.weather_widget_card_bg)
             views.setInt(R.id.widget_hourly_strip_2, "setBackgroundResource", R.drawable.weather_widget_card_bg)
-            views.setInt(R.id.widget_hourly_strip_3, "setBackgroundResource", R.drawable.weather_widget_card_bg)
-            views.setInt(R.id.widget_hourly_strip_4, "setBackgroundResource", R.drawable.weather_widget_card_bg)
+            views.setInt(R.id.widget_hourly_strip_sg, "setBackgroundResource", R.drawable.weather_widget_card_bg)
             views.setInt(R.id.widget_day_card_1, "setBackgroundResource", R.drawable.weather_widget_card_bg)
             views.setInt(R.id.widget_day_card_2, "setBackgroundResource", R.drawable.weather_widget_card_bg)
             views.setInt(R.id.widget_day_card_3, "setBackgroundResource", R.drawable.weather_widget_card_bg)
@@ -141,10 +139,15 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextColor(R.id.widget_temp, brightColor)
         views.setTextColor(R.id.widget_high_low, dimColor)
 
+        views.setTextColor(R.id.widget_location_sg, brightColor)
+        views.setTextColor(R.id.widget_condition_sg, dimColor)
+        views.setTextColor(R.id.widget_temp_sg, brightColor)
+        views.setTextColor(R.id.widget_high_low_sg, dimColor)
+
         views.setTextColor(R.id.widget_hourly_title, brightColor)
         views.setTextColor(R.id.widget_daily_title, brightColor)
 
-        for (index in 1..24) {
+        for (index in 1..12) {
             val timeId = context.resources.getIdentifier("widget_hour_time_$index", "id", context.packageName)
             if (timeId != 0) views.setTextColor(timeId, dimColor)
 
@@ -153,6 +156,15 @@ abstract class WeatherFastWidgetProviderBase(
 
             val conditionId = context.resources.getIdentifier("widget_hour_condition_$index", "id", context.packageName)
             if (conditionId != 0) views.setTextColor(conditionId, dimColor)
+
+            // Singapore-specific IDs (only 5 rows)
+            if (index <= 5) {
+                val timeSgId = context.resources.getIdentifier("widget_hour_time_sg_$index", "id", context.packageName)
+                if (timeSgId != 0) views.setTextColor(timeSgId, dimColor)
+
+                val conditionSgId = context.resources.getIdentifier("widget_hour_condition_sg_$index", "id", context.packageName)
+                if (conditionSgId != 0) views.setTextColor(conditionSgId, dimColor)
+            }
         }
 
         views.setTextColor(R.id.widget_day_name_1, brightColor)
@@ -172,32 +184,64 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextColor(R.id.widget_day_temp_7, hourlyTempColor)
     }
 
-    private fun applySizeLayout(context: Context, views: RemoteViews, profile: WidgetSizeProfile) {
-        for (index in 1..24) {
+    private fun applySizeLayout(context: Context, views: RemoteViews, profile: WidgetSizeProfile, widgetData: SharedPreferences) {
+        val city = widgetData.getString("wf_location_name", "") ?: ""
+        val isSingapore = city.contains("Singapore", ignoreCase = true)
+        val isColumnar = isSingapore && (widgetFamily == "medium" || widgetFamily == "large")
+
+        if (isColumnar) {
+            views.setViewVisibility(R.id.widget_header, View.GONE)
+            views.setViewVisibility(R.id.widget_header_sg_left, View.VISIBLE)
+        } else {
+            views.setViewVisibility(R.id.widget_header, View.VISIBLE)
+            views.setViewVisibility(R.id.widget_header_sg_left, View.GONE)
+        }
+
+        // Standard hourly cards
+        val showStandardHourly = (!isSingapore || isColumnar) && profile.hourlyCardsVisible > 0
+        for (index in 1..12) {
             val cardId = context.resources.getIdentifier(
                 "widget_hour_card_$index",
                 "id",
                 context.packageName,
             )
             if (cardId != 0) {
-                views.setViewVisibility(cardId, if (profile.hourlyCardsVisible >= index) View.VISIBLE else View.GONE)
+                val shouldShow = showStandardHourly && profile.hourlyCardsVisible >= index
+                views.setViewVisibility(cardId, if (shouldShow) View.VISIBLE else View.GONE)
             }
         }
+        
+        // Singapore-specific hourly rows
+        for (index in 1..5) {
+            val rowId = context.resources.getIdentifier(
+                "widget_hour_sg_row_$index",
+                "id",
+                context.packageName,
+            )
+            if (rowId != 0) {
+                // Show up to 5 rows for Singapore
+                val shouldShow = isSingapore && index <= (profile.hourlyCardsVisible.coerceAtLeast(3))
+                views.setViewVisibility(rowId, if (shouldShow) View.VISIBLE else View.GONE)
+            }
+        }
+
+        views.setViewVisibility(
+            R.id.widget_section_hourly,
+            if (showStandardHourly) View.VISIBLE else View.GONE,
+        )
+        
+        views.setViewVisibility(
+            R.id.widget_section_hourly_sg,
+            if (isSingapore) View.VISIBLE else View.GONE,
+        )
+
         views.setViewVisibility(
             R.id.widget_hourly_strip,
-            if (profile.hourlyCardsVisible > 0) View.VISIBLE else View.GONE,
+            if (showStandardHourly) View.VISIBLE else View.GONE,
         )
         views.setViewVisibility(
             R.id.widget_hourly_strip_2,
-            if (profile.hourlyCardsVisible > 6) View.VISIBLE else View.GONE,
-        )
-        views.setViewVisibility(
-            R.id.widget_hourly_strip_3,
-            if (profile.hourlyCardsVisible > 12) View.VISIBLE else View.GONE,
-        )
-        views.setViewVisibility(
-            R.id.widget_hourly_strip_4,
-            if (profile.hourlyCardsVisible > 18) View.VISIBLE else View.GONE,
+            if (showStandardHourly && profile.hourlyCardsVisible > 6) View.VISIBLE else View.GONE,
         )
 
         val showDaily = profile.dailyCardsVisible > 0
@@ -249,7 +293,7 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextViewTextSize(R.id.widget_high_low, android.util.TypedValue.COMPLEX_UNIT_SP, subHeadingSize - 2)
 
         // Hourly
-        for (index in 1..24) {
+        for (index in 1..12) {
             val timeId = context.resources.getIdentifier(
                 "widget_hour_time_$index",
                 "id",
@@ -275,6 +319,27 @@ abstract class WeatherFastWidgetProviderBase(
             )
             if (conditionId != 0) {
                 views.setTextViewTextSize(conditionId, android.util.TypedValue.COMPLEX_UNIT_SP, hourlyConditionSize)
+            }
+
+            // Singapore-specific IDs (only 5 rows)
+            if (index <= 5) {
+                val timeSgId = context.resources.getIdentifier(
+                    "widget_hour_time_sg_$index",
+                    "id",
+                    context.packageName,
+                )
+                if (timeSgId != 0) {
+                    views.setTextViewTextSize(timeSgId, android.util.TypedValue.COMPLEX_UNIT_SP, hourlyTimeSize)
+                }
+
+                val conditionSgId = context.resources.getIdentifier(
+                    "widget_hour_condition_sg_$index",
+                    "id",
+                    context.packageName,
+                )
+                if (conditionSgId != 0) {
+                    views.setTextViewTextSize(conditionSgId, android.util.TypedValue.COMPLEX_UNIT_SP, hourlyConditionSize + 1)
+                }
             }
         }
 
@@ -316,7 +381,7 @@ abstract class WeatherFastWidgetProviderBase(
         val effectiveWidthDp = maxOf(minWidthDp, maxWidthDp)
         val effectiveHeightDp = maxOf(minHeightDp, maxHeightDp)
         val widgetSettings = WeatherWidgetConfigStore.load(context, widgetId)
-        val hourlyCardsVisible = widgetSettings.hourlyCards?.coerceIn(0, 24) ?: defaultHourlyCardsVisible(effectiveWidthDp)
+        val hourlyCardsVisible = (widgetSettings.hourlyCards?.coerceIn(0, 12) ?: defaultHourlyCardsVisible(effectiveWidthDp)).coerceAtMost(12)
         val dailyCardsVisible = when (widgetFamily) {
             "large" -> {
                 val dailyUserCap = widgetSettings.dailyCards?.coerceIn(0, 7) ?: 4
@@ -442,7 +507,7 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextViewText(R.id.widget_high_low, highLow)
 
         // Bind hourly data
-        for (index in 1..24) {
+        for (index in 1..12) {
             val hourText = widgetData.getString("wf_hour_$index", "--") ?: "--"
             val hourTemp = widgetData.getString("wf_hour_temp_$index", "--") ?: "--"
             val rawHourCondition = widgetData.getString("wf_hour_condition_$index", "--") ?: "--"
@@ -496,6 +561,36 @@ abstract class WeatherFastWidgetProviderBase(
             )
             if (iconId != 0) {
                 views.setImageViewResource(iconId, iconResForToken(hourGlyph))
+            }
+
+            // Bind to Singapore-specific IDs if index <= 5
+            if (index <= 5) {
+                val timeSgId = context.resources.getIdentifier(
+                    "widget_hour_time_sg_$index",
+                    "id",
+                    context.packageName,
+                )
+                if (timeSgId != 0) {
+                    views.setTextViewText(timeSgId, hourText)
+                }
+
+                val conditionSgId = context.resources.getIdentifier(
+                    "widget_hour_condition_sg_$index",
+                    "id",
+                    context.packageName,
+                )
+                if (conditionSgId != 0) {
+                    views.setTextViewText(conditionSgId, hourCondition)
+                }
+
+                val iconSgId = context.resources.getIdentifier(
+                    "widget_hour_icon_sg_$index",
+                    "id",
+                    context.packageName,
+                )
+                if (iconSgId != 0) {
+                    views.setImageViewResource(iconSgId, iconResForToken(hourGlyph))
+                }
             }
         }
 

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:workmanager/workmanager.dart';
+import 'package:intl/intl.dart';
 
 import 'global_data.dart';
 import 'preferences_service.dart';
@@ -151,46 +152,23 @@ class WidgetRefreshService {
       }
       lastHourlySource = source;
 
-      if (displayTime.isNotEmpty) {
-        // Handle NEA Ranged Periods for Singapore - using 2 forecast spaces
-        String from = displayTime;
-        String to = '';
-        if (displayTime.contains(' to ')) {
-          final parts = displayTime.split(' to ');
-          from = parts[0].trim();
-          to = parts[1].trim();
-        }
+      final isSingapore = locationName.toLowerCase().contains('singapore') || 
+                         (item is Map && item['source'] == 'nea');
 
-        String parseTimeShort(String t) {
-          if (t.toLowerCase().contains('midday')) return '12 PM';
-          if (t.toLowerCase().contains('midnight')) return '12 AM';
-          final match = RegExp(r'(\d{1,2})\s*([aApP][mM])').firstMatch(t);
-          if (match != null) {
-            return '${match.group(1)} ${match.group(2)!.toUpperCase()}';
-          }
-          // Fallback if parsing fails
-          return t.length > 8 ? t.substring(0, 8) : t;
-        }
-
-        final fromLabel = parseTimeShort(from);
-        final toLabel = to.isNotEmpty ? parseTimeShort(to) : '';
-
-        // Space 1: From
-        hourlyTemps.add('From');
-        hourlyLabels.add(fromLabel);
-        hourlyIcons.add(
-          item['glyph']?.toString() ??
-              _glyphForCondition(conditionText),
-        );
-        hourlyConditions.add(conditionText);
-
-        // Space 2: To
-        if (hourlyLabels.length < 24 && toLabel.isNotEmpty) {
-          hourlyTemps.add('To');
-          hourlyLabels.add(toLabel);
+      if (isSingapore) {
+        final startTime = parsedTime ?? DateTime.tryParse(timeRaw) ?? DateTime.now();
+        final endTime = item['end'] != null
+            ? DateTime.tryParse(item['end'].toString())
+            : startTime.add(const Duration(hours: 1));
+        
+        if (endTime != null) {
+          final startStr = DateFormat('h a d MMM').format(startTime);
+          final endStr = DateFormat('h a d MMM').format(endTime);
+          
+          hourlyLabels.add('$startStr - $endStr');
+          hourlyTemps.add(''); // Only one information, so we clear the temp space
           hourlyIcons.add(
-            item['glyph']?.toString() ??
-                _glyphForCondition(conditionText),
+            item['glyph']?.toString() ?? _glyphForCondition(conditionText),
           );
           hourlyConditions.add(conditionText);
         }

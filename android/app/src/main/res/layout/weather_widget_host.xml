@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingStart="12dp">
+            android:paddingLeft="12dp">
 
             <TextView
                 android:id="@+id/widget_temp"
@@ -67,6 +67,339 @@
                 android:text="-- / --"
                 android:textColor="#CADAEA"
                 android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/widget_header_sg_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:orientation="vertical"
+            android:paddingEnd="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/widget_location_sg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="WeatherFast"
+                android:textColor="#F4FAFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_condition_sg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="--"
+                android:textColor="#CADAEA"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/widget_temp_sg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="--"
+                android:textColor="#F4FAFF"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_high_low_sg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-- / --"
+                android:textColor="#CADAEA"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/widget_section_hourly_sg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/widget_hourly_title_sg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hourly Forecast"
+            android:textColor="#F4FAFF"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/widget_hourly_strip_sg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/weather_widget_card_bg"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:id="@+id/widget_hour_sg_row_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/widget_hour_time_sg_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_hour_icon_sg_1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wf_partly"
+                        android:tint="#F3CD3D" />
+
+                    <TextView
+                        android:id="@+id/widget_hour_condition_sg_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="--"
+                        android:textColor="#EAF3FB"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#22FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_hour_sg_row_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/widget_hour_time_sg_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_hour_icon_sg_2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wf_partly"
+                        android:tint="#F3CD3D" />
+
+                    <TextView
+                        android:id="@+id/widget_hour_condition_sg_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="--"
+                        android:textColor="#EAF3FB"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#22FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_hour_sg_row_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/widget_hour_time_sg_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_hour_icon_sg_3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wf_partly"
+                        android:tint="#F3CD3D" />
+
+                    <TextView
+                        android:id="@+id/widget_hour_condition_sg_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="--"
+                        android:textColor="#EAF3FB"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#22FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_hour_sg_row_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/widget_hour_time_sg_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_hour_icon_sg_4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wf_partly"
+                        android:tint="#F3CD3D" />
+
+                    <TextView
+                        android:id="@+id/widget_hour_condition_sg_4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="--"
+                        android:textColor="#EAF3FB"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#22FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_hour_sg_row_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/widget_hour_time_sg_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_hour_icon_sg_5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_wf_partly"
+                        android:tint="#F3CD3D" />
+
+                    <TextView
+                        android:id="@+id/widget_hour_condition_sg_5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="--"
+                        android:textColor="#EAF3FB"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -137,10 +470,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -186,10 +516,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -235,10 +562,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -284,10 +608,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -333,10 +654,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -382,10 +700,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
         </LinearLayout>
@@ -442,10 +757,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -491,10 +803,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -540,10 +849,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -589,10 +895,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -638,10 +941,7 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -687,622 +987,12 @@
                     android:text="--"
                     android:textColor="#CADAEA"
                     android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
+                    android:gravity="center" />
 
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/widget_hourly_strip_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/weather_widget_card_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_13"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_13"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_14"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_14"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_15"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_15"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_16"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_16"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_17"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_17"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_18"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_18"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/widget_hourly_strip_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/weather_widget_card_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_19"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_19"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_20"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_20"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_21"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_21"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_22"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_22"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_23"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_23"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/widget_hour_card_24"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/widget_hour_temp_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#EAF3FB"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/widget_hour_time_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/widget_hour_icon_24"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:src="@drawable/ic_wf_partly"
-                    android:tint="#F3CD3D" />
-
-                <TextView
-                    android:id="@+id/widget_hour_condition_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textColor="#CADAEA"
-                    android:textSize="9sp"
-                    android:gravity="center"
-                    android:textAlignment="center" />
-
-                
-
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -1329,11 +1019,10 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1347,7 +1036,7 @@
                 android:id="@+id/widget_day_name_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Mon"
                 android:textColor="#F4FAFF"
@@ -1371,11 +1060,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1389,7 +1077,7 @@
                 android:id="@+id/widget_day_name_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Tue"
                 android:textColor="#F4FAFF"
@@ -1413,11 +1101,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1431,7 +1118,7 @@
                 android:id="@+id/widget_day_name_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Wed"
                 android:textColor="#F4FAFF"
@@ -1455,11 +1142,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1473,7 +1159,7 @@
                 android:id="@+id/widget_day_name_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Thu"
                 android:textColor="#F4FAFF"
@@ -1497,11 +1183,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1515,7 +1200,7 @@
                 android:id="@+id/widget_day_name_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Fri"
                 android:textColor="#F4FAFF"
@@ -1539,11 +1224,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1557,7 +1241,7 @@
                 android:id="@+id/widget_day_name_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Sat"
                 android:textColor="#F4FAFF"
@@ -1581,11 +1265,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/weather_widget_card_bg"
             android:gravity="center_vertical"
-            android:minHeight="38dp"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
-            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
             android:paddingBottom="6dp">
 
             <ImageView
@@ -1599,7 +1282,7 @@
                 android:id="@+id/widget_day_name_7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Sun"
                 android:textColor="#F4FAFF"
