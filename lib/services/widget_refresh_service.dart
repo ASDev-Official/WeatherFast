@@ -523,14 +523,13 @@ class WidgetRefreshService {
     }
   }
 
-  /// Formats a single DateTime as "28 May\n6 AM" (12hr) or "28 May\n18:00" (24hr).
+  /// Formats a single DateTime as "6 AM" (12hr) or "18:00" (24hr).
   static String _formatHourLabel(DateTime dateTime, bool is24Hour) {
     final local = dateTime.toLocal();
-    final dateStr = DateFormat('d MMM').format(local);
     final timeStr = is24Hour
         ? DateFormat('HH:mm').format(local)
         : DateFormat('h a').format(local);
-    return '$dateStr $timeStr';
+    return timeStr;
   }
 
   /// Formats a Singapore time-range as "28 May\n6 AM – 12 PM" (12hr) or "28 May\n06:00 – 12:00" (24hr).

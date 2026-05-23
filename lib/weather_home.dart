@@ -448,14 +448,20 @@ class _WeatherHomeState extends State<WeatherHome> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: WeatherMapSnippet(
-                          lat: (_weatherData!['location']['lat'] as num).toDouble(),
-                          lng: (_weatherData!['location']['lon'] as num).toDouble(),
+                          lat: (_weatherData!['location']['lat'] as num)
+                              .toDouble(),
+                          lng: (_weatherData!['location']['lon'] as num)
+                              .toDouble(),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => WeatherMapScreen(
-                                  initialLat: (_weatherData!['location']['lat'] as num).toDouble(),
-                                  initialLng: (_weatherData!['location']['lon'] as num).toDouble(),
+                                  initialLat:
+                                      (_weatherData!['location']['lat'] as num)
+                                          .toDouble(),
+                                  initialLng:
+                                      (_weatherData!['location']['lon'] as num)
+                                          .toDouble(),
                                 ),
                               ),
                             );
@@ -498,10 +504,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                     children: [
                       Row(
                         children: [
-                          const Icon(
-                            Icons.wb_sunny,
-                            size: 32,
-                          ),
+                          const Icon(Icons.wb_sunny, size: 32),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
@@ -536,7 +539,9 @@ class _WeatherHomeState extends State<WeatherHome> {
                               children: [
                                 const Text('H 80° · L 60°'),
                                 const SizedBox(height: 6),
-                                const Text('Great light outside. Sunglasses recommended.'),
+                                const Text(
+                                  'Great light outside. Sunglasses recommended.',
+                                ),
                               ],
                             ),
                           ),
@@ -730,16 +735,17 @@ class _WeatherHomeState extends State<WeatherHome> {
         final rawTime = hour['time']?.toString() ?? '';
         final displayTime = hour['display_time']?.toString() ?? '';
         if (rawTime.isEmpty) continue;
-        
+
         final hourTime = DateTime.tryParse(rawTime);
         if (hourTime == null) continue;
 
         bool shouldInclude = false;
         if (displayTime.isNotEmpty) {
           // For NEA period data, include it if it's the current period or a future one
-          // We can check if the current time is before the start of the period, 
+          // We can check if the current time is before the start of the period,
           // or if it's a multi-day forecast where the date is today or later.
-          shouldInclude = true; // For Singapore NEA, we generally want all provided periods
+          shouldInclude =
+              true; // For Singapore NEA, we generally want all provided periods
         } else if (hourTime.isAfter(locationTime)) {
           shouldInclude = true;
         }
@@ -764,11 +770,11 @@ class _WeatherHomeState extends State<WeatherHome> {
       final dateKey = entry.key;
       final hours = entry.value;
       if (hours.isEmpty) continue;
-      
+
       final firstHourTime = hours.first['time'] as DateTime;
       final isExpanded = _expandedDays.contains(dateKey);
       final hasOm = hours.any((h) => h['data']['source'] == 'open-meteo');
-      
+
       // For Singapore, we only show headers for days that have Open-Meteo data
       final showHeader = !isSingapore || hasOm;
 
@@ -801,17 +807,20 @@ class _WeatherHomeState extends State<WeatherHome> {
           if (lastSource != null && lastSource != source) {
             horizontalItems.add(
               _SourceTransitionChip(
-                label: source == 'open-meteo' ? 'Data from Open-Meteo' : 'Data from NEA',
+                label: source == 'open-meteo'
+                    ? 'Data from Open-Meteo'
+                    : 'Data from NEA',
               ),
             );
           }
           lastSource = source;
 
           final hourTime = hourEntry['time'] as DateTime;
-          final condition = hourData['condition']?['text']?.toString() ?? 'Clear';
+          final condition =
+              hourData['condition']?['text']?.toString() ?? 'Clear';
           final precip =
               hourData['chance_of_rain'] ?? hourData['chance_of_snow'] ?? 0;
-          
+
           final String? displayTime = hourData['display_time'];
 
           if (displayTime != null && displayTime.isNotEmpty) {
@@ -841,7 +850,7 @@ class _WeatherHomeState extends State<WeatherHome> {
           }
         }
       } else {
-        // If day is collapsed, update lastSource to the last element's source 
+        // If day is collapsed, update lastSource to the last element's source
         // to detect transitions in subsequent days
         lastSource = hours.last['data']['source'] ?? 'nea';
       }
@@ -877,7 +886,8 @@ class _WeatherHomeState extends State<WeatherHome> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount: horizontalItems.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 12),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 12),
                   itemBuilder: (context, index) => horizontalItems[index],
                 ),
               ],
@@ -890,14 +900,15 @@ class _WeatherHomeState extends State<WeatherHome> {
 
   Widget _buildSgRegionalForecast() {
     final allRanges = _weatherData!['sg_period_ranges'] as List? ?? [];
-    
+
     // Find the range that is currently valid
     final now = DateTime.now().toUtc().add(const Duration(hours: 8));
     final currentRanges = allRanges.where((r) {
       final start = DateTime.tryParse(r['start'] ?? '');
       final end = DateTime.tryParse(r['end'] ?? '');
       if (start == null || end == null) return false;
-      return now.isAfter(start.subtract(const Duration(seconds: 1))) && now.isBefore(end);
+      return now.isAfter(start.subtract(const Duration(seconds: 1))) &&
+          now.isBefore(end);
     }).toList();
 
     if (currentRanges.isEmpty) return const SizedBox.shrink();
@@ -938,7 +949,9 @@ class _WeatherHomeState extends State<WeatherHome> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                     side: BorderSide(
-                      color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant.withValues(alpha: 0.5),
                     ),
                   ),
                   child: Container(
@@ -949,17 +962,21 @@ class _WeatherHomeState extends State<WeatherHome> {
                       children: [
                         Text(
                           regionName,
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           period,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
                         ),
                         const Spacer(),
                         Row(
@@ -967,15 +984,16 @@ class _WeatherHomeState extends State<WeatherHome> {
                             Icon(
                               _iconForCondition(text),
                               size: 20,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant,
                             ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 text,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],
@@ -1076,8 +1094,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       final rain = day['day']['daily_chance_of_rain'];
 
       if (dayMap != null &&
-          (dayMap.containsKey('wind') ||
-              dayMap.containsKey('humidity'))) {
+          (dayMap.containsKey('wind') || dayMap.containsKey('humidity'))) {
         final wind = dayMap['wind'] ?? {};
         final hum = dayMap['humidity'] ?? {};
         items.add(
@@ -1392,9 +1409,9 @@ class _ForecastChip extends StatelessWidget {
           children: [
             Text(
               label,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -1406,24 +1423,24 @@ class _ForecastChip extends StatelessWidget {
                 Text(
                   value,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 4),
             Text(
               condition,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
             ),
             Text(
               caption,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                    fontSize: 10,
-                  ),
+                color: scheme.onSurfaceVariant,
+                fontSize: 10,
+              ),
             ),
           ],
         ),
@@ -1448,7 +1465,7 @@ class _SgPeriodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    
+
     // Parse "From X to Y"
     String from = label;
     String to = '';
@@ -1470,16 +1487,16 @@ class _SgPeriodCard extends StatelessWidget {
             Text(
               from,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: scheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: scheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             if (to.isNotEmpty)
               Text(
                 'to $to',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: scheme.onSurfaceVariant,
-                    ),
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
             const Spacer(),
             Row(
@@ -1494,16 +1511,16 @@ class _SgPeriodCard extends StatelessWidget {
                       Text(
                         condition,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                          fontWeight: FontWeight.w600,
+                        ),
                         // Allow wrapping for long descriptors
                       ),
                       Text(
                         precip,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: scheme.onSurfaceVariant,
-                              fontSize: 10,
-                            ),
+                          color: scheme.onSurfaceVariant,
+                          fontSize: 10,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -1541,12 +1558,16 @@ class _SourceTransitionChip extends StatelessWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: scheme.onSurfaceVariant,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(width: 8),
-            Icon(Icons.arrow_forward_rounded, size: 14, color: scheme.onSurfaceVariant),
+            Icon(
+              Icons.arrow_forward_rounded,
+              size: 14,
+              color: scheme.onSurfaceVariant,
+            ),
           ],
         ),
       ),

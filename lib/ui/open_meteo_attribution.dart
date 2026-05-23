@@ -6,7 +6,7 @@ import '../webview_screen.dart';
 class OpenMeteoAttribution extends StatefulWidget {
   const OpenMeteoAttribution({
     super.key,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.padding = const EdgeInsets.fromLTRB(16, 24, 16, 0),
     this.source = 'open-meteo',
   });
 
@@ -55,7 +55,6 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
     return Padding(
       padding: widget.padding,
       child: Card(
-        margin: const EdgeInsets.only(top: 4, bottom: 8),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           child: Column(
@@ -73,10 +72,10 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                       TextSpan(
                         text: 'Singapore Open Data Licence version 1.0',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          color: Theme.of(context).colorScheme.primary,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                        ),
                         recognizer: _tapGestureRecognizer
                           ..onTap = () => _openLink(_licenceUrl),
                       ),
@@ -107,7 +106,10 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                         ),
                         ActionChip(
                           label: const Text('Data.gov.sg'),
-                          avatar: const Icon(Icons.menu_book_outlined, size: 16),
+                          avatar: const Icon(
+                            Icons.menu_book_outlined,
+                            size: 16,
+                          ),
                           onPressed: () => _openLink(_dataGovUrl),
                         ),
                       ]
@@ -119,7 +121,10 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                         ),
                         ActionChip(
                           label: const Text('API Docs'),
-                          avatar: const Icon(Icons.menu_book_outlined, size: 16),
+                          avatar: const Icon(
+                            Icons.menu_book_outlined,
+                            size: 16,
+                          ),
                           onPressed: () => _openLink(_omDocsUrl),
                         ),
                         ActionChip(
