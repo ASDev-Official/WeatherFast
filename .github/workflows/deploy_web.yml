@@ -7,6 +7,10 @@ jobs:
   deploy:
     name: Build & Deploy to Web Branch
     runs-on: ubuntu-latest
+    permissions:
+      contents: write       # needed for peanut to push the branch
+      pull-requests: write  # needed for gh pr create
+
 
     steps:
       - name: Checkout code
