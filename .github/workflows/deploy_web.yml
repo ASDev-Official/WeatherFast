@@ -8,7 +8,7 @@ jobs:
     name: Build & Deploy to Web Branch
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # needed for peanut to push the branch
+      contents: write       # needed to push the deploy branch
       pull-requests: write  # needed for gh pr create
 
     env:
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0  # Full history needed for peanut to push to branch
+          fetch-depth: 0
 
       - name: Create .env file
         run: echo "MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}" > .env
@@ -37,42 +37,55 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Activate flutter_peanut
-        run: dart pub global activate peanut
-
-      # Pre-create the staging branch from web so peanut's commit has proper
-      # git lineage. Without this, peanut creates an orphan commit (no parent)
-      # which GitHub rejects when trying to open a PR.
-      - name: Pre-create staging branch from web
-        run: |
-          DEPLOY_BRANCH="web-deploy/${{ github.run_number }}"
-          if git ls-remote --exit-code --heads origin web; then
-            git fetch origin web --depth=1
-            git push origin origin/web:refs/heads/"$DEPLOY_BRANCH"
-            echo "Created $DEPLOY_BRANCH from web"
-          else
-            echo "web branch not found — peanut will create an orphan branch"
-          fi
-
-      # peanut builds Flutter web and pushes the output on top of the staging
-      # branch (which shares history with web), making it 1 commit ahead.
+      # Build Flutter web — try WASM first, fall back to standard JS
       - name: Build web (with --wasm)
         id: build_wasm
-        run: dart pub global run peanut -b web-deploy/${{ github.run_number }} --wasm
+        run: flutter build web --wasm
         continue-on-error: true
 
       - name: Build web (fallback without --wasm)
         if: steps.build_wasm.outcome == 'failure'
-        run: dart pub global run peanut -b web-deploy/${{ github.run_number }}
+        run: flutter build web
 
-      - name: Clear .env file
-        run: echo -n > .env
+      # Copy build output somewhere safe before we switch branches
+      - name: Stash build output
+        run: cp -r build/web /tmp/flutter-web-build
+
+      # Blank .env so no secrets end up in the deployed branch
+      - name: Clear .env in build output
+        run: echo -n > /tmp/flutter-web-build/.env
+
+      # Create the deploy branch FROM web so it shares history,
+      # then replace its content with the fresh build output.
+      # This gives GitHub a proper base…head diff for the PR.
+      - name: Push build to staging branch
+        run: |
+          set -e
+          DEPLOY_BRANCH="web-deploy/${{ github.run_number }}"
+
+          if git ls-remote --exit-code --heads origin web; then
+            git fetch origin web --depth=1
+            git checkout -B "$DEPLOY_BRANCH" origin/web
+          else
+            echo "web branch does not exist yet — creating orphan"
+            git checkout --orphan "$DEPLOY_BRANCH"
+          fi
+
+          # Wipe tracked files so we start clean
+          git rm -rf . --quiet || true
+
+          # Copy new build output into the working tree
+          cp -r /tmp/flutter-web-build/. .
+
+          git add -A
+          git commit -m "chore: web build #${{ github.run_number }}"
+          git push origin "$DEPLOY_BRANCH" --force
 
       - name: Open PR from staging branch to web
         run: |
           gh pr create \
             --base web \
-            --head web-deploy/${{ github.run_number }} \
+            --head "web-deploy/${{ github.run_number }}" \
             --title "chore: deploy web build #${{ github.run_number }}" \
             --body "## 🚀 Web Deploy
 
