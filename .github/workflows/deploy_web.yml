@@ -26,6 +26,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Activate flutter_peanut
         run: dart pub global activate peanut
 
@@ -41,10 +46,7 @@ jobs:
       - name: Clear .env file
         run: echo -n > .env
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+
 
       - name: Create pull request to web branch
         uses: peter-evans/create-pull-request@v7
