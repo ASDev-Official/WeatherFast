@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'services/global_data.dart';
 import 'services/weather_insights_service.dart';
@@ -776,23 +777,6 @@ class _DetailScreenState extends State<DetailScreen>
       );
     }
 
-    if (_isLoading) {
-      return Scaffold(
-        appBar: animatedAppBar(child: const Text('Insights')),
-        body: const SafeArea(
-          child: Column(
-            children: [
-              Spacer(),
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Loading weather insights...'),
-              Spacer(),
-            ],
-          ),
-        ),
-      );
-    }
-
     final condition = _condition;
     final isDaytime = _isDaytime;
 
@@ -830,7 +814,24 @@ class _DetailScreenState extends State<DetailScreen>
               onRefresh: _fetchForecast,
               displacement: 32,
               child: _isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Skeletonizer(
+                      enabled: true,
+                      child: CustomScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                        slivers: [
+                          SliverToBoxAdapter(child: _buildAIInsightsCard()),
+                          SliverToBoxAdapter(child: _buildActivityCards()),
+                          SliverToBoxAdapter(child: _buildClothingCard()),
+                          SliverToBoxAdapter(child: _buildBestTimesCard()),
+                          SliverToBoxAdapter(child: _buildHourlyInsightsCard()),
+                          SliverToBoxAdapter(child: _buildHealthTipsCard()),
+                          SliverToBoxAdapter(child: _buildWeekAheadCard()),
+                          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                        ],
+                      ),
+                    )
                   : FadeTransition(
                       opacity: _fadeAnimation,
                       child: CustomScrollView(

@@ -3,6 +3,8 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
+import 'package:skeletonizer/skeletonizer.dart';
+
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/weather_cache_service.dart';
@@ -52,11 +54,6 @@ class _WeatherHomeState extends State<WeatherHome> {
               color: Colors.transparent,
               child: Chip(
                 label: const Text('Updating weather…'),
-                avatar: const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
                 backgroundColor: Theme.of(
                   context,
                 ).colorScheme.surface.withValues(alpha: 0.9),
@@ -112,6 +109,9 @@ class _WeatherHomeState extends State<WeatherHome> {
           _localTime = _resolveLocalTime(_weatherData);
           _isDaytime = _weatherData?['current']?['is_day'] == 1;
         });
+        if (_currentLocation != null && _currentLocation!.isNotEmpty) {
+          widget.onLocationSelected(_currentLocation!);
+        }
       }
       initialQuery = await PreferencesService.loadLastLocationQuery();
       GlobalData.hasPreloaded = false;
@@ -129,6 +129,9 @@ class _WeatherHomeState extends State<WeatherHome> {
             _localTime = _resolveLocalTime(snapshot.weatherData);
             _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
           });
+          if (_currentLocation != null && _currentLocation!.isNotEmpty) {
+            widget.onLocationSelected(_currentLocation!);
+          }
         }
       }
 
@@ -478,27 +481,75 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   Widget _buildLoadingCard() {
-    return const Column(
+    return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Card(
-            child: SizedBox(
-              height: 180,
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 12),
-                    Text('Loading the sky for you…'),
-                  ],
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Skeletonizer(
+            enabled: true,
+            child: Card(
+              child: SizedBox(
+                height: 180,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.wb_sunny,
+                            size: 32,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('Clear'),
+                                const Text('Mon, Jan 1 • 12:00 PM'),
+                              ],
+                            ),
+                          ),
+                          const Chip(
+                            label: Text('Daytime'),
+                            avatar: Icon(Icons.wb_sunny, size: 18),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text(
+                            '72°F',
+                            style: TextStyle(
+                              fontSize: 45,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('H 80° · L 60°'),
+                                const SizedBox(height: 6),
+                                const Text('Great light outside. Sunglasses recommended.'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-        OpenMeteoAttribution(),
+        const OpenMeteoAttribution(),
       ],
     );
   }
