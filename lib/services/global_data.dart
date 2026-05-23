@@ -3,4 +3,5 @@ class GlobalData {
   static Map<String, dynamic>? preloadedWeatherData;
   static Map<String, dynamic>? preloadedForecastData;
   static bool useFahrenheit = false;
+  static double widgetFontScale = 1.0;
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'services/preferences_service.dart';
 import 'package:flutter/foundation.dart';
 

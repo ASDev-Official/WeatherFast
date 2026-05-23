@@ -32,7 +32,7 @@ class WeatherMapView extends StatelessWidget {
             Icon(
               Icons.map_rounded, 
               size: 80, 
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 24),
             Text(

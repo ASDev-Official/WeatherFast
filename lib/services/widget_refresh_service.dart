@@ -95,6 +95,10 @@ class WidgetRefreshService {
     }
 
     final locationName = (weatherData['location']?['name'] ?? '').toString();
+    final country = (weatherData['location']?['country'] ?? '').toString();
+    final isSgWidget = country.toLowerCase().contains('singapore') || locationName.toLowerCase().contains('singapore');
+    await HomeWidget.saveWidgetData<bool>('wf_is_singapore', isSgWidget);
+
     final condition =
         (weatherData['current']?['condition']?['text'] ?? 'Unknown').toString();
     final source = (weatherData['source'] ?? 'open-meteo').toString();
@@ -141,7 +145,7 @@ class WidgetRefreshService {
         continue;
       }
 
-      final displayTime = item['display_time']?.toString() ?? '';
+
       final timeRaw = item['time']?.toString() ?? '';
       final parsedTime = DateTime.tryParse(timeRaw);
       final source = item['source']?.toString() ?? 'nea';
@@ -152,8 +156,7 @@ class WidgetRefreshService {
       }
       lastHourlySource = source;
 
-      final isSingapore = locationName.toLowerCase().contains('singapore') || 
-                         (item is Map && item['source'] == 'nea');
+      final isSingapore = isSgWidget || (item['source'] == 'nea');
 
       if (isSingapore) {
         final startTime = parsedTime ?? DateTime.tryParse(timeRaw) ?? DateTime.now();
@@ -162,8 +165,8 @@ class WidgetRefreshService {
             : startTime.add(const Duration(hours: 1));
         
         if (endTime != null) {
-          final startStr = DateFormat('h a d MMM').format(startTime);
-          final endStr = DateFormat('h a d MMM').format(endTime);
+          final startStr = DateFormat('h a').format(startTime);
+          final endStr = DateFormat('h a').format(endTime);
           
           hourlyLabels.add('$startStr - $endStr');
           hourlyTemps.add(''); // Only one information, so we clear the temp space
@@ -245,6 +248,10 @@ class WidgetRefreshService {
     await HomeWidget.saveWidgetData<String>(_kLocationName, locationName);
     await HomeWidget.saveWidgetData<String>(_kConditionText, condition);
     await HomeWidget.saveWidgetData<String>(_kTemperature, tempLabel);
+    await HomeWidget.saveWidgetData<String>(
+      'wf_font_scale',
+      GlobalData.widgetFontScale.toString(),
+    );
     await HomeWidget.saveWidgetData<String>(
       _kHighLow,
       (highValue == null || lowValue == null)

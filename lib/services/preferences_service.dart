@@ -53,4 +53,14 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble(_kMapRadarOpacity, value);
   }
+
+  static Future<double> loadWidgetFontScale() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble('widget_font_scale') ?? 1.0;
+  }
+
+  static Future<void> saveWidgetFontScale(double value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('widget_font_scale', value);
+  }
 }

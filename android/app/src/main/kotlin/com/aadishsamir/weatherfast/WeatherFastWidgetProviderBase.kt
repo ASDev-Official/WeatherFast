@@ -58,7 +58,7 @@ abstract class WeatherFastWidgetProviderBase(
     ) {
         val views = RemoteViews(context.packageName, R.layout.weather_widget_host)
         val widgetOptions = appWidgetManager.getAppWidgetOptions(widgetId)
-        val profile = resolveSizeProfile(context, widgetId, widgetOptions)
+        val profile = resolveSizeProfile(context, widgetId, widgetOptions, widgetData)
 
         bindData(context, views, widgetData)
         applySizeLayout(context, views, profile, widgetData)
@@ -186,7 +186,8 @@ abstract class WeatherFastWidgetProviderBase(
 
     private fun applySizeLayout(context: Context, views: RemoteViews, profile: WidgetSizeProfile, widgetData: SharedPreferences) {
         val city = widgetData.getString("wf_location_name", "") ?: ""
-        val isSingapore = city.contains("Singapore", ignoreCase = true)
+        val isSgWidget = widgetData.getBoolean("wf_is_singapore", false)
+        val isSingapore = isSgWidget || city.contains("Singapore", ignoreCase = true)
         val isColumnar = isSingapore && (widgetFamily == "medium" || widgetFamily == "large")
 
         if (isColumnar) {
@@ -365,6 +366,7 @@ abstract class WeatherFastWidgetProviderBase(
         context: Context,
         widgetId: Int,
         widgetOptions: Bundle,
+        widgetData: SharedPreferences,
     ): WidgetSizeProfile {
         val minWidthDp = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
             .takeIf { it > 0 }
@@ -395,18 +397,21 @@ abstract class WeatherFastWidgetProviderBase(
         val bump = if (isTransparent) 2f else 0f
         val hourlyBump = if (isTransparent) 1f else 0f
 
+        val fontScaleStr = widgetData.getString("wf_font_scale", "1.0") ?: "1.0"
+        val fontScale = fontScaleStr.toFloatOrNull() ?: 1.0f
+
         return when {
             effectiveHeightDp < 210 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = 14f + bump,
-                subHeadingSize = 10f + bump,
-                tempSize = 28f + bump,
-                hourlyTimeSize = 8f + hourlyBump,
-                hourlyTempSize = 10f + hourlyBump,
-                hourlyConditionSize = 7f + hourlyBump,
-                dailyNameSize = 11f + bump,
-                dailyTempSize = 11f + bump,
+                headingSize = (14f + bump) * fontScale,
+                subHeadingSize = (10f + bump) * fontScale,
+                tempSize = (28f + bump) * fontScale,
+                hourlyTimeSize = (8f + hourlyBump) * fontScale,
+                hourlyTempSize = (10f + hourlyBump) * fontScale,
+                hourlyConditionSize = (7f + hourlyBump) * fontScale,
+                dailyNameSize = (11f + bump) * fontScale,
+                dailyTempSize = (11f + bump) * fontScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
@@ -414,14 +419,14 @@ abstract class WeatherFastWidgetProviderBase(
             effectiveHeightDp < 290 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = 16f + bump,
-                subHeadingSize = 11f + bump,
-                tempSize = 32f + bump,
-                hourlyTimeSize = 9f + hourlyBump,
-                hourlyTempSize = 11f + hourlyBump,
-                hourlyConditionSize = 8f + hourlyBump,
-                dailyNameSize = 12f + bump,
-                dailyTempSize = 12f + bump,
+                headingSize = (16f + bump) * fontScale,
+                subHeadingSize = (11f + bump) * fontScale,
+                tempSize = (32f + bump) * fontScale,
+                hourlyTimeSize = (9f + hourlyBump) * fontScale,
+                hourlyTempSize = (11f + hourlyBump) * fontScale,
+                hourlyConditionSize = (8f + hourlyBump) * fontScale,
+                dailyNameSize = (12f + bump) * fontScale,
+                dailyTempSize = (12f + bump) * fontScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
@@ -429,14 +434,14 @@ abstract class WeatherFastWidgetProviderBase(
             effectiveHeightDp < 360 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = 17f + bump,
-                subHeadingSize = 12f + bump,
-                tempSize = 36f + bump,
-                hourlyTimeSize = 10f + hourlyBump,
-                hourlyTempSize = 12f + hourlyBump,
-                hourlyConditionSize = 9f + hourlyBump,
-                dailyNameSize = 13f + bump,
-                dailyTempSize = 13f + bump,
+                headingSize = (17f + bump) * fontScale,
+                subHeadingSize = (12f + bump) * fontScale,
+                tempSize = (36f + bump) * fontScale,
+                hourlyTimeSize = (10f + hourlyBump) * fontScale,
+                hourlyTempSize = (12f + hourlyBump) * fontScale,
+                hourlyConditionSize = (9f + hourlyBump) * fontScale,
+                dailyNameSize = (13f + bump) * fontScale,
+                dailyTempSize = (13f + bump) * fontScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
@@ -444,14 +449,14 @@ abstract class WeatherFastWidgetProviderBase(
             else -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = 18f + bump,
-                subHeadingSize = 13f + bump,
-                tempSize = 40f + bump,
-                hourlyTimeSize = 11f + hourlyBump,
-                hourlyTempSize = 13f + hourlyBump,
-                hourlyConditionSize = 10f + hourlyBump,
-                dailyNameSize = 14f + bump,
-                dailyTempSize = 14f + bump,
+                headingSize = (18f + bump) * fontScale,
+                subHeadingSize = (13f + bump) * fontScale,
+                tempSize = (40f + bump) * fontScale,
+                hourlyTimeSize = (11f + hourlyBump) * fontScale,
+                hourlyTempSize = (13f + hourlyBump) * fontScale,
+                hourlyConditionSize = (10f + hourlyBump) * fontScale,
+                dailyNameSize = (14f + bump) * fontScale,
+                dailyTempSize = (14f + bump) * fontScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
@@ -505,6 +510,13 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextViewText(R.id.widget_temp, temp)
         views.setTextViewText(R.id.widget_condition, condition)
         views.setTextViewText(R.id.widget_high_low, highLow)
+        
+        // Bind SG header
+        views.setTextViewText(R.id.widget_location_sg, city)
+        views.setTextViewText(R.id.widget_temp_sg, temp)
+        views.setTextViewText(R.id.widget_condition_sg, condition)
+        views.setTextViewText(R.id.widget_high_low_sg, highLow)
+        views.setImageViewResource(R.id.widget_condition_icon_sg, iconResForToken(glyph))
 
         // Bind hourly data
         for (index in 1..12) {

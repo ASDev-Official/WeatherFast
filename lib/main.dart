@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:flutter/foundation.dart';
 
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +30,7 @@ Future<void> main() async {
   await TimeUtils.initialize();
   await WidgetRefreshService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
+  GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
   runApp(const WeatherFastApp());
 }
 

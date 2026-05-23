@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../services/preferences_service.dart';
 
 class WeatherMapView extends StatefulWidget {
   final double initialLat;
@@ -90,7 +89,7 @@ class _WeatherMapViewState extends State<WeatherMapView> {
           key: const ValueKey("mapWidget"),
           onMapCreated: _onMapCreated,
           onStyleLoadedListener: _onStyleLoaded,
-          cameraOptions: CameraOptions(
+          viewport: CameraViewportState(
             center: Point(coordinates: Position(widget.initialLng, widget.initialLat)),
             zoom: 5.0,
           ),

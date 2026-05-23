@@ -77,7 +77,7 @@ class SingaporeWeatherService {
       'pressure_mb': 1010.0,
       'precip_mm': 0.0,
       'vis_km': 10.0,
-      if (psi != null) ...psi,
+      ...?psi,
     };
 
     final regionalOutlook = await fetchRegionalOutlook();
