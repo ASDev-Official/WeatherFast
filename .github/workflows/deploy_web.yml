@@ -54,9 +54,6 @@ jobs:
       - name: Clear .env file
         run: echo -n > .env
 
-      - name: Authenticate gh CLI
-        run: echo "$GH_TOKEN" | gh auth login --with-token
-
       - name: Open PR from staging branch to web
         run: |
           gh pr create \
