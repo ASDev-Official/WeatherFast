@@ -1,0 +1,70 @@
+name: Deploy Web
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy to Web Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Full history needed for peanut to push to web branch
+
+      - name: Create .env file
+        run: echo "MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}" > .env
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.38.5"
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Activate flutter_peanut
+        run: dart pub global activate peanut
+
+      - name: Build web (with --wasm)
+        id: build_wasm
+        run: dart pub global run peanut -b web --wasm
+        continue-on-error: true
+
+      - name: Build web (fallback without --wasm)
+        if: steps.build_wasm.outcome == 'failure'
+        run: dart pub global run peanut -b web
+
+      - name: Remove .env file
+        run: rm -f .env
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create pull request to web branch
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: web-deploy/${{ github.run_number }}
+          base: web
+          title: "chore: deploy web build #${{ github.run_number }}"
+          body: |
+            ## 🚀 Web Deploy
+
+            Automated web build triggered by [@${{ github.actor }}](https://github.com/${{ github.actor }}) via the **Deploy Web** workflow.
+
+            | Detail | Value |
+            |--------|-------|
+            | Run | #${{ github.run_number }} |
+            | Triggered by | @${{ github.actor }} |
+            | Source branch | `${{ github.ref_name }}` |
+            | Build mode | WASM (with fallback to JS) |
+
+            > ⚠️ The `.env` file has been removed from this build. Ensure secrets are managed via GitHub Secrets.
+          delete-branch: true
+          labels: "web-deploy,automated"
