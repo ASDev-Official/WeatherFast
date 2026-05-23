@@ -40,8 +40,22 @@ jobs:
       - name: Activate flutter_peanut
         run: dart pub global activate peanut
 
-      # peanut builds Flutter web and pushes the output to a staging branch.
-      # We target web-deploy/N (not web directly) so there is something to PR.
+      # Pre-create the staging branch from web so peanut's commit has proper
+      # git lineage. Without this, peanut creates an orphan commit (no parent)
+      # which GitHub rejects when trying to open a PR.
+      - name: Pre-create staging branch from web
+        run: |
+          DEPLOY_BRANCH="web-deploy/${{ github.run_number }}"
+          if git ls-remote --exit-code --heads origin web; then
+            git fetch origin web --depth=1
+            git push origin origin/web:refs/heads/"$DEPLOY_BRANCH"
+            echo "Created $DEPLOY_BRANCH from web"
+          else
+            echo "web branch not found — peanut will create an orphan branch"
+          fi
+
+      # peanut builds Flutter web and pushes the output on top of the staging
+      # branch (which shares history with web), making it 1 commit ahead.
       - name: Build web (with --wasm)
         id: build_wasm
         run: dart pub global run peanut -b web-deploy/${{ github.run_number }} --wasm
