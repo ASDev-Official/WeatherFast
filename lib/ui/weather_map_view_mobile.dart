@@ -27,7 +27,7 @@ class _WeatherMapViewState extends State<WeatherMapView> {
     _mapboxMap = mapboxMap;
   }
 
-  void _onStyleLoaded(StyleLoadedEventData event) async {
+  void _onMapLoaded(MapLoadedEventData event) async {
     await _addWeatherLayer();
     if (mounted) setState(() => _isLoading = false);
   }
@@ -88,7 +88,10 @@ class _WeatherMapViewState extends State<WeatherMapView> {
         MapWidget(
           key: const ValueKey("mapWidget"),
           onMapCreated: _onMapCreated,
-          onStyleLoadedListener: _onStyleLoaded,
+          onMapLoadedListener: _onMapLoaded,
+          onMapLoadErrorListener: (error) {
+            debugPrint("Map load error: \${error.type} \${error.message}");
+          },
           viewport: CameraViewportState(
             center: Point(coordinates: Position(widget.initialLng, widget.initialLat)),
             zoom: 5.0,
