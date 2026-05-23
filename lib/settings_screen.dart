@@ -16,14 +16,12 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool _useFahrenheit;
-  late double _widgetFontScale;
   bool _isRefreshingWidgets = false;
 
   @override
   void initState() {
     super.initState();
     _useFahrenheit = GlobalData.useFahrenheit;
-    _widgetFontScale = GlobalData.widgetFontScale;
   }
 
   Future<void> _toggleUnit(bool value) async {
@@ -35,14 +33,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  Future<void> _updateFontScale(double value) async {
-    await PreferencesService.saveWidgetFontScale(value);
-    await WidgetRefreshService.refreshFromBackground();
-    setState(() {
-      _widgetFontScale = value;
-      GlobalData.widgetFontScale = value;
-    });
-  }
 
   Future<void> _forceRefreshWidgets() async {
     if (_isRefreshingWidgets) {
@@ -121,58 +111,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       value: _useFahrenheit,
                       onChanged: _toggleUnit,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: colorScheme.tertiaryContainer,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Icon(
-                                  Icons.text_fields_rounded,
-                                  color: colorScheme.onTertiaryContainer,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('Widget Font Size', style: TextStyle(fontSize: 16)),
-                                    Text(
-                                      'Scale: ${_widgetFontScale.toStringAsFixed(1)}x',
-                                      style: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 14),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Slider(
-                            value: _widgetFontScale,
-                            min: 0.7,
-                            max: 1.5,
-                            divisions: 8,
-                            label: '${_widgetFontScale.toStringAsFixed(1)}x',
-                            onChanged: (value) {
-                              setState(() {
-                                _widgetFontScale = value;
-                              });
-                            },
-                            onChangeEnd: _updateFontScale,
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                   const SizedBox(height: 24),

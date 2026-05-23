@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
+import android.widget.SeekBar
 import android.widget.TextView
 
 class WeatherWidgetConfigureActivity : Activity() {
@@ -45,6 +46,25 @@ class WeatherWidgetConfigureActivity : Activity() {
         val customColorInput = findViewById<android.widget.EditText>(R.id.widget_config_custom_color_input)
         val cancelButton = findViewById<Button>(R.id.widget_config_cancel)
         val saveButton = findViewById<Button>(R.id.widget_config_save)
+        val fontScaleSeek = findViewById<SeekBar>(R.id.widget_config_font_scale_seek)
+        val fontScaleLabel = findViewById<TextView>(R.id.widget_config_font_scale_label)
+
+        // SeekBar: 30 steps → 0.5 to 2.0 in 0.05 increments. Default progress 10 = 1.0x
+        fun progressToScale(p: Int) = 0.5f + p * 0.05f
+        fun scaleToProgress(s: Float) = ((s - 0.5f) / 0.05f).toInt().coerceIn(0, 30)
+
+        val existing = WeatherWidgetConfigStore.load(this, appWidgetId)
+
+        fontScaleSeek.progress = scaleToProgress(existing.fontScale)
+        fontScaleLabel.text = "Scale: ${"%,.1f".format(existing.fontScale)}x"
+        fontScaleSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar?, progress: Int, fromUser: Boolean) {
+                val scale = progressToScale(progress)
+                fontScaleLabel.text = "Scale: ${"%,.1f".format(scale)}x"
+            }
+            override fun onStartTrackingTouch(seek: SeekBar?) {}
+            override fun onStopTrackingTouch(seek: SeekBar?) {}
+        })
 
         titleView.text = when (widgetFamily) {
             "small" -> "Configure Small Widget"
@@ -52,7 +72,6 @@ class WeatherWidgetConfigureActivity : Activity() {
             else -> "Configure Large Widget"
         }
 
-        val existing = WeatherWidgetConfigStore.load(this, appWidgetId)
 
         hourlyPicker.minValue = 0
         hourlyPicker.maxValue = 24
@@ -94,7 +113,8 @@ class WeatherWidgetConfigureActivity : Activity() {
             val isTransparent = transparentSwitch.isChecked
             val isTextBlack = colorBlack.isChecked
             val customThemeColor = customColorInput.text.toString().takeIf { isTransparent && it.isNotBlank() }
-            WeatherWidgetConfigStore.save(this, appWidgetId, hourlyCards, dailyCards, isTransparent, isTextBlack, customThemeColor)
+            val fontScale = 0.5f + fontScaleSeek.progress * 0.05f
+            WeatherWidgetConfigStore.save(this, appWidgetId, hourlyCards, dailyCards, isTransparent, isTextBlack, customThemeColor, fontScale)
 
             requestWidgetUpdate(providerInfo?.provider)
 

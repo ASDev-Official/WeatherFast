@@ -165,10 +165,12 @@ class WidgetRefreshService {
             : startTime.add(const Duration(hours: 1));
         
         if (endTime != null) {
-          final startStr = DateFormat('h a').format(startTime);
-          final endStr = DateFormat('h a').format(endTime);
+          final startLocal = startTime.toLocal();
+          final endLocal = endTime.toLocal();
+          final is24Hour = WidgetsBinding.instance.platformDispatcher.alwaysUse24HourFormat;
+          final label = _formatSgRangeLabel(startLocal, endLocal, is24Hour);
           
-          hourlyLabels.add('$startStr - $endStr');
+          hourlyLabels.add(label);
           hourlyTemps.add(''); // Only one information, so we clear the temp space
           hourlyIcons.add(
             item['glyph']?.toString() ?? _glyphForCondition(conditionText),
@@ -177,7 +179,8 @@ class WidgetRefreshService {
         }
       } else if (parsedTime != null) {
         // Standard Hourly
-        final hourLabel = _formatHourLabel(parsedTime);
+        final is24Hour = WidgetsBinding.instance.platformDispatcher.alwaysUse24HourFormat;
+        final hourLabel = _formatHourLabel(parsedTime, is24Hour);
         final num? hourTempValue = useFahrenheit
             ? item['temp_f'] as num?
             : item['temp_c'] as num?;
@@ -520,10 +523,25 @@ class WidgetRefreshService {
     }
   }
 
-  static String _formatHourLabel(DateTime dateTime) {
-    final hour = dateTime.hour;
-    final period = hour >= 12 ? 'PM' : 'AM';
-    final hour12 = hour % 12 == 0 ? 12 : hour % 12;
-    return '$hour12 $period';
+  /// Formats a single DateTime as "28 May\n6 AM" (12hr) or "28 May\n18:00" (24hr).
+  static String _formatHourLabel(DateTime dateTime, bool is24Hour) {
+    final local = dateTime.toLocal();
+    final dateStr = DateFormat('d MMM').format(local);
+    final timeStr = is24Hour
+        ? DateFormat('HH:mm').format(local)
+        : DateFormat('h a').format(local);
+    return '$dateStr $timeStr';
+  }
+
+  /// Formats a Singapore time-range as "28 May\n6 AM – 12 PM" (12hr) or "28 May\n06:00 – 12:00" (24hr).
+  static String _formatSgRangeLabel(DateTime start, DateTime end, bool is24Hour) {
+    final dateStr = DateFormat('d MMM').format(start);
+    final startStr = is24Hour
+        ? DateFormat('HH:mm').format(start)
+        : DateFormat('h a').format(start);
+    final endStr = is24Hour
+        ? DateFormat('HH:mm').format(end)
+        : DateFormat('h a').format(end);
+    return '$dateStr $startStr – $endStr';
   }
 }

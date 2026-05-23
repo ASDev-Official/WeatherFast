@@ -58,7 +58,7 @@ abstract class WeatherFastWidgetProviderBase(
     ) {
         val views = RemoteViews(context.packageName, R.layout.weather_widget_host)
         val widgetOptions = appWidgetManager.getAppWidgetOptions(widgetId)
-        val profile = resolveSizeProfile(context, widgetId, widgetOptions, widgetData)
+        val profile = resolveSizeProfile(context, widgetId, widgetOptions)
 
         bindData(context, views, widgetData)
         applySizeLayout(context, views, profile, widgetData)
@@ -366,7 +366,6 @@ abstract class WeatherFastWidgetProviderBase(
         context: Context,
         widgetId: Int,
         widgetOptions: Bundle,
-        widgetData: SharedPreferences,
     ): WidgetSizeProfile {
         val minWidthDp = widgetOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
             .takeIf { it > 0 }
@@ -394,11 +393,9 @@ abstract class WeatherFastWidgetProviderBase(
         val isTransparent = widgetSettings.isTransparent
         val isTextBlack = widgetSettings.isTextBlack
         val customThemeColor = widgetSettings.customThemeColor
+        val fontScale = widgetSettings.fontScale
         val bump = if (isTransparent) 2f else 0f
         val hourlyBump = if (isTransparent) 1f else 0f
-
-        val fontScaleStr = widgetData.getString("wf_font_scale", "1.0") ?: "1.0"
-        val fontScale = fontScaleStr.toFloatOrNull() ?: 1.0f
 
         return when {
             effectiveHeightDp < 210 -> WidgetSizeProfile(
