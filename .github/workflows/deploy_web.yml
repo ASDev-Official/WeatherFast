@@ -38,8 +38,8 @@ jobs:
         if: steps.build_wasm.outcome == 'failure'
         run: dart pub global run peanut -b web
 
-      - name: Remove .env file
-        run: rm -f .env
+      - name: Clear .env file
+        run: echo -n > .env
 
       - name: Configure Git
         run: |
