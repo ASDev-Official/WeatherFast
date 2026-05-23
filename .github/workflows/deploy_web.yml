@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0  # Full history needed for peanut to push to web branch
+          fetch-depth: 0  # Full history needed for peanut to push to branch
 
       - name: Create .env file
         run: echo "MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}" > .env
@@ -34,39 +34,39 @@ jobs:
       - name: Activate flutter_peanut
         run: dart pub global activate peanut
 
+      # peanut builds Flutter web and pushes the output to a staging branch.
+      # We target web-deploy/N (not web directly) so there is something to PR.
       - name: Build web (with --wasm)
         id: build_wasm
-        run: dart pub global run peanut -b web --wasm
+        run: dart pub global run peanut -b web-deploy/${{ github.run_number }} --wasm
         continue-on-error: true
 
       - name: Build web (fallback without --wasm)
         if: steps.build_wasm.outcome == 'failure'
-        run: dart pub global run peanut -b web
+        run: dart pub global run peanut -b web-deploy/${{ github.run_number }}
 
       - name: Clear .env file
         run: echo -n > .env
 
+      - name: Open PR from staging branch to web
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base web \
+            --head web-deploy/${{ github.run_number }} \
+            --title "chore: deploy web build #${{ github.run_number }}" \
+            --body "## 🚀 Web Deploy
 
+          Automated web build triggered by [@${{ github.actor }}](https://github.com/${{ github.actor }}) via the **Deploy Web** workflow.
 
-      - name: Create pull request to web branch
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: web-deploy/${{ github.run_number }}
-          base: web
-          title: "chore: deploy web build #${{ github.run_number }}"
-          body: |
-            ## 🚀 Web Deploy
+          | Detail | Value |
+          |--------|-------|
+          | Run | #${{ github.run_number }} |
+          | Triggered by | @${{ github.actor }} |
+          | Source branch | \`${{ github.ref_name }}\` |
+          | Build mode | WASM (with fallback to JS) |
 
-            Automated web build triggered by [@${{ github.actor }}](https://github.com/${{ github.actor }}) via the **Deploy Web** workflow.
-
-            | Detail | Value |
-            |--------|-------|
-            | Run | #${{ github.run_number }} |
-            | Triggered by | @${{ github.actor }} |
-            | Source branch | `${{ github.ref_name }}` |
-            | Build mode | WASM (with fallback to JS) |
-
-            > ⚠️ The `.env` file has been removed from this build. Ensure secrets are managed via GitHub Secrets.
-          delete-branch: true
-          labels: "web-deploy,automated"
+          > ⚠️ The \`.env\` file has been cleared in this build. Secrets are managed via GitHub Secrets." \
+            --label "web-deploy" \
+            --label "automated"
