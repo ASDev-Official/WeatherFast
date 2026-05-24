@@ -13,6 +13,7 @@ import 'services/widget_refresh_service.dart';
 import 'settings_screen.dart';
 import 'time_utils.dart';
 import 'weather_home.dart';
+import 'services/rating_service.dart';
 
 // Conditional import to prevent Mapbox SDK crashes on Web
 import 'services/mapbox_service_mobile.dart'
@@ -29,6 +30,7 @@ Future<void> main() async {
 
   await TimeUtils.initialize();
   await WidgetRefreshService.initialize();
+  await RatingService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
   runApp(const WeatherFastApp());

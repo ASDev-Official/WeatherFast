@@ -6,6 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/widget_refresh_service.dart';
+import 'services/rating_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -208,6 +209,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onTap: _isRefreshingWidgets
                             ? null
                             : _forceRefreshWidgets,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Card(
+                      child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.star_rate_rounded,
+                            color: colorScheme.onErrorContainer,
+                          ),
+                        ),
+                        title: const Text('Test Rating Bottom Sheet'),
+                        subtitle: const Text('Simulate successful weather fetch trigger'),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () async {
+                          await RatingService.debugFastForwardTime();
+                          if (context.mounted) {
+                            RatingService.checkAndShowRating(context);
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Card(
+                      child: ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.restore_rounded,
+                            color: colorScheme.onErrorContainer,
+                          ),
+                        ),
+                        title: const Text('Reset Rating Preferences'),
+                        subtitle: const Text('Reset shown count and timestamps'),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () async {
+                          await RatingService.resetRatingPreferences();
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Rating preferences reset')),
+                            );
+                          }
+                        },
                       ),
                     ),
                     const SizedBox(height: 24),

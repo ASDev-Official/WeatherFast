@@ -9,6 +9,7 @@ import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/weather_cache_service.dart';
 import 'services/widget_refresh_service.dart';
+import 'services/rating_service.dart';
 import 'ui/animated_weather_backdrop.dart';
 import 'ui/open_meteo_attribution.dart';
 import 'ui/daily_range_tile.dart';
@@ -244,6 +245,9 @@ class _WeatherHomeState extends State<WeatherHome> {
       // Notify parent of location change
       if (locationName != null && locationName.isNotEmpty) {
         widget.onLocationSelected(locationName);
+      }
+      if (mounted) {
+        RatingService.checkAndShowRating(context);
       }
     } catch (e) {
       if (mounted) _showError('Failed to load weather: $e');
