@@ -433,6 +433,7 @@ class CompiledApp {
       _1322: (x0,x1,x2,x3) => x0.addEventListener(x1,x2,x3),
       _1323: (x0,x1,x2,x3) => x0.removeEventListener(x1,x2,x3),
       _1324: (x0,x1) => x0.createElement(x1),
+      _1329: (x0,x1,x2,x3) => x0.open(x1,x2,x3),
       _1335: (x0,x1) => x0.createElement(x1),
       _1341: (x0,x1,x2) => x0.addEventListener(x1,x2),
       _1342: x0 => x0.decode(),
