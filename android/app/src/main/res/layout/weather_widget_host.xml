@@ -75,101 +75,141 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/widget_header_sg_left"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.4"
-            android:orientation="vertical"
-            android:gravity="end"
             android:paddingEnd="12dp"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/widget_location_sg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="WeatherFast"
-                android:textColor="#F4FAFF"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
+            <!-- Top Right: Icon -->
             <ImageView
                 android:id="@+id/widget_condition_icon_sg"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:src="@drawable/ic_wf_partly" />
 
-            <TextView
-                android:id="@+id/widget_temp_sg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="--"
-                android:textColor="#F4FAFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/widget_condition_sg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="--"
-                android:textColor="#CADAEA"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/widget_high_low_sg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="-- / --"
-                android:textColor="#CADAEA"
-                android:textSize="11sp" />
-
+            <!-- Bottom-Most: Condition, Refresh, and Location -->
             <LinearLayout
-                android:id="@+id/widget_refresh_container_sg"
+                android:id="@+id/widget_bottom_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="end|center_vertical"
-                android:orientation="horizontal">
-
-                <ViewFlipper
-                    android:id="@+id/widget_refresh_flipper_sg"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="3dp">
-
-                    <ImageView
-                        android:id="@+id/widget_refresh_icon_sg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_refresh"
-                        android:tint="#CADAEA" />
-
-                    <ProgressBar
-                        android:id="@+id/widget_refresh_progress_sg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:indeterminateTint="#CADAEA" />
-                </ViewFlipper>
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/widget_last_refresh_sg"
+                    android:id="@+id/widget_condition_sg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="--"
+                    android:textColor="#CADAEA"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/widget_refresh_container_sg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ViewFlipper
+                        android:id="@+id/widget_refresh_flipper_sg"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="3dp">
+
+                        <ImageView
+                            android:id="@+id/widget_refresh_icon_sg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_refresh"
+                            android:tint="#CADAEA" />
+
+                        <ProgressBar
+                            android:id="@+id/widget_refresh_progress_sg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:indeterminateTint="#CADAEA" />
+                    </ViewFlipper>
+
+                    <TextView
+                        android:id="@+id/widget_last_refresh_sg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="--"
+                        android:textColor="#CADAEA"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/widget_location_icon_sg"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_location"
+                        android:tint="#CADAEA" />
+
+                    <TextView
+                        android:id="@+id/widget_location_sg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="WeatherFast"
+                        android:textColor="#F4FAFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bottom Left (above bottom info): Temperature & High/Low -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_above="@id/widget_bottom_info_container"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/widget_temp_sg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
+                    android:textColor="#F4FAFF"
+                    android:textSize="28sp"
+                    android:maxLines="1"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/widget_high_low_sg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="-- / --"
                     android:textColor="#CADAEA"
-                    android:textSize="9sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="0dp"

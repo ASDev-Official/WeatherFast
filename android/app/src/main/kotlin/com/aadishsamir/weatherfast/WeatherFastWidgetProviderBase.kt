@@ -343,7 +343,7 @@ abstract class WeatherFastWidgetProviderBase(
         // SG Header
         views.setTextViewTextSize(R.id.widget_location_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 12f * profile.sgLeftFontScale)
         views.setTextViewTextSize(R.id.widget_condition_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 10f * profile.sgLeftFontScale)
-        views.setTextViewTextSize(R.id.widget_temp_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 13f * profile.sgLeftFontScale)
+        views.setTextViewTextSize(R.id.widget_temp_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 28f * profile.sgLeftFontScale)
         views.setTextViewTextSize(R.id.widget_high_low_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 10f * profile.sgLeftFontScale)
         views.setTextViewTextSize(R.id.widget_last_refresh_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 9f * profile.sgLeftFontScale)
 
@@ -574,8 +574,33 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextViewText(R.id.widget_high_low, highLow)
         
         // Bind SG header
-        views.setTextViewText(R.id.widget_location_sg, city)
-        views.setTextViewText(R.id.widget_temp_sg, temp)
+        views.setTextViewText(R.id.widget_location_sg, "$city")
+        val formattedTemp: CharSequence = run {
+            var normalized = temp.trim()
+            if (normalized.endsWith(" C", ignoreCase = true)) {
+                normalized = normalized.dropLast(2).trim() + "°C"
+            } else if (normalized.endsWith(" F", ignoreCase = true)) {
+                normalized = normalized.dropLast(2).trim() + "°F"
+            } else if (!normalized.contains("°") && (normalized.endsWith("C", ignoreCase = true) || normalized.endsWith("F", ignoreCase = true))) {
+                normalized = normalized.dropLast(1).trim() + "°" + normalized.takeLast(1).uppercase()
+            }
+            
+            if (normalized.contains("°")) {
+                val parts = normalized.split("°", limit = 2)
+                val num = parts[0].trim()
+                val unit = if (parts.size > 1) parts[1].trim() else ""
+                
+                val builder = android.text.SpannableStringBuilder(num)
+                val start = builder.length
+                builder.append("°").append(unit)
+                builder.setSpan(android.text.style.SuperscriptSpan(), start, builder.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                builder.setSpan(android.text.style.RelativeSizeSpan(0.6f), start, builder.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                builder
+            } else {
+                temp
+            }
+        }
+        views.setTextViewText(R.id.widget_temp_sg, formattedTemp)
         views.setTextViewText(R.id.widget_condition_sg, condition)
         views.setTextViewText(R.id.widget_high_low_sg, highLow)
         views.setImageViewResource(R.id.widget_condition_icon_sg, iconResForToken(glyph))
@@ -696,7 +721,7 @@ abstract class WeatherFastWidgetProviderBase(
 
         val lastRefresh = widgetData.getString("wf_last_refresh", "--") ?: "--"
         views.setTextViewText(R.id.widget_last_refresh, "Last refreshed: $lastRefresh")
-        views.setTextViewText(R.id.widget_last_refresh_sg, "Last refreshed: $lastRefresh")
+        views.setTextViewText(R.id.widget_last_refresh_sg, lastRefresh)
         views.setDisplayedChild(R.id.widget_refresh_flipper, 0)
         views.setDisplayedChild(R.id.widget_refresh_flipper_sg, 0)
     }
