@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,8 @@ class AnimatedAwardStar extends StatefulWidget {
   State<AnimatedAwardStar> createState() => _AnimatedAwardStarState();
 }
 
-class _AnimatedAwardStarState extends State<AnimatedAwardStar> with SingleTickerProviderStateMixin {
+class _AnimatedAwardStarState extends State<AnimatedAwardStar>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _shineGrow;
   late Animation<double> _shineFade;
@@ -117,23 +117,35 @@ class _AwardStarPainter extends CustomPainter {
     required this.elementsFade,
   });
 
-  Path _buildSquigglyLine(Offset center, double angle, double startRadius, double endRadius) {
+  Path _buildSquigglyLine(
+    Offset center,
+    double angle,
+    double startRadius,
+    double endRadius,
+  ) {
     final path = Path();
     final int steps = 80;
     final double length = endRadius - startRadius;
     final double amplitude = 2.0; // Very subtle amplitude
-    final double frequency = math.pi * 1.5; // Much lower frequency (gentle wave)
-    
+    final double frequency =
+        math.pi * 1.5; // Much lower frequency (gentle wave)
+
     for (int i = 0; i <= steps; i++) {
       final double t = i / steps;
       final double d = startRadius + t * length;
-      
+
       // Sine wave offset perpendicular to the main angle
-      final double perpOffset = amplitude * math.sin(t * frequency); 
-      
-      final double x = center.dx + d * math.cos(angle) + perpOffset * math.cos(angle + math.pi / 2);
-      final double y = center.dy + d * math.sin(angle) + perpOffset * math.sin(angle + math.pi / 2);
-      
+      final double perpOffset = amplitude * math.sin(t * frequency);
+
+      final double x =
+          center.dx +
+          d * math.cos(angle) +
+          perpOffset * math.cos(angle + math.pi / 2);
+      final double y =
+          center.dy +
+          d * math.sin(angle) +
+          perpOffset * math.sin(angle + math.pi / 2);
+
       if (i == 0) {
         path.moveTo(x, y);
       } else {
@@ -143,24 +155,31 @@ class _AwardStarPainter extends CustomPainter {
     return path;
   }
 
-  Path _buildSquigglyArc(Offset center, double baseRadius, double startAngle, double sweepAngle) {
+  Path _buildSquigglyArc(
+    Offset center,
+    double baseRadius,
+    double startAngle,
+    double sweepAngle,
+  ) {
     final path = Path();
     if (sweepAngle <= 0) return path;
-    
+
     final int steps = 180;
     final double amplitude = 2.0; // Very subtle amplitude
-    final double frequency = 16.0; // Higher frequency (16 full waves around circle)
-    
+    final double frequency =
+        16.0; // Higher frequency (16 full waves around circle)
+
     for (int i = 0; i <= steps; i++) {
       final double t = i / steps;
       final double currentAngle = startAngle + t * sweepAngle;
-      
+
       // Sine wave offset added to radius
-      final double r = baseRadius + amplitude * math.sin(currentAngle * frequency);
-      
+      final double r =
+          baseRadius + amplitude * math.sin(currentAngle * frequency);
+
       final double x = center.dx + r * math.cos(currentAngle);
       final double y = center.dy + r * math.sin(currentAngle);
-      
+
       if (i == 0) {
         path.moveTo(x, y);
       } else {
@@ -174,7 +193,7 @@ class _AwardStarPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final maxRadius = size.width / 2;
-    
+
     // 1. Draw Squiggly Shine Lines (Straight angles: Right, Down, Left, Up)
     if (shineGrow > 0 && shineFade > 0) {
       final shinePaint = Paint()
@@ -185,18 +204,23 @@ class _AwardStarPainter extends CustomPainter {
 
       final numShines = 4;
       for (int i = 0; i < numShines; i++) {
-        final angle = i * math.pi / 2 + math.pi / 4; // perfectly straight lines, at 45 degree diagonals
-        
+        final angle =
+            i * math.pi / 2 +
+            math.pi / 4; // perfectly straight lines, at 45 degree diagonals
+
         final startRadius = maxRadius * 0.35;
         final endRadius = maxRadius * 0.95;
-        
+
         final path = _buildSquigglyLine(center, angle, startRadius, endRadius);
 
         // Slowly draw the path
         final pathMetrics = path.computeMetrics().toList();
         if (pathMetrics.isNotEmpty) {
           final metric = pathMetrics.first;
-          final extractPath = metric.extractPath(0.0, metric.length * shineGrow);
+          final extractPath = metric.extractPath(
+            0.0,
+            metric.length * shineGrow,
+          );
           canvas.drawPath(extractPath, shinePaint);
         }
       }
@@ -212,13 +236,21 @@ class _AwardStarPainter extends CustomPainter {
 
       final startAngle = -math.pi / 2; // Top
       // We generate the full 2pi path first, so the squiggles stay perfectly static in place
-      final fullArcPath = _buildSquigglyArc(center, maxRadius * 0.75, startAngle, 2 * math.pi);
+      final fullArcPath = _buildSquigglyArc(
+        center,
+        maxRadius * 0.75,
+        startAngle,
+        2 * math.pi,
+      );
 
       // Slowly draw the arc
       final arcMetrics = fullArcPath.computeMetrics().toList();
       if (arcMetrics.isNotEmpty) {
         final metric = arcMetrics.first;
-        final extractPath = metric.extractPath(0.0, metric.length * shellProgress);
+        final extractPath = metric.extractPath(
+          0.0,
+          metric.length * shellProgress,
+        );
         canvas.drawPath(extractPath, shellPaint);
       }
 
@@ -232,12 +264,16 @@ class _AwardStarPainter extends CustomPainter {
         final leftRibbon = Path()
           ..moveTo(center.dx - 12, center.dy + maxRadius * 0.65)
           ..quadraticBezierTo(
-            center.dx - 32 * ribbonProgress, center.dy + maxRadius * 0.8 * ribbonProgress,
-            center.dx - 26 * ribbonProgress, center.dy + maxRadius * 1.1 * ribbonProgress,
+            center.dx - 32 * ribbonProgress,
+            center.dy + maxRadius * 0.8 * ribbonProgress,
+            center.dx - 26 * ribbonProgress,
+            center.dy + maxRadius * 1.1 * ribbonProgress,
           )
           ..quadraticBezierTo(
-            center.dx - 16 * ribbonProgress, center.dy + maxRadius * 0.95 * ribbonProgress,
-            center.dx - 8 * ribbonProgress, center.dy + maxRadius * 0.95 * ribbonProgress,
+            center.dx - 16 * ribbonProgress,
+            center.dy + maxRadius * 0.95 * ribbonProgress,
+            center.dx - 8 * ribbonProgress,
+            center.dy + maxRadius * 0.95 * ribbonProgress,
           )
           ..lineTo(center.dx - 2, center.dy + maxRadius * 0.7)
           ..close();
@@ -247,12 +283,16 @@ class _AwardStarPainter extends CustomPainter {
         final rightRibbon = Path()
           ..moveTo(center.dx + 12, center.dy + maxRadius * 0.65)
           ..quadraticBezierTo(
-            center.dx + 32 * ribbonProgress, center.dy + maxRadius * 0.8 * ribbonProgress,
-            center.dx + 26 * ribbonProgress, center.dy + maxRadius * 1.1 * ribbonProgress,
+            center.dx + 32 * ribbonProgress,
+            center.dy + maxRadius * 0.8 * ribbonProgress,
+            center.dx + 26 * ribbonProgress,
+            center.dy + maxRadius * 1.1 * ribbonProgress,
           )
           ..quadraticBezierTo(
-            center.dx + 16 * ribbonProgress, center.dy + maxRadius * 0.95 * ribbonProgress,
-            center.dx + 8 * ribbonProgress, center.dy + maxRadius * 0.95 * ribbonProgress,
+            center.dx + 16 * ribbonProgress,
+            center.dy + maxRadius * 0.95 * ribbonProgress,
+            center.dx + 8 * ribbonProgress,
+            center.dy + maxRadius * 0.95 * ribbonProgress,
           )
           ..lineTo(center.dx + 2, center.dy + maxRadius * 0.7)
           ..close();
@@ -264,9 +304,9 @@ class _AwardStarPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _AwardStarPainter oldDelegate) {
     return shineGrow != oldDelegate.shineGrow ||
-           shineFade != oldDelegate.shineFade ||
-           shellProgress != oldDelegate.shellProgress ||
-           ribbonProgress != oldDelegate.ribbonProgress ||
-           elementsFade != oldDelegate.elementsFade;
+        shineFade != oldDelegate.shineFade ||
+        shellProgress != oldDelegate.shellProgress ||
+        ribbonProgress != oldDelegate.ribbonProgress ||
+        elementsFade != oldDelegate.elementsFade;
   }
 }
