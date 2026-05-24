@@ -56,6 +56,13 @@ void widgetRefreshCallbackDispatcher() {
   });
 }
 
+@pragma('vm:entry-point')
+Future<void> homeWidgetBackgroundCallback(Uri? uri) async {
+  if (uri?.host == 'refresh') {
+    await WidgetRefreshService.refreshFromBackground();
+  }
+}
+
 class WidgetRefreshService {
   static bool _isInitialized = false;
 
@@ -68,6 +75,8 @@ class WidgetRefreshService {
       _isInitialized = true;
       return;
     }
+
+    await HomeWidget.registerInteractivityCallback(homeWidgetBackgroundCallback);
 
     await Workmanager().initialize(
       widgetRefreshCallbackDispatcher,
@@ -139,6 +148,7 @@ class WidgetRefreshService {
     final hourlyConditions = <String>[];
     String? hourlySourceTransition;
     String? lastHourlySource;
+    var neaCount = 0;
 
     for (final item in nextHoursRaw) {
       if (item is! Map) {
@@ -156,9 +166,10 @@ class WidgetRefreshService {
       }
       lastHourlySource = source;
 
-      final isSingapore = isSgWidget || (item['source'] == 'nea');
+      final isNeaItem = item['source'] == 'nea';
 
-      if (isSingapore) {
+      if (isNeaItem) {
+        neaCount++;
         final startTime = parsedTime ?? DateTime.tryParse(timeRaw) ?? DateTime.now();
         final endTime = item['end'] != null
             ? DateTime.tryParse(item['end'].toString())
@@ -246,6 +257,11 @@ class WidgetRefreshService {
         break;
       }
     }
+
+    final nowTime = DateTime.now();
+    final lastRefresh = DateFormat.jm().format(nowTime);
+    await HomeWidget.saveWidgetData<String>('wf_last_refresh', lastRefresh);
+    await HomeWidget.saveWidgetData<int>('wf_nea_count', neaCount);
 
     await HomeWidget.saveWidgetData<String>(_kLocationQuery, locationName);
     await HomeWidget.saveWidgetData<String>(_kLocationName, locationName);

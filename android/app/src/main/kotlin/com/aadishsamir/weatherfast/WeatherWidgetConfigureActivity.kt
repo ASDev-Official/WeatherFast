@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.content.Context
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.SeekBar
@@ -48,6 +49,17 @@ class WeatherWidgetConfigureActivity : Activity() {
         val saveButton = findViewById<Button>(R.id.widget_config_save)
         val fontScaleSeek = findViewById<SeekBar>(R.id.widget_config_font_scale_seek)
         val fontScaleLabel = findViewById<TextView>(R.id.widget_config_font_scale_label)
+        val sgScaleSection = findViewById<View>(R.id.widget_config_sg_scale_section)
+        val sgScaleSeek = findViewById<SeekBar>(R.id.widget_config_sg_scale_seek)
+        val sgScaleLabel = findViewById<TextView>(R.id.widget_config_sg_scale_label)
+        val topScaleSection = findViewById<View>(R.id.widget_config_top_scale_section)
+        val topScaleSeek = findViewById<SeekBar>(R.id.widget_config_top_scale_seek)
+        val topScaleLabel = findViewById<TextView>(R.id.widget_config_top_scale_label)
+        val topScaleTitle = findViewById<TextView>(R.id.widget_config_top_scale_title)
+        val bottomScaleSection = findViewById<View>(R.id.widget_config_bottom_scale_section)
+        val bottomScaleSeek = findViewById<SeekBar>(R.id.widget_config_bottom_scale_seek)
+        val bottomScaleLabel = findViewById<TextView>(R.id.widget_config_bottom_scale_label)
+
 
         // SeekBar: 30 steps → 0.5 to 2.0 in 0.05 increments. Default progress 10 = 1.0x
         fun progressToScale(p: Int) = 0.5f + p * 0.05f
@@ -65,6 +77,72 @@ class WeatherWidgetConfigureActivity : Activity() {
             override fun onStartTrackingTouch(seek: SeekBar?) {}
             override fun onStopTrackingTouch(seek: SeekBar?) {}
         })
+
+        sgScaleSeek.progress = scaleToProgress(existing.sgLeftFontScale)
+        sgScaleLabel.text = "Scale: ${"%,.1f".format(existing.sgLeftFontScale)}x"
+        sgScaleSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar?, progress: Int, fromUser: Boolean) {
+                val scale = progressToScale(progress)
+                sgScaleLabel.text = "Scale: ${"%,.1f".format(scale)}x"
+            }
+            override fun onStartTrackingTouch(seek: SeekBar?) {}
+            override fun onStopTrackingTouch(seek: SeekBar?) {}
+        })
+
+        topScaleSeek.progress = scaleToProgress(existing.topFontScale)
+        topScaleLabel.text = "Scale: ${"%,.1f".format(existing.topFontScale)}x"
+        topScaleSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar?, progress: Int, fromUser: Boolean) {
+                topScaleLabel.text = "Scale: ${"%,.1f".format(progressToScale(progress))}x"
+            }
+            override fun onStartTrackingTouch(seek: SeekBar?) {}
+            override fun onStopTrackingTouch(seek: SeekBar?) {}
+        })
+
+        bottomScaleSeek.progress = scaleToProgress(existing.bottomFontScale)
+        bottomScaleLabel.text = "Scale: ${"%,.1f".format(existing.bottomFontScale)}x"
+        bottomScaleSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar?, progress: Int, fromUser: Boolean) {
+                bottomScaleLabel.text = "Scale: ${"%,.1f".format(progressToScale(progress))}x"
+            }
+            override fun onStartTrackingTouch(seek: SeekBar?) {}
+            override fun onStopTrackingTouch(seek: SeekBar?) {}
+        })
+
+
+        val flutterPrefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+        val flutterIsSg = flutterPrefs.getBoolean("flutter.is_singapore", false)
+        
+        val homeWidgetPrefs = getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
+        val widgetIsSg = homeWidgetPrefs.getBoolean("wf_is_singapore", false)
+        
+        val isSingapore = flutterIsSg || widgetIsSg
+
+        val mainScaleTitle = findViewById<TextView>(R.id.widget_config_main_scale_title)
+
+        if (widgetFamily == "large") {
+            bottomScaleSection.visibility = View.VISIBLE
+            if (isSingapore) {
+                sgScaleSection.visibility = View.VISIBLE
+                mainScaleTitle?.text = "Right Partition Font Size (Hourly)"
+                topScaleSection.visibility = View.GONE
+            } else {
+                sgScaleSection.visibility = View.GONE
+                topScaleSection.visibility = View.VISIBLE
+                topScaleTitle?.text = "Top Partition Font Size (Weather Details)"
+                mainScaleTitle?.text = "Top Partition Font Size (Hourly)"
+            }
+        } else {
+            bottomScaleSection.visibility = View.GONE
+            topScaleSection.visibility = View.GONE
+            if (isSingapore) {
+                sgScaleSection.visibility = View.VISIBLE
+                mainScaleTitle?.text = "Right Partition Font Size"
+            } else {
+                sgScaleSection.visibility = View.GONE
+                mainScaleTitle?.text = "Font Size"
+            }
+        }
 
         titleView.text = when (widgetFamily) {
             "small" -> "Configure Small Widget"
@@ -114,7 +192,10 @@ class WeatherWidgetConfigureActivity : Activity() {
             val isTextBlack = colorBlack.isChecked
             val customThemeColor = customColorInput.text.toString().takeIf { isTransparent && it.isNotBlank() }
             val fontScale = 0.5f + fontScaleSeek.progress * 0.05f
-            WeatherWidgetConfigStore.save(this, appWidgetId, hourlyCards, dailyCards, isTransparent, isTextBlack, customThemeColor, fontScale)
+            val sgLeftFontScale = 0.5f + sgScaleSeek.progress * 0.05f
+            val topFontScale = 0.5f + topScaleSeek.progress * 0.05f
+            val bottomFontScale = 0.5f + bottomScaleSeek.progress * 0.05f
+            WeatherWidgetConfigStore.save(this, appWidgetId, hourlyCards, dailyCards, isTransparent, isTextBlack, customThemeColor, fontScale, sgLeftFontScale, topFontScale, bottomFontScale)
 
             requestWidgetUpdate(providerInfo?.provider)
 

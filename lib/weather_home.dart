@@ -225,6 +225,12 @@ class _WeatherHomeState extends State<WeatherHome> {
         _localTime = localTime;
         _isDaytime = isDaytime;
       });
+      final country = weather['location']?['country']?.toString().toLowerCase() ?? '';
+      final lat = (weather['location']?['lat'] as num?)?.toDouble() ?? 0.0;
+      final lon = (weather['location']?['lon'] as num?)?.toDouble() ?? 0.0;
+      final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 && lon <= 104.15;
+      final isSingapore = country.contains('singapore') || isSingaporeCoords;
+      await PreferencesService.saveIsSingapore(isSingapore);
       await PreferencesService.saveLastLocationQuery(location);
       await WeatherCacheService.saveSnapshot(
         locationQuery: location,

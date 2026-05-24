@@ -5,6 +5,17 @@ class PreferencesService {
   static const String _kLastLocationQuery = 'last_location_query';
   static const String _kMapDarkMode = 'map_dark_mode';
   static const String _kMapRadarOpacity = 'map_radar_opacity';
+  static const String _kIsSingapore = 'is_singapore';
+
+  static Future<bool> loadIsSingapore() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_kIsSingapore) ?? false;
+  }
+
+  static Future<void> saveIsSingapore(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kIsSingapore, value);
+  }
 
   static Future<bool> loadUseFahrenheit() async {
     final prefs = await SharedPreferences.getInstance();

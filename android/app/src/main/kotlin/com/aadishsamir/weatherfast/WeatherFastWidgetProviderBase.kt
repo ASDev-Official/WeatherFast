@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
+import android.content.Intent
+import android.app.PendingIntent
 import es.antonborri.home_widget.HomeWidgetProvider
 import kotlin.math.min
 
@@ -26,6 +28,7 @@ abstract class WeatherFastWidgetProviderBase(
         val isTransparent: Boolean,
         val isTextBlack: Boolean,
         val customThemeColor: String?,
+        val sgLeftFontScale: Float,
     )
 
     override fun onUpdate(
@@ -36,6 +39,26 @@ abstract class WeatherFastWidgetProviderBase(
     ) {
         appWidgetIds.forEach { widgetId ->
             updateWidget(context, appWidgetManager, widgetId, widgetData)
+        }
+    }
+
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        if (intent.action == "com.aadishsamir.weatherfast.WIDGET_REFRESH") {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0)
+            if (widgetId != 0) {
+                val views = RemoteViews(context.packageName, R.layout.weather_widget_host)
+                views.setDisplayedChild(R.id.widget_refresh_flipper, 1)
+                views.setDisplayedChild(R.id.widget_refresh_flipper_sg, 1)
+                appWidgetManager.partiallyUpdateAppWidget(widgetId, views)
+                
+                val backgroundIntent = es.antonborri.home_widget.HomeWidgetBackgroundIntent.getBroadcast(
+                    context,
+                    android.net.Uri.parse("weatherfast://refresh")
+                )
+                backgroundIntent.send()
+            }
         }
     }
 
@@ -69,6 +92,19 @@ abstract class WeatherFastWidgetProviderBase(
             R.id.widget_root,
             WeatherWidgetCommon.openAppIntent(context, 1000 + widgetId),
         )
+
+        val refreshIntent = Intent(context, this::class.java).apply {
+            action = "com.aadishsamir.weatherfast.WIDGET_REFRESH"
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
+        }
+        val refreshPendingIntent = PendingIntent.getBroadcast(
+            context,
+            widgetId,
+            refreshIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.widget_refresh_container, refreshPendingIntent)
+        views.setOnClickPendingIntent(R.id.widget_refresh_container_sg, refreshPendingIntent)
 
         appWidgetManager.updateAppWidget(widgetId, views)
     }
@@ -143,27 +179,30 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextColor(R.id.widget_condition_sg, dimColor)
         views.setTextColor(R.id.widget_temp_sg, brightColor)
         views.setTextColor(R.id.widget_high_low_sg, dimColor)
+        views.setTextColor(R.id.widget_last_refresh_sg, dimColor)
 
-        views.setTextColor(R.id.widget_hourly_title, brightColor)
         views.setTextColor(R.id.widget_daily_title, brightColor)
+
+        val hourlyTimeColor = if (profile.isTransparent) brightColor else dimColor
+        val hourlyConditionColor = if (profile.isTransparent) brightColor else dimColor
 
         for (index in 1..12) {
             val timeId = context.resources.getIdentifier("widget_hour_time_$index", "id", context.packageName)
-            if (timeId != 0) views.setTextColor(timeId, dimColor)
+            if (timeId != 0) views.setTextColor(timeId, hourlyTimeColor)
 
             val tempId = context.resources.getIdentifier("widget_hour_temp_$index", "id", context.packageName)
             if (tempId != 0) views.setTextColor(tempId, hourlyTempColor)
 
             val conditionId = context.resources.getIdentifier("widget_hour_condition_$index", "id", context.packageName)
-            if (conditionId != 0) views.setTextColor(conditionId, dimColor)
+            if (conditionId != 0) views.setTextColor(conditionId, hourlyConditionColor)
 
             // Singapore-specific IDs (only 5 rows)
             if (index <= 5) {
                 val timeSgId = context.resources.getIdentifier("widget_hour_time_sg_$index", "id", context.packageName)
-                if (timeSgId != 0) views.setTextColor(timeSgId, dimColor)
+                if (timeSgId != 0) views.setTextColor(timeSgId, hourlyTimeColor)
 
                 val conditionSgId = context.resources.getIdentifier("widget_hour_condition_sg_$index", "id", context.packageName)
-                if (conditionSgId != 0) views.setTextColor(conditionSgId, dimColor)
+                if (conditionSgId != 0) views.setTextColor(conditionSgId, hourlyConditionColor)
             }
         }
 
@@ -198,8 +237,16 @@ abstract class WeatherFastWidgetProviderBase(
             views.setViewVisibility(R.id.widget_header_sg_left, View.GONE)
         }
 
+        if (isColumnar) {
+            views.setViewVisibility(R.id.widget_refresh_container, View.GONE)
+        } else {
+            views.setViewVisibility(R.id.widget_refresh_container, View.VISIBLE)
+        }
+
         // Standard hourly cards
         val showStandardHourly = (!isSingapore || isColumnar) && profile.hourlyCardsVisible > 0
+        val neaCount = widgetData.getInt("wf_nea_count", if (isSingapore) 5 else 0)
+        
         for (index in 1..12) {
             val cardId = context.resources.getIdentifier(
                 "widget_hour_card_$index",
@@ -207,7 +254,8 @@ abstract class WeatherFastWidgetProviderBase(
                 context.packageName,
             )
             if (cardId != 0) {
-                val shouldShow = showStandardHourly && profile.hourlyCardsVisible >= index
+                val isStandardCardVisible = if (isSingapore) index > neaCount else true
+                val shouldShow = showStandardHourly && profile.hourlyCardsVisible >= index && isStandardCardVisible
                 views.setViewVisibility(cardId, if (shouldShow) View.VISIBLE else View.GONE)
             }
         }
@@ -220,8 +268,8 @@ abstract class WeatherFastWidgetProviderBase(
                 context.packageName,
             )
             if (rowId != 0) {
-                // Show up to 5 rows for Singapore
-                val shouldShow = isSingapore && index <= (profile.hourlyCardsVisible.coerceAtLeast(3))
+                // Show up to neaCount rows for Singapore
+                val shouldShow = isSingapore && index <= neaCount.coerceAtMost(5) && index <= profile.hourlyCardsVisible.coerceAtLeast(3)
                 views.setViewVisibility(rowId, if (shouldShow) View.VISIBLE else View.GONE)
             }
         }
@@ -233,7 +281,7 @@ abstract class WeatherFastWidgetProviderBase(
         
         views.setViewVisibility(
             R.id.widget_section_hourly_sg,
-            if (isSingapore) View.VISIBLE else View.GONE,
+            if (isSingapore && neaCount > 0) View.VISIBLE else View.GONE,
         )
 
         views.setViewVisibility(
@@ -292,6 +340,12 @@ abstract class WeatherFastWidgetProviderBase(
         views.setTextViewTextSize(R.id.widget_condition, android.util.TypedValue.COMPLEX_UNIT_SP, subHeadingSize - 1)
         views.setTextViewTextSize(R.id.widget_temp, android.util.TypedValue.COMPLEX_UNIT_SP, tempSize)
         views.setTextViewTextSize(R.id.widget_high_low, android.util.TypedValue.COMPLEX_UNIT_SP, subHeadingSize - 2)
+        // SG Header
+        views.setTextViewTextSize(R.id.widget_location_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 12f * profile.sgLeftFontScale)
+        views.setTextViewTextSize(R.id.widget_condition_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 10f * profile.sgLeftFontScale)
+        views.setTextViewTextSize(R.id.widget_temp_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 13f * profile.sgLeftFontScale)
+        views.setTextViewTextSize(R.id.widget_high_low_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 10f * profile.sgLeftFontScale)
+        views.setTextViewTextSize(R.id.widget_last_refresh_sg, android.util.TypedValue.COMPLEX_UNIT_SP, 9f * profile.sgLeftFontScale)
 
         // Hourly
         for (index in 1..12) {
@@ -397,66 +451,77 @@ abstract class WeatherFastWidgetProviderBase(
         val bump = if (isTransparent) 2f else 0f
         val hourlyBump = if (isTransparent) 1f else 0f
 
+        val isSingapore = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+            .getBoolean("flutter.is_singapore", false) ||
+            context.getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
+            .getBoolean("wf_is_singapore", false)
+        val effectiveTopScale = if (widgetFamily == "large" && !isSingapore) widgetSettings.topFontScale else fontScale
+        val effectiveBottomScale = if (widgetFamily == "large") widgetSettings.bottomFontScale else fontScale
+
         return when {
             effectiveHeightDp < 210 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = (14f + bump) * fontScale,
-                subHeadingSize = (10f + bump) * fontScale,
-                tempSize = (28f + bump) * fontScale,
+                headingSize = (14f + bump) * effectiveTopScale,
+                subHeadingSize = (10f + bump) * effectiveTopScale,
+                tempSize = (28f + bump) * effectiveTopScale,
                 hourlyTimeSize = (8f + hourlyBump) * fontScale,
                 hourlyTempSize = (10f + hourlyBump) * fontScale,
                 hourlyConditionSize = (7f + hourlyBump) * fontScale,
-                dailyNameSize = (11f + bump) * fontScale,
-                dailyTempSize = (11f + bump) * fontScale,
+                dailyNameSize = (11f + bump) * effectiveBottomScale,
+                dailyTempSize = (11f + bump) * effectiveBottomScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
+                sgLeftFontScale = widgetSettings.sgLeftFontScale,
             )
             effectiveHeightDp < 290 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = (16f + bump) * fontScale,
-                subHeadingSize = (11f + bump) * fontScale,
-                tempSize = (32f + bump) * fontScale,
+                headingSize = (16f + bump) * effectiveTopScale,
+                subHeadingSize = (11f + bump) * effectiveTopScale,
+                tempSize = (32f + bump) * effectiveTopScale,
                 hourlyTimeSize = (9f + hourlyBump) * fontScale,
                 hourlyTempSize = (11f + hourlyBump) * fontScale,
                 hourlyConditionSize = (8f + hourlyBump) * fontScale,
-                dailyNameSize = (12f + bump) * fontScale,
-                dailyTempSize = (12f + bump) * fontScale,
+                dailyNameSize = (12f + bump) * effectiveBottomScale,
+                dailyTempSize = (12f + bump) * effectiveBottomScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
+                sgLeftFontScale = widgetSettings.sgLeftFontScale,
             )
             effectiveHeightDp < 360 -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = (17f + bump) * fontScale,
-                subHeadingSize = (12f + bump) * fontScale,
-                tempSize = (36f + bump) * fontScale,
+                headingSize = (17f + bump) * effectiveTopScale,
+                subHeadingSize = (12f + bump) * effectiveTopScale,
+                tempSize = (36f + bump) * effectiveTopScale,
                 hourlyTimeSize = (10f + hourlyBump) * fontScale,
                 hourlyTempSize = (12f + hourlyBump) * fontScale,
                 hourlyConditionSize = (9f + hourlyBump) * fontScale,
-                dailyNameSize = (13f + bump) * fontScale,
-                dailyTempSize = (13f + bump) * fontScale,
+                dailyNameSize = (13f + bump) * effectiveBottomScale,
+                dailyTempSize = (13f + bump) * effectiveBottomScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
+                sgLeftFontScale = widgetSettings.sgLeftFontScale,
             )
             else -> WidgetSizeProfile(
                 hourlyCardsVisible = hourlyCardsVisible,
                 dailyCardsVisible = dailyCardsVisible,
-                headingSize = (18f + bump) * fontScale,
-                subHeadingSize = (13f + bump) * fontScale,
-                tempSize = (40f + bump) * fontScale,
+                headingSize = (18f + bump) * effectiveTopScale,
+                subHeadingSize = (13f + bump) * effectiveTopScale,
+                tempSize = (40f + bump) * effectiveTopScale,
                 hourlyTimeSize = (11f + hourlyBump) * fontScale,
                 hourlyTempSize = (13f + hourlyBump) * fontScale,
                 hourlyConditionSize = (10f + hourlyBump) * fontScale,
-                dailyNameSize = (14f + bump) * fontScale,
-                dailyTempSize = (14f + bump) * fontScale,
+                dailyNameSize = (14f + bump) * effectiveBottomScale,
+                dailyTempSize = (14f + bump) * effectiveBottomScale,
                 isTransparent = isTransparent,
                 isTextBlack = isTextBlack,
                 customThemeColor = customThemeColor,
+                sgLeftFontScale = widgetSettings.sgLeftFontScale,
             )
         }
     }
@@ -628,6 +693,12 @@ abstract class WeatherFastWidgetProviderBase(
         views.setImageViewResource(R.id.widget_day_icon_5, iconResForToken(widgetData.getString("wf_day_icon_5", glyph) ?: glyph))
         views.setImageViewResource(R.id.widget_day_icon_6, iconResForToken(widgetData.getString("wf_day_icon_6", glyph) ?: glyph))
         views.setImageViewResource(R.id.widget_day_icon_7, iconResForToken(widgetData.getString("wf_day_icon_7", glyph) ?: glyph))
+
+        val lastRefresh = widgetData.getString("wf_last_refresh", "--") ?: "--"
+        views.setTextViewText(R.id.widget_last_refresh, "Last refreshed: $lastRefresh")
+        views.setTextViewText(R.id.widget_last_refresh_sg, "Last refreshed: $lastRefresh")
+        views.setDisplayedChild(R.id.widget_refresh_flipper, 0)
+        views.setDisplayedChild(R.id.widget_refresh_flipper_sg, 0)
     }
 
     private fun iconResForToken(token: String): Int {
