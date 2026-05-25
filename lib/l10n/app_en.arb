@@ -1,2 +1,90 @@
 {
+  "home": "Home",
+  "insights": "Insights",
+  "settings": "Settings",
+  "updatingWeather": "Updating weather…",
+  "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
+  "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
+  "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
+  "failedToLoadWeather": "Failed to load weather: {error}",
+  "@failedToLoadWeather": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchPlace": "Search a place",
+  "close": "Close",
+  "cityRegionOrCoordinates": "City, region, or coordinates",
+  "loadingLocation": "Loading location…",
+  "searchLocation": "Search location",
+  "useCurrentLocation": "Use current location",
+  "clear": "Clear",
+  "dummyTime": "Mon, Jan 1 • 12:00 PM",
+  "daytime": "Daytime",
+  "night": "Night",
+  "dummyHighLow": "H 80° · L 60°",
+  "highLowTemp": "H {high}°  ·  L {low}°",
+  "@highLowTemp": {
+    "placeholders": {
+      "high": { "type": "String" },
+      "low": { "type": "String" }
+    }
+  },
+  "feelsLike": "Feels like",
+  "humidity": "Humidity",
+  "wind": "Wind",
+  "airQuality": "Air Quality",
+  "visibility": "Visibility",
+  "precipChance": "Precip chance",
+  "hourlyForecast": "Hourly Forecast",
+  "regionalOutlook": "Regional Outlook",
+  "dataFromOpenMeteo": "Data from Open-Meteo",
+  "dataFromNea": "Data from NEA",
+  "todaysSuggestion": "Today’s suggestion",
+  "adviceRain": "Grab a light shell and keep moving.",
+  "adviceSnow": "Layer up and mind slick paths.",
+  "adviceStorm": "Stay indoors; lightning risk.",
+  "adviceClear": "Great light outside. Sunglasses recommended.",
+  "adviceCloud": "Soft clouds today—perfect walking weather.",
+  "adviceDefault": "Stay comfortable and check again in a few hours.",
+  "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
+  "futureAdviceSnow": "Snow later today—plan travel with extra time.",
+  "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
+  "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "nextDays": "Next {count} days",
+  "@nextDays": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "weather": "Weather",
+  "precipPercent": "{percent}% precip",
+  "@precipPercent": {
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+  "toTime": "to {time}",
+  "@toTime": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+  "windSpeed": "{speed} km/h {dir}",
+  "@windSpeed": {
+    "placeholders": {
+      "speed": { "type": "String" },
+      "dir": { "type": "String" }
+    }
+  },
+  "visibilityKm": "{dist} km",
+  "@visibilityKm": {
+    "placeholders": {
+      "dist": { "type": "String" }
+    }
+  }
 }
