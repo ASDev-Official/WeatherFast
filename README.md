@@ -15,6 +15,11 @@ Fast, focused weather app built with Flutter. Get instant conditions, intelligen
 - In-app web views for helpful links
 - Modern settings page with License info and help/feedback entry points
 
+## Localisation
+
+WeatherFast uses Weblate for localisation. You can help translate the app by visiting our project on Weblate:
+[https://hosted.weblate.org/engage/asdev-weatherfast/](https://hosted.weblate.org/engage/asdev-weatherfast/)
+
 ## Getting Started
 
 1. Clone and install
