@@ -1,0 +1,106 @@
+{
+    "home": "",
+    "insights": "",
+    "settings": "",
+    "updatingWeather": "",
+    "locationServicesDisabled": "",
+    "locationPermissionDenied": "",
+    "unableToFetchLocation": "",
+    "failedToLoadWeather": "",
+    "@failedToLoadWeather": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "searchPlace": "",
+    "close": "",
+    "cityRegionOrCoordinates": "",
+    "loadingLocation": "",
+    "searchLocation": "",
+    "useCurrentLocation": "",
+    "clear": "",
+    "dummyTime": "",
+    "daytime": "",
+    "night": "",
+    "dummyHighLow": "",
+    "highLowTemp": "",
+    "@highLowTemp": {
+        "placeholders": {
+            "high": {
+                "type": "String"
+            },
+            "low": {
+                "type": "String"
+            }
+        }
+    },
+    "feelsLike": "",
+    "humidity": "",
+    "wind": "",
+    "airQuality": "",
+    "visibility": "",
+    "precipChance": "",
+    "hourlyForecast": "",
+    "regionalOutlook": "",
+    "dataFromOpenMeteo": "",
+    "dataFromNea": "",
+    "todaysSuggestion": "",
+    "adviceRain": "",
+    "adviceSnow": "",
+    "adviceStorm": "",
+    "adviceClear": "",
+    "adviceCloud": "",
+    "adviceDefault": "",
+    "futureAdviceRain": "",
+    "futureAdviceSnow": "",
+    "futureAdviceStorm": "",
+    "futureAdviceClear": "",
+    "today": "",
+    "tomorrow": "",
+    "nextDays": "",
+    "@nextDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "weather": "",
+    "precipPercent": "",
+    "@precipPercent": {
+        "placeholders": {
+            "percent": {
+                "type": "String"
+            }
+        }
+    },
+    "toTime": "",
+    "@toTime": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "windSpeed": "",
+    "@windSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            },
+            "dir": {
+                "type": "String"
+            }
+        }
+    },
+    "visibilityKm": "",
+    "@visibilityKm": {
+        "placeholders": {
+            "dist": {
+                "type": "String"
+            }
+        }
+    }
+}
