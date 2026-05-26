@@ -1,7 +1,7 @@
 {
-    "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "airQuality": "Luftqualität",
+    "close": "Schließen",
+    "failedToLoadWeather": "Wetter konnte nicht geladen werden: {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -11,7 +11,7 @@
     },
     "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
     "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
-    "highLowTemp": "H {high}°  ·  L {low}°",
+    "highLowTemp": "max {high}°  ·  min {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
@@ -22,11 +22,11 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
+    "dataFromNea": "Daten von NEA",
+    "night": "Nacht",
+    "useCurrentLocation": "Aktuellen Standort verwenden",
     "adviceRain": "Grab a light shell and keep moving.",
-    "nextDays": "Next {count} days",
+    "nextDays": "Nächste {count} Tage",
     "@nextDays": {
         "placeholders": {
             "count": {
@@ -34,15 +34,15 @@
             }
         }
     },
-    "visibility": "Visibility",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
+    "visibility": "Sichtbarkeit",
+    "dataFromOpenMeteo": "Daten von Open-Meteo",
     "adviceClear": "Great light outside. Sunglasses recommended.",
     "clear": "Clear",
-    "precipChance": "Precip chance",
-    "updatingWeather": "Updating weather…",
+    "precipChance": "Niederschlagswahrscheinlichkeit",
+    "updatingWeather": "Aktualisiere Wetter…",
     "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
-    "loadingLocation": "Loading location…",
-    "precipPercent": "{percent}% precip",
+    "loadingLocation": "Lade Ort…",
+    "precipPercent": "{percent}% Niederschlag",
     "@precipPercent": {
         "placeholders": {
             "percent": {
@@ -59,8 +59,8 @@
         }
     },
     "futureAdviceSnow": "Snow later today—plan travel with extra time.",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
+    "searchLocation": "Ort suchen",
+    "dummyTime": "Mon, 1. Jan • 12:00",
     "adviceCloud": "Soft clouds today—perfect walking weather.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
@@ -70,14 +70,14 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
+    "cityRegionOrCoordinates": "Stadt, Region oder Koordinaten",
     "adviceSnow": "Layer up and mind slick paths.",
     "adviceStorm": "Stay indoors; lightning risk.",
-    "feelsLike": "Feels like",
-    "weather": "Weather",
-    "insights": "Insights",
+    "feelsLike": "Gefühlt",
+    "weather": "Wetter",
+    "insights": "Einsichten",
     "regionalOutlook": "Regional Outlook",
-    "tomorrow": "Tomorrow",
+    "tomorrow": "Morgen",
     "windSpeed": "{speed} km/h {dir}",
     "@windSpeed": {
         "placeholders": {
@@ -90,17 +90,17 @@
         }
     },
     "adviceDefault": "Stay comfortable and check again in a few hours.",
-    "home": "Home",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
-    "hourlyForecast": "Hourly Forecast",
-    "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
-    "settings": "Settings",
-    "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
+    "home": "Startseite",
+    "searchPlace": "Ort suchen",
+    "locationPermissionDenied": "Ortung abgelehnt. Bitte automatische Ortung erlauben.",
+    "hourlyForecast": "Stündliche Vorhersage",
+    "todaysSuggestion": "Heutiger Vorschlag",
+    "humidity": "Luftfeuchtigkeit",
+    "locationServicesDisabled": "Ortungsdienste sind deaktiviert. Bitte in den Einstellungen aktivieren.",
+    "settings": "Einstellungen",
+    "dummyHighLow": "max 80° · min 60°",
+    "daytime": "Tag",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-    "today": "Today",
+    "today": "Heute",
     "wind": "Wind"
 }
