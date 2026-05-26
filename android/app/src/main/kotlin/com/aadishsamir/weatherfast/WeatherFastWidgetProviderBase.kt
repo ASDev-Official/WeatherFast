@@ -8,12 +8,12 @@ import android.view.View
 import android.widget.RemoteViews
 import android.content.Intent
 import android.app.PendingIntent
-import es.antonborri.home_widget.HomeWidgetProvider
+import android.appwidget.AppWidgetProvider
 import kotlin.math.min
 
 abstract class WeatherFastWidgetProviderBase(
     private val widgetFamily: String,
-) : HomeWidgetProvider() {
+) : AppWidgetProvider() {
     private data class WidgetSizeProfile(
         val hourlyCardsVisible: Int,
         val dailyCardsVisible: Int,
@@ -35,8 +35,9 @@ abstract class WeatherFastWidgetProviderBase(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
-        widgetData: SharedPreferences,
     ) {
+        // Get widget data directly from the shared prefs key that home_widget uses.
+        val widgetData = context.getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
         appWidgetIds.forEach { widgetId ->
             updateWidget(context, appWidgetManager, widgetId, widgetData)
         }
@@ -52,12 +53,25 @@ abstract class WeatherFastWidgetProviderBase(
                 views.setDisplayedChild(R.id.widget_refresh_flipper, 1)
                 views.setDisplayedChild(R.id.widget_refresh_flipper_sg, 1)
                 appWidgetManager.partiallyUpdateAppWidget(widgetId, views)
-                
-                val backgroundIntent = es.antonborri.home_widget.HomeWidgetBackgroundIntent.getBroadcast(
-                    context,
-                    android.net.Uri.parse("weatherfast://refresh")
-                )
-                backgroundIntent.send()
+
+                // Trigger the home_widget background worker to refresh weather data.
+                // We use setClassName() to avoid a compile-time dependency on home_widget's
+                // Kotlin classes (which AGP 9 does not compile from the library module).
+                try {
+                    val bgIntent = Intent()
+                    bgIntent.setClassName(
+                        context,
+                        "es.antonborri.home_widget.HomeWidgetBackgroundReceiver",
+                    )
+                    bgIntent.data = android.net.Uri.parse("weatherfast://refresh")
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        context,
+                        0,
+                        bgIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    )
+                    pendingIntent.send()
+                } catch (_: Exception) {}
             }
         }
     }
@@ -68,7 +82,9 @@ abstract class WeatherFastWidgetProviderBase(
         appWidgetId: Int,
         newOptions: Bundle,
     ) {
-        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
+        // HomeWidgetProvider does not override onAppWidgetOptionsChanged, so we cannot
+        // call super here (it would fail to resolve). The default AppWidgetProvider
+        // implementation simply calls onUpdate, which we already handle directly below.
         val prefs = context.getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
         updateWidget(context, appWidgetManager, appWidgetId, prefs)
     }
