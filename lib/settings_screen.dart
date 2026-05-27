@@ -54,7 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Widgets refreshed')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.widgetsRefreshed)));
     } catch (error) {
       if (!mounted) {
         return;
@@ -62,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Widget refresh failed: $error')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.widgetRefreshFailed(error.toString()))));
     } finally {
       if (mounted) {
         setState(() {
@@ -98,8 +98,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     'zh': '中文',
   };
 
-  String _getLanguageName(String? code) {
-    if (code == null) return 'System Default';
+  String _getLanguageName(String? code, BuildContext context) {
+    if (code == null) return AppLocalizations.of(context)!.systemDefault;
     return _languageNames[code] ?? code;
   }
 
@@ -110,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Language'),
+          title: Text(AppLocalizations.of(context)!.language),
           contentPadding: const EdgeInsets.only(top: 16),
           content: SizedBox(
             width: double.maxFinite,
@@ -118,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               shrinkWrap: true,
               children: [
                 ListTile(
-                  title: const Text('System Default'),
+                  title: Text(AppLocalizations.of(context)!.systemDefault),
                   trailing: currentLang == 'system' ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
                   onTap: () => Navigator.pop(context, 'system'),
                 ),
@@ -153,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar.large(title: const Text('Settings'), pinned: true),
+          SliverAppBar.large(title: Text(AppLocalizations.of(context)!.settings), pinned: true),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -162,7 +162,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   // Preferences Section
                   Text(
-                    'Preferences',
+                    AppLocalizations.of(context)!.preferences,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -184,9 +184,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onTertiaryContainer,
                             ),
                           ),
-                          title: const Text('Use Fahrenheit'),
+                          title: Text(AppLocalizations.of(context)!.useFahrenheit),
                           subtitle: Text(
-                            _useFahrenheit ? 'Showing °F' : 'Showing °C',
+                            _useFahrenheit ? AppLocalizations.of(context)!.showingFahrenheit : AppLocalizations.of(context)!.showingCelsius,
                           ),
                           value: _useFahrenheit,
                           onChanged: _toggleUnit,
@@ -204,8 +204,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onTertiaryContainer,
                             ),
                           ),
-                          title: const Text('Language'),
-                          subtitle: Text(_getLanguageName(GlobalData.languageCodeNotifier.value)),
+                          title: Text(AppLocalizations.of(context)!.language),
+                          subtitle: Text(_getLanguageName(GlobalData.languageCodeNotifier.value, context)),
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: _selectLanguage,
                         ),
@@ -216,7 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   // About Section
                   Text(
-                    'About',
+                    AppLocalizations.of(context)!.about,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -238,13 +238,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onPrimaryContainer,
                             ),
                           ),
-                          title: const Text('Open-Source Licenses'),
+                          title: Text(AppLocalizations.of(context)!.openSourceLicenses),
                           subtitle: FutureBuilder<PackageInfo>(
                             future: PackageInfo.fromPlatform(),
                             builder: (context, snapshot) {
                               return Text(
-                                "View licenses for open-source packages"
-                                "${snapshot.hasData ? ' used in WeatherFast ${snapshot.data!.version}' : ''}.",
+                                "${AppLocalizations.of(context)!.viewLicensesForOpenSourcePackages}"
+                                "${snapshot.hasData ? AppLocalizations.of(context)!.usedInWeatherFastVersion(snapshot.data!.version) : ''}.",
                               );
                             },
                           ),
@@ -271,7 +271,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   if (kDebugMode) ...[
                     Text(
-                      'Debug',
+                      AppLocalizations.of(context)!.debug,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: colorScheme.primary,
                         fontWeight: FontWeight.bold,
@@ -291,9 +291,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: colorScheme.onErrorContainer,
                           ),
                         ),
-                        title: const Text('Force refresh widgets'),
-                        subtitle: const Text(
-                          'Reload widget data (USE SPARINGLY!!!)',
+                        title: Text(AppLocalizations.of(context)!.forceRefreshWidgets),
+                        subtitle: Text(
+                          AppLocalizations.of(context)!.reloadWidgetDataWarning,
                         ),
                         trailing: _isRefreshingWidgets
                             ? const SizedBox(
@@ -323,8 +323,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: colorScheme.onErrorContainer,
                           ),
                         ),
-                        title: const Text('Test Rating Bottom Sheet'),
-                        subtitle: const Text('Simulate successful weather fetch trigger'),
+                        title: Text(AppLocalizations.of(context)!.testRatingBottomSheet),
+                        subtitle: Text(AppLocalizations.of(context)!.simulateSuccessfulWeatherFetchTrigger),
                         trailing: const Icon(Icons.chevron_right_rounded),
                         onTap: () async {
                           await RatingService.debugFastForwardTime();
@@ -348,14 +348,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: colorScheme.onErrorContainer,
                           ),
                         ),
-                        title: const Text('Reset Rating Preferences'),
-                        subtitle: const Text('Reset shown count and timestamps'),
+                        title: Text(AppLocalizations.of(context)!.resetRatingPreferences),
+                        subtitle: Text(AppLocalizations.of(context)!.resetShownCountAndTimestamps),
                         trailing: const Icon(Icons.chevron_right_rounded),
                         onTap: () async {
                           await RatingService.resetRatingPreferences();
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Rating preferences reset')),
+                              SnackBar(content: Text(AppLocalizations.of(context)!.ratingPreferencesReset)),
                             );
                           }
                         },
@@ -366,7 +366,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                   // Support Section
                   Text(
-                    'Support',
+                    AppLocalizations.of(context)!.support,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -388,8 +388,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onSecondaryContainer,
                             ),
                           ),
-                          title: const Text('System Status'),
-                          subtitle: const Text('Check the operational status of services'),
+                          title: Text(AppLocalizations.of(context)!.systemStatus),
+                          subtitle: Text(AppLocalizations.of(context)!.checkOperationalStatusOfServices),
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: () {
                             Navigator.push(
@@ -413,8 +413,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onSecondaryContainer,
                             ),
                           ),
-                          title: const Text('Help & Feedback'),
-                          subtitle: const Text('Get help or send feedback'),
+                          title: Text(AppLocalizations.of(context)!.helpAndFeedback),
+                          subtitle: Text(AppLocalizations.of(context)!.getHelpOrSendFeedback),
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: () {
                             Navigator.push(
@@ -458,7 +458,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               return const SizedBox.shrink();
                             }
                             return Text(
-                              'Version ${snapshot.data!.version} (${snapshot.data!.buildNumber})',
+                              AppLocalizations.of(context)!.versionBuildNumber(snapshot.data!.version, snapshot.data!.buildNumber),
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
                                     color: colorScheme.onSurface.withValues(

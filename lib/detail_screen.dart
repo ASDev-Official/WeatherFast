@@ -6,6 +6,7 @@ import 'services/weather_insights_service.dart';
 import 'time_service.dart';
 import 'ui/animated_weather_backdrop.dart';
 import 'weather_service.dart';
+import 'l10n/app_localizations.dart';
 
 class DetailScreen extends StatefulWidget {
   final String? location;
@@ -130,7 +131,7 @@ class _DetailScreenState extends State<DetailScreen>
         });
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Failed to load Insights: $e')));
+        ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.failedToLoadInsights(e.toString()))));
       }
     }
   }
@@ -211,7 +212,7 @@ class _DetailScreenState extends State<DetailScreen>
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Weather Insights',
+                        AppLocalizations.of(context)!.weatherInsights,
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -225,7 +226,7 @@ class _DetailScreenState extends State<DetailScreen>
                 // Summary
                 Text(
                   _insightsSummary.isEmpty
-                      ? 'Analyzing conditions...'
+                      ? AppLocalizations.of(context)!.analyzingConditions
                       : _insightsSummary,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
@@ -243,7 +244,7 @@ class _DetailScreenState extends State<DetailScreen>
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Air Quality',
+                        AppLocalizations.of(context)!.airQuality,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
@@ -325,7 +326,7 @@ class _DetailScreenState extends State<DetailScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Activity Suggestions',
+                    AppLocalizations.of(context)!.activitySuggestions,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -411,7 +412,7 @@ class _DetailScreenState extends State<DetailScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Health & Safety',
+                    AppLocalizations.of(context)!.healthAndSafety,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -507,7 +508,7 @@ class _DetailScreenState extends State<DetailScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'What to Wear',
+                      AppLocalizations.of(context)!.whatToWear,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(
@@ -546,7 +547,7 @@ class _DetailScreenState extends State<DetailScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Today\'s Timeline',
+                AppLocalizations.of(context)!.todaysTimeline,
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -638,7 +639,7 @@ class _DetailScreenState extends State<DetailScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Week Ahead',
+                    AppLocalizations.of(context)!.weekAhead,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onTertiaryContainer,
@@ -751,7 +752,7 @@ class _DetailScreenState extends State<DetailScreen>
 
     if (widget.location == null || widget.location!.isEmpty) {
       return Scaffold(
-        appBar: animatedAppBar(child: const Text('Weather Insights')),
+        appBar: animatedAppBar(child: Text(AppLocalizations.of(context)!.weatherInsights)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -763,12 +764,12 @@ class _DetailScreenState extends State<DetailScreen>
               ),
               const SizedBox(height: 16),
               Text(
-                'Select a location from Home',
+                AppLocalizations.of(context)!.selectLocationFromHome,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 8),
               Text(
-                'to view the detailed Insights',
+                AppLocalizations.of(context)!.toViewDetailedInsights,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -788,7 +789,7 @@ class _DetailScreenState extends State<DetailScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10), // Top spacing
-            const Text('Weather Insights'),
+            Text(AppLocalizations.of(context)!.weatherInsights),
             if (_locationName != null)
               Text(
                 _locationName!,

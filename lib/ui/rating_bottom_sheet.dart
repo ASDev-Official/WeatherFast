@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/rating_service.dart';
 import 'animated_award_star.dart';
+import '../l10n/app_localizations.dart';
 
 class RatingBottomSheet extends StatelessWidget {
   final int promptShownCount;
@@ -23,7 +24,7 @@ class RatingBottomSheet extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Enjoying WeatherFast?',
+                AppLocalizations.of(context)!.enjoyingWeatherFast,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -31,7 +32,7 @@ class RatingBottomSheet extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!',
+                AppLocalizations.of(context)!.rateAppDescription,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -41,7 +42,7 @@ class RatingBottomSheet extends StatelessWidget {
                   Navigator.of(context).pop();
                   RatingService.markAsRated();
                 },
-                child: const Text('Rate Now'),
+                child: Text(AppLocalizations.of(context)!.rateNow),
               ),
               if (promptShownCount == 0) ...[
                 const SizedBox(height: 12),
@@ -50,7 +51,7 @@ class RatingBottomSheet extends StatelessWidget {
                     Navigator.of(context).pop();
                     RatingService.remindMeLater();
                   },
-                  child: const Text('Remind Me in 2 Days'),
+                  child: Text(AppLocalizations.of(context)!.remindMeLater),
                 ),
               ],
               if (promptShownCount >= 1) ...[
@@ -60,7 +61,7 @@ class RatingBottomSheet extends StatelessWidget {
                     Navigator.of(context).pop();
                     RatingService.declineRating();
                   },
-                  child: const Text('No Thanks'),
+                  child: Text(AppLocalizations.of(context)!.noThanks),
                 ),
               ],
             ],

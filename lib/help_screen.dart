@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'webview_screen.dart'; // Import your WebViewScreen here
+import 'l10n/app_localizations.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -13,16 +14,16 @@ class HelpScreen extends StatelessWidget {
 
     final List<Map<String, dynamic>> items = [
       {
-        'title': 'Feature Request',
-        'subtitle': 'Suggest a new feature for WeatherFast',
+        'title': AppLocalizations.of(context)!.featureRequest,
+        'subtitle': AppLocalizations.of(context)!.suggestFeature,
         'icon': Icons.lightbulb_outline,
         'color': colorScheme.primaryContainer,
         'iconColor': colorScheme.onPrimaryContainer,
         'url': featureRequestUrl,
       },
       {
-        'title': 'Bug Report',
-        'subtitle': 'Report a bug or issue',
+        'title': AppLocalizations.of(context)!.bugReport,
+        'subtitle': AppLocalizations.of(context)!.reportBug,
         'icon': Icons.bug_report_outlined,
         'color': colorScheme.secondaryContainer,
         'iconColor': colorScheme.onSecondaryContainer,
@@ -34,7 +35,7 @@ class HelpScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar.large(
-            title: const Text('Help & Feedback'),
+            title: Text(AppLocalizations.of(context)!.helpAndFeedback),
             pinned: true,
           ),
           SliverToBoxAdapter(
@@ -44,7 +45,7 @@ class HelpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Support',
+                    AppLocalizations.of(context)!.support,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,

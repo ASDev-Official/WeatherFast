@@ -433,6 +433,486 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{dist} km'**
   String visibilityKm(String dist);
+
+  /// No description provided for @failedToLoadInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load Insights: {error}'**
+  String failedToLoadInsights(String error);
+
+  /// No description provided for @weatherInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Insights'**
+  String get weatherInsights;
+
+  /// No description provided for @analyzingConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing conditions...'**
+  String get analyzingConditions;
+
+  /// No description provided for @activitySuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Suggestions'**
+  String get activitySuggestions;
+
+  /// No description provided for @healthAndSafety.
+  ///
+  /// In en, this message translates to:
+  /// **'Health & Safety'**
+  String get healthAndSafety;
+
+  /// No description provided for @whatToWear.
+  ///
+  /// In en, this message translates to:
+  /// **'What to Wear'**
+  String get whatToWear;
+
+  /// No description provided for @todaysTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Timeline'**
+  String get todaysTimeline;
+
+  /// No description provided for @weekAhead.
+  ///
+  /// In en, this message translates to:
+  /// **'Week Ahead'**
+  String get weekAhead;
+
+  /// No description provided for @selectLocationFromHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a location from Home'**
+  String get selectLocationFromHome;
+
+  /// No description provided for @toViewDetailedInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'to view the detailed Insights'**
+  String get toViewDetailedInsights;
+
+  /// No description provided for @widgetsRefreshed.
+  ///
+  /// In en, this message translates to:
+  /// **'Widgets refreshed'**
+  String get widgetsRefreshed;
+
+  /// No description provided for @widgetRefreshFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Widget refresh failed: {error}'**
+  String widgetRefreshFailed(String error);
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @systemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get systemDefault;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @useFahrenheit.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Fahrenheit'**
+  String get useFahrenheit;
+
+  /// No description provided for @showingFahrenheit.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing °F'**
+  String get showingFahrenheit;
+
+  /// No description provided for @showingCelsius.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing °C'**
+  String get showingCelsius;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @openSourceLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-Source Licenses'**
+  String get openSourceLicenses;
+
+  /// No description provided for @viewLicensesForOpenSourcePackages.
+  ///
+  /// In en, this message translates to:
+  /// **'View licenses for open-source packages'**
+  String get viewLicensesForOpenSourcePackages;
+
+  /// No description provided for @usedInWeatherFastVersion.
+  ///
+  /// In en, this message translates to:
+  /// **' used in WeatherFast {version}'**
+  String usedInWeatherFastVersion(String version);
+
+  /// No description provided for @debug.
+  ///
+  /// In en, this message translates to:
+  /// **'Debug'**
+  String get debug;
+
+  /// No description provided for @forceRefreshWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Force refresh widgets'**
+  String get forceRefreshWidgets;
+
+  /// No description provided for @reloadWidgetDataWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Reload widget data (USE SPARINGLY!!!)'**
+  String get reloadWidgetDataWarning;
+
+  /// No description provided for @testRatingBottomSheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Rating Bottom Sheet'**
+  String get testRatingBottomSheet;
+
+  /// No description provided for @simulateSuccessfulWeatherFetchTrigger.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulate successful weather fetch trigger'**
+  String get simulateSuccessfulWeatherFetchTrigger;
+
+  /// No description provided for @resetRatingPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Rating Preferences'**
+  String get resetRatingPreferences;
+
+  /// No description provided for @resetShownCountAndTimestamps.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset shown count and timestamps'**
+  String get resetShownCountAndTimestamps;
+
+  /// No description provided for @ratingPreferencesReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating preferences reset'**
+  String get ratingPreferencesReset;
+
+  /// No description provided for @support.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get support;
+
+  /// No description provided for @systemStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'System Status'**
+  String get systemStatus;
+
+  /// No description provided for @checkOperationalStatusOfServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the operational status of services'**
+  String get checkOperationalStatusOfServices;
+
+  /// No description provided for @helpAndFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Feedback'**
+  String get helpAndFeedback;
+
+  /// No description provided for @getHelpOrSendFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Get help or send feedback'**
+  String get getHelpOrSendFeedback;
+
+  /// No description provided for @versionBuildNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version} ({buildNumber})'**
+  String versionBuildNumber(String version, String buildNumber);
+
+  /// No description provided for @featureRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Feature Request'**
+  String get featureRequest;
+
+  /// No description provided for @suggestFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggest a new feature for WeatherFast'**
+  String get suggestFeature;
+
+  /// No description provided for @bugReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug Report'**
+  String get bugReport;
+
+  /// No description provided for @reportBug.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a bug or issue'**
+  String get reportBug;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @loadingNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading notification title...'**
+  String get loadingNotificationTitle;
+
+  /// No description provided for @loadingNotificationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading notification description...'**
+  String get loadingNotificationDesc;
+
+  /// No description provided for @failedToLoadNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load notifications: {error}'**
+  String failedToLoadNotifications(String error);
+
+  /// No description provided for @errorLoadingNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading notifications: {error}'**
+  String errorLoadingNotifications(String error);
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @noNewNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No new notifications'**
+  String get noNewNotifications;
+
+  /// No description provided for @notificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notificationTitle;
+
+  /// No description provided for @couldNotOpenLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open link'**
+  String get couldNotOpenLink;
+
+  /// No description provided for @openLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Link'**
+  String get openLink;
+
+  /// No description provided for @mapSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Map Settings'**
+  String get mapSettings;
+
+  /// No description provided for @radarOpacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Radar Opacity'**
+  String get radarOpacity;
+
+  /// No description provided for @dataSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Sources'**
+  String get dataSources;
+
+  /// No description provided for @mapLayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Map Layers:'**
+  String get mapLayers;
+
+  /// No description provided for @baseMapsMapbox.
+  ///
+  /// In en, this message translates to:
+  /// **'Base maps are provided by Mapbox.'**
+  String get baseMapsMapbox;
+
+  /// No description provided for @weatherData.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Data:'**
+  String get weatherData;
+
+  /// No description provided for @livePrecipitationRainviewer.
+  ///
+  /// In en, this message translates to:
+  /// **'Live precipitation radar layers are provided by RainViewer.'**
+  String get livePrecipitationRainviewer;
+
+  /// No description provided for @attribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Attribution:'**
+  String get attribution;
+
+  /// No description provided for @attributionText.
+  ///
+  /// In en, this message translates to:
+  /// **'© Mapbox, © OpenStreetMap contributors, © RainViewer.'**
+  String get attributionText;
+
+  /// No description provided for @weatherMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Map'**
+  String get weatherMap;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @enjoyingWeatherFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoying WeatherFast?'**
+  String get enjoyingWeatherFast;
+
+  /// No description provided for @rateAppDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!'**
+  String get rateAppDescription;
+
+  /// No description provided for @rateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Now'**
+  String get rateNow;
+
+  /// No description provided for @remindMeLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind Me in 2 Days'**
+  String get remindMeLater;
+
+  /// No description provided for @noThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'No Thanks'**
+  String get noThanks;
+
+  /// No description provided for @neaAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the '**
+  String neaAttribution(String date);
+
+  /// No description provided for @sgOpenDataLicence.
+  ///
+  /// In en, this message translates to:
+  /// **'Singapore Open Data Licence version 1.0'**
+  String get sgOpenDataLicence;
+
+  /// No description provided for @weatherDataProvidedByOM.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather data provided by Open-Meteo'**
+  String get weatherDataProvidedByOM;
+
+  /// No description provided for @neaWebsite.
+  ///
+  /// In en, this message translates to:
+  /// **'NEA Website'**
+  String get neaWebsite;
+
+  /// No description provided for @dataGovSg.
+  ///
+  /// In en, this message translates to:
+  /// **'Data.gov.sg'**
+  String get dataGovSg;
+
+  /// No description provided for @website.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get website;
+
+  /// No description provided for @apiDocs.
+  ///
+  /// In en, this message translates to:
+  /// **'API Docs'**
+  String get apiDocs;
+
+  /// No description provided for @terms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get terms;
+
+  /// No description provided for @loadingClearWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get loadingClearWeather;
+
+  /// No description provided for @loadingTempF.
+  ///
+  /// In en, this message translates to:
+  /// **'72°F'**
+  String get loadingTempF;
+
+  /// No description provided for @tapToViewInteractiveRadar.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to view interactive radar'**
+  String get tapToViewInteractiveRadar;
+
+  /// No description provided for @weatherMapsUnavailableOnWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Maps Unavailable on Web'**
+  String get weatherMapsUnavailableOnWeb;
+
+  /// No description provided for @interactiveWeatherRadarDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Interactive weather radar and high-resolution maps are optimized for our mobile experience.'**
+  String get interactiveWeatherRadarDescription;
+
+  /// No description provided for @getItOnPlayStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Get it on Play Store'**
+  String get getItOnPlayStore;
 }
 
 class _AppLocalizationsDelegate

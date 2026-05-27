@@ -86,5 +86,121 @@
     "placeholders": {
       "dist": { "type": "String" }
     }
-  }
+  },
+  "failedToLoadInsights": "Failed to load Insights: {error}",
+  "@failedToLoadInsights": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "weatherInsights": "Weather Insights",
+  "analyzingConditions": "Analyzing conditions...",
+  "activitySuggestions": "Activity Suggestions",
+  "healthAndSafety": "Health & Safety",
+  "whatToWear": "What to Wear",
+  "todaysTimeline": "Today's Timeline",
+  "weekAhead": "Week Ahead",
+  "selectLocationFromHome": "Select a location from Home",
+  "toViewDetailedInsights": "to view the detailed Insights",
+  "widgetsRefreshed": "Widgets refreshed",
+  "widgetRefreshFailed": "Widget refresh failed: {error}",
+  "@widgetRefreshFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "language": "Language",
+  "systemDefault": "System Default",
+  "preferences": "Preferences",
+  "useFahrenheit": "Use Fahrenheit",
+  "showingFahrenheit": "Showing °F",
+  "showingCelsius": "Showing °C",
+  "about": "About",
+  "openSourceLicenses": "Open-Source Licenses",
+  "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
+  "usedInWeatherFastVersion": " used in WeatherFast {version}",
+  "@usedInWeatherFastVersion": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+  "debug": "Debug",
+  "forceRefreshWidgets": "Force refresh widgets",
+  "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
+  "testRatingBottomSheet": "Test Rating Bottom Sheet",
+  "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
+  "resetRatingPreferences": "Reset Rating Preferences",
+  "resetShownCountAndTimestamps": "Reset shown count and timestamps",
+  "ratingPreferencesReset": "Rating preferences reset",
+  "support": "Support",
+  "systemStatus": "System Status",
+  "checkOperationalStatusOfServices": "Check the operational status of services",
+  "helpAndFeedback": "Help & Feedback",
+  "getHelpOrSendFeedback": "Get help or send feedback",
+  "versionBuildNumber": "Version {version} ({buildNumber})",
+  "@versionBuildNumber": {
+    "placeholders": {
+      "version": { "type": "String" },
+      "buildNumber": { "type": "String" }
+    }
+  },
+  "featureRequest": "Feature Request",
+  "suggestFeature": "Suggest a new feature for WeatherFast",
+  "bugReport": "Bug Report",
+  "reportBug": "Report a bug or issue",
+  "notifications": "Notifications",
+  "loadingNotificationTitle": "Loading notification title...",
+  "loadingNotificationDesc": "Loading notification description...",
+  "failedToLoadNotifications": "Failed to load notifications: {error}",
+  "@failedToLoadNotifications": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "errorLoadingNotifications": "Error loading notifications: {error}",
+  "@errorLoadingNotifications": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "retry": "Retry",
+  "noNewNotifications": "No new notifications",
+  "notificationTitle": "Notification",
+  "couldNotOpenLink": "Could not open link",
+  "openLink": "Open Link",
+  "mapSettings": "Map Settings",
+  "radarOpacity": "Radar Opacity",
+  "dataSources": "Data Sources",
+  "mapLayers": "Map Layers:",
+  "baseMapsMapbox": "Base maps are provided by Mapbox.",
+  "weatherData": "Weather Data:",
+  "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
+  "attribution": "Attribution:",
+  "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
+  "weatherMap": "Weather Map",
+  "loading": "Loading...",
+  "enjoyingWeatherFast": "Enjoying WeatherFast?",
+  "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
+  "rateNow": "Rate Now",
+  "remindMeLater": "Remind Me in 2 Days",
+  "noThanks": "No Thanks",
+  "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
+  "@neaAttribution": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
+  "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
+  "neaWebsite": "NEA Website",
+  "dataGovSg": "Data.gov.sg",
+  "website": "Website",
+  "apiDocs": "API Docs",
+  "terms": "Terms",
+  "loadingClearWeather": "Clear",
+  "loadingTempF": "72°F",
+  "tapToViewInteractiveRadar": "Tap to view interactive radar",
+  "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
+  "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
+  "getItOnPlayStore": "Get it on Play Store"
 }

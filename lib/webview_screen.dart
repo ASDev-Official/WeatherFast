@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'l10n/app_localizations.dart';
 
 class WebViewScreen extends StatefulWidget {
   final String url;
@@ -11,7 +12,7 @@ class WebViewScreen extends StatefulWidget {
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
-  String pageTitle = "Loading..."; // Default title while loading
+  String? pageTitle; // Default title while loading
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(pageTitle),
+        title: Text(pageTitle ?? AppLocalizations.of(context)!.loading),
       ),
       body: InAppWebView(
         initialUrlRequest: URLRequest(url: WebUri(widget.url)),

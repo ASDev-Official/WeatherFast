@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../l10n/app_localizations.dart';
 
 class WeatherMapSnippet extends StatelessWidget {
   final double lat;
@@ -71,17 +72,17 @@ class WeatherMapSnippet extends StatelessWidget {
                       ),
                     ),
                     padding: const EdgeInsets.all(16),
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.map_rounded, color: Colors.white, size: 20),
-                            SizedBox(width: 8),
+                            const Icon(Icons.map_rounded, color: Colors.white, size: 20),
+                            const SizedBox(width: 8),
                             Text(
-                              'Weather Map',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.weatherMap,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -90,8 +91,8 @@ class WeatherMapSnippet extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          'Tap to view interactive radar',
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.tapToViewInteractiveRadar,
+                          style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 12,
                           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../l10n/app_localizations.dart';
 
 class WeatherMapView extends StatelessWidget {
   final double initialLat;
@@ -36,7 +37,7 @@ class WeatherMapView extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              "Weather Maps Unavailable on Web",
+              AppLocalizations.of(context)!.weatherMapsUnavailableOnWeb,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class WeatherMapView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
+              AppLocalizations.of(context)!.interactiveWeatherRadarDescription,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -54,7 +55,7 @@ class WeatherMapView extends StatelessWidget {
             FilledButton.icon(
               onPressed: _launchPlayStore,
               icon: const Icon(Icons.shop_rounded),
-              label: const Text("Get it on Play Store"),
+              label: Text(AppLocalizations.of(context)!.getItOnPlayStore),
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 56),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

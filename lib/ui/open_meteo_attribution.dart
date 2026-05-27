@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../webview_screen.dart';
+import '../l10n/app_localizations.dart';
 
 class OpenMeteoAttribution extends StatefulWidget {
   const OpenMeteoAttribution({
@@ -65,12 +66,11 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text:
-                            'Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on $deviceDate from the National Environment Agency which is made available under the terms of the ',
+                        text: AppLocalizations.of(context)!.neaAttribution(deviceDate),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       TextSpan(
-                        text: 'Singapore Open Data Licence version 1.0',
+                        text: AppLocalizations.of(context)!.sgOpenDataLicence,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                           decoration: TextDecoration.underline,
@@ -88,7 +88,7 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                 )
               else
                 Text(
-                  'Weather data provided by Open-Meteo',
+                  AppLocalizations.of(context)!.weatherDataProvidedByOM,
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -100,12 +100,12 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                 children: isNea
                     ? [
                         ActionChip(
-                          label: const Text('NEA Website'),
+                          label: Text(AppLocalizations.of(context)!.neaWebsite),
                           avatar: const Icon(Icons.public, size: 16),
                           onPressed: () => _openLink(_neaUrl),
                         ),
                         ActionChip(
-                          label: const Text('Data.gov.sg'),
+                          label: Text(AppLocalizations.of(context)!.dataGovSg),
                           avatar: const Icon(
                             Icons.menu_book_outlined,
                             size: 16,
@@ -115,12 +115,12 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                       ]
                     : [
                         ActionChip(
-                          label: const Text('Website'),
+                          label: Text(AppLocalizations.of(context)!.website),
                           avatar: const Icon(Icons.public, size: 16),
                           onPressed: () => _openLink(_omHomeUrl),
                         ),
                         ActionChip(
-                          label: const Text('API Docs'),
+                          label: Text(AppLocalizations.of(context)!.apiDocs),
                           avatar: const Icon(
                             Icons.menu_book_outlined,
                             size: 16,
@@ -128,7 +128,7 @@ class _OpenMeteoAttributionState extends State<OpenMeteoAttribution> {
                           onPressed: () => _openLink(_omDocsUrl),
                         ),
                         ActionChip(
-                          label: const Text('Terms'),
+                          label: Text(AppLocalizations.of(context)!.terms),
                           avatar: const Icon(Icons.gavel_outlined, size: 16),
                           onPressed: () => _openLink(_omTermsUrl),
                         ),

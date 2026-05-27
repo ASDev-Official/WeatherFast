@@ -537,7 +537,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Clear'),
+                                Text(AppLocalizations.of(context)!.loadingClearWeather),
                                 Text(AppLocalizations.of(context)!.dummyTime),
                               ],
                             ),
@@ -552,9 +552,9 @@ class _WeatherHomeState extends State<WeatherHome> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Text(
-                            '72°F',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.loadingTempF,
+                            style: const TextStyle(
                               fontSize: 45,
                               fontWeight: FontWeight.w700,
                             ),
@@ -1519,7 +1519,7 @@ class _SgPeriodCard extends StatelessWidget {
             ),
             if (to.isNotEmpty)
               Text(
-                'to $to',
+                AppLocalizations.of(context)!.toTime(to),
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: scheme.onSurfaceVariant,
                 ),

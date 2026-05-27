@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
+import 'l10n/app_localizations.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -56,7 +57,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: Text(AppLocalizations.of(context)!.notifications),
       ),
       body: _buildBody(),
     );
@@ -69,11 +70,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         child: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {
-            return const Card(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ListTile(
-                title: Text('Loading notification title...'),
-                subtitle: Text('Loading notification description...'),
+                title: Text(AppLocalizations.of(context)!.loadingNotificationTitle),
+                subtitle: Text(AppLocalizations.of(context)!.loadingNotificationDesc),
               ),
             );
           },
@@ -91,14 +92,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               const Icon(Icons.error_outline, size: 48, color: Colors.red),
               const SizedBox(height: 16),
               Text(
-                _error!, 
+                AppLocalizations.of(context)!.failedToLoadNotifications(_error!), 
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               FilledButton(
                 onPressed: _fetchNotifications,
-                child: const Text('Retry'),
+                child: Text(AppLocalizations.of(context)!.retry),
               ),
             ],
           ),
@@ -107,13 +108,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     }
 
     if (_notifications.isEmpty) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.notifications_off_outlined, size: 48, color: Colors.grey),
-            SizedBox(height: 16),
-            Text('No new notifications', style: TextStyle(fontSize: 18)),
+            const Icon(Icons.notifications_off_outlined, size: 48, color: Colors.grey),
+            const SizedBox(height: 16),
+            Text(AppLocalizations.of(context)!.noNewNotifications, style: const TextStyle(fontSize: 18)),
           ],
         ),
       );
@@ -123,7 +124,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       itemCount: _notifications.length,
       itemBuilder: (context, index) {
         final notification = _notifications[index];
-        final title = notification['title']?.toString() ?? 'Notification';
+        final title = notification['title']?.toString() ?? AppLocalizations.of(context)!.notificationTitle;
         final body = notification['message']?.toString() ?? notification['body']?.toString() ?? '';
         final dateRaw = notification['createdAt']?.toString() ?? notification['date']?.toString() ?? '';
         final actionUrl = notification['actionUrl']?.toString() ?? '';
@@ -191,12 +192,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         } else {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Could not open link')),
+                              SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
                             );
                           }
                         }
                       },
-                      child: const Text('Open Link'),
+                      child: Text(AppLocalizations.of(context)!.openLink),
                     ),
                   ),
                 ],

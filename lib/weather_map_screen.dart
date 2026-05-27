@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'services/preferences_service.dart';
 import 'package:flutter/foundation.dart';
+import 'l10n/app_localizations.dart';
 
 // Conditional imports to prevent Mapbox SDK crashes on Web
 // This ensures that the 'mapbox_maps_flutter' package is NEVER loaded in the browser.
@@ -53,11 +54,11 @@ class _WeatherMapScreenState extends State<WeatherMapScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Map Settings", style: Theme.of(context).textTheme.headlineSmall),
+                  Text(AppLocalizations.of(context)!.mapSettings, style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Text("Radar Opacity", style: Theme.of(context).textTheme.labelLarge),
+                    child: Text(AppLocalizations.of(context)!.radarOpacity, style: Theme.of(context).textTheme.labelLarge),
                   ),
                   Slider(
                     value: _radarOpacity,
@@ -70,7 +71,7 @@ class _WeatherMapScreenState extends State<WeatherMapScreen> {
                   const Divider(),
                   ListTile(
                     leading: const Icon(Icons.info_outline),
-                    title: const Text("Data Sources"),
+                    title: Text(AppLocalizations.of(context)!.dataSources),
                     onTap: () {
                       Navigator.pop(context);
                       _showSources();
@@ -89,23 +90,23 @@ class _WeatherMapScreenState extends State<WeatherMapScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Data Sources"),
-        content: const Column(
+        title: Text(AppLocalizations.of(context)!.dataSources),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Map Layers:", style: TextStyle(fontWeight: FontWeight.bold)),
-            Text("Base maps are provided by Mapbox."),
-            SizedBox(height: 12),
-            Text("Weather Data:", style: TextStyle(fontWeight: FontWeight.bold)),
-            Text("Live precipitation radar layers are provided by RainViewer."),
-            SizedBox(height: 12),
-            Text("Attribution:", style: TextStyle(fontWeight: FontWeight.bold)),
-            Text("© Mapbox, © OpenStreetMap contributors, © RainViewer."),
+            Text(AppLocalizations.of(context)!.mapLayers, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.baseMapsMapbox),
+            const SizedBox(height: 12),
+            Text(AppLocalizations.of(context)!.weatherData, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.livePrecipitationRainviewer),
+            const SizedBox(height: 12),
+            Text(AppLocalizations.of(context)!.attribution, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.attributionText),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close")),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(AppLocalizations.of(context)!.close)),
         ],
       ),
     );
@@ -115,7 +116,7 @@ class _WeatherMapScreenState extends State<WeatherMapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weather Map'),
+        title: Text(AppLocalizations.of(context)!.weatherMap),
         actions: [
           if (!kIsWeb)
             IconButton(
