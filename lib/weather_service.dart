@@ -73,8 +73,8 @@ class WeatherService {
             continue;
           }
 
-          final tempC = (hourlyTemps[i] as num).toDouble();
-          final weatherCode = (hourlyCodes[i] as num).toInt();
+          final tempC = (hourlyTemps[i] as num?)?.toDouble() ?? 0.0;
+          final weatherCode = (hourlyCodes[i] as num?)?.toInt() ?? 0;
 
           nextHours.add({
             'time': hourlyTimes[i],
@@ -102,8 +102,8 @@ class WeatherService {
         final dayCodes = (daily['weather_code'] as List?)?.toList() ?? const [];
 
         if (dayMax.isNotEmpty && dayMin.isNotEmpty) {
-          todayHighC = (dayMax[0] as num).toDouble();
-          todayLowC = (dayMin[0] as num).toDouble();
+          todayHighC = (dayMax[0] as num?)?.toDouble() ?? 0.0;
+          todayLowC = (dayMin[0] as num?)?.toDouble() ?? 0.0;
         }
 
         for (int i = 1; i < dayDates.length; i++) {
@@ -113,9 +113,9 @@ class WeatherService {
             break;
           }
 
-          final code = (dayCodes[i] as num).toInt();
-          final maxC = (dayMax[i] as num).toDouble();
-          final minC = (dayMin[i] as num).toDouble();
+          final code = (dayCodes[i] as num?)?.toInt() ?? 0;
+          final maxC = (dayMax[i] as num?)?.toDouble() ?? 0.0;
+          final minC = (dayMin[i] as num?)?.toDouble() ?? 0.0;
           nextDays.add({
             'date': dayDates[i],
             'max_c': maxC,
@@ -144,38 +144,31 @@ class WeatherService {
           'localtime': currentTime ?? '',
         },
         'current': {
-          'temp_c': (weatherData['current']['temperature_2m'] as num)
-              .toDouble(),
+          'temp_c': (weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0,
           'temp_f':
-              ((weatherData['current']['temperature_2m'] as num).toDouble() *
+              (((weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0) *
                   9 /
                   5) +
               32,
-          'feelslike_c': (weatherData['current']['apparent_temperature'] as num)
-              .toDouble(),
+          'feelslike_c': (weatherData['current']['apparent_temperature'] as num?)?.toDouble() ?? 0.0,
           'feelslike_f':
-              ((weatherData['current']['apparent_temperature'] as num)
-                      .toDouble() *
+              (((weatherData['current']['apparent_temperature'] as num?)?.toDouble() ?? 0.0) *
                   9 /
                   5) +
               32,
           'condition': {
             'text': _getWeatherDescription(
-              (weatherData['current']['weather_code'] as num).toInt(),
+              (weatherData['current']['weather_code'] as num?)?.toInt() ?? 0,
             ),
             'icon': '//cdn.weatherapi.com/weather/64x64/day/116.png',
           },
-          'humidity': (weatherData['current']['relative_humidity_2m'] as num)
-              .toInt(),
-          'wind_kph': (weatherData['current']['wind_speed_10m'] as num)
-              .toDouble(),
-          'wind_degree': (weatherData['current']['wind_direction_10m'] as num)
-              .toInt(),
+          'humidity': (weatherData['current']['relative_humidity_2m'] as num?)?.toInt() ?? 0,
+          'wind_kph': (weatherData['current']['wind_speed_10m'] as num?)?.toDouble() ?? 0.0,
+          'wind_degree': (weatherData['current']['wind_direction_10m'] as num?)?.toInt() ?? 0,
           'wind_dir': _getWindDirection(
-            (weatherData['current']['wind_direction_10m'] as num).toInt(),
+            (weatherData['current']['wind_direction_10m'] as num?)?.toInt() ?? 0,
           ),
-          'pressure_mb': (weatherData['current']['pressure_msl'] as num)
-              .toDouble(),
+          'pressure_mb': (weatherData['current']['pressure_msl'] as num?)?.toDouble() ?? 0.0,
           'precip_mm': 0.0,
           'vis_km': (() {
             // Prefer current visibility if provided (meters -> km)
@@ -365,10 +358,10 @@ class WeatherService {
       final hourlyPrecipProb = hourly['precipitation_probability'] as List;
 
         for (int i = 0; i < dates.length && i < 14; i++) {
-          final maxTemp = (maxTemps[i] as num).toDouble();
-          final minTemp = (minTemps[i] as num).toDouble();
-          final weatherCode = (weatherCodes[i] as num).toInt();
-          final precip = (precipProb[i] as num).toInt();
+          final maxTemp = (maxTemps[i] as num?)?.toDouble() ?? 0.0;
+          final minTemp = (minTemps[i] as num?)?.toDouble() ?? 0.0;
+          final weatherCode = (weatherCodes[i] as num?)?.toInt() ?? 0;
+          final precip = (precipProb[i] as num?)?.toInt() ?? 0;
 
           // Get hourly data for this day
           final dayDate = dates[i].toString();
@@ -386,31 +379,31 @@ class WeatherService {
           for (int h = 0; h < hourlyTimes.length; h++) {
             final hourTimeStr = hourlyTimes[h].toString();
             if (hourTimeStr.startsWith(dayDate)) {
-              final tC = (hourlyTemps[h] as num).toDouble();
+              final tC = (hourlyTemps[h] as num?)?.toDouble() ?? 0.0;
+              final feelsC = (hourlyFeelsLike[h] as num?)?.toDouble() ?? 0.0;
+              final code = (hourlyWeatherCodes[h] as num?)?.toInt() ?? 0;
+              
               hourlyDataForDay.add({
                 'time': hourTimeStr,
                 'temp_c': tC,
                 'temp_f': (tC * 9 / 5) + 32,
-                'feelslike_c': (hourlyFeelsLike[h] as num).toDouble(),
-                'feelslike_f':
-                    ((hourlyFeelsLike[h] as num).toDouble() * 9 / 5) + 32,
+                'feelslike_c': feelsC,
+                'feelslike_f': (feelsC * 9 / 5) + 32,
                 'chance_of_rain': (hourlyPrecipProb[h] as num?)?.toInt() ?? 0,
                 'chance_of_snow': 0,
                 'condition': {
-                  'text': _getWeatherDescription(
-                    (hourlyWeatherCodes[h] as num).toInt(),
-                  ),
+                  'text': _getWeatherDescription(code),
                   'icon': '//cdn.weatherapi.com/weather/64x64/day/116.png',
                 },
               });
 
               if (hourlyWind != null && h < hourlyWind.length) {
-                final w = (hourlyWind[h] as num).toDouble();
+                final w = (hourlyWind[h] as num?)?.toDouble() ?? 0.0;
                 if (dayWindLow == null || w < dayWindLow) dayWindLow = w;
                 if (dayWindHigh == null || w > dayWindHigh) dayWindHigh = w;
               }
               if (hourlyRh != null && h < hourlyRh.length) {
-                final r = (hourlyRh[h] as num).toInt();
+                final r = (hourlyRh[h] as num?)?.toInt() ?? 0;
                 if (dayRhLow == null || r < dayRhLow) dayRhLow = r;
                 if (dayRhHigh == null || r > dayRhHigh) dayRhHigh = r;
               }
@@ -457,38 +450,31 @@ class WeatherService {
           'tz_id': weatherData['timezone'] ?? 'UTC',
         },
         'current': {
-          'temp_c': (weatherData['current']['temperature_2m'] as num)
-              .toDouble(),
+          'temp_c': (weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0,
           'temp_f':
-              ((weatherData['current']['temperature_2m'] as num).toDouble() *
+              (((weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0) *
                   9 /
                   5) +
               32,
-          'feelslike_c': (weatherData['current']['apparent_temperature'] as num)
-              .toDouble(),
+          'feelslike_c': (weatherData['current']['apparent_temperature'] as num?)?.toDouble() ?? 0.0,
           'feelslike_f':
-              ((weatherData['current']['apparent_temperature'] as num)
-                      .toDouble() *
+              (((weatherData['current']['apparent_temperature'] as num?)?.toDouble() ?? 0.0) *
                   9 /
                   5) +
               32,
           'condition': {
             'text': _getWeatherDescription(
-              (weatherData['current']['weather_code'] as num).toInt(),
+              (weatherData['current']['weather_code'] as num?)?.toInt() ?? 0,
             ),
             'icon': '//cdn.weatherapi.com/weather/64x64/day/116.png',
           },
-          'humidity': (weatherData['current']['relative_humidity_2m'] as num)
-              .toInt(),
-          'wind_kph': (weatherData['current']['wind_speed_10m'] as num)
-              .toDouble(),
-          'wind_degree': (weatherData['current']['wind_direction_10m'] as num)
-              .toInt(),
+          'humidity': (weatherData['current']['relative_humidity_2m'] as num?)?.toInt() ?? 0,
+          'wind_kph': (weatherData['current']['wind_speed_10m'] as num?)?.toDouble() ?? 0.0,
+          'wind_degree': (weatherData['current']['wind_direction_10m'] as num?)?.toInt() ?? 0,
           'wind_dir': _getWindDirection(
-            (weatherData['current']['wind_direction_10m'] as num).toInt(),
+            (weatherData['current']['wind_direction_10m'] as num?)?.toInt() ?? 0,
           ),
-          'pressure_mb': (weatherData['current']['pressure_msl'] as num)
-              .toDouble(),
+          'pressure_mb': (weatherData['current']['pressure_msl'] as num?)?.toDouble() ?? 0.0,
           'precip_mm': 0.0,
           'vis_km': (() {
             if (weatherData['current']?.containsKey('visibility') == true) {
@@ -643,8 +629,8 @@ class WeatherService {
           'name': result['name'] ?? 'Unknown',
           'region': result['admin1']?.toString() ?? '',
           'country': result['country']?.toString() ?? '',
-          'lat': (result['latitude'] as num).toDouble(),
-          'lon': (result['longitude'] as num).toDouble(),
+          'lat': (result['latitude'] as num?)?.toDouble() ?? 0.0,
+          'lon': (result['longitude'] as num?)?.toDouble() ?? 0.0,
         };
       }
       return null;
