@@ -7,6 +7,8 @@ import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/widget_refresh_service.dart';
 import 'services/rating_service.dart';
+import 'l10n/app_localizations.dart';
+import 'webview_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -70,6 +72,80 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  final Map<String, String> _languageNames = {
+    'system': 'System Default',
+    'en': 'English',
+    'ar': 'العربية',
+    'da': 'Dansk',
+    'de': 'Deutsch',
+    'es': 'Español',
+    'fi': 'Suomi',
+    'fr': 'Français',
+    'hi': 'हिंदी',
+    'id': 'Bahasa Indonesia',
+    'it': 'Italiano',
+    'ja': '日本語',
+    'ko': '한국어',
+    'ms': 'Bahasa Melayu',
+    'nb': 'Norsk bokmål',
+    'nl': 'Nederlands',
+    'pt': 'Português',
+    'ru': 'Русский',
+    'sv': 'Svenska',
+    'th': 'ไทย',
+    'tl': 'Tagalog',
+    'vi': 'Tiếng Việt',
+    'zh': '中文',
+  };
+
+  String _getLanguageName(String? code) {
+    if (code == null) return 'System Default';
+    return _languageNames[code] ?? code;
+  }
+
+  Future<void> _selectLanguage() async {
+    final currentLang = GlobalData.languageCodeNotifier.value ?? 'system';
+    
+    final selected = await showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Language'),
+          contentPadding: const EdgeInsets.only(top: 16),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                ListTile(
+                  title: const Text('System Default'),
+                  trailing: currentLang == 'system' ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
+                  onTap: () => Navigator.pop(context, 'system'),
+                ),
+                ...AppLocalizations.supportedLocales.map((locale) {
+                  final code = locale.languageCode;
+                  final name = _languageNames[code] ?? code;
+                  return ListTile(
+                    title: Text(name),
+                    trailing: currentLang == code ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
+                    onTap: () => Navigator.pop(context, code),
+                  );
+                }),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (selected != null && selected != currentLang) {
+      final codeToSave = selected == 'system' ? null : selected;
+      await PreferencesService.saveLanguageCode(codeToSave);
+      GlobalData.languageCodeNotifier.value = codeToSave;
+      if (mounted) setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -84,9 +160,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Units Section
+                  // Preferences Section
                   Text(
-                    'Units',
+                    'Preferences',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -94,24 +170,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Card(
-                    child: SwitchListTile(
-                      secondary: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: colorScheme.tertiaryContainer,
-                          borderRadius: BorderRadius.circular(8),
+                    child: Column(
+                      children: [
+                        SwitchListTile(
+                          secondary: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.thermostat_rounded,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                          title: const Text('Use Fahrenheit'),
+                          subtitle: Text(
+                            _useFahrenheit ? 'Showing °F' : 'Showing °C',
+                          ),
+                          value: _useFahrenheit,
+                          onChanged: _toggleUnit,
                         ),
-                        child: Icon(
-                          Icons.thermostat_rounded,
-                          color: colorScheme.onTertiaryContainer,
+                        const Divider(height: 1),
+                        ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.language_rounded,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                          title: const Text('Language'),
+                          subtitle: Text(_getLanguageName(GlobalData.languageCodeNotifier.value)),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: _selectLanguage,
                         ),
-                      ),
-                      title: const Text('Use Fahrenheit'),
-                      subtitle: Text(
-                        _useFahrenheit ? 'Showing °F' : 'Showing °C',
-                      ),
-                      value: _useFahrenheit,
-                      onChanged: _toggleUnit,
+                      ],
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -278,6 +376,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Card(
                     child: Column(
                       children: [
+                        ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.secondaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.monitor_heart_outlined,
+                              color: colorScheme.onSecondaryContainer,
+                            ),
+                          ),
+                          title: const Text('System Status'),
+                          subtitle: const Text('Check the operational status of services'),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const WebViewScreen(url: 'https://status.weatherfast.aadish.dev'),
+                              ),
+                            );
+                          },
+                        ),
+                        const Divider(height: 1),
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),

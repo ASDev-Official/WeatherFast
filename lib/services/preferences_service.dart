@@ -6,6 +6,7 @@ class PreferencesService {
   static const String _kMapDarkMode = 'map_dark_mode';
   static const String _kMapRadarOpacity = 'map_radar_opacity';
   static const String _kIsSingapore = 'is_singapore';
+  static const String _kLanguageCode = 'language_code';
 
   static Future<bool> loadIsSingapore() async {
     final prefs = await SharedPreferences.getInstance();
@@ -73,5 +74,19 @@ class PreferencesService {
   static Future<void> saveWidgetFontScale(double value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble('widget_font_scale', value);
+  }
+
+  static Future<String?> loadLanguageCode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_kLanguageCode);
+  }
+
+  static Future<void> saveLanguageCode(String? value) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (value == null) {
+      await prefs.remove(_kLanguageCode);
+    } else {
+      await prefs.setString(_kLanguageCode, value);
+    }
   }
 }

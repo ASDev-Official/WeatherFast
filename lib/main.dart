@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'detail_screen.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
   await RatingService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
+  GlobalData.languageCodeNotifier.value = await PreferencesService.loadLanguageCode();
   runApp(const WeatherFastApp());
 }
 
@@ -182,12 +184,25 @@ class WeatherFastApp extends StatelessWidget {
             darkDynamic ??
             ColorScheme.fromSeed(seedColor: seed, brightness: Brightness.dark);
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: _buildTheme(lightScheme),
-          darkTheme: _buildTheme(darkScheme),
-          themeMode: ThemeMode.system,
-          home: const WeatherShell(),
+        return ValueListenableBuilder<String?>(
+          valueListenable: GlobalData.languageCodeNotifier,
+          builder: (context, languageCode, _) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: languageCode != null ? Locale(languageCode) : null,
+              theme: _buildTheme(lightScheme),
+              darkTheme: _buildTheme(darkScheme),
+              themeMode: ThemeMode.system,
+              home: const WeatherShell(),
+            );
+          },
         );
       },
     );

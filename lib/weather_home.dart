@@ -17,6 +17,8 @@ import 'time_utils.dart';
 import 'weather_service.dart';
 import 'weather_map_screen.dart';
 import 'ui/weather_map_snippet.dart';
+import 'l10n/app_localizations.dart';
+import 'notifications_screen.dart';
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key, required this.onLocationSelected});
@@ -54,7 +56,7 @@ class _WeatherHomeState extends State<WeatherHome> {
             child: Material(
               color: Colors.transparent,
               child: Chip(
-                label: const Text('Updating weather…'),
+                label: Text(AppLocalizations.of(context)!.updatingWeather),
                 backgroundColor: Theme.of(
                   context,
                 ).colorScheme.surface.withValues(alpha: 0.9),
@@ -156,8 +158,9 @@ class _WeatherHomeState extends State<WeatherHome> {
     }
     try {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!mounted) return;
       if (!serviceEnabled) {
-        _showError('Location services are disabled. Enable them in Settings.');
+        _showError(AppLocalizations.of(context)!.locationServicesDisabled);
         return;
       }
 
@@ -165,9 +168,10 @@ class _WeatherHomeState extends State<WeatherHome> {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
       }
+      if (!mounted) return;
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
-        _showError('Location permission denied. Enable it to auto-locate you.');
+        _showError(AppLocalizations.of(context)!.locationPermissionDenied);
         return;
       }
 
@@ -179,7 +183,8 @@ class _WeatherHomeState extends State<WeatherHome> {
       final coords = '${position.latitude},${position.longitude}';
       await _fetchWeather(coords, showOverlay: showOverlay);
     } catch (e) {
-      _showError('Unable to fetch location weather. Please try again.');
+      if (!mounted) return;
+      _showError(AppLocalizations.of(context)!.unableToFetchLocation);
     } finally {
       if (showOverlay) {
         _removeUpdatingOverlay();
@@ -250,7 +255,7 @@ class _WeatherHomeState extends State<WeatherHome> {
         RatingService.checkAndShowRating(context);
       }
     } catch (e) {
-      if (mounted) _showError('Failed to load weather: $e');
+      if (mounted) _showError(AppLocalizations.of(context)!.failedToLoadWeather(e.toString()));
     } finally {
       if (mounted) setState(() => _isRefreshing = false);
       if (showOverlay) {
@@ -282,12 +287,12 @@ class _WeatherHomeState extends State<WeatherHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Search a place',
+                      AppLocalizations.of(context)!.searchPlace,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     IconButton(
                       icon: const Icon(Icons.close_rounded),
-                      tooltip: 'Close',
+                      tooltip: AppLocalizations.of(context)!.close,
                       onPressed: Navigator.of(context).pop,
                     ),
                   ],
@@ -304,9 +309,9 @@ class _WeatherHomeState extends State<WeatherHome> {
                       controller: controller,
                       focusNode: focusNode,
                       autofocus: true,
-                      decoration: const InputDecoration(
-                        hintText: 'City, region, or coordinates',
-                        prefixIcon: Icon(Icons.search),
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.cityRegionOrCoordinates,
+                        prefixIcon: const Icon(Icons.search),
                       ),
                     );
                   },
@@ -387,7 +392,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                 children: [
                   const SizedBox(height: 10),
                   Text(
-                    _currentLocation ?? 'Loading location…',
+                    _currentLocation ?? AppLocalizations.of(context)!.loadingLocation,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   if (_localTime != null)
@@ -401,13 +406,25 @@ class _WeatherHomeState extends State<WeatherHome> {
               ),
               actions: [
                 IconButton(
+                  icon: const Icon(Icons.notifications_rounded),
+                  tooltip: 'Notifications',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const NotificationsScreen(),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
                   icon: const Icon(Icons.search_rounded),
-                  tooltip: 'Search location',
+                  tooltip: AppLocalizations.of(context)!.searchLocation,
                   onPressed: _openSearchSheet,
                 ),
                 IconButton(
                   icon: const Icon(Icons.my_location_rounded),
-                  tooltip: 'Use current location',
+                  tooltip: AppLocalizations.of(context)!.useCurrentLocation,
                   onPressed: _fetchWeatherForCurrentLocation,
                 ),
                 const SizedBox(width: 8),
@@ -521,13 +538,13 @@ class _WeatherHomeState extends State<WeatherHome> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text('Clear'),
-                                const Text('Mon, Jan 1 • 12:00 PM'),
+                                Text(AppLocalizations.of(context)!.dummyTime),
                               ],
                             ),
                           ),
-                          const Chip(
-                            label: Text('Daytime'),
-                            avatar: Icon(Icons.wb_sunny, size: 18),
+                          Chip(
+                            label: Text(AppLocalizations.of(context)!.daytime),
+                            avatar: const Icon(Icons.wb_sunny, size: 18),
                           ),
                         ],
                       ),
@@ -547,10 +564,10 @@ class _WeatherHomeState extends State<WeatherHome> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('H 80° · L 60°'),
+                                Text(AppLocalizations.of(context)!.dummyHighLow),
                                 const SizedBox(height: 6),
-                                const Text(
-                                  'Great light outside. Sunglasses recommended.',
+                                Text(
+                                  AppLocalizations.of(context)!.adviceClear,
                                 ),
                               ],
                             ),
@@ -618,7 +635,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                         ),
                       ),
                       Chip(
-                        label: Text(isDaytime ? 'Daytime' : 'Night'),
+                        label: Text(isDaytime ? AppLocalizations.of(context)!.daytime : AppLocalizations.of(context)!.night),
                         avatar: Icon(
                           isDaytime
                               ? Icons.wb_sunny_rounded
@@ -645,7 +662,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'H ${high != null ? high.round() : '--'}°  ·  L ${low != null ? low.round() : '--'}°',
+                              AppLocalizations.of(context)!.highLowTemp(high != null ? high.round().toString() : '--', low != null ? low.round().toString() : '--'),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.titleMedium
@@ -679,36 +696,35 @@ class _WeatherHomeState extends State<WeatherHome> {
     final current = _weatherData!['current'];
     final items = [
       _MetricTile(
-        label: 'Feels like',
+        label: AppLocalizations.of(context)!.feelsLike,
         value:
             '${(GlobalData.useFahrenheit ? current['feelslike_f'] : current['feelslike_c'])?.round() ?? '--'}°${GlobalData.useFahrenheit ? 'F' : 'C'}',
         icon: Icons.thermostat,
       ),
       _MetricTile(
-        label: 'Humidity',
+        label: AppLocalizations.of(context)!.humidity,
         value: '${current['humidity'] ?? '--'}%',
         icon: Icons.water_drop,
       ),
       _MetricTile(
-        label: 'Wind',
-        value:
-            '${current['wind_kph']?.round() ?? '--'} km/h ${current['wind_dir'] ?? ''}',
+        label: AppLocalizations.of(context)!.wind,
+        value: AppLocalizations.of(context)!.windSpeed((current['wind_kph']?.round() ?? '--').toString(), current['wind_dir']?.toString() ?? ''),
         icon: Icons.air,
       ),
       _MetricTile(
-        label: 'Air Quality',
+        label: AppLocalizations.of(context)!.airQuality,
         value: current['aqi'] != null && current['aqi'] > 0
             ? '${current['aqi']} - ${current['air_quality_text'] ?? ''}'
             : 'N/A',
         icon: Icons.air_outlined,
       ),
       _MetricTile(
-        label: 'Visibility',
-        value: '${current['vis_km']?.toStringAsFixed(1) ?? '--'} km',
+        label: AppLocalizations.of(context)!.visibility,
+        value: AppLocalizations.of(context)!.visibilityKm((current['vis_km']?.toStringAsFixed(1) ?? '--').toString()),
         icon: Icons.remove_red_eye,
       ),
       _MetricTile(
-        label: 'Precip chance',
+        label: AppLocalizations.of(context)!.precipChance,
         value:
             '${_forecastData?['forecast']?['forecastday']?.first?['day']?['daily_chance_of_rain'] ?? '--'}%',
         icon: Icons.umbrella,
@@ -818,8 +834,8 @@ class _WeatherHomeState extends State<WeatherHome> {
             horizontalItems.add(
               _SourceTransitionChip(
                 label: source == 'open-meteo'
-                    ? 'Data from Open-Meteo'
-                    : 'Data from NEA',
+                    ? AppLocalizations.of(context)!.dataFromOpenMeteo
+                    : AppLocalizations.of(context)!.dataFromNea,
               ),
             );
           }
@@ -840,7 +856,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                 label: displayTime,
                 icon: _iconForCondition(condition),
                 condition: condition,
-                precip: '$precip% precip',
+                precip: AppLocalizations.of(context)!.precipPercent(precip.toString()),
               ),
             );
           } else {
@@ -854,7 +870,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                 value: '${(temp as num).round()}°',
                 icon: _iconForCondition(condition),
                 condition: condition,
-                caption: '$precip% precip',
+                caption: AppLocalizations.of(context)!.precipPercent(precip.toString()),
               ),
             );
           }
@@ -881,7 +897,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Hourly Forecast',
+                  AppLocalizations.of(context)!.hourlyForecast,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
@@ -936,7 +952,7 @@ class _WeatherHomeState extends State<WeatherHome> {
               ),
               const SizedBox(width: 8),
               Text(
-                'Regional Outlook',
+                AppLocalizations.of(context)!.regionalOutlook,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
@@ -1039,7 +1055,7 @@ class _WeatherHomeState extends State<WeatherHome> {
               ),
               const SizedBox(width: 8),
               Text(
-                'Next ${list.length} days',
+                AppLocalizations.of(context)!.nextDays(list.length),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
@@ -1071,7 +1087,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                   child: Row(
                     children: [
                       Text(
-                        'Data from Open-Meteo',
+                        AppLocalizations.of(context)!.dataFromOpenMeteo,
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
@@ -1119,7 +1135,7 @@ class _WeatherHomeState extends State<WeatherHome> {
               rhLow: (hum['low'] as num?)?.toInt() ?? 0,
               rhHigh: (hum['high'] as num?)?.toInt() ?? 0,
               icon: _iconForCondition(condition),
-              subtitle: '$rain% precip',
+              subtitle: AppLocalizations.of(context)!.precipPercent(rain.toString()),
               useFahrenheit: GlobalData.useFahrenheit,
             ),
           ),
@@ -1133,7 +1149,7 @@ class _WeatherHomeState extends State<WeatherHome> {
               hi: hi,
               lo: lo,
               icon: _iconForCondition(condition),
-              subtitle: '$rain% precip',
+              subtitle: AppLocalizations.of(context)!.precipPercent(rain.toString()),
             ),
           ),
         );
@@ -1164,7 +1180,7 @@ class _WeatherHomeState extends State<WeatherHome> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Today’s suggestion',
+                    AppLocalizations.of(context)!.todaysSuggestion,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
@@ -1189,18 +1205,18 @@ class _WeatherHomeState extends State<WeatherHome> {
 
   String _insightForWeather(String condition) {
     final lower = condition.toLowerCase();
-    if (lower.contains('rain')) return 'Grab a light shell and keep moving.';
-    if (lower.contains('snow')) return 'Layer up and mind slick paths.';
+    if (lower.contains('rain')) return AppLocalizations.of(context)!.adviceRain;
+    if (lower.contains('snow')) return AppLocalizations.of(context)!.adviceSnow;
     if (lower.contains('storm') || lower.contains('thunder')) {
-      return 'Stay indoors; lightning risk.';
+      return AppLocalizations.of(context)!.adviceStorm;
     }
     if (lower.contains('clear') || lower.contains('sunny')) {
-      return 'Great light outside. Sunglasses recommended.';
+      return AppLocalizations.of(context)!.adviceClear;
     }
     if (lower.contains('cloud')) {
-      return 'Soft clouds today—perfect walking weather.';
+      return AppLocalizations.of(context)!.adviceCloud;
     }
-    return 'Stay comfortable and check again in a few hours.';
+    return AppLocalizations.of(context)!.adviceDefault;
   }
 
   String? _futureInsight() {
@@ -1220,15 +1236,15 @@ class _WeatherHomeState extends State<WeatherHome> {
     if (futureHour == null) return null;
     final cond = (futureHour['condition']['text'] as String).toLowerCase();
     if (cond.contains('rain')) {
-      return 'Rain likely in ~3 hours. Keep an umbrella nearby.';
+      return AppLocalizations.of(context)!.futureAdviceRain;
     }
     if (cond.contains('snow')) {
-      return 'Snow later today—plan travel with extra time.';
+      return AppLocalizations.of(context)!.futureAdviceSnow;
     }
     if (cond.contains('storm') || cond.contains('thunder')) {
-      return 'Storm window in a few hours. Wrap up outdoor tasks soon.';
+      return AppLocalizations.of(context)!.futureAdviceStorm;
     }
-    return 'Next few hours stay steady—good time to be outside.';
+    return AppLocalizations.of(context)!.futureAdviceClear;
   }
 
   IconData _iconForCondition(String condition) {
@@ -1289,9 +1305,9 @@ class _CollapsibleDateHeader extends StatelessWidget {
 
     String dateLabel;
     if (isToday) {
-      dateLabel = 'Today';
+      dateLabel = AppLocalizations.of(context)!.today;
     } else if (isTomorrow) {
-      dateLabel = 'Tomorrow';
+      dateLabel = AppLocalizations.of(context)!.tomorrow;
     } else {
       dateLabel = DateFormat('EEE, MMM d').format(date);
     }
