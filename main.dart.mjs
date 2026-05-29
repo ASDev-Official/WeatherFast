@@ -449,6 +449,7 @@ class CompiledApp {
       _1352: (x0,x1,x2) => ({enableHighAccuracy: x0,timeout: x1,maximumAge: x2}),
       _1353: (x0,x1,x2,x3) => x0.getCurrentPosition(x1,x2,x3),
       _1358: (x0,x1) => x0.getItem(x1),
+      _1359: (x0,x1) => x0.removeItem(x1),
       _1360: (x0,x1,x2) => x0.setItem(x1,x2),
       _1374: Date.now,
       _1376: s => new Date(s * 1000).getTimezoneOffset() * 60,
