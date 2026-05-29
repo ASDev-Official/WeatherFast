@@ -186,7 +186,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get weatherInsights => 'Weather Insights';
 
   @override
-  String get analyzingConditions => 'Analyzing conditions...';
+  String get analyzingConditions => 'Analyzing conditions..।';
 
   @override
   String get activitySuggestions => 'Activity Suggestions';
@@ -312,10 +312,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
-  String get loadingNotificationTitle => 'Loading notification title...';
+  String get loadingNotificationTitle => 'Loading notification title..।';
 
   @override
-  String get loadingNotificationDesc => 'Loading notification description...';
+  String get loadingNotificationDesc => 'Loading notification description..।';
 
   @override
   String failedToLoadNotifications(String error) {
@@ -355,27 +355,27 @@ class AppLocalizationsHi extends AppLocalizations {
   String get mapLayers => 'Map Layers:';
 
   @override
-  String get baseMapsMapbox => 'Base maps are provided by Mapbox.';
+  String get baseMapsMapbox => 'Base maps are provided by Mapbox।';
 
   @override
   String get weatherData => 'Weather Data:';
 
   @override
   String get livePrecipitationRainviewer =>
-      'Live precipitation radar layers are provided by RainViewer.';
+      'Live precipitation radar layers are provided by RainViewer।';
 
   @override
   String get attribution => 'Attribution:';
 
   @override
   String get attributionText =>
-      '© Mapbox, © OpenStreetMap contributors, © RainViewer.';
+      '© Mapbox, © OpenStreetMap contributors, © RainViewer।';
 
   @override
   String get weatherMap => 'Weather Map';
 
   @override
-  String get loading => 'Loading...';
+  String get loading => 'Loading..।';
 
   @override
   String get enjoyingWeatherFast => 'Enjoying WeatherFast?';
@@ -433,7 +433,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get interactiveWeatherRadarDescription =>
-      'Interactive weather radar and high-resolution maps are optimized for our mobile experience.';
+      'Interactive weather radar and high-resolution maps are optimized for our mobile experience।';
 
   @override
   String get getItOnPlayStore => 'Get it on Play Store';
