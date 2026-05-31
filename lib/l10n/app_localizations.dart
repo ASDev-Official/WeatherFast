@@ -833,7 +833,7 @@ abstract class AppLocalizations {
   /// No description provided for @neaAttribution.
   ///
   /// In en, this message translates to:
-  /// **'Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the '**
+  /// **'Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI), from the National Environment Agency, and Flood Alerts across Singapore, from the PUB, Singapore\'s national water agency, accessed on {date}, which is made available under the terms of the '**
   String neaAttribution(String date);
 
   /// No description provided for @sgOpenDataLicence.
