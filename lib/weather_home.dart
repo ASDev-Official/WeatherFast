@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'services/global_data.dart';
-import 'services/preferences_service.dart';
-import 'services/weather_cache_service.dart';
-import 'services/widget_refresh_service.dart';
-import 'services/rating_service.dart';
-import 'ui/animated_weather_backdrop.dart';
-import 'ui/open_meteo_attribution.dart';
-import 'ui/daily_range_tile.dart';
-import 'time_utils.dart';
-import 'weather_service.dart';
-import 'weather_map_screen.dart';
-import 'ui/weather_map_snippet.dart';
 import 'l10n/app_localizations.dart';
 import 'notifications_screen.dart';
+import 'services/global_data.dart';
+import 'services/preferences_service.dart';
+import 'services/rating_service.dart';
+import 'services/weather_cache_service.dart';
+import 'services/widget_refresh_service.dart';
+import 'time_utils.dart';
+import 'ui/animated_weather_backdrop.dart';
+import 'ui/daily_range_tile.dart';
+import 'ui/open_meteo_attribution.dart';
+import 'ui/weather_map_snippet.dart';
+import 'weather_map_screen.dart';
+import 'weather_service.dart';
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key, required this.onLocationSelected});
@@ -705,6 +704,19 @@ class _WeatherHomeState extends State<WeatherHome> {
         label: AppLocalizations.of(context)!.humidity,
         value: '${current['humidity'] ?? '--'}%',
         icon: Icons.water_drop,
+      ),
+      _MetricTile(
+        label: 'UV Index',
+        value: current['uv']?.toStringAsFixed(1) ?? '--',
+        icon: Icons.wb_sunny_outlined,
+      ),
+      _MetricTile(
+        label: 'Dew Point',
+        value: '${(GlobalData.useFahrenheit
+            ? current['dewpoint_f']
+            : current['dewpoint_c'])?.round() ?? '--'}°${GlobalData
+            .useFahrenheit ? 'F' : 'C'}',
+        icon: Icons.dew_point,
       ),
       _MetricTile(
         label: AppLocalizations.of(context)!.wind,

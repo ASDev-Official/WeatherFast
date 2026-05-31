@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:http/http.dart' as http;
 
 class SingaporeWeatherService {
@@ -14,10 +15,12 @@ class SingaporeWeatherService {
     // Fetch Open-Meteo for granular daily data and hourly continuation
     List<Map<String, dynamic>> hourlyOm = [];
     List<Map<String, dynamic>> dailyOm = [];
+    Map<String, dynamic>? currentOm = {};
     try {
       final omData = await _fetchOpenMeteo(lat, lon);
       hourlyOm = omData['hourly'] ?? [];
       dailyOm = omData['daily'] ?? [];
+      currentOm = (omData['current'] ?? {}) as Map<String, dynamic>?;
     } catch (_) {}
 
     // Construct "Today" from current or first hourly period if missing in daily list
@@ -77,6 +80,10 @@ class SingaporeWeatherService {
       'pressure_mb': 1010.0,
       'precip_mm': 0.0,
       'vis_km': 10.0,
+      'dewpoint_c': (currentOm?['dew_point_2m'] as num?)?.toDouble() ?? 0.0,
+      'dewpoint_f': (((currentOm?['dew_point_2m'] as num?)?.toDouble() ?? 0.0) *
+          9 / 5) + 32,
+      'uv': (currentOm?['uv_index'] as num?)?.toDouble() ?? 0.0,
       ...?psi,
     };
 
@@ -105,9 +112,10 @@ class SingaporeWeatherService {
     };
     }
 
-  Future<Map<String, List<Map<String, dynamic>>>> _fetchOpenMeteo(double lat, double lon) async {
+  Future<Map<String, dynamic>> _fetchOpenMeteo(double lat, double lon) async {
     final url = Uri.parse(
       'https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon'
+          '&current=dew_point_2m,uv_index'
       '&hourly=temperature_2m,weather_code,precipitation_probability'
       '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
       '&timezone=auto',
@@ -119,51 +127,60 @@ class SingaporeWeatherService {
     final List<Map<String, dynamic>> hourly = [];
     final List<Map<String, dynamic>> daily = [];
 
-    final hData = data['hourly'] ?? {};
-    final hTimes = hData['time'] as List? ?? [];
-    final hTemps = hData['temperature_2m'] as List? ?? [];
-    final hCodes = hData['weather_code'] as List? ?? [];
-    final hPrecip = hData['precipitation_probability'] as List? ?? [];
+    try {
+      final hData = data['hourly'] ?? {};
+      final hTimes = hData['time'] as List? ?? [];
+      final hTemps = hData['temperature_2m'] as List? ?? [];
+      final hCodes = hData['weather_code'] as List? ?? [];
+      final hPrecip = hData['precipitation_probability'] as List? ?? [];
 
-    for (int i = 0; i < hTimes.length; i++) {
-      final tC = (hTemps[i] as num).toDouble();
-      final code = (hCodes[i] as num).toInt();
-      hourly.add({
-        'time': hTimes[i],
-        'temp_c': tC,
-        'temp_f': (tC * 9 / 5) + 32,
-        'condition': {'text': _getWmoDescription(code)},
-        'glyph': _getWmoGlyph(code),
-        'chance_of_rain': (hPrecip[i] as num).toInt(),
-        'source': 'open-meteo',
-      });
-    }
+      for (int i = 0; i < hTimes.length; i++) {
+        if (i >= hTemps.length || i >= hCodes.length || i >= hPrecip.length)
+          break;
+        final tC = (hTemps[i] as num?)?.toDouble() ?? 0.0;
+        final code = (hCodes[i] as num?)?.toInt() ?? 0;
+        hourly.add({
+          'time': hTimes[i],
+          'temp_c': tC,
+          'temp_f': (tC * 9 / 5) + 32,
+          'condition': {'text': _getWmoDescription(code)},
+          'glyph': _getWmoGlyph(code),
+          'chance_of_rain': (hPrecip[i] as num?)?.toInt() ?? 0,
+          'source': 'open-meteo',
+        });
+      }
+    } catch (_) {}
 
-    final dData = data['daily'] ?? {};
-    final dTimes = dData['time'] as List? ?? [];
-    final dMax = dData['temperature_2m_max'] as List? ?? [];
-    final dMin = dData['temperature_2m_min'] as List? ?? [];
-    final dCodes = dData['weather_code'] as List? ?? [];
-    final dPrecip = dData['precipitation_probability_max'] as List? ?? [];
+    try {
+      final dData = data['daily'] ?? {};
+      final dTimes = dData['time'] as List? ?? [];
+      final dMax = dData['temperature_2m_max'] as List? ?? [];
+      final dMin = dData['temperature_2m_min'] as List? ?? [];
+      final dCodes = dData['weather_code'] as List? ?? [];
+      final dPrecip = dData['precipitation_probability_max'] as List? ?? [];
 
-    for (int i = 0; i < dTimes.length; i++) {
-      final maxC = (dMax[i] as num).toDouble();
-      final minC = (dMin[i] as num).toDouble();
-      final code = (dCodes[i] as num).toInt();
-      daily.add({
-        'date': dTimes[i],
-        'max_c': maxC,
-        'max_f': (maxC * 9 / 5) + 32,
-        'min_c': minC,
-        'min_f': (minC * 9 / 5) + 32,
-        'condition': {'text': _getWmoDescription(code)},
-        'glyph': _getWmoGlyph(code),
-        'chance_of_rain': (dPrecip[i] as num).toInt(),
-        'source': 'open-meteo',
-      });
-    }
+      for (int i = 0; i < dTimes.length; i++) {
+        if (i >= dMax.length || i >= dMin.length || i >= dCodes.length ||
+            i >= dPrecip.length) break;
+        final maxC = (dMax[i] as num?)?.toDouble() ?? 0.0;
+        final minC = (dMin[i] as num?)?.toDouble() ?? 0.0;
+        final code = (dCodes[i] as num?)?.toInt() ?? 0;
+        daily.add({
+          'date': dTimes[i],
+          'max_c': maxC,
+          'max_f': (maxC * 9 / 5) + 32,
+          'min_c': minC,
+          'min_f': (minC * 9 / 5) + 32,
+          'condition': {'text': _getWmoDescription(code)},
+          'glyph': _getWmoGlyph(code),
+          'chance_of_rain': (dPrecip[i] as num?)?.toInt() ?? 0,
+          'source': 'open-meteo',
+        });
+      }
+    } catch (_) {}
 
-    return {'hourly': hourly, 'daily': daily};
+    final currentOm = data['current'] ?? {};
+    return {'hourly': hourly, 'daily': daily, 'current': currentOm};
   }
 
   String _getWmoDescription(int code) {

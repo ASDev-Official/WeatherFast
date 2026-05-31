@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
 import 'weather_service_sg.dart';
 
 class WeatherService {
@@ -231,6 +233,11 @@ class WeatherService {
           })(),
           'aqi': airQuality['us_aqi'],
           'air_quality_text': _getAQIDescription(airQuality['us_aqi']),
+          'dewpoint_c': (weatherData['current']['dew_point_2m'] as num?)
+              ?.toDouble() ?? 0.0,
+          'dewpoint_f': (((weatherData['current']['dew_point_2m'] as num?)
+              ?.toDouble() ?? 0.0) * 9 / 5) + 32,
+          'uv': (weatherData['current']['uv_index'] as num?)?.toDouble() ?? 0.0,
         },
         'widget_today_high_c': todayHighC,
         'widget_today_high_f': todayHighC == null
@@ -531,6 +538,11 @@ class WeatherService {
           })(),
           'aqi': airQuality['us_aqi'],
           'air_quality_text': _getAQIDescription(airQuality['us_aqi']),
+          'dewpoint_c': (weatherData['current']['dew_point_2m'] as num?)
+              ?.toDouble() ?? 0.0,
+          'dewpoint_f': (((weatherData['current']['dew_point_2m'] as num?)
+              ?.toDouble() ?? 0.0) * 9 / 5) + 32,
+          'uv': (weatherData['current']['uv_index'] as num?)?.toDouble() ?? 0.0,
         },
         'forecast': {'forecastday': forecastDays},
       };
@@ -643,7 +655,7 @@ class WeatherService {
   Future<Map<String, dynamic>> _fetchWeatherData(double lat, double lon) async {
     final url = Uri.parse(
       '$_weatherUrl?latitude=$lat&longitude=$lon'
-      '&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl,visibility'
+          '&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl,visibility,dew_point_2m,uv_index'
       '&hourly=temperature_2m,apparent_temperature,weather_code,visibility,precipitation_probability,wind_speed_10m,relative_humidity_2m'
       '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
       '&timezone=auto'
