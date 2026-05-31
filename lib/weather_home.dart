@@ -188,7 +188,9 @@ class _WeatherHomeState extends State<WeatherHome> {
       List<Map<String, dynamic>> alerts) async {
     final currentHeadline = alerts.map((e) => e['headline']).join('|');
     if (_isShowingFloodAnimation ||
-        _lastAnimatedFloodHeadline == currentHeadline) return;
+        _lastAnimatedFloodHeadline == currentHeadline) {
+      return;
+    }
 
     setState(() {
       _isShowingFloodAnimation = true;
