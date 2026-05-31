@@ -10,6 +10,118 @@ class WeatherService {
   final String _airQualityUrl =
       'https://air-quality-api.open-meteo.com/v1/air-quality';
 
+  /// Fetch both current and forecast data in one optimized pass
+  Future<Map<String, Map<String, dynamic>>> fetchAllWeatherData(
+      String location) async {
+    try {
+      final coords = await _getLocationCoordinates(location);
+      if (coords == null) throw Exception('Location not found');
+
+      final lat = (coords['lat'] as num?)?.toDouble() ?? 0.0;
+      final lon = (coords['lon'] as num?)?.toDouble() ?? 0.0;
+      final country = (coords['country'] ?? '').toString().toLowerCase();
+      final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 &&
+          lon <= 104.15;
+
+      if (country.contains('singapore') || isSingaporeCoords) {
+        final sg = SingaporeWeatherService();
+        final sgData = await sg.fetchWeatherFromCoords(lat, lon);
+
+        // Map SG data to the expected shapes for both current and forecast
+        final weather = _mapSgToWeather(sgData, coords);
+        final forecast = _mapSgToForecast(sgData, coords);
+
+        return {'weather': weather, 'forecast': forecast};
+      }
+
+      // Non-Singapore locations
+      final weather = await fetchWeather(location);
+      final forecast = await fetchForecast(location);
+      return {'weather': weather, 'forecast': forecast};
+    } catch (e) {
+      throw Exception('Failed to load all weather data: $e');
+    }
+  }
+
+  Map<String, dynamic> _mapSgToWeather(Map<String, dynamic> sgData,
+      Map<String, dynamic> coords) {
+    return {
+      'location': sgData['location'],
+      'current': sgData['current'],
+      'source': sgData['source'],
+      'widget_today_high_c': sgData['widget_today_high_c'],
+      'widget_today_high_f': sgData['widget_today_high_f'],
+      'widget_today_low_c': sgData['widget_today_low_c'],
+      'widget_today_low_f': sgData['widget_today_low_f'],
+      'widget_next_hours': sgData['widget_next_hours'],
+      'widget_next_days': sgData['widget_next_days'],
+      'sg_regions': sgData['sg_regions'],
+      'sg_period_ranges': sgData['sg_period_ranges'],
+    };
+  }
+
+  Map<String, dynamic> _mapSgToForecast(Map<String, dynamic> sgData,
+      Map<String, dynamic> coords) {
+    final List<dynamic> forecastDays = [];
+    final days = (sgData['widget_next_days'] as List?) ?? const [];
+    final hourlyData = (sgData['widget_next_hours'] as List?) ?? const [];
+
+    for (int i = 0; i < days.length; i++) {
+      final d = days[i];
+      final dateStr = d['date'] ?? '';
+      final dayDate = DateTime.tryParse(dateStr);
+
+      final List<dynamic> dayHourly = [];
+      for (final h in hourlyData) {
+        final hTimeStr = h['time']?.toString() ?? '';
+        final hTime = DateTime.tryParse(hTimeStr);
+
+        bool matches = hTimeStr.startsWith(dateStr);
+        if (!matches && dayDate != null && hTime != null) {
+          matches =
+              hTime.year == dayDate.year && hTime.month == dayDate.month &&
+                  hTime.day == dayDate.day;
+        }
+
+        if (matches) {
+          dayHourly.add({
+            'time': h['time'],
+            'display_time': h['display_time'],
+            'temp_c': h['temp_c'],
+            'temp_f': h['temp_f'],
+            'condition': h['condition'],
+            'chance_of_rain': h['chance_of_rain'] ?? 0,
+            'chance_of_snow': 0,
+            'source': h['source'] ?? 'nea',
+          });
+        }
+      }
+
+      forecastDays.add({
+        'date': dateStr,
+        'day': {
+          'maxtemp_c': d['max_c'],
+          'maxtemp_f': d['max_f'],
+          'mintemp_c': d['min_c'],
+          'mintemp_f': d['min_f'],
+          'condition': d['condition'] ?? {},
+          'daily_chance_of_rain': d['chance_of_rain'] ?? 0,
+          'wind': d['wind'] ?? {},
+          'humidity': d['humidity'] ?? {},
+        },
+        'hour': dayHourly,
+        'source': d['source'] ?? 'nea',
+      });
+    }
+
+    return {
+      'source': 'nea',
+      'location': sgData['location'],
+      'current': sgData['current'],
+      'forecast': {'forecastday': forecastDays},
+    };
+  }
+
   /// Fetch current weather and forecast for a location
   /// Returns data compatible with the app's existing UI expectations
   Future<Map<String, dynamic>> fetchWeather(String location) async {

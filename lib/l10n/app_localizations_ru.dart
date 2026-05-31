@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -437,4 +438,39 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get getItOnPlayStore => 'Get it on Play Store';
+
+  @override
+  String get multipleFloodAlerts => 'Multiple Flood Alerts';
+
+  @override
+  String activeWarnings(int count) {
+    return '$count active warnings';
+  }
+
+  @override
+  String get tapToViewAllAlerts => 'Tap to view all alerts';
+
+  @override
+  String get activeFloodAlerts => 'Active Flood Alerts';
+
+  @override
+  String get area => 'Area';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get instruction => 'Instruction';
+
+  @override
+  String get severity => 'Severity';
+
+  @override
+  String get response => 'Response';
+
+  @override
+  String get flashFloodWarning => 'Flash Flood Warning!';
+
+  @override
+  String get floodAlert => 'Flood Alert';
 }

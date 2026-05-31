@@ -913,6 +913,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get it on Play Store'**
   String get getItOnPlayStore;
+
+  /// No description provided for @multipleFloodAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiple Flood Alerts'**
+  String get multipleFloodAlerts;
+
+  /// No description provided for @activeWarnings.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} active warnings'**
+  String activeWarnings(int count);
+
+  /// No description provided for @tapToViewAllAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to view all alerts'**
+  String get tapToViewAllAlerts;
+
+  /// No description provided for @activeFloodAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Flood Alerts'**
+  String get activeFloodAlerts;
+
+  /// No description provided for @area.
+  ///
+  /// In en, this message translates to:
+  /// **'Area'**
+  String get area;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @instruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Instruction'**
+  String get instruction;
+
+  /// No description provided for @severity.
+  ///
+  /// In en, this message translates to:
+  /// **'Severity'**
+  String get severity;
+
+  /// No description provided for @response.
+  ///
+  /// In en, this message translates to:
+  /// **'Response'**
+  String get response;
+
+  /// No description provided for @flashFloodWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash Flood Warning!'**
+  String get flashFloodWarning;
+
+  /// No description provided for @floodAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood Alert'**
+  String get floodAlert;
 }
 
 class _AppLocalizationsDelegate

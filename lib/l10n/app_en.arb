@@ -202,5 +202,23 @@
   "tapToViewInteractiveRadar": "Tap to view interactive radar",
   "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
   "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
-  "getItOnPlayStore": "Get it on Play Store"
+  "getItOnPlayStore": "Get it on Play Store",
+  "multipleFloodAlerts": "Multiple Flood Alerts",
+  "activeWarnings": "{count} active warnings",
+  "@activeWarnings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tapToViewAllAlerts": "Tap to view all alerts",
+  "activeFloodAlerts": "Active Flood Alerts",
+  "area": "Area",
+  "description": "Description",
+  "instruction": "Instruction",
+  "severity": "Severity",
+  "response": "Response",
+  "flashFloodWarning": "Flash Flood Warning!",
+  "floodAlert": "Flood Alert"
 }

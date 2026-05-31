@@ -7,21 +7,28 @@ class SingaporeWeatherService {
   final String _base = 'https://api.weatherfast.aadish.dev';
 
   Future<Map<String, dynamic>> fetchWeatherFromCoords(double lat, double lon) async {
-    final current = await fetchCurrent(lat, lon);
-    final hourlyNea = await fetchHourly(lat, lon);
-    final dailyNea = await fetchDaily(lat, lon);
-    final psi = await fetchPSI(lat, lon);
+    // Parallelize core weather data fetching
+    final results = await Future.wait([
+      fetchCurrent(lat, lon),
+      _fetchTwentyFourHourData(lat, lon),
+      // Fetches once and shares with hourly/regional
+      fetchDaily(lat, lon),
+      fetchPSI(lat, lon),
+    ]);
 
-    // Fetch Open-Meteo for granular daily data and hourly continuation
-    List<Map<String, dynamic>> hourlyOm = [];
-    List<Map<String, dynamic>> dailyOm = [];
-    Map<String, dynamic>? currentOm = {};
-    try {
-      final omData = await _fetchOpenMeteo(lat, lon);
-      hourlyOm = omData['hourly'] ?? [];
-      dailyOm = omData['daily'] ?? [];
-      currentOm = (omData['current'] ?? {}) as Map<String, dynamic>?;
-    } catch (_) {}
+    final current = results[0] as Map<String, dynamic>;
+    final twentyFourHourData = results[1] as Map<String, dynamic>;
+    final dailyNea = results[2] as List<Map<String, dynamic>>;
+    final psi = results[3] as Map<String, dynamic>?;
+
+    final hourlyNea = _parseHourlyFromData(twentyFourHourData, lat, lon);
+    final regionalOutlook = _parseRegionalFromData(twentyFourHourData);
+
+    // Fetch Open-Meteo once for all needs
+    final omData = await _fetchOpenMeteo(lat, lon);
+    final hourlyOm = omData['hourly'] ?? [];
+    final dailyOm = omData['daily'] ?? [];
+    final currentOm = (omData['current'] ?? {}) as Map<String, dynamic>?;
 
     // Construct "Today" from current or first hourly period if missing in daily list
     // The 24-hour forecast usually covers "Today".
@@ -87,8 +94,6 @@ class SingaporeWeatherService {
       ...?psi,
     };
 
-    final regionalOutlook = await fetchRegionalOutlook();
-
     return {
       'location': {
         'name': current['area_name'] ?? 'Singapore',
@@ -110,7 +115,74 @@ class SingaporeWeatherService {
       if (dailyMerged.isNotEmpty) 'widget_today_low_c': dailyMerged[0]['min_c'],
       if (dailyMerged.isNotEmpty) 'widget_today_low_f': (dailyMerged[0]['min_c'] * 9 / 5) + 32,
     };
+  }
+
+  Future<Map<String, dynamic>> _fetchTwentyFourHourData(double lat,
+      double lon) async {
+    final day24Res = await http.get(
+        Uri.parse('$_base/api/sg/twenty-four-hr-forecast'));
+    if (day24Res.statusCode != 200) return {};
+    return jsonDecode(day24Res.body);
+  }
+
+  List<Map<String, dynamic>> _parseHourlyFromData(Map<String, dynamic> day24,
+      double lat, double lon, {String? areaRegion}) {
+    final data = day24['data'] ?? {};
+    final record = (data['records'] as List?)?.firstOrNull ??
+        (data['items'] as List?)?.firstOrNull;
+    if (record == null) return [];
+
+    final periods = (record['periods'] as List?) ?? [];
+    final region = areaRegion?.toLowerCase() ?? 'central';
+
+    final List<Map<String, dynamic>> results = [];
+    for (final p in periods) {
+      final timePeriod = p['timePeriod'] ?? p['time_period'] ?? {};
+      final start = timePeriod['start'] ?? '';
+      String cond = p['regions']?[region]?['text'] ??
+          p['regions']?['central']?['text'] ?? p['forecast'] ?? 'Clear';
+
+      results.add({
+        'time': start,
+        'display_time': timePeriod['text'] ?? timePeriod['label'] ?? '',
+        'condition': {'text': cond},
+        'glyph': _mapConditionToGlyph(cond),
+        'chance_of_rain': 0, // Will be enriched or handled by OM
+        'temp_c': 0.0,
+        'source': 'nea',
+        'end': timePeriod['end'] ?? '',
+      });
     }
+    return results;
+  }
+
+  List<Map<String, dynamic>> _parseRegionalFromData(
+      Map<String, dynamic> day24) {
+    final data = day24['data'] ?? {};
+    final record = (data['records'] as List?)?.firstOrNull ??
+        (data['items'] as List?)?.firstOrNull;
+    if (record == null) return [];
+
+    final List<Map<String, dynamic>> outlook = [];
+    final periods = (record['periods'] as List?) ?? [];
+
+    for (final p in periods) {
+      final regions = p['regions'] ?? {};
+      if (regions is Map) {
+        for (final entry in regions.entries) {
+          outlook.add({
+            'region': entry.key,
+            'text': entry.value?['text'] ?? '',
+            'period_text': (p['timePeriod'] ?? p['time_period'] ??
+                {})['text'] ?? '',
+            'start': (p['timePeriod'] ?? p['time_period'] ?? {})['start'],
+            'end': (p['timePeriod'] ?? p['time_period'] ?? {})['end'],
+          });
+        }
+      }
+    }
+    return outlook;
+  }
 
   Future<Map<String, dynamic>> _fetchOpenMeteo(double lat, double lon) async {
     final url = Uri.parse(
@@ -135,8 +207,9 @@ class SingaporeWeatherService {
       final hPrecip = hData['precipitation_probability'] as List? ?? [];
 
       for (int i = 0; i < hTimes.length; i++) {
-        if (i >= hTemps.length || i >= hCodes.length || i >= hPrecip.length)
+        if (i >= hTemps.length || i >= hCodes.length || i >= hPrecip.length) {
           break;
+        }
         final tC = (hTemps[i] as num?)?.toDouble() ?? 0.0;
         final code = (hCodes[i] as num?)?.toInt() ?? 0;
         hourly.add({
@@ -161,7 +234,9 @@ class SingaporeWeatherService {
 
       for (int i = 0; i < dTimes.length; i++) {
         if (i >= dMax.length || i >= dMin.length || i >= dCodes.length ||
-            i >= dPrecip.length) break;
+            i >= dPrecip.length) {
+          break;
+        }
         final maxC = (dMax[i] as num?)?.toDouble() ?? 0.0;
         final minC = (dMin[i] as num?)?.toDouble() ?? 0.0;
         final code = (dCodes[i] as num?)?.toInt() ?? 0;
@@ -214,10 +289,17 @@ class SingaporeWeatherService {
   }
 
   Future<Map<String, dynamic>> fetchCurrent(double lat, double lon) async {
-    final airTempRes = await http.get(Uri.parse('$_base/api/sg/air-temperature'));
-    final twoHourRes = await http.get(Uri.parse('$_base/api/sg/two-hour-forecast'));
-    final rhRes = await http.get(Uri.parse('$_base/api/sg/relative-humidity'));
-    final windRes = await http.get(Uri.parse('$_base/api/sg/wind-speed'));
+    final results = await Future.wait([
+      http.get(Uri.parse('$_base/api/sg/air-temperature')),
+      http.get(Uri.parse('$_base/api/sg/two-hour-forecast')),
+      http.get(Uri.parse('$_base/api/sg/relative-humidity')),
+      http.get(Uri.parse('$_base/api/sg/wind-speed')),
+    ]);
+
+    final airTempRes = results[0];
+    final twoHourRes = results[1];
+    final rhRes = results[2];
+    final windRes = results[3];
 
     double temp = 0.0;
     String condition = 'Clear';
@@ -287,61 +369,8 @@ class SingaporeWeatherService {
     };
   }
 
-  Future<List<Map<String, dynamic>>> fetchHourly(double lat, double lon, {String? areaRegion}) async {
-    final day24Res = await http.get(Uri.parse('$_base/api/sg/twenty-four-hr-forecast'));
-    if (day24Res.statusCode != 200) return [];
-    
-    final day24 = jsonDecode(day24Res.body);
-    final data = day24['data'] ?? {};
-    final record = (data['records'] as List?)?.firstOrNull ?? (data['items'] as List?)?.firstOrNull;
-    if (record == null) return [];
-
-    final periods = (record['periods'] as List?) ?? [];
-    final region = areaRegion?.toLowerCase() ?? 'central';
-
-    // Also fetch Open-Meteo for precip chance
-    List<int> precipChances = [];
-    try {
-      final omRes = await http.get(Uri.parse(
-        'https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&hourly=precipitation_probability&timezone=auto&forecast_days=1',
-      ));
-      if (omRes.statusCode == 200) {
-        final omData = jsonDecode(omRes.body);
-        precipChances = (omData['hourly']?['precipitation_probability'] as List?)?.map((e) => (e as num).toInt()).toList() ?? [];
-      }
-    } catch (_) {}
-
-    final List<Map<String, dynamic>> results = [];
-    for (final p in periods) {
-      final timePeriod = p['timePeriod'] ?? p['time_period'] ?? {};
-      final start = timePeriod['start'] ?? '';
-      
-      String cond = p['regions']?[region]?['text'] ?? p['regions']?['central']?['text'] ?? p['forecast'] ?? 'Clear';
-      
-      int maxPrecip = 0;
-      final startDt = DateTime.tryParse(start);
-      final endDt = DateTime.tryParse(timePeriod['end'] ?? '');
-      if (precipChances.isNotEmpty && startDt != null && endDt != null) {
-        for (int h = startDt.hour; h <= endDt.hour && h < precipChances.length; h++) {
-          if (precipChances[h] > maxPrecip) maxPrecip = precipChances[h];
-        }
-      }
-
-      results.add({
-        'time': start,
-        'display_time': timePeriod['text'] ?? timePeriod['label'] ?? '',
-        'condition': {'text': cond},
-        'glyph': _mapConditionToGlyph(cond),
-        'chance_of_rain': maxPrecip,
-        'temp_c': 0.0,
-        'source': 'nea',
-        'end': timePeriod['end'] ?? '',
-      });
-    }
-    return results;
-  }
-
-  Future<List<Map<String, dynamic>>> fetchDaily(double lat, double lon) async {
+  Future<List<Map<String, dynamic>>> fetchDaily(double lat, double lon,
+      {List<int>? omPrecipChances}) async {
     final fourDayRes = await http.get(Uri.parse('$_base/api/sg/four-day-forecast'));
     if (fourDayRes.statusCode != 200) return [];
     
@@ -351,18 +380,7 @@ class SingaporeWeatherService {
     if (rec == null) return [];
 
     final forecasts = (rec['forecasts'] as List?) ?? [];
-    
-    // Precip chance from Open-Meteo
-    List<int> precipChances = [];
-    try {
-      final omRes = await http.get(Uri.parse(
-        'https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&daily=precipitation_probability_max&timezone=auto&forecast_days=4',
-      ));
-      if (omRes.statusCode == 200) {
-        final omData = jsonDecode(omRes.body);
-        precipChances = (omData['daily']?['precipitation_probability_max'] as List?)?.map((e) => (e as num).toInt()).toList() ?? [];
-      }
-    } catch (_) {}
+    final precipChances = omPrecipChances ?? [];
 
     final List<Map<String, dynamic>> results = [];
     for (int i = 0; i < forecasts.length; i++) {
@@ -420,32 +438,34 @@ class SingaporeWeatherService {
     return null;
   }
 
-  Future<List<Map<String, dynamic>>> fetchRegionalOutlook() async {
-    final day24Res = await http.get(Uri.parse('$_base/api/sg/twenty-four-hr-forecast'));
-    if (day24Res.statusCode != 200) return [];
-    final day24 = jsonDecode(day24Res.body);
-    final data = day24['data'] ?? {};
-    final record = (data['records'] as List?)?.firstOrNull ?? (data['items'] as List?)?.firstOrNull;
-    if (record == null) return [];
-    
-    final List<Map<String, dynamic>> outlook = [];
-    final periods = (record['periods'] as List?) ?? [];
-    
-    for (final p in periods) {
-      final regions = p['regions'] ?? {};
-      if (regions is Map) {
-        for (final entry in regions.entries) {
-          outlook.add({
-            'region': entry.key,
-            'text': entry.value?['text'] ?? '',
-            'period_text': (p['timePeriod'] ?? p['time_period'] ?? {})['text'] ?? '',
-            'start': (p['timePeriod'] ?? p['time_period'] ?? {})['start'],
-            'end': (p['timePeriod'] ?? p['time_period'] ?? {})['end'],
+  Future<List<Map<String, dynamic>>> fetchFloodAlerts() async {
+    try {
+      final res = await http.get(Uri.parse('$_base/api/test/sg/flood-alerts'));
+      if (res.statusCode != 200) return [];
+
+      final data = jsonDecode(res.body);
+      final records = (data['data']?['records'] as List?) ?? [];
+      final List<Map<String, dynamic>> allAlerts = [];
+
+      for (var record in records) {
+        final readings = (record['item']?['readings'] as List?) ?? [];
+        for (var r in readings) {
+          final map = Map<String, dynamic>.from(r as Map);
+          allAlerts.add({
+            'headline': map['headline'] ?? 'Flood Alert',
+            'description': map['description'] ?? '',
+            'area': map['area']?['areaDesc'] ?? '',
+            'instruction': map['instruction'] ?? '',
+            'severity': map['severity'] ?? 'Minor',
+            'responseType': map['responseType'] ?? '',
           });
         }
       }
+
+      return allAlerts;
+    } catch (_) {
+      return [];
     }
-    return outlook;
   }
 
   // --- Helpers ---

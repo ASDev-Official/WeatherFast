@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import 'l10n/app_localizations.dart';
@@ -18,6 +19,7 @@ import 'ui/open_meteo_attribution.dart';
 import 'ui/weather_map_snippet.dart';
 import 'weather_map_screen.dart';
 import 'weather_service.dart';
+import 'weather_service_sg.dart';
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key, required this.onLocationSelected});
@@ -42,6 +44,9 @@ class _WeatherHomeState extends State<WeatherHome> {
   // ignore: unused_field
   bool _isRefreshing = false;
   final Set<String> _expandedDays = {};
+  List<Map<String, dynamic>>? _sgFloodAlerts;
+  bool _isShowingFloodAnimation = false;
+  String? _lastAnimatedFloodHeadline;
 
   void _showUpdatingOverlay() {
     if (_updatingOverlay != null) return;
@@ -140,6 +145,12 @@ class _WeatherHomeState extends State<WeatherHome> {
       initialQuery ??= await PreferencesService.loadLastLocationQuery();
     }
 
+    // Load flood alerts once if we are likely in Singapore
+    final isSg = await PreferencesService.loadIsSingapore();
+    if (isSg) {
+      _fetchSgFloodAlerts();
+    }
+
     if (initialQuery != null && initialQuery.isNotEmpty) {
       _currentLocationQuery = initialQuery;
       await _fetchWeather(initialQuery, showOverlay: !hasInitialData);
@@ -147,6 +158,56 @@ class _WeatherHomeState extends State<WeatherHome> {
     }
 
     await _fetchWeatherForCurrentLocation(showOverlay: !hasInitialData);
+  }
+
+  Future<void> _fetchSgFloodAlerts() async {
+    final isSingapore = await PreferencesService.loadIsSingapore();
+    if (!isSingapore) {
+      if (mounted) setState(() => _sgFloodAlerts = null);
+      return;
+    }
+
+    try {
+      final sgService = SingaporeWeatherService();
+      final alerts = await sgService.fetchFloodAlerts();
+      if (mounted) {
+        setState(() {
+          _sgFloodAlerts = alerts.isNotEmpty ? alerts : null;
+        });
+
+        if (alerts.isNotEmpty) {
+          _triggerFloodAlertAnimation(alerts);
+        }
+      }
+    } catch (_) {
+      if (mounted) setState(() => _sgFloodAlerts = null);
+    }
+  }
+
+  Future<void> _triggerFloodAlertAnimation(
+      List<Map<String, dynamic>> alerts) async {
+    final currentHeadline = alerts.map((e) => e['headline']).join('|');
+    if (_isShowingFloodAnimation ||
+        _lastAnimatedFloodHeadline == currentHeadline) return;
+
+    setState(() {
+      _isShowingFloodAnimation = true;
+      _lastAnimatedFloodHeadline = currentHeadline;
+    });
+
+    // We use a longer delay if needed, but the user said "for a second"
+    await Future.delayed(const Duration(milliseconds: 2000));
+
+    if (mounted) {
+      setState(() {
+        _isShowingFloodAnimation = false;
+      });
+      if (alerts.length > 1) {
+        _showFloodAlertsList(alerts);
+      } else {
+        _showFloodAlertDetails(alerts.first);
+      }
+    }
   }
 
   Future<void> _fetchWeatherForCurrentLocation({
@@ -215,8 +276,9 @@ class _WeatherHomeState extends State<WeatherHome> {
     setState(() => _isRefreshing = true);
 
     try {
-      final weather = await _weatherService.fetchWeather(location);
-      final forecast = await _weatherService.fetchForecast(location);
+      final data = await _weatherService.fetchAllWeatherData(location);
+      final weather = data['weather']!;
+      final forecast = data['forecast']!;
       final localTime = _resolveLocalTime(weather);
       final isDaytime = weather['current']?['is_day'] == 1;
 
@@ -235,7 +297,17 @@ class _WeatherHomeState extends State<WeatherHome> {
       final lon = (weather['location']?['lon'] as num?)?.toDouble() ?? 0.0;
       final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 && lon <= 104.15;
       final isSingapore = country.contains('singapore') || isSingaporeCoords;
+
+      final wasSingapore = await PreferencesService.loadIsSingapore();
       await PreferencesService.saveIsSingapore(isSingapore);
+
+      if (isSingapore && !wasSingapore) {
+        // If we just transitioned to Singapore (or it's the first time), fetch alerts immediately
+        _fetchSgFloodAlerts();
+      } else if (!isSingapore) {
+        setState(() => _sgFloodAlerts = null);
+      }
+
       await PreferencesService.saveLastLocationQuery(location);
       await WeatherCacheService.saveSnapshot(
         locationQuery: location,
@@ -460,6 +532,8 @@ class _WeatherHomeState extends State<WeatherHome> {
                             low: minToday,
                           ),
                   ),
+                  if (_sgFloodAlerts != null)
+                    SliverToBoxAdapter(child: _buildFloodAlerts()),
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     sliver: SliverToBoxAdapter(child: _buildMetricsGrid()),
@@ -507,6 +581,55 @@ class _WeatherHomeState extends State<WeatherHome> {
               ),
             ),
           ),
+          if (_isShowingFloodAnimation)
+            Positioned.fill(
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.0, end: 1.0),
+                duration: const Duration(milliseconds: 500),
+                builder: (context, value, child) {
+                  return Container(
+                    color: Colors.red.withValues(alpha: 0.4 * value),
+                    child: Center(
+                      child: Opacity(
+                        opacity: value,
+                        child: child,
+                      ),
+                    ),
+                  );
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      'assets/animations/flood_alert.json',
+                      width: 200,
+                      height: 200,
+                      repeat: false,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      AppLocalizations.of(context)!.flashFloodWarning,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                        shadows: [
+                          const Shadow(
+                            color: Colors.black54,
+                            blurRadius: 8,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -687,6 +810,142 @@ class _WeatherHomeState extends State<WeatherHome> {
           const SizedBox(height: 12),
         ],
       ),
+    );
+  }
+
+  Widget _buildFloodAlerts() {
+    final alerts = _sgFloodAlerts ?? [];
+    if (alerts.isEmpty) return const SizedBox.shrink();
+
+    final scheme = Theme
+        .of(context)
+        .colorScheme;
+    final isMultiple = alerts.length > 1;
+
+    final headline = isMultiple ? AppLocalizations.of(context)!
+        .multipleFloodAlerts : (alerts.first['headline']?.toString() ??
+        AppLocalizations.of(context)!.floodAlert);
+    final area = isMultiple ? AppLocalizations.of(context)!.activeWarnings(
+        alerts.length) : (alerts.first['area']?.toString() ?? '');
+    final description = isMultiple ? AppLocalizations.of(context)!
+        .tapToViewAllAlerts : (alerts.first['description']?.toString() ?? '');
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Card(
+        color: scheme.errorContainer,
+        elevation: 2,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: scheme.error.withValues(alpha: 0.5)),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            if (isMultiple) {
+              _showFloodAlertsList(alerts);
+            } else {
+              _showFloodAlertDetails(alerts.first);
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.warning_amber_rounded,
+                  color: scheme.onErrorContainer,
+                  size: 32,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        headline,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: scheme.onErrorContainer,
+                        ),
+                      ),
+                      if (area.isNotEmpty)
+                        Text(
+                          area,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                            color: scheme.onErrorContainer,
+                          ),
+                        ),
+                      if (description.isNotEmpty)
+                        Text(
+                          description,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                            color: scheme.onErrorContainer.withValues(
+                                alpha: 0.8),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: scheme.onErrorContainer.withValues(alpha: 0.5),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showFloodAlertsList(List<Map<String, dynamic>> alerts) {
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return _FloodAlertsSheet(alerts: alerts);
+      },
+    );
+  }
+
+  void _showFloodAlertDetails(Map<String, dynamic> alert) {
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.6,
+          minChildSize: 0.4,
+          maxChildSize: 0.95,
+          builder: (context, scrollController) {
+            return _FloodAlertDetailsContent(
+              alert: alert,
+              scrollController: scrollController,
+            );
+          },
+        );
+      },
     );
   }
 
@@ -1643,6 +1902,300 @@ class _DailyTile extends StatelessWidget {
             context,
           ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
+      ),
+    );
+  }
+}
+
+class _FloodAlertsSheet extends StatefulWidget {
+  const _FloodAlertsSheet({required this.alerts});
+
+  final List<Map<String, dynamic>> alerts;
+
+  @override
+  State<_FloodAlertsSheet> createState() => _FloodAlertsSheetState();
+}
+
+class _FloodAlertsSheetState extends State<_FloodAlertsSheet> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  final DraggableScrollableController _sheetController = DraggableScrollableController();
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme
+        .of(context)
+        .colorScheme;
+
+    return DraggableScrollableSheet(
+      controller: _sheetController,
+      expand: false,
+      initialChildSize: 0.6,
+      minChildSize: 0.4,
+      maxChildSize: 0.95,
+      builder: (context, scrollController) {
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (didPop) return;
+            final navigator = _navigatorKey.currentState;
+            if (navigator != null && navigator.canPop()) {
+              navigator.pop();
+            } else if (mounted) {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Material(
+            color: scheme.surface,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            child: Navigator(
+              key: _navigatorKey,
+              onGenerateRoute: (settings) {
+                return MaterialPageRoute(
+                  builder: (context) {
+                    return _buildList(context, scrollController);
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildList(BuildContext context, ScrollController scrollController) {
+    final scheme = Theme
+        .of(context)
+        .colorScheme;
+    return Column(
+      children: [
+        const SizedBox(height: 12),
+        Container(
+          width: 40,
+          height: 4,
+          decoration: BoxDecoration(
+            color: scheme.outlineVariant,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            children: [
+              Icon(Icons.warning_amber_rounded, color: scheme.error, size: 28),
+              const SizedBox(width: 12),
+              Text(
+                AppLocalizations.of(context)!.activeFloodAlerts,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: ListView.separated(
+            controller: scrollController,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            itemCount: widget.alerts.length,
+            separatorBuilder: (_, _) => const SizedBox(height: 12),
+            itemBuilder: (context, index) {
+              final alert = widget.alerts[index];
+              return Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(color: scheme.outlineVariant),
+                ),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  title: Text(
+                    alert['headline'] ??
+                        AppLocalizations.of(context)!.floodAlert,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    alert['area'] ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: () async {
+                    _sheetController.animateTo(
+                      0.95,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                    );
+                    await _navigatorKey.currentState?.push(
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            _FloodAlertDetailsContent(
+                              alert: alert,
+                              showBackButton: true,
+                              scrollController: scrollController,
+                            ),
+                      ),
+                    );
+                    if (mounted) {
+                      _sheetController.animateTo(
+                        0.6,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
+                      );
+                    }
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _FloodAlertDetailsContent extends StatelessWidget {
+  const _FloodAlertDetailsContent({
+    required this.alert,
+    this.scrollController,
+    this.showBackButton = false,
+  });
+
+  final Map<String, dynamic> alert;
+  final ScrollController? scrollController;
+  final bool showBackButton;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme
+        .of(context)
+        .colorScheme;
+    return Material(
+      color: scheme.surface,
+      child: SingleChildScrollView(
+        controller: scrollController,
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (!showBackButton) ...[
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: scheme.outlineVariant,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ] else
+              ...[
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                const SizedBox(height: 8),
+              ],
+            Row(
+              children: [
+                Icon(
+                    Icons.warning_amber_rounded, color: scheme.error, size: 32),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    alert['headline'] ??
+                        AppLocalizations.of(context)!.floodAlert,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            _DetailSection(title: AppLocalizations.of(context)!.area,
+                content: alert['area'],
+                icon: Icons.location_on_outlined),
+            _DetailSection(title: AppLocalizations.of(context)!.description,
+                content: alert['description'],
+                icon: Icons.description_outlined),
+            _DetailSection(title: AppLocalizations.of(context)!.instruction,
+                content: alert['instruction'],
+                icon: Icons.info_outline),
+            _DetailSection(title: AppLocalizations.of(context)!.severity,
+                content: alert['severity'],
+                icon: Icons.speed_outlined),
+            _DetailSection(title: AppLocalizations.of(context)!.response,
+                content: alert['responseType'],
+                icon: Icons.reply_outlined),
+            const SizedBox(height: 32),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DetailSection extends StatelessWidget {
+  const _DetailSection({
+    required this.title,
+    required this.content,
+    required this.icon,
+  });
+
+  final String title;
+  final String? content;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    if (content == null || content!.isEmpty) return const SizedBox.shrink();
+    final scheme = Theme
+        .of(context)
+        .colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 18, color: scheme.primary),
+              const SizedBox(width: 8),
+              Text(
+                title,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .labelLarge
+                    ?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: scheme.primary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            content!,
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodyLarge,
+          ),
+        ],
       ),
     );
   }
