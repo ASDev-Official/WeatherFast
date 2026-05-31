@@ -234,5 +234,23 @@
     "useFahrenheit": "Use Fahrenheit",
     "ratingPreferencesReset": "Rating preferences reset",
     "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
-    "widgetsRefreshed": "Widgets refreshed"
+    "widgetsRefreshed": "Widgets refreshed",
+    "tapToViewAllAlerts": "Tap to view all alerts",
+    "description": "Description",
+    "instruction": "Instruction",
+    "severity": "Severity",
+    "activeWarnings": "{count} active warnings",
+    "@activeWarnings": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "activeFloodAlerts": "Active Flood Alerts",
+    "response": "Response",
+    "area": "Area",
+    "floodAlert": "Flood Alert",
+    "flashFloodWarning": "Flash Flood Warning!",
+    "multipleFloodAlerts": "Multiple Flood Alerts"
 }
