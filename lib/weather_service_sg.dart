@@ -440,7 +440,7 @@ class SingaporeWeatherService {
 
   Future<List<Map<String, dynamic>>> fetchFloodAlerts() async {
     try {
-      final res = await http.get(Uri.parse('$_base/api/test/sg/flood-alerts'));
+      final res = await http.get(Uri.parse('$_base/api/sg/flood-alerts'));
       if (res.statusCode != 200) return [];
 
       final data = jsonDecode(res.body);
