@@ -121,12 +121,12 @@
     "noNewNotifications": "कोई नए संदेश नहीं",
     "loadingNotificationTitle": "नोटिफिकेशन टाइटल लोड हो रहा है..।",
     "resetRatingPreferences": "रेटिंग प्राथमिकताएँ रीसेट करें",
-    "apiDocs": "API Docs",
+    "apiDocs": "API दस्तावेज़ीकरण",
     "featureRequest": "सुविधा का अनुरोध",
     "mapSettings": "मानचित्र सेटिंग्स",
-    "website": "Website",
-    "tapToViewInteractiveRadar": "Tap to view interactive radar",
-    "usedInWeatherFastVersion": " जो WeatherFast में उपयोग किए जाते हैं",
+    "website": "वेबसाइट",
+    "tapToViewInteractiveRadar": "इंटरैक्टिव रडार देखने के लिए टैप करें",
+    "usedInWeatherFastVersion": " जो WeatherFast {version} में उपयोग किए जाते हैं",
     "@usedInWeatherFastVersion": {
         "placeholders": {
             "version": {
@@ -142,7 +142,7 @@
     "healthAndSafety": "स्वास्थ्य एवं सुरक्षा",
     "simulateSuccessfulWeatherFetchTrigger": "सफल मौसम फ़ेच ट्रिगर सिमुलेट करें",
     "preferences": "सेटिंग्स",
-    "terms": "Terms",
+    "terms": "शर्तें",
     "showingFahrenheit": "फ़ारेनहाइट दिखा रहा है",
     "toViewDetailedInsights": "विस्तृत जानकारी देखने के लिए",
     "support": "सहायता",
@@ -152,7 +152,7 @@
     "mapLayers": "मानचित्र परतें:",
     "remindMeLater": "मुझे 2 दिन में याद दिलाना",
     "debug": "डिबग",
-    "getItOnPlayStore": "Get it on Play Store",
+    "getItOnPlayStore": "प्ले स्टोर पर प्राप्त करें",
     "retry": "पुन: प्रयास करें",
     "widgetRefreshFailed": "विजेट रिफ्रेश काम नहीं किया: {error}",
     "@widgetRefreshFailed": {
@@ -176,7 +176,7 @@
             }
         }
     },
-    "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
+    "sgOpenDataLicence": "सिंगापुर ओपन डेटा लाइसेंस वर्शन 1.0 की शर्तों के तहत उपलब्ध कराई गई है",
     "failedToLoadInsights": "इनसाइट्स लोड नहीं हो पाईं: {error}",
     "@failedToLoadInsights": {
         "placeholders": {
@@ -186,7 +186,7 @@
         }
     },
     "todaysTimeline": "आज की समयरेखा",
-    "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
+    "neaAttribution": "इसमें 2 घंटे का मौसम पूर्वानुमान, 24 घंटे का मौसम पूर्वानुमान, 4 दिन का मौसम पूर्वानुमान, पूरे सिंगापुर में हवा का तापमान, सिंगापुर में वर्षा, सिंगापुर में सापेक्ष आर्द्रता, सिंगापुर में सापेक्ष आर्द्रता, सिंगापुर में हवा की गति और प्रदूषक मानक सूचकांक (पीएसआई) की जानकारी शामिल है, जिसे PUB और NEA से {date} को एक्सेस किया गया है, जो की ",
     "@neaAttribution": {
         "placeholders": {
             "date": {
@@ -205,10 +205,10 @@
         }
     },
     "rateNow": "रेट करें",
-    "neaWebsite": "NEA Website",
+    "neaWebsite": "NEA वेबसाइट",
     "weatherMap": "मौसम मानचित्र",
     "whatToWear": "क्या पहनना है",
-    "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
+    "weatherMapsUnavailableOnWeb": "वेब पर मौसम के नक्शे उपलब्ध नहीं हैं",
     "weatherInsights": "मौसम संबंधी जानकारी",
     "testRatingBottomSheet": "टेस्ट रेटिंग बॉटम शीट",
     "livePrecipitationRainviewer": "लाइव प्रेसिपिटेशन रडार लेयर्स RainViewer से मिलती हैं।",
@@ -221,25 +221,25 @@
     "loading": "लोड हो रहा है..।",
     "systemStatus": "सिस्टम स्थिति",
     "analyzingConditions": "परिस्थितियों का विश्लेषण..।",
-    "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
+    "weatherDataProvidedByOM": "ओपन-मेटियो द्वारा प्रदान किया गया मौसम डेटा",
     "couldNotOpenLink": "लिंक नहीं खोला जा सका",
     "weatherData": "मौसम डेटा:",
     "loadingNotificationDesc": "नोटिफ़िकेशन डिस्क्रिप्शन लोड हो रहा है..।",
-    "noThanks": "No Thanks",
+    "noThanks": "नहीं",
     "helpAndFeedback": "सहायता और प्रतिक्रिया",
     "dataGovSg": "Data.gov.sg",
-    "loadingClearWeather": "Clear",
+    "loadingClearWeather": "साफ करो",
     "radarOpacity": "रडार अपारदर्शिता",
     "attribution": "श्रेय:",
     "useFahrenheit": "फ़ारेनहाइट का उपयोग करें",
     "ratingPreferencesReset": "रेटिंग प्राथमिकताएँ रीसेट करें",
-    "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience।",
+    "interactiveWeatherRadarDescription": "इंटरैक्टिव वेदर रडार और हाई-रिज़ॉल्यूशन मैप हमारे मोबाइल एक्सपीरियंस के लिए ऑप्टिमाइज़ किए गए हैं।",
     "widgetsRefreshed": "विजेट ताज़ा किए गए",
-    "tapToViewAllAlerts": "Tap to view all alerts",
-    "description": "Description",
-    "instruction": "Instruction",
-    "severity": "Severity",
-    "activeWarnings": "{count} active warnings",
+    "tapToViewAllAlerts": "सभी अलर्ट देखने के लिए टैप करें",
+    "description": "विवरण",
+    "instruction": "अनुदेश",
+    "severity": "गंभीरता",
+    "activeWarnings": "{count} सक्रिय चेतावनियाँ",
     "@activeWarnings": {
         "placeholders": {
             "count": {
@@ -247,10 +247,10 @@
             }
         }
     },
-    "activeFloodAlerts": "Active Flood Alerts",
-    "response": "Response",
-    "area": "Area",
-    "floodAlert": "Flood Alert",
-    "flashFloodWarning": "Flash Flood Warning!",
-    "multipleFloodAlerts": "Multiple Flood Alerts"
+    "activeFloodAlerts": "सक्रिय बाढ़ की चेतावनियाँ",
+    "response": "प्रतिक्रिया",
+    "area": "क्षेत्र",
+    "floodAlert": "बाढ़ की चेतावनी",
+    "flashFloodWarning": "ध्यान दे: बाढ़ की चेतावनी!",
+    "multipleFloodAlerts": "बाढ़ की कई चेतावनियाँ"
 }
