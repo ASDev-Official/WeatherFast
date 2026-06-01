@@ -252,5 +252,7 @@
     "area": "Area",
     "floodAlert": "Flood Alert",
     "flashFloodWarning": "Flash Flood Warning!",
-    "multipleFloodAlerts": "Multiple Flood Alerts"
+    "multipleFloodAlerts": "Multiple Flood Alerts",
+    "dewPoint": "Dew Point",
+    "uvIndex": "UV Index"
 }
