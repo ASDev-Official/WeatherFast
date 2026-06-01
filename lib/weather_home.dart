@@ -967,12 +967,12 @@ class _WeatherHomeState extends State<WeatherHome> {
         icon: Icons.water_drop,
       ),
       _MetricTile(
-        label: 'UV Index',
+        label: AppLocalizations.of(context)!.uvIndex,
         value: current['uv']?.toStringAsFixed(1) ?? '--',
         icon: Icons.wb_sunny_outlined,
       ),
       _MetricTile(
-        label: 'Dew Point',
+        label: AppLocalizations.of(context)!.dewPoint,
         value: '${(GlobalData.useFahrenheit
             ? current['dewpoint_f']
             : current['dewpoint_c'])?.round() ?? '--'}°${GlobalData

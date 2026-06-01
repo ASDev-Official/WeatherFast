@@ -272,6 +272,18 @@ abstract class AppLocalizations {
   /// **'Humidity'**
   String get humidity;
 
+  /// No description provided for @uvIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'UV Index'**
+  String get uvIndex;
+
+  /// No description provided for @dewPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Dew Point'**
+  String get dewPoint;
+
   /// No description provided for @wind.
   ///
   /// In en, this message translates to:

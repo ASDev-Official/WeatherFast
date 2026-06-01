@@ -34,6 +34,8 @@
   },
   "feelsLike": "Feels like",
   "humidity": "Humidity",
+  "uvIndex": "UV Index",
+  "dewPoint": "Dew Point",
   "wind": "Wind",
   "airQuality": "Air Quality",
   "visibility": "Visibility",

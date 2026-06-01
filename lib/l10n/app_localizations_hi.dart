@@ -82,6 +82,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get humidity => 'नमी';
 
   @override
+  String get uvIndex => 'UV Index';
+
+  @override
+  String get dewPoint => 'Dew Point';
+
+  @override
   String get wind => 'हवा';
 
   @override
