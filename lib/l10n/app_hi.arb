@@ -1,5 +1,5 @@
 {
-    "airQuality": "Air Quality",
+    "airQuality": "वायु गुणवत्ता",
     "close": "बंद",
     "failedToLoadWeather": "मौसम लोड करने में विफल: {error}",
     "@failedToLoadWeather": {
@@ -9,8 +9,8 @@
             }
         }
     },
-    "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon।",
-    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby।",
+    "futureAdviceStorm": "कुछ घंटों में भारी बारिश होने वाली है। बाहर के काम जल्दी खत्म कर लें।",
+    "futureAdviceRain": "लगभग 3 घंटे में बारिश होने की संभावना है। छाता पास रखें।",
     "highLowTemp": "H {high}°  ·  L {low}°",
     "@highLowTemp": {
         "placeholders": {
@@ -22,11 +22,11 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
+    "dataFromNea": "NEA से डेटा",
     "night": "रात",
     "useCurrentLocation": "वर्तमान स्थान का उपयोग करें",
-    "adviceRain": "Grab a light shell and keep moving।",
-    "nextDays": "Next {count} days",
+    "adviceRain": "अपने साथ छाता ले जाएं।",
+    "nextDays": "अगले {count} दिन",
     "@nextDays": {
         "placeholders": {
             "count": {
@@ -34,15 +34,15 @@
             }
         }
     },
-    "visibility": "Visibility",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
-    "adviceClear": "Great light outside. Sunglasses recommended।",
+    "visibility": "दृश्यता",
+    "dataFromOpenMeteo": "Open-Meteo से डेटा",
+    "adviceClear": "धूप निकली है। धूप का चश्मा पहनो।",
     "clear": "स्पष्ट",
-    "precipChance": "Precip chance",
+    "precipChance": "बारिश की संभावना",
     "updatingWeather": "मौसम लोड हो रहा है…",
     "unableToFetchLocation": "लोकेशन का मौसम नहीं मिल रहा है। कृपया फिर से कोशिश करें।",
     "loadingLocation": "लोकेशन लोड हो रहा है…",
-    "precipPercent": "{percent}% precip",
+    "precipPercent": "{percent}% बारिश",
     "@precipPercent": {
         "placeholders": {
             "percent": {
@@ -50,7 +50,7 @@
             }
         }
     },
-    "toTime": "to {time}",
+    "toTime": "{time} तक",
     "@toTime": {
         "placeholders": {
             "time": {
@@ -58,11 +58,11 @@
             }
         }
     },
-    "futureAdviceSnow": "Snow later today—plan travel with extra time।",
+    "futureAdviceSnow": "आज बाद में बर्फ़बारी होगी - ज़्यादा समय लेकर यात्रा की योजना बनाएं।",
     "searchLocation": "स्थान खोजें",
     "dummyTime": "सोमवार, 1 जनवरी • दोपहर 12:00 बजे",
-    "adviceCloud": "Soft clouds today—perfect walking weather।",
-    "visibilityKm": "{dist} km",
+    "adviceCloud": "आज हल्के बादल हैं -- घूमना अच्छा रहेगा।",
+    "visibilityKm": "{dist} किलोमीटर",
     "@visibilityKm": {
         "placeholders": {
             "dist": {
@@ -71,14 +71,14 @@
         }
     },
     "cityRegionOrCoordinates": "शहर, क्षेत्र, या निर्देशांक",
-    "adviceSnow": "Layer up and mind slick paths।",
-    "adviceStorm": "Stay indoors; lightning risk।",
-    "feelsLike": "Feels like",
-    "weather": "Weather",
+    "adviceSnow": "कपड़े पहनें और फिसलन भरी सड़कों से सावधान रहें।",
+    "adviceStorm": "घर के अंदर रहें; बिजली गिरने का खतरा है।",
+    "feelsLike": "आभासी तापमान",
+    "weather": "मौसम",
     "insights": "अंतर्दृष्टि",
-    "regionalOutlook": "Regional Outlook",
-    "tomorrow": "Tomorrow",
-    "windSpeed": "{speed} km/h {dir}",
+    "regionalOutlook": "क्षेत्रीय पूर्वानुमान",
+    "tomorrow": "कल",
+    "windSpeed": "{speed} किलोमीटर/घंटा {dir}",
     "@windSpeed": {
         "placeholders": {
             "speed": {
@@ -89,27 +89,27 @@
             }
         }
     },
-    "adviceDefault": "Stay comfortable and check again in a few hours।",
+    "adviceDefault": "आराम से रहें और कुछ घंटों में फिर से चेक करें।",
     "home": "होम",
     "searchPlace": "कोई स्थान खोजें",
     "locationPermissionDenied": "लोकेशन परमिशन नहीं मिली। इसे आपको ऑटो-लोकेट करने के लिए इनेबल करें।",
-    "hourlyForecast": "Hourly Forecast",
-    "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
+    "hourlyForecast": "घंटेवार पूर्वानुमान",
+    "todaysSuggestion": "आज का सुझाव",
+    "humidity": "नमी",
     "locationServicesDisabled": "लोकेशन सर्विस बंद हैं. सेटिंग्स में जाकर उन्हें चालू करें।",
     "settings": "सेटिंग्स",
     "dummyHighLow": "H 80° · L 60°",
     "daytime": "दिन",
-    "futureAdviceClear": "Next few hours stay steady—good time to be outside।",
-    "today": "Today",
-    "wind": "Wind",
-    "weekAhead": "Week Ahead",
-    "suggestFeature": "Suggest a new feature for WeatherFast",
-    "activitySuggestions": "Activity Suggestions",
-    "baseMapsMapbox": "Base maps are provided by Mapbox।",
-    "reportBug": "Report a bug or issue",
-    "notificationTitle": "Notification",
-    "failedToLoadNotifications": "Failed to load notifications: {error}",
+    "futureAdviceClear": "अगले कुछ घंटों तक मौसम अच्छा रहेगा। बाहर जाने का अच्छा समय है।",
+    "today": "आज",
+    "wind": "हवा",
+    "weekAhead": "आने वाला सप्ताह",
+    "suggestFeature": "WeatherFast के लिए एक नया फीचर सुझाएं",
+    "activitySuggestions": "गतिविधियों के लिए सुझाव",
+    "baseMapsMapbox": "बेस मैप Mapbox द्वारा दिए जाते हैं।",
+    "reportBug": "बग या समस्या की रिपोर्ट करें",
+    "notificationTitle": "अधिसूचना",
+    "failedToLoadNotifications": "नोटिफ़िकेशन लोड नहीं हो पाए: {error}",
     "@failedToLoadNotifications": {
         "placeholders": {
             "error": {
@@ -117,16 +117,16 @@
             }
         }
     },
-    "openSourceLicenses": "Open-Source Licenses",
-    "noNewNotifications": "No new notifications",
-    "loadingNotificationTitle": "Loading notification title..।",
-    "resetRatingPreferences": "Reset Rating Preferences",
+    "openSourceLicenses": "ओपन-सोर्स लाइसेंस",
+    "noNewNotifications": "कोई नए संदेश नहीं",
+    "loadingNotificationTitle": "नोटिफिकेशन टाइटल लोड हो रहा है..।",
+    "resetRatingPreferences": "रेटिंग प्राथमिकताएँ रीसेट करें",
     "apiDocs": "API Docs",
-    "featureRequest": "Feature Request",
-    "mapSettings": "Map Settings",
+    "featureRequest": "सुविधा का अनुरोध",
+    "mapSettings": "मानचित्र सेटिंग्स",
     "website": "Website",
     "tapToViewInteractiveRadar": "Tap to view interactive radar",
-    "usedInWeatherFastVersion": " used in WeatherFast {version}",
+    "usedInWeatherFastVersion": " जो WeatherFast में उपयोग किए जाते हैं",
     "@usedInWeatherFastVersion": {
         "placeholders": {
             "version": {
@@ -134,27 +134,27 @@
             }
         }
     },
-    "selectLocationFromHome": "Select a location from Home",
-    "dataSources": "Data Sources",
-    "bugReport": "Bug Report",
-    "resetShownCountAndTimestamps": "Reset shown count and timestamps",
-    "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
-    "healthAndSafety": "Health & Safety",
-    "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
-    "preferences": "Preferences",
+    "selectLocationFromHome": "होम से कोई स्थान चुनें",
+    "dataSources": "डेटा स्रोत",
+    "bugReport": "बग रिपोर्ट",
+    "resetShownCountAndTimestamps": "दिखाई गई गिनती और टाइमस्टैम्प रीसेट करें",
+    "reloadWidgetDataWarning": "विजेट डेटा रीलोड करें (कम इस्तेमाल करें)",
+    "healthAndSafety": "स्वास्थ्य एवं सुरक्षा",
+    "simulateSuccessfulWeatherFetchTrigger": "सफल मौसम फ़ेच ट्रिगर सिमुलेट करें",
+    "preferences": "सेटिंग्स",
     "terms": "Terms",
-    "showingFahrenheit": "Showing °F",
-    "toViewDetailedInsights": "to view the detailed Insights",
-    "support": "Support",
-    "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
-    "checkOperationalStatusOfServices": "Check the operational status of services",
-    "forceRefreshWidgets": "Force refresh widgets",
-    "mapLayers": "Map Layers:",
-    "remindMeLater": "Remind Me in 2 Days",
-    "debug": "Debug",
+    "showingFahrenheit": "फ़ारेनहाइट दिखा रहा है",
+    "toViewDetailedInsights": "विस्तृत जानकारी देखने के लिए",
+    "support": "सहायता",
+    "rateAppDescription": "अगर आपको हमारा ऐप इस्तेमाल करना पसंद है, तो प्लीज़ थोड़ा समय निकालकर इसे Play Store में रेट करें। आपका सपोर्ट हमारे लिए बहुत मायने रखता है!",
+    "checkOperationalStatusOfServices": "सेवाओं की ऑपरेशनल स्थिति की जाँच करें",
+    "forceRefreshWidgets": "विजेट को ज़बरदस्ती रिफ़्रेश करें",
+    "mapLayers": "मानचित्र परतें:",
+    "remindMeLater": "मुझे 2 दिन में याद दिलाना",
+    "debug": "डिबग",
     "getItOnPlayStore": "Get it on Play Store",
-    "retry": "Retry",
-    "widgetRefreshFailed": "Widget refresh failed: {error}",
+    "retry": "पुन: प्रयास करें",
+    "widgetRefreshFailed": "विजेट रिफ्रेश काम नहीं किया: {error}",
     "@widgetRefreshFailed": {
         "placeholders": {
             "error": {
@@ -162,10 +162,10 @@
             }
         }
     },
-    "showingCelsius": "Showing °C",
-    "enjoyingWeatherFast": "Enjoying WeatherFast?",
-    "notifications": "Notifications",
-    "versionBuildNumber": "Version {version} ({buildNumber})",
+    "showingCelsius": "सेल्सियस दिखा रहा है",
+    "enjoyingWeatherFast": "क्या आप WeatherFast का आनंद ले रहे हैं?",
+    "notifications": "सूचनाएं",
+    "versionBuildNumber": "वर्ज़न {version} ({buildNumber})",
     "@versionBuildNumber": {
         "placeholders": {
             "version": {
@@ -177,7 +177,7 @@
         }
     },
     "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
-    "failedToLoadInsights": "Failed to load Insights: {error}",
+    "failedToLoadInsights": "इनसाइट्स लोड नहीं हो पाईं: {error}",
     "@failedToLoadInsights": {
         "placeholders": {
             "error": {
@@ -185,7 +185,7 @@
             }
         }
     },
-    "todaysTimeline": "Today's Timeline",
+    "todaysTimeline": "आज की समयरेखा",
     "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
     "@neaAttribution": {
         "placeholders": {
@@ -194,9 +194,9 @@
             }
         }
     },
-    "about": "About",
-    "systemDefault": "System Default",
-    "errorLoadingNotifications": "Error loading notifications: {error}",
+    "about": "ऐप के बारे में",
+    "systemDefault": "प्रणालीगत चूक",
+    "errorLoadingNotifications": "नोटिफ़िकेशन लोड नहीं हो पाए: {error}",
     "@errorLoadingNotifications": {
         "placeholders": {
             "error": {
@@ -204,37 +204,37 @@
             }
         }
     },
-    "rateNow": "Rate Now",
+    "rateNow": "रेट करें",
     "neaWebsite": "NEA Website",
-    "weatherMap": "Weather Map",
-    "whatToWear": "What to Wear",
+    "weatherMap": "मौसम मानचित्र",
+    "whatToWear": "क्या पहनना है",
     "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
-    "weatherInsights": "Weather Insights",
-    "testRatingBottomSheet": "Test Rating Bottom Sheet",
-    "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer।",
+    "weatherInsights": "मौसम संबंधी जानकारी",
+    "testRatingBottomSheet": "टेस्ट रेटिंग बॉटम शीट",
+    "livePrecipitationRainviewer": "लाइव प्रेसिपिटेशन रडार लेयर्स RainViewer से मिलती हैं।",
     "loadingTempF": "72°F",
-    "language": "Language",
-    "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
-    "openLink": "Open Link",
-    "getHelpOrSendFeedback": "Get help or send feedback",
+    "language": "भाषा",
+    "viewLicensesForOpenSourcePackages": "ओपन-सोर्स पैकेज के लिए लाइसेंस देखें",
+    "openLink": "लिंक खोलें",
+    "getHelpOrSendFeedback": "मदद लें या फ़ीडबैक भेजें",
     "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer।",
-    "loading": "Loading..।",
-    "systemStatus": "System Status",
-    "analyzingConditions": "Analyzing conditions..।",
+    "loading": "लोड हो रहा है..।",
+    "systemStatus": "सिस्टम स्थिति",
+    "analyzingConditions": "परिस्थितियों का विश्लेषण..।",
     "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
-    "couldNotOpenLink": "Could not open link",
-    "weatherData": "Weather Data:",
-    "loadingNotificationDesc": "Loading notification description..।",
+    "couldNotOpenLink": "लिंक नहीं खोला जा सका",
+    "weatherData": "मौसम डेटा:",
+    "loadingNotificationDesc": "नोटिफ़िकेशन डिस्क्रिप्शन लोड हो रहा है..।",
     "noThanks": "No Thanks",
-    "helpAndFeedback": "Help & Feedback",
+    "helpAndFeedback": "सहायता और प्रतिक्रिया",
     "dataGovSg": "Data.gov.sg",
     "loadingClearWeather": "Clear",
-    "radarOpacity": "Radar Opacity",
-    "attribution": "Attribution:",
-    "useFahrenheit": "Use Fahrenheit",
-    "ratingPreferencesReset": "Rating preferences reset",
+    "radarOpacity": "रडार अपारदर्शिता",
+    "attribution": "श्रेय:",
+    "useFahrenheit": "फ़ारेनहाइट का उपयोग करें",
+    "ratingPreferencesReset": "रेटिंग प्राथमिकताएँ रीसेट करें",
     "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience।",
-    "widgetsRefreshed": "Widgets refreshed",
+    "widgetsRefreshed": "विजेट ताज़ा किए गए",
     "tapToViewAllAlerts": "Tap to view all alerts",
     "description": "Description",
     "instruction": "Instruction",
