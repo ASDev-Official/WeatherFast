@@ -1,7 +1,7 @@
 {
     "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "close": "閉じる",
+    "failedToLoadWeather": "天気のロードが出来ませんでした: {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -23,8 +23,8 @@
         }
     },
     "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
+    "night": "夜",
+    "useCurrentLocation": "現在地を使用する",
     "adviceRain": "Grab a light shell and keep moving.",
     "nextDays": "Next {count} days",
     "@nextDays": {
@@ -37,11 +37,11 @@
     "visibility": "Visibility",
     "dataFromOpenMeteo": "Data from Open-Meteo",
     "adviceClear": "Great light outside. Sunglasses recommended.",
-    "clear": "Clear",
+    "clear": "クリア",
     "precipChance": "Precip chance",
     "updatingWeather": "天気アップデート中…",
-    "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
-    "loadingLocation": "Loading location…",
+    "unableToFetchLocation": "場所の天気を取得できません。もう一度お試しください。",
+    "loadingLocation": "場所を読み込み中…",
     "precipPercent": "{percent}% precip",
     "@precipPercent": {
         "placeholders": {
@@ -59,8 +59,8 @@
         }
     },
     "futureAdviceSnow": "Snow later today—plan travel with extra time.",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
+    "searchLocation": "場所を検索",
+    "dummyTime": "月曜日, Jan 1 • 12:00 PM",
     "adviceCloud": "Soft clouds today—perfect walking weather.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
@@ -70,10 +70,10 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
+    "cityRegionOrCoordinates": "都市、地域、または座標",
     "adviceSnow": "Layer up and mind slick paths.",
     "adviceStorm": "Stay indoors; lightning risk.",
-    "feelsLike": "Feels like",
+    "feelsLike": "感じ",
     "weather": "Weather",
     "insights": "洞察",
     "regionalOutlook": "Regional Outlook",
@@ -91,15 +91,15 @@
     },
     "adviceDefault": "Stay comfortable and check again in a few hours.",
     "home": "ホーム",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
+    "searchPlace": "場所を検索",
+    "locationPermissionDenied": "位置情報の許可が拒否されました。自動的に位置を特定するように設定してください。",
     "hourlyForecast": "Hourly Forecast",
     "todaysSuggestion": "Today’s suggestion",
     "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
+    "locationServicesDisabled": "位置情報サービスは無効です。設定で有効にしてください。",
     "settings": "セッティング",
     "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
+    "daytime": "昼間",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
     "today": "Today",
     "wind": "Wind",
