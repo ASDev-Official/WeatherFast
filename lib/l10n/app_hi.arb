@@ -1,7 +1,7 @@
 {
     "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "close": "बंद",
+    "failedToLoadWeather": "मौसम लोड करने में विफल: {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -23,8 +23,8 @@
         }
     },
     "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
+    "night": "रात",
+    "useCurrentLocation": "वर्तमान स्थान का उपयोग करें",
     "adviceRain": "Grab a light shell and keep moving।",
     "nextDays": "Next {count} days",
     "@nextDays": {
@@ -37,11 +37,11 @@
     "visibility": "Visibility",
     "dataFromOpenMeteo": "Data from Open-Meteo",
     "adviceClear": "Great light outside. Sunglasses recommended।",
-    "clear": "Clear",
+    "clear": "स्पष्ट",
     "precipChance": "Precip chance",
-    "updatingWeather": "Updating weather…",
-    "unableToFetchLocation": "Unable to fetch location weather. Please try again।",
-    "loadingLocation": "Loading location…",
+    "updatingWeather": "मौसम लोड हो रहा है…",
+    "unableToFetchLocation": "लोकेशन का मौसम नहीं मिल रहा है। कृपया फिर से कोशिश करें।",
+    "loadingLocation": "लोकेशन लोड हो रहा है…",
     "precipPercent": "{percent}% precip",
     "@precipPercent": {
         "placeholders": {
@@ -59,8 +59,8 @@
         }
     },
     "futureAdviceSnow": "Snow later today—plan travel with extra time।",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
+    "searchLocation": "स्थान खोजें",
+    "dummyTime": "सोमवार, 1 जनवरी • दोपहर 12:00 बजे",
     "adviceCloud": "Soft clouds today—perfect walking weather।",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
@@ -70,12 +70,12 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
+    "cityRegionOrCoordinates": "शहर, क्षेत्र, या निर्देशांक",
     "adviceSnow": "Layer up and mind slick paths।",
     "adviceStorm": "Stay indoors; lightning risk।",
     "feelsLike": "Feels like",
     "weather": "Weather",
-    "insights": "Insights",
+    "insights": "अंतर्दृष्टि",
     "regionalOutlook": "Regional Outlook",
     "tomorrow": "Tomorrow",
     "windSpeed": "{speed} km/h {dir}",
@@ -90,16 +90,16 @@
         }
     },
     "adviceDefault": "Stay comfortable and check again in a few hours।",
-    "home": "Home",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you।",
+    "home": "होम",
+    "searchPlace": "कोई स्थान खोजें",
+    "locationPermissionDenied": "लोकेशन परमिशन नहीं मिली। इसे आपको ऑटो-लोकेट करने के लिए इनेबल करें।",
     "hourlyForecast": "Hourly Forecast",
     "todaysSuggestion": "Today’s suggestion",
     "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings।",
-    "settings": "Settings",
+    "locationServicesDisabled": "लोकेशन सर्विस बंद हैं. सेटिंग्स में जाकर उन्हें चालू करें।",
+    "settings": "सेटिंग्स",
     "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
+    "daytime": "दिन",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside।",
     "today": "Today",
     "wind": "Wind",
