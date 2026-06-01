@@ -253,6 +253,6 @@
     "floodAlert": "बाढ़ की चेतावनी",
     "flashFloodWarning": "ध्यान दे: बाढ़ की चेतावनी!",
     "multipleFloodAlerts": "बाढ़ की कई चेतावनियाँ",
-    "dewPoint": "Dew Point",
-    "uvIndex": "UV Index"
+    "dewPoint": "ओसांक",
+    "uvIndex": "यूवी सूचकांक"
 }
