@@ -254,5 +254,15 @@
     "flashFloodWarning": "ध्यान दे: बाढ़ की चेतावनी!",
     "multipleFloodAlerts": "बाढ़ की कई चेतावनियाँ",
     "dewPoint": "ओसांक",
-    "uvIndex": "यूवी सूचकांक"
+    "uvIndex": "यूवी सूचकांक",
+    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed।",
+    "@incompleteLocalisationMessage": {
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "ok": "OK"
 }
