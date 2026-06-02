@@ -128,7 +128,6 @@ abstract class AppLocalizations {
     Locale('ko'),
     Locale('ms'),
     Locale('nb'),
-    Locale('nb', 'NO'),
     Locale('nl'),
     Locale('pt'),
     Locale('ru'),
@@ -137,7 +136,6 @@ abstract class AppLocalizations {
     Locale('tl'),
     Locale('vi'),
     Locale('zh'),
-    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
   ];
 
   /// No description provided for @home.
@@ -1033,30 +1031,6 @@ class _AppLocalizationsDelegate
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-  // Lookup logic when language+script codes are specified.
-  switch (locale.languageCode) {
-    case 'zh':
-      {
-        switch (locale.scriptCode) {
-          case 'Hans':
-            return AppLocalizationsZhHans();
-        }
-        break;
-      }
-  }
-
-  // Lookup logic when language+country codes are specified.
-  switch (locale.languageCode) {
-    case 'nb':
-      {
-        switch (locale.countryCode) {
-          case 'NO':
-            return AppLocalizationsNbNo();
-        }
-        break;
-      }
-  }
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'ar':
