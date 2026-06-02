@@ -487,12 +487,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String incompleteLocalisationMessage(String language) {
-    return 'The localization for the language $language has not been completed.';
+    return '$language भाषा का लोकलाइज़ेशन पूरा नहीं हुआ है।';
   }
 
   @override
-  String get helpLocalizeWeatherFast => 'Help localize WeatherFast';
+  String get helpLocalizeWeatherFast =>
+      'WeatherFast का अनुवाद करने में मदद करें';
 
   @override
-  String get ok => 'OK';
+  String get ok => 'ठीक है';
 }
