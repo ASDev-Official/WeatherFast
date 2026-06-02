@@ -222,5 +222,15 @@
   "severity": "Severity",
   "response": "Response",
   "flashFloodWarning": "Flash Flood Warning!",
-  "floodAlert": "Flood Alert"
+  "floodAlert": "Flood Alert",
+  "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+  "@incompleteLocalisationMessage": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "helpLocalizeWeatherFast": "Help localize WeatherFast",
+  "ok": "OK"
 }

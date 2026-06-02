@@ -478,4 +478,15 @@ class AppLocalizationsNb extends AppLocalizations {
 
   @override
   String get floodAlert => 'Flood Alert';
+
+  @override
+  String incompleteLocalisationMessage(String language) {
+    return 'The localization for the language $language has not been completed.';
+  }
+
+  @override
+  String get helpLocalizeWeatherFast => 'Help localize WeatherFast';
+
+  @override
+  String get ok => 'OK';
 }

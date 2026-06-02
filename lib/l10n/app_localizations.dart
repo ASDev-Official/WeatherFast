@@ -989,6 +989,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flood Alert'**
   String get floodAlert;
+
+  /// No description provided for @incompleteLocalisationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The localization for the language {language} has not been completed.'**
+  String incompleteLocalisationMessage(String language);
+
+  /// No description provided for @helpLocalizeWeatherFast.
+  ///
+  /// In en, this message translates to:
+  /// **'Help localize WeatherFast'**
+  String get helpLocalizeWeatherFast;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:weatherfast/help_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
@@ -103,8 +106,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return _languageNames[code] ?? code;
   }
 
+  Future<Map<String, double>> _fetchWeblateStats() async {
+    try {
+      final response = await http.get(Uri.parse('https://hosted.weblate.org/api/components/asdev-weatherfast/app/statistics/'));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final results = data['results'] as List;
+        final map = <String, double>{};
+        for (final r in results) {
+          final code = r['code'] as String;
+          final langCode = code.split('_')[0];
+          map[langCode] = (r['translated_percent'] as num).toDouble();
+        }
+        return map;
+      }
+    } catch (e) {
+      // ignore errors
+    }
+    return {};
+  }
+
   Future<void> _selectLanguage() async {
     final currentLang = GlobalData.languageCodeNotifier.value ?? 'system';
+    final statsFuture = _fetchWeblateStats();
     
     final selected = await showDialog<String>(
       context: context,
@@ -112,27 +136,118 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return AlertDialog(
           title: Text(AppLocalizations.of(context)!.language),
           contentPadding: const EdgeInsets.only(top: 16),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.systemDefault),
-                  trailing: currentLang == 'system' ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
-                  onTap: () => Navigator.pop(context, 'system'),
-                ),
-                ...AppLocalizations.supportedLocales.map((locale) {
-                  final code = locale.languageCode;
-                  final name = _languageNames[code] ?? code;
-                  return ListTile(
-                    title: Text(name),
-                    trailing: currentLang == code ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
-                    onTap: () => Navigator.pop(context, code),
+          content: FutureBuilder<Map<String, double>>(
+            future: statsFuture,
+            builder: (context, snapshot) {
+              final stats = snapshot.data ?? {};
+              
+              Widget buildSubtitle(double? percent) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(2),
+                            child: const LinearProgressIndicator(
+                              minHeight: 4,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '--%',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
-                }),
-              ],
-            ),
+                } else if (percent != null) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(2),
+                            child: LinearProgressIndicator(
+                              value: percent / 100,
+                              minHeight: 4,
+                              color: percent == 100 ? Colors.green : Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${percent.toInt()}%',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(2),
+                            child: LinearProgressIndicator(
+                              value: 0,
+                              minHeight: 4,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '0%',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              }
+
+              final systemLangCode = WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+              final systemPercent = stats[systemLangCode];
+
+              return SizedBox(
+                width: double.maxFinite,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      title: Text(AppLocalizations.of(context)!.systemDefault),
+                      subtitle: buildSubtitle(systemPercent),
+                      trailing: currentLang == 'system' ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
+                      onTap: () => Navigator.pop(context, 'system'),
+                    ),
+                    ...AppLocalizations.supportedLocales.map((locale) {
+                      final code = locale.languageCode;
+                      final name = _languageNames[code] ?? code;
+                      final percent = stats[code];
+
+                      return ListTile(
+                        title: Text(name),
+                        subtitle: buildSubtitle(percent),
+                        trailing: currentLang == code ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary) : null,
+                        onTap: () => Navigator.pop(context, code),
+                      );
+                    }),
+                  ],
+                ),
+              );
+            },
           ),
         );
       },
@@ -143,6 +258,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await PreferencesService.saveLanguageCode(codeToSave);
       GlobalData.languageCodeNotifier.value = codeToSave;
       if (mounted) setState(() {});
+
+      final stats = await statsFuture;
+      final percent = stats[selected];
+      
+      if (percent != null && percent < 75 && mounted) {
+        final languageName = _languageNames[selected] ?? selected;
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(AppLocalizations.of(context)!.language),
+              content: Text(AppLocalizations.of(context)!.incompleteLocalisationMessage(languageName)),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    launchUrl(
+                      Uri.parse('https://hosted.weblate.org/engage/asdev-shopsync/'),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  child: Text(AppLocalizations.of(context)!.helpLocalizeWeatherFast),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(AppLocalizations.of(context)!.ok),
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
