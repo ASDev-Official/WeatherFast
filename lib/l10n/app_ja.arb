@@ -254,5 +254,15 @@
     "flashFloodWarning": "Flash Flood Warning!",
     "multipleFloodAlerts": "Multiple Flood Alerts",
     "dewPoint": "Dew Point",
-    "uvIndex": "UV Index"
+    "uvIndex": "UV Index",
+    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+    "@incompleteLocalisationMessage": {
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "ok": "OK"
 }
