@@ -9,63 +9,61 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get home => 'Home';
+  String get home => 'ホーム';
 
   @override
-  String get insights => 'Insights';
+  String get insights => '洞察';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'セッティング';
 
   @override
-  String get updatingWeather => 'Updating weather…';
+  String get updatingWeather => '天気アップデート中…';
 
   @override
-  String get locationServicesDisabled =>
-      'Location services are disabled. Enable them in Settings.';
+  String get locationServicesDisabled => '位置情報サービスは無効です。設定で有効にしてください。';
 
   @override
   String get locationPermissionDenied =>
-      'Location permission denied. Enable it to auto-locate you.';
+      '位置情報の許可が拒否されました。自動的に位置を特定するように設定してください。';
 
   @override
-  String get unableToFetchLocation =>
-      'Unable to fetch location weather. Please try again.';
+  String get unableToFetchLocation => '場所の天気を取得できません。もう一度お試しください。';
 
   @override
   String failedToLoadWeather(String error) {
-    return 'Failed to load weather: $error';
+    return '天気のロードが出来ませんでした: $error';
   }
 
   @override
-  String get searchPlace => 'Search a place';
+  String get searchPlace => '場所を検索';
 
   @override
-  String get close => 'Close';
+  String get close => '閉じる';
 
   @override
-  String get cityRegionOrCoordinates => 'City, region, or coordinates';
+  String get cityRegionOrCoordinates => '都市、地域、または座標';
 
   @override
-  String get loadingLocation => 'Loading location…';
+  String get loadingLocation => '場所を読み込み中…';
 
   @override
-  String get searchLocation => 'Search location';
+  String get searchLocation => '場所を検索';
 
   @override
-  String get useCurrentLocation => 'Use current location';
+  String get useCurrentLocation => '現在地を使用する';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'クリア';
 
   @override
-  String get dummyTime => 'Mon, Jan 1 • 12:00 PM';
+  String get dummyTime => '月曜日, Jan 1 • 12:00 PM';
 
   @override
-  String get daytime => 'Daytime';
+  String get daytime => '昼間';
 
   @override
-  String get night => 'Night';
+  String get night => '夜';
 
   @override
   String get dummyHighLow => 'H 80° · L 60°';
@@ -76,7 +74,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get feelsLike => 'Feels like';
+  String get feelsLike => '感じ';
 
   @override
   String get humidity => 'Humidity';
