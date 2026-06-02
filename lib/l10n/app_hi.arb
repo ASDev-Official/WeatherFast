@@ -255,7 +255,7 @@
     "multipleFloodAlerts": "बाढ़ की कई चेतावनियाँ",
     "dewPoint": "ओसांक",
     "uvIndex": "यूवी सूचकांक",
-    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed।",
+    "incompleteLocalisationMessage": "{language} भाषा का लोकलाइज़ेशन पूरा नहीं हुआ है।",
     "@incompleteLocalisationMessage": {
         "placeholders": {
             "language": {
@@ -263,6 +263,6 @@
             }
         }
     },
-    "helpLocalizeWeatherFast": "Help localize WeatherFast",
-    "ok": "OK"
+    "helpLocalizeWeatherFast": "WeatherFast का अनुवाद करने में मदद करें",
+    "ok": "ठीक है"
 }
