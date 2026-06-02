@@ -27,8 +27,8 @@ android {
         applicationId = "com.aadishsamir.weatherfast"
         minSdk = 24
         targetSdk = 37
-        versionCode = 32
-        versionName = "3.7.1"
+        versionCode = 33
+        versionName = "3.7.2"
     }
 
     signingConfigs {
