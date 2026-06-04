@@ -35,6 +35,7 @@ Future<void> main() async {
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
   GlobalData.languageCodeNotifier.value = await PreferencesService.loadLanguageCode();
+  GlobalData.performanceModeNotifier.value = await PreferencesService.loadPerformanceMode();
   runApp(const WeatherFastApp());
 }
 
@@ -238,11 +239,13 @@ class _WeatherShellState extends State<WeatherShell> {
     return Scaffold(
       extendBody: true,
       body: IndexedStack(index: _index, children: pages),
-      bottomNavigationBar: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: NavigationBar(
-            backgroundColor: _navigationBarColor,
+      bottomNavigationBar: ValueListenableBuilder<bool>(
+        valueListenable: GlobalData.performanceModeNotifier,
+        builder: (context, performanceMode, child) {
+          final navBar = NavigationBar(
+            backgroundColor: performanceMode
+                ? Theme.of(context).colorScheme.surface
+                : _navigationBarColor,
             elevation: 1,
             shadowColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
@@ -262,8 +265,19 @@ class _WeatherShellState extends State<WeatherShell> {
                 label: 'Settings',
               ),
             ],
-          ),
-        ),
+          );
+
+          if (performanceMode) {
+            return navBar;
+          }
+
+          return ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: navBar,
+            ),
+          );
+        },
       ),
     );
   }

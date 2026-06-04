@@ -22,12 +22,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool _useFahrenheit;
+  late bool _performanceMode;
   bool _isRefreshingWidgets = false;
 
   @override
   void initState() {
     super.initState();
     _useFahrenheit = GlobalData.useFahrenheit;
+    _performanceMode = GlobalData.performanceModeNotifier.value;
   }
 
   Future<void> _toggleUnit(bool value) async {
@@ -36,6 +38,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _useFahrenheit = value;
       GlobalData.useFahrenheit = value;
+    });
+  }
+
+  Future<void> _togglePerformanceMode(bool value) async {
+    await PreferencesService.savePerformanceMode(value);
+    setState(() {
+      _performanceMode = value;
+      GlobalData.performanceModeNotifier.value = value;
     });
   }
 
@@ -337,6 +347,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           value: _useFahrenheit,
                           onChanged: _toggleUnit,
+                        ),
+                        const Divider(height: 1),
+                        SwitchListTile(
+                          secondary: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.speed_rounded,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                          title: const Text('Performance Mode'),
+                          subtitle: const Text('Disable extra visual effects'),
+                          value: _performanceMode,
+                          onChanged: _togglePerformanceMode,
                         ),
                         const Divider(height: 1),
                         ListTile(

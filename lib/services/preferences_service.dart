@@ -7,6 +7,17 @@ class PreferencesService {
   static const String _kMapRadarOpacity = 'map_radar_opacity';
   static const String _kIsSingapore = 'is_singapore';
   static const String _kLanguageCode = 'language_code';
+  static const String _kPerformanceMode = 'performance_mode';
+
+  static Future<bool> loadPerformanceMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_kPerformanceMode) ?? false;
+  }
+
+  static Future<void> savePerformanceMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kPerformanceMode, value);
+  }
 
   static Future<bool> loadIsSingapore() async {
     final prefs = await SharedPreferences.getInstance();

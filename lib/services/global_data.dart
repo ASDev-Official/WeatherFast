@@ -7,4 +7,5 @@ class GlobalData {
   static bool useFahrenheit = false;
   static double widgetFontScale = 1.0;
   static ValueNotifier<String?> languageCodeNotifier = ValueNotifier<String?>(null);
+  static ValueNotifier<bool> performanceModeNotifier = ValueNotifier<bool>(false);
 }

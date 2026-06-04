@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import '../services/global_data.dart';
 
 class AnimatedWeatherBackdrop extends StatefulWidget {
   const AnimatedWeatherBackdrop({
@@ -100,9 +101,43 @@ class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
     return SizedBox(
       height: widget.height,
       child: RepaintBoundary(
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, _) {
+        child: ValueListenableBuilder<bool>(
+          valueListenable: GlobalData.performanceModeNotifier,
+          builder: (context, performanceMode, child) {
+            if (performanceMode) {
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          _palette.start,
+                          Color.lerp(_palette.start, _palette.end, 0.35)!,
+                          _palette.end,
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: _GlowPainter(
+                        palette: _palette,
+                        isDay: widget.isDaytime,
+                        phase: 0.3,
+                        wave: 0.0,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            return AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) {
             final t = disableAnimations ? 0.3 : _controller.value;
             final wave = sin(2 * pi * t) * 0.08 * widget.intensity;
 
@@ -166,6 +201,8 @@ class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
                   ),
                 ),
               ],
+            );
+          },
             );
           },
         ),
