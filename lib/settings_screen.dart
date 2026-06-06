@@ -13,6 +13,8 @@ import 'services/rating_service.dart';
 import 'l10n/app_localizations.dart';
 import 'webview_screen.dart';
 import 'units_screen.dart';
+import 'package:m3e_core/m3e_core.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -270,17 +272,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: Text(AppLocalizations.of(context)!.language),
               content: Text(AppLocalizations.of(context)!.incompleteLocalisationMessage(languageName)),
               actions: [
-                TextButton(
+                M3EFilledButton.tonal(
                   onPressed: () {
                     Navigator.pop(context);
                     launchUrl(
-                      Uri.parse('https://hosted.weblate.org/engage/asdev-shopsync/'),
+                      Uri.parse('https://hosted.weblate.org/engage/asdev-weatherfast/'),
                       mode: LaunchMode.externalApplication,
                     );
                   },
                   child: Text(AppLocalizations.of(context)!.helpLocalizeWeatherFast),
                 ),
-                TextButton(
+                M3EFilledButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(AppLocalizations.of(context)!.ok),
                 ),
@@ -295,6 +297,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final cardTheme = Theme.of(context).cardTheme;
+    final cardColor = ElevationOverlay.applySurfaceTint(
+      cardTheme.color ?? Theme.of(context).colorScheme.surface,
+      cardTheme.surfaceTintColor,
+      cardTheme.elevation ?? 2.0,
+    );
 
     return Scaffold(
       body: CustomScrollView(
@@ -315,9 +323,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Card(
-                    child: Column(
-                      children: [
+                  M3ECardColumn(
+                    innerRadius: 12.0,
+                    color: cardColor,
+                    children: [
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -342,7 +351,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             );
                           },
                         ),
-                        const Divider(height: 1),
+
                         SwitchListTile(
                           secondary: Container(
                             padding: const EdgeInsets.all(8),
@@ -360,7 +369,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           value: _performanceMode,
                           onChanged: _togglePerformanceMode,
                         ),
-                        const Divider(height: 1),
+
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -378,8 +387,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: _selectLanguage,
                         ),
-                      ],
-                    ),
+                    ],
                   ),
                   const SizedBox(height: 24),
 
@@ -392,9 +400,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Card(
-                    child: Column(
-                      children: [
+                  M3ECardColumn(
+                    innerRadius: 12.0,
+                    color: cardColor,
+                    children: [
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -424,16 +433,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               MaterialPageRoute(
                                 builder: (_) => Theme(
                                   data: Theme.of(context),
-                                  child: const LicensePage(
+                                  child: LicensePage(
                                     applicationName: 'WeatherFast',
+                                    applicationLegalese: 'Copyright © Aadish Samir',
+                                    applicationIcon: Icon(Icons.cloud_outlined, size: 64, color: colorScheme.primary),
                                   ),
                                 ),
                               ),
                             );
                           },
                         ),
-                      ],
-                    ),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   const SizedBox(height: 24),
@@ -447,8 +457,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Card(
-                      child: ListTile(
+                    M3ECardColumn(
+                      innerRadius: 12.0,
+                      color: cardColor,
+                      children: [
+                        ListTile(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -476,11 +489,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         onTap: _isRefreshingWidgets
                             ? null
                             : _forceRefreshWidgets,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Card(
-                      child: ListTile(
+                        ),
+                        ListTile(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -501,11 +511,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             RatingService.checkAndShowRating(context);
                           }
                         },
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Card(
-                      child: ListTile(
+                        ),
+                        ListTile(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -529,7 +536,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           }
                         },
                       ),
-                    ),
+                    ],
+                  ),
                     const SizedBox(height: 24),
                   ],
 
@@ -542,9 +550,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Card(
-                    child: Column(
-                      children: [
+                  M3ECardColumn(
+                    innerRadius: 12.0,
+                    color: cardColor,
+                    children: [
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -569,7 +578,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             );
                           },
                         ),
-                        const Divider(height: 1),
+
                         ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -594,8 +603,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             );
                           },
                         ),
-                      ],
-                    ),
+                    ],
                   ),
                   const SizedBox(height: 40),
 

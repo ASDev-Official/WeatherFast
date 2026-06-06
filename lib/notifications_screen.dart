@@ -5,6 +5,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 import 'l10n/app_localizations.dart';
+import 'package:m3e_core/m3e_core.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -17,6 +18,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   List<dynamic> _notifications = [];
   bool _isLoading = true;
   String? _error;
+  String _filter = 'all';
 
   @override
   void initState() {
@@ -64,14 +66,27 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   Widget _buildBody() {
+    final cardTheme = Theme.of(context).cardTheme;
+    final cardColor = ElevationOverlay.applySurfaceTint(
+      cardTheme.color ?? Theme.of(context).colorScheme.surface,
+      cardTheme.surfaceTintColor,
+      cardTheme.elevation ?? 2.0,
+    );
+
     if (_isLoading) {
       return Skeletonizer(
         enabled: true,
         child: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {
-            return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            return M3ECard(
+              index: index,
+              position: calculateCardPosition(index, 5),
+              outerRadius: 16,
+              innerRadius: 4,
+              gap: 8,
+              color: cardColor,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ListTile(
                 title: Text(AppLocalizations.of(context)!.loadingNotificationTitle),
                 subtitle: Text(AppLocalizations.of(context)!.loadingNotificationDesc),
@@ -97,7 +112,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              FilledButton(
+              M3EFilledButton(
                 onPressed: _fetchNotifications,
                 child: Text(AppLocalizations.of(context)!.retry),
               ),
@@ -107,105 +122,126 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       );
     }
 
-    if (_notifications.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.notifications_off_outlined, size: 48, color: Colors.grey),
-            const SizedBox(height: 16),
-            Text(AppLocalizations.of(context)!.noNewNotifications, style: const TextStyle(fontSize: 18)),
-          ],
-        ),
-      );
-    }
+    final displayNotifications = _notifications.where((n) {
+      if (_filter == 'all') return true;
+      if (_filter == 'info') return n['type'] == 'info';
+      if (_filter == 'alerts') return n['type'] != 'info';
+      return true;
+    }).toList();
 
-    return ListView.builder(
-      itemCount: _notifications.length,
-      itemBuilder: (context, index) {
-        final notification = _notifications[index];
-        final title = notification['title']?.toString() ?? AppLocalizations.of(context)!.notificationTitle;
-        final body = notification['message']?.toString() ?? notification['body']?.toString() ?? '';
-        final dateRaw = notification['createdAt']?.toString() ?? notification['date']?.toString() ?? '';
-        final actionUrl = notification['actionUrl']?.toString() ?? '';
-
-        String formattedDate = '';
-        if (dateRaw.isNotEmpty) {
-          try {
-            final parsedDate = DateTime.parse(dateRaw).toLocal();
-            formattedDate = DateFormat('MMM d, yyyy • h:mm a').format(parsedDate);
-          } catch (e) {
-            formattedDate = dateRaw;
-          }
-        }
-
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (displayNotifications.isEmpty)
+            M3ECard(
+              index: 0,
+              position: M3ECardPosition.single,
+              outerRadius: 16,
+              innerRadius: 16,
+              gap: 0,
+              color: cardColor,
+              padding: const EdgeInsets.all(32.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      notification['type'] == 'info' ? Icons.info_outline : Icons.notifications_active_outlined,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                          const SizedBox(height: 4),
-                          Text(body),
-                          if (formattedDate.isNotEmpty) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              formattedDate,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
+                    const Icon(Icons.notifications_off_outlined, size: 48, color: Colors.grey),
+                    const SizedBox(height: 16),
+                    Text(AppLocalizations.of(context)!.noNewNotifications, style: const TextStyle(fontSize: 18)),
                   ],
                 ),
-                if (actionUrl.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: FilledButton.tonal(
-                      onPressed: () async {
-                        var url = actionUrl;
-                        if (url.startsWith('/')) {
-                          url = 'https://weatherfast.aadish.dev$url';
-                        }
-                        final uri = Uri.parse(url);
-                        if (await canLaunchUrl(uri)) {
-                          await launchUrl(uri, mode: LaunchMode.externalApplication);
-                        } else {
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
-                            );
-                          }
-                        }
-                      },
-                      child: Text(AppLocalizations.of(context)!.openLink),
-                    ),
+              ),
+            )
+          else
+            M3ECardColumn(
+              padding: EdgeInsets.zero,
+              innerRadius: 12.0,
+              color: cardColor,
+              children: displayNotifications.map((notification) {
+                final title = notification['title']?.toString() ?? AppLocalizations.of(context)!.notificationTitle;
+                final body = notification['message']?.toString() ?? notification['body']?.toString() ?? '';
+                final dateRaw = notification['createdAt']?.toString() ?? notification['date']?.toString() ?? '';
+                final actionUrl = notification['actionUrl']?.toString() ?? '';
+
+                String formattedDate = '';
+                if (dateRaw.isNotEmpty) {
+                  try {
+                    final parsedDate = DateTime.parse(dateRaw).toLocal();
+                    formattedDate = DateFormat('MMM d, yyyy • h:mm a').format(parsedDate);
+                  } catch (e) {
+                    formattedDate = dateRaw;
+                  }
+                }
+
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            notification['type'] == 'info' ? Icons.info_outline : Icons.notifications_active_outlined,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                const SizedBox(height: 4),
+                                Text(body),
+                                if (formattedDate.isNotEmpty) ...[
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    formattedDate,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (actionUrl.isNotEmpty) ...[
+                        const SizedBox(height: 16),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: M3EFilledButton.tonal(
+                            onPressed: () async {
+                              var url = actionUrl;
+                              if (url.startsWith('/')) {
+                                url = 'https://weatherfast.aadish.dev$url';
+                              }
+                              final uri = Uri.parse(url);
+                              if (await canLaunchUrl(uri)) {
+                                await launchUrl(uri, mode: LaunchMode.externalApplication);
+                              } else {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
+                                  );
+                                }
+                              }
+                            },
+                            child: Text(AppLocalizations.of(context)!.openLink),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
-                ],
-              ],
+                );
+              }).toList(),
             ),
-          ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

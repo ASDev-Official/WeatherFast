@@ -138,8 +138,6 @@ class WeatherFastApp extends StatelessWidget {
         ),
       ),
       listTileTheme: ListTileThemeData(
-        tileColor: colorScheme.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         iconColor: colorScheme.onSurfaceVariant,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),

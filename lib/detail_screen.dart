@@ -4,6 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'services/global_data.dart';
 import 'services/weather_insights_service.dart';
 import 'time_service.dart';
+import 'package:m3e_core/m3e_core.dart';
 import 'ui/animated_weather_backdrop.dart';
 import 'weather_service.dart';
 import 'l10n/app_localizations.dart';
@@ -180,25 +181,6 @@ class _DetailScreenState extends State<DetailScreen>
 
   Widget _buildAIInsightsCard() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Theme.of(
-                    context,
-                  ).colorScheme.tertiaryContainer.withValues(alpha: 0.6),
-                  Theme.of(
-                    context,
-                  ).colorScheme.primaryContainer.withValues(alpha: 0.4),
-                ],
-              ),
-            ),
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,20 +283,14 @@ class _DetailScreenState extends State<DetailScreen>
                 ],
               ],
             ),
-          ),
-        ),
-      ),
     );
   }
 
-  Widget _buildActivityCards() {
-    if (_activities.isEmpty) return const SizedBox.shrink();
+  Widget? _buildActivityCards() {
+    if (_activities.isEmpty) return null;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -388,19 +364,14 @@ class _DetailScreenState extends State<DetailScreen>
               }),
             ],
           ),
-        ),
-      ),
     );
   }
 
-  Widget _buildHealthTipsCard() {
-    if (_healthTips.isEmpty) return const SizedBox.shrink();
+  Widget? _buildHealthTipsCard() {
+    if (_healthTips.isEmpty) return null;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -420,7 +391,10 @@ class _DetailScreenState extends State<DetailScreen>
                 ],
               ),
               const SizedBox(height: 12),
-              ..._healthTips.map((tip) {
+              ..._healthTips.asMap().entries.map((entry) {
+                final index = entry.key;
+                final tip = entry.value;
+                final total = _healthTips.length;
                 final severity = tip['severity'] ?? 'low';
                 Color indicatorColor;
                 if (severity == 'high') {
@@ -431,126 +405,136 @@ class _DetailScreenState extends State<DetailScreen>
                   indicatorColor = Colors.green;
                 }
 
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: indicatorColor.withValues(alpha: 0.3),
-                      width: 2,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tip['icon'] ?? '',
-                          style: const TextStyle(fontSize: 24),
+                M3ECardPosition position;
+                if (total == 1) {
+                  position = M3ECardPosition.single;
+                } else if (index == 0) {
+                  position = M3ECardPosition.first;
+                } else if (index == total - 1) {
+                  position = M3ECardPosition.last;
+                } else {
+                  position = M3ECardPosition.middle;
+                }
+
+                return M3ECard(
+                  index: index,
+                  position: position,
+                  outerRadius: 12.0,
+                  innerRadius: 4.0,
+                  gap: 3.0,
+                  color: indicatorColor.withValues(alpha: 0.15),
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tip['icon'] ?? '',
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              tip['title'] ?? '',
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: indicatorColor,
+                                  ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              tip['description'] ?? '',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
+                                  ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                tip['title'] ?? '',
-                                style: Theme.of(context).textTheme.titleSmall
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: indicatorColor,
-                                    ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                tip['description'] ?? '',
-                                style: Theme.of(context).textTheme.bodySmall
-                                    ?.copyWith(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onSurfaceVariant,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               }),
             ],
           ),
-        ),
-      ),
     );
   }
 
-  Widget _buildClothingCard() {
-    if (_clothingAdvice.isEmpty) return const SizedBox.shrink();
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Text(
-                _clothingAdvice['icon'] ?? '👕',
-                style: const TextStyle(fontSize: 40),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.whatToWear,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSecondaryContainer,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _clothingAdvice['advice'] ?? '',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSecondaryContainer,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHourlyInsightsCard() {
-    if (_hourlyInsights.isEmpty) return const SizedBox.shrink();
+  Widget? _buildClothingCard() {
+    if (_clothingAdvice.isEmpty) return null;
 
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                AppLocalizations.of(context)!.todaysTimeline,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Icon(
+                    Icons.checkroom,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    AppLocalizations.of(context)!.whatToWear,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    _clothingAdvice['icon'] ?? '👕',
+                    style: const TextStyle(fontSize: 40),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      _clothingAdvice['advice'] ?? '',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+    );
+  }
+
+  Widget? _buildHourlyInsightsCard() {
+    if (_hourlyInsights.isEmpty) return null;
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.access_time,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    AppLocalizations.of(context)!.todaysTimeline,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               ..._hourlyInsights.map((insight) {
@@ -614,20 +598,14 @@ class _DetailScreenState extends State<DetailScreen>
               }),
             ],
           ),
-        ),
-      ),
     );
   }
 
-  Widget _buildWeekAheadCard() {
-    if (_weekAhead.isEmpty) return const SizedBox.shrink();
+  Widget? _buildWeekAheadCard() {
+    if (_weekAhead.isEmpty) return null;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        color: Theme.of(context).colorScheme.tertiaryContainer,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -657,63 +635,71 @@ class _DetailScreenState extends State<DetailScreen>
               ),
             ],
           ),
-        ),
-      ),
     );
   }
 
-  Widget _buildBestTimesCard() {
-    if (_bestTimes.isEmpty) return const SizedBox.shrink();
+  Widget? _buildBestTimesCard() {
+    if (_bestTimes.isEmpty) return null;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
+      padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.wb_sunny,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _bestTimes['title'] ?? '',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.timer,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    _bestTimes['title'] ?? 'Best Times',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.wb_sunny,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
                       _bestTimes['description'] ?? '',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-        ),
-      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
+    final cardTheme = Theme.of(context).cardTheme;
+    final cardColor = ElevationOverlay.applySurfaceTint(
+      cardTheme.color ?? Theme.of(context).colorScheme.surface,
+      cardTheme.surfaceTintColor,
+      cardTheme.elevation ?? 2.0,
+    );
 
     PreferredSizeWidget animatedAppBar({required Widget child}) {
       return PreferredSize(
@@ -822,13 +808,24 @@ class _DetailScreenState extends State<DetailScreen>
                           parent: BouncingScrollPhysics(),
                         ),
                         slivers: [
-                          SliverToBoxAdapter(child: _buildAIInsightsCard()),
-                          SliverToBoxAdapter(child: _buildActivityCards()),
-                          SliverToBoxAdapter(child: _buildClothingCard()),
-                          SliverToBoxAdapter(child: _buildBestTimesCard()),
-                          SliverToBoxAdapter(child: _buildHourlyInsightsCard()),
-                          SliverToBoxAdapter(child: _buildHealthTipsCard()),
-                          SliverToBoxAdapter(child: _buildWeekAheadCard()),
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                              child: M3ECardColumn(
+                                innerRadius: 12.0,
+                                color: cardColor,
+                                children: [
+                                  _buildAIInsightsCard(),
+                                  _buildActivityCards(),
+                                  _buildClothingCard(),
+                                  _buildBestTimesCard(),
+                                  _buildHourlyInsightsCard(),
+                                  _buildHealthTipsCard(),
+                                  _buildWeekAheadCard(),
+                                ].whereType<Widget>().toList(),
+                              ),
+                            ),
+                          ),
                           const SliverToBoxAdapter(child: SizedBox(height: 24)),
                         ],
                       ),
@@ -841,13 +838,24 @@ class _DetailScreenState extends State<DetailScreen>
                         ),
                         slivers: [
                           // AI Insights only - no duplicate home page content
-                          SliverToBoxAdapter(child: _buildAIInsightsCard()),
-                          SliverToBoxAdapter(child: _buildActivityCards()),
-                          SliverToBoxAdapter(child: _buildClothingCard()),
-                          SliverToBoxAdapter(child: _buildBestTimesCard()),
-                          SliverToBoxAdapter(child: _buildHourlyInsightsCard()),
-                          SliverToBoxAdapter(child: _buildHealthTipsCard()),
-                          SliverToBoxAdapter(child: _buildWeekAheadCard()),
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                              child: M3ECardColumn(
+                                innerRadius: 12.0,
+                                color: cardColor,
+                                children: [
+                                  _buildAIInsightsCard(),
+                                  _buildActivityCards(),
+                                  _buildClothingCard(),
+                                  _buildBestTimesCard(),
+                                  _buildHourlyInsightsCard(),
+                                  _buildHealthTipsCard(),
+                                  _buildWeekAheadCard(),
+                                ].whereType<Widget>().toList(),
+                              ),
+                            ),
+                          ),
 
                           const SliverToBoxAdapter(child: SizedBox(height: 24)),
                         ],

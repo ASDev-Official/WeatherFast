@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'webview_screen.dart'; // Import your WebViewScreen here
 import 'l10n/app_localizations.dart';
+import 'package:m3e_core/m3e_core.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -8,6 +9,12 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final cardTheme = Theme.of(context).cardTheme;
+    final cardColor = ElevationOverlay.applySurfaceTint(
+      cardTheme.color ?? Theme.of(context).colorScheme.surface,
+      cardTheme.surfaceTintColor,
+      cardTheme.elevation ?? 2.0,
+    );
 
     const featureRequestUrl = 'https://asdev.fillout.com/wf-fr';
     const bugReportUrl = 'https://asdev.fillout.com/wf-br';
@@ -52,9 +59,11 @@ class HelpScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Card(
-                    child: Column(
-                      children: items.map((item) {
+                  M3ECardColumn(
+                    padding: EdgeInsets.zero,
+                    innerRadius: 12.0,
+                    color: cardColor,
+                    children: items.map((item) {
                         return ListTile(
                           leading: Container(
                             padding: const EdgeInsets.all(8),
@@ -78,7 +87,6 @@ class HelpScreen extends StatelessWidget {
                           },
                         );
                       }).toList(),
-                    ),
                   ),
                   const SizedBox(height: 40),
                   Center(
