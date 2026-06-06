@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:weatherfast/services/global_data.dart';
 import 'package:weatherfast/services/preferences_service.dart';
