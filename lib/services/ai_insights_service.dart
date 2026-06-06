@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'global_data.dart';
+import 'unit_converter.dart';
 
 class AIInsightsService {
   static const String _ollamaUrl = 'http://localhost:11434/api/generate';
@@ -82,7 +84,7 @@ class AIInsightsService {
 Current: $currentCondition, $currentTemp°C
 Today's High/Low: $highTemp°C / $lowTemp°C
 Humidity: $humidity%
-Wind: ${windSpeed.toStringAsFixed(1)} km/h
+Wind: ${UnitConverter.convertWind(windSpeed).toStringAsFixed(1)} ${GlobalData.windUnit}
 UV Index: ${uvIndex.toStringAsFixed(1)}
 Next 7 days: $forecastSummary
 

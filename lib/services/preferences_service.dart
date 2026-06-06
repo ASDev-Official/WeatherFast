@@ -8,6 +8,8 @@ class PreferencesService {
   static const String _kIsSingapore = 'is_singapore';
   static const String _kLanguageCode = 'language_code';
   static const String _kPerformanceMode = 'performance_mode';
+  static const String _kWindUnit = 'wind_unit';
+  static const String _kVisibilityUnit = 'visibility_unit';
 
   static Future<bool> loadPerformanceMode() async {
     final prefs = await SharedPreferences.getInstance();
@@ -99,5 +101,25 @@ class PreferencesService {
     } else {
       await prefs.setString(_kLanguageCode, value);
     }
+  }
+
+  static Future<String> loadWindUnit() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_kWindUnit) ?? 'km/h';
+  }
+
+  static Future<void> saveWindUnit(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kWindUnit, value);
+  }
+
+  static Future<String> loadVisibilityUnit() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_kVisibilityUnit) ?? 'km';
+  }
+
+  static Future<void> saveVisibilityUnit(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kVisibilityUnit, value);
   }
 }

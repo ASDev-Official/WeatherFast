@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../services/global_data.dart';
+import '../services/unit_converter.dart';
 
 class DailyRangeTile extends StatelessWidget {
   const DailyRangeTile({
@@ -33,9 +35,9 @@ class DailyRangeTile extends StatelessWidget {
     final hiText = max == null ? '--' : '${max!.round()}$unit';
     final loText = min == null ? '--' : '${min!.round()}$unit';
 
-    final wLow = useFahrenheit ? windLow * 0.621371 : windLow;
-    final wHigh = useFahrenheit ? windHigh * 0.621371 : windHigh;
-    final wUnit = useFahrenheit ? 'mph' : 'km/h';
+    final wLow = UnitConverter.convertWind(windLow);
+    final wHigh = UnitConverter.convertWind(windHigh);
+    final wUnit = GlobalData.windUnit;
 
     return Card(
       elevation: 0,

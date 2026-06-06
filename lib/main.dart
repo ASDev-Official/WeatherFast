@@ -33,6 +33,8 @@ Future<void> main() async {
   await WidgetRefreshService.initialize();
   await RatingService.initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
+  GlobalData.windUnit = await PreferencesService.loadWindUnit();
+  GlobalData.visibilityUnit = await PreferencesService.loadVisibilityUnit();
   GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
   GlobalData.languageCodeNotifier.value = await PreferencesService.loadLanguageCode();
   GlobalData.performanceModeNotifier.value = await PreferencesService.loadPerformanceMode();

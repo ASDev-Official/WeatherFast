@@ -12,6 +12,7 @@ import 'services/preferences_service.dart';
 import 'services/rating_service.dart';
 import 'services/weather_cache_service.dart';
 import 'services/widget_refresh_service.dart';
+import 'services/unit_converter.dart';
 import 'time_utils.dart';
 import 'ui/animated_weather_backdrop.dart';
 import 'ui/daily_range_tile.dart';
@@ -981,7 +982,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       ),
       _MetricTile(
         label: AppLocalizations.of(context)!.wind,
-        value: AppLocalizations.of(context)!.windSpeed((current['wind_kph']?.round() ?? '--').toString(), current['wind_dir']?.toString() ?? ''),
+        value: current['wind_kph'] != null ? '${UnitConverter.convertWind((current['wind_kph'] as num).toDouble()).round()} ${GlobalData.windUnit} ${current['wind_dir']?.toString() ?? ''}' : '--',
         icon: Icons.air,
       ),
       _MetricTile(
@@ -993,7 +994,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       ),
       _MetricTile(
         label: AppLocalizations.of(context)!.visibility,
-        value: AppLocalizations.of(context)!.visibilityKm((current['vis_km']?.toStringAsFixed(1) ?? '--').toString()),
+        value: current['vis_km'] != null ? '${UnitConverter.convertVisibility((current['vis_km'] as num).toDouble()).toStringAsFixed(1)} ${GlobalData.visibilityUnit}' : '--',
         icon: Icons.remove_red_eye,
       ),
       _MetricTile(

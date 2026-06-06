@@ -5,6 +5,8 @@ class GlobalData {
   static Map<String, dynamic>? preloadedWeatherData;
   static Map<String, dynamic>? preloadedForecastData;
   static bool useFahrenheit = false;
+  static String windUnit = 'km/h';
+  static String visibilityUnit = 'km';
   static double widgetFontScale = 1.0;
   static ValueNotifier<String?> languageCodeNotifier = ValueNotifier<String?>(null);
   static ValueNotifier<bool> performanceModeNotifier = ValueNotifier<bool>(false);

@@ -12,7 +12,7 @@ import 'services/widget_refresh_service.dart';
 import 'services/rating_service.dart';
 import 'l10n/app_localizations.dart';
 import 'webview_screen.dart';
-
+import 'units_screen.dart';
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -21,24 +21,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  late bool _useFahrenheit;
   late bool _performanceMode;
   bool _isRefreshingWidgets = false;
 
   @override
   void initState() {
     super.initState();
-    _useFahrenheit = GlobalData.useFahrenheit;
     _performanceMode = GlobalData.performanceModeNotifier.value;
-  }
-
-  Future<void> _toggleUnit(bool value) async {
-    await PreferencesService.saveUseFahrenheit(value);
-    await WidgetRefreshService.refreshFromBackground();
-    setState(() {
-      _useFahrenheit = value;
-      GlobalData.useFahrenheit = value;
-    });
   }
 
   Future<void> _togglePerformanceMode(bool value) async {
@@ -329,8 +318,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Card(
                     child: Column(
                       children: [
-                        SwitchListTile(
-                          secondary: Container(
+                        ListTile(
+                          leading: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: colorScheme.tertiaryContainer,
@@ -341,12 +330,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onTertiaryContainer,
                             ),
                           ),
-                          title: Text(AppLocalizations.of(context)!.useFahrenheit),
-                          subtitle: Text(
-                            _useFahrenheit ? AppLocalizations.of(context)!.showingFahrenheit : AppLocalizations.of(context)!.showingCelsius,
-                          ),
-                          value: _useFahrenheit,
-                          onChanged: _toggleUnit,
+                          title: const Text('Units'),
+                          subtitle: const Text('Temperature, Wind, Visibility'),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const UnitsScreen(),
+                              ),
+                            );
+                          },
                         ),
                         const Divider(height: 1),
                         SwitchListTile(

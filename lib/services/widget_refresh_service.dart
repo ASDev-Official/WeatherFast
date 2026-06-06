@@ -5,6 +5,7 @@ import 'package:workmanager/workmanager.dart';
 import 'package:intl/intl.dart';
 
 import 'global_data.dart';
+import 'unit_converter.dart';
 import 'preferences_service.dart';
 import 'weather_cache_service.dart';
 import '../weather_service.dart';
@@ -285,9 +286,10 @@ class WidgetRefreshService {
       _kHumidity,
       humidity == null ? '--' : '$humidity%',
     );
+    final windConverted = windKph != null ? UnitConverter.convertWind(windKph) : null;
     await HomeWidget.saveWidgetData<String>(
       _kWind,
-      windKph == null ? '--' : '${windKph.round()} km/h',
+      windConverted == null ? '--' : '${windConverted.round()} ${GlobalData.windUnit}',
     );
     await HomeWidget.saveWidgetData<String>(_kAqi, aqi == null ? '--' : '$aqi');
 
