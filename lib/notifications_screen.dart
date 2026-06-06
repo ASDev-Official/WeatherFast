@@ -18,7 +18,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   List<dynamic> _notifications = [];
   bool _isLoading = true;
   String? _error;
-  String _filter = 'all';
+  final String _filter = 'all';
 
   @override
   void initState() {
@@ -224,7 +224,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               if (await canLaunchUrl(uri)) {
                                 await launchUrl(uri, mode: LaunchMode.externalApplication);
                               } else {
-                                if (context.mounted) {
+                                if (mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(AppLocalizations.of(context)!.couldNotOpenLink)),
                                   );
