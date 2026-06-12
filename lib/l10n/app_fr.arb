@@ -1,7 +1,7 @@
 {
-    "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "airQuality": "Qualité de l'air",
+    "close": "Fermer",
+    "failedToLoadWeather": "Échec du chargement de la météo : {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -10,8 +10,8 @@
         }
     },
     "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
-    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
-    "highLowTemp": "H {high}°  ·  L {low}°",
+    "futureAdviceRain": "Il risque de pleuvoir d'ici environ 3 heures. Gardez un parapluie à portée de main.",
+    "highLowTemp": "H {high}°  ·  B {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
@@ -22,11 +22,11 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
-    "adviceRain": "Grab a light shell and keep moving.",
-    "nextDays": "Next {count} days",
+    "dataFromNea": "Données issues de NEA",
+    "night": "Nuit",
+    "useCurrentLocation": "Utiliser l'emplacement actuel",
+    "adviceRain": "Enfilez une veste légère et continuez à marcher.",
+    "nextDays": "Les {count} prochains jours",
     "@nextDays": {
         "placeholders": {
             "count": {
@@ -34,15 +34,15 @@
             }
         }
     },
-    "visibility": "Visibility",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
-    "adviceClear": "Great light outside. Sunglasses recommended.",
-    "clear": "Clear",
-    "precipChance": "Precip chance",
-    "updatingWeather": "Updating weather…",
-    "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
-    "loadingLocation": "Loading location…",
-    "precipPercent": "{percent}% precip",
+    "visibility": "Visibilité",
+    "dataFromOpenMeteo": "Données issues d'Open-Meteo",
+    "adviceClear": "Il fait très clair dehors. Portez des lunettes de soleil.",
+    "clear": "Effacer",
+    "precipChance": "Risque de précipitations",
+    "updatingWeather": "Mise à jour de la météo…",
+    "unableToFetchLocation": "Impossible de récupérer la météo pour cet emplacement. Veuillez réessayer.",
+    "loadingLocation": "Chargement de l'emplacement…",
+    "precipPercent": "{percent}% de précipitations",
     "@precipPercent": {
         "placeholders": {
             "percent": {
@@ -50,7 +50,7 @@
             }
         }
     },
-    "toTime": "to {time}",
+    "toTime": "à {time}",
     "@toTime": {
         "placeholders": {
             "time": {
@@ -58,10 +58,10 @@
             }
         }
     },
-    "futureAdviceSnow": "Snow later today—plan travel with extra time.",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
-    "adviceCloud": "Soft clouds today—perfect walking weather.",
+    "futureAdviceSnow": "Il va neiger plus tard dans la journée : prévoyez plus de temps pour vos déplacements.",
+    "searchLocation": "Rechercher un emplacement",
+    "dummyTime": "Lun 1er jan • 12:00",
+    "adviceCloud": "Le ciel est nuageux aujourd'hui : une météo idéale pour se promener.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
         "placeholders": {
@@ -70,14 +70,14 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
-    "adviceSnow": "Layer up and mind slick paths.",
-    "adviceStorm": "Stay indoors; lightning risk.",
-    "feelsLike": "Feels like",
-    "weather": "Weather",
-    "insights": "Insights",
-    "regionalOutlook": "Regional Outlook",
-    "tomorrow": "Tomorrow",
+    "cityRegionOrCoordinates": "Ville, région ou coordonnées",
+    "adviceSnow": "Habillez-vous chaudement et faites attention aux chemins glissants.",
+    "adviceStorm": "Restez à l'intérieur ; risque d'orage.",
+    "feelsLike": "Ressenti",
+    "weather": "Météo",
+    "insights": "Statistiques",
+    "regionalOutlook": "Prévisions régionales",
+    "tomorrow": "Demain",
     "windSpeed": "{speed} km/h {dir}",
     "@windSpeed": {
         "placeholders": {
@@ -89,27 +89,27 @@
             }
         }
     },
-    "adviceDefault": "Stay comfortable and check again in a few hours.",
-    "home": "Home",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
-    "hourlyForecast": "Hourly Forecast",
-    "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
-    "settings": "Settings",
-    "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
-    "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-    "today": "Today",
-    "wind": "Wind",
-    "weekAhead": "Week Ahead",
-    "suggestFeature": "Suggest a new feature for WeatherFast",
-    "activitySuggestions": "Activity Suggestions",
-    "baseMapsMapbox": "Base maps are provided by Mapbox.",
-    "reportBug": "Report a bug or issue",
+    "adviceDefault": "Restez calme et vérifiez à nouveau dans quelques heures.",
+    "home": "Accueil",
+    "searchPlace": "Rechercher un lieu",
+    "locationPermissionDenied": "L'accès à la localisation a été refusé. Autorisez-le pour vous géolocaliser.",
+    "hourlyForecast": "Prévisions par heure",
+    "todaysSuggestion": "Suggestion du jour",
+    "humidity": "Humidité",
+    "locationServicesDisabled": "Les services de localisation sont désactivés. Activez-les dans Paramètres",
+    "settings": "Paramètres",
+    "dummyHighLow": "H 80° · B 60°",
+    "daytime": "Journée",
+    "futureAdviceClear": "Le temps devrait rester stable dans les prochaines heures : c'est le moment idéal pour profiter du grand air.",
+    "today": "Aujourd'hui",
+    "wind": "Vent",
+    "weekAhead": "Semaine prochaine",
+    "suggestFeature": "Suggérer une nouvelle fonctionnalité pour WeatherFast",
+    "activitySuggestions": "Suggestions d'activité",
+    "baseMapsMapbox": "Les cartes de base sont fournies par Mapbox.",
+    "reportBug": "Signaler un bug ou un problème",
     "notificationTitle": "Notification",
-    "failedToLoadNotifications": "Failed to load notifications: {error}",
+    "failedToLoadNotifications": "Échec du chargement des notifications : {error}",
     "@failedToLoadNotifications": {
         "placeholders": {
             "error": {
@@ -117,16 +117,16 @@
             }
         }
     },
-    "openSourceLicenses": "Open-Source Licenses",
-    "noNewNotifications": "No new notifications",
-    "loadingNotificationTitle": "Loading notification title...",
+    "openSourceLicenses": "Licences Open-Source",
+    "noNewNotifications": "Aucune nouvelle notification",
+    "loadingNotificationTitle": "Chargement du titre de la notification…",
     "resetRatingPreferences": "Reset Rating Preferences",
-    "apiDocs": "API Docs",
-    "featureRequest": "Feature Request",
-    "mapSettings": "Map Settings",
-    "website": "Website",
-    "tapToViewInteractiveRadar": "Tap to view interactive radar",
-    "usedInWeatherFastVersion": " used in WeatherFast {version}",
+    "apiDocs": "Documentation API",
+    "featureRequest": "Demande de fonctionnalité",
+    "mapSettings": "Paramètres de la carte",
+    "website": "Site Web",
+    "tapToViewInteractiveRadar": "Cliquez pour visualiser le radar interactif",
+    "usedInWeatherFastVersion": " utilisé dans WeatherFast {version}",
     "@usedInWeatherFastVersion": {
         "placeholders": {
             "version": {
@@ -134,27 +134,27 @@
             }
         }
     },
-    "selectLocationFromHome": "Select a location from Home",
-    "dataSources": "Data Sources",
-    "bugReport": "Bug Report",
+    "selectLocationFromHome": "Sélectionnez un emplacement depuis l'accueil",
+    "dataSources": "Sources des données",
+    "bugReport": "Signaler un bug",
     "resetShownCountAndTimestamps": "Reset shown count and timestamps",
-    "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
-    "healthAndSafety": "Health & Safety",
-    "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
-    "preferences": "Preferences",
-    "terms": "Terms",
-    "showingFahrenheit": "Showing °F",
-    "toViewDetailedInsights": "to view the detailed Insights",
-    "support": "Support",
-    "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
-    "checkOperationalStatusOfServices": "Check the operational status of services",
-    "forceRefreshWidgets": "Force refresh widgets",
-    "mapLayers": "Map Layers:",
-    "remindMeLater": "Remind Me in 2 Days",
-    "debug": "Debug",
-    "getItOnPlayStore": "Get it on Play Store",
-    "retry": "Retry",
-    "widgetRefreshFailed": "Widget refresh failed: {error}",
+    "reloadWidgetDataWarning": "Actualiser les données du widget (AVEC MODÉRATION !!!)",
+    "healthAndSafety": "Santé et sécurité",
+    "simulateSuccessfulWeatherFetchTrigger": "Simuler le succès de la récupération des données météo",
+    "preferences": "Préférences",
+    "terms": "Conditions d'utilisation",
+    "showingFahrenheit": "Affiche °F",
+    "toViewDetailedInsights": "pour consulter les statistiques détaillées",
+    "support": "Assistance",
+    "rateAppDescription": "Si vous aimez utiliser notre application, merci de prendre un instant pour la noter dans le Play Store. Votre soutien compte beaucoup pour nous !",
+    "checkOperationalStatusOfServices": "Vérifier l'état opérationnel des services",
+    "forceRefreshWidgets": "Forcer l'actualisation des widgets",
+    "mapLayers": "Couches de la carte :",
+    "remindMeLater": "Me le rappeler dans 2 jours",
+    "debug": "Débogage",
+    "getItOnPlayStore": "Obtenir sur le Play Store",
+    "retry": "Réessayer",
+    "widgetRefreshFailed": "Échec de l'actualisation des widgets : {error}",
     "@widgetRefreshFailed": {
         "placeholders": {
             "error": {
@@ -162,8 +162,8 @@
             }
         }
     },
-    "showingCelsius": "Showing °C",
-    "enjoyingWeatherFast": "Enjoying WeatherFast?",
+    "showingCelsius": "Affiche °C",
+    "enjoyingWeatherFast": "Vous aimez WeatherFast ?",
     "notifications": "Notifications",
     "versionBuildNumber": "Version {version} ({buildNumber})",
     "@versionBuildNumber": {
@@ -177,7 +177,7 @@
         }
     },
     "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
-    "failedToLoadInsights": "Failed to load Insights: {error}",
+    "failedToLoadInsights": "Échec du chargement des statistiques : {error}",
     "@failedToLoadInsights": {
         "placeholders": {
             "error": {
@@ -185,7 +185,7 @@
             }
         }
     },
-    "todaysTimeline": "Today's Timeline",
+    "todaysTimeline": "Prévisions de la journée",
     "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
     "@neaAttribution": {
         "placeholders": {
@@ -194,9 +194,9 @@
             }
         }
     },
-    "about": "About",
-    "systemDefault": "System Default",
-    "errorLoadingNotifications": "Error loading notifications: {error}",
+    "about": "À propos",
+    "systemDefault": "Système",
+    "errorLoadingNotifications": "Erreur lors du chargement des notifications : {error}",
     "@errorLoadingNotifications": {
         "placeholders": {
             "error": {
@@ -204,42 +204,42 @@
             }
         }
     },
-    "rateNow": "Rate Now",
-    "neaWebsite": "NEA Website",
-    "weatherMap": "Weather Map",
-    "whatToWear": "What to Wear",
-    "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
-    "weatherInsights": "Weather Insights",
+    "rateNow": "Laisser un avis",
+    "neaWebsite": "Site Web de NEA",
+    "weatherMap": "Carte météo",
+    "whatToWear": "Quoi porter",
+    "weatherMapsUnavailableOnWeb": "Les cartes météo ne sont pas disponibles sur le Web",
+    "weatherInsights": "Statistiques météo",
     "testRatingBottomSheet": "Test Rating Bottom Sheet",
-    "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
+    "livePrecipitationRainviewer": "Les couches du radar de précipitations sont fournies par RainViewer.",
     "loadingTempF": "72°F",
-    "language": "Language",
-    "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
-    "openLink": "Open Link",
-    "getHelpOrSendFeedback": "Get help or send feedback",
+    "language": "Langue",
+    "viewLicensesForOpenSourcePackages": "Voir les licences pour les paquets open-source",
+    "openLink": "Ouvrir le lien",
+    "getHelpOrSendFeedback": "Obtenir de l'aider ou envoyer des commentaires",
     "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
-    "loading": "Loading...",
-    "systemStatus": "System Status",
-    "analyzingConditions": "Analyzing conditions...",
-    "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
-    "couldNotOpenLink": "Could not open link",
-    "weatherData": "Weather Data:",
-    "loadingNotificationDesc": "Loading notification description...",
-    "noThanks": "No Thanks",
-    "helpAndFeedback": "Help & Feedback",
+    "loading": "Chargement…",
+    "systemStatus": "État du système",
+    "analyzingConditions": "Analyse des conditions…",
+    "weatherDataProvidedByOM": "Données météo fournies par Open-Meteo",
+    "couldNotOpenLink": "Impossible d'ouvrir le lien",
+    "weatherData": "Données météo :",
+    "loadingNotificationDesc": "Chargement de la description de la notification…",
+    "noThanks": "Non merci",
+    "helpAndFeedback": "Aide et commentaires",
     "dataGovSg": "Data.gov.sg",
-    "loadingClearWeather": "Clear",
-    "radarOpacity": "Radar Opacity",
-    "attribution": "Attribution:",
-    "useFahrenheit": "Use Fahrenheit",
+    "loadingClearWeather": "Effacer",
+    "radarOpacity": "Opacité du radar",
+    "attribution": "Attribution :",
+    "useFahrenheit": "Utiliser le Fahrenheit",
     "ratingPreferencesReset": "Rating preferences reset",
-    "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
-    "widgetsRefreshed": "Widgets refreshed",
-    "tapToViewAllAlerts": "Tap to view all alerts",
+    "interactiveWeatherRadarDescription": "Le radar météo interactif et les cartes haute résolution sont optimisés pour notre expérience mobile.",
+    "widgetsRefreshed": "Widgets actualisés",
+    "tapToViewAllAlerts": "Cliquez pour voir les alertes",
     "description": "Description",
-    "instruction": "Instruction",
-    "severity": "Severity",
-    "activeWarnings": "{count} active warnings",
+    "instruction": "Instructions",
+    "severity": "Niveau de risque",
+    "activeWarnings": "{count} avertissements actifs",
     "@activeWarnings": {
         "placeholders": {
             "count": {
@@ -247,15 +247,15 @@
             }
         }
     },
-    "activeFloodAlerts": "Active Flood Alerts",
-    "response": "Response",
-    "area": "Area",
-    "floodAlert": "Flood Alert",
-    "flashFloodWarning": "Flash Flood Warning!",
-    "multipleFloodAlerts": "Multiple Flood Alerts",
-    "dewPoint": "Dew Point",
-    "uvIndex": "UV Index",
-    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+    "activeFloodAlerts": "Alertes inondation en cours",
+    "response": "Réponse",
+    "area": "Zone",
+    "floodAlert": "Alerte inondation",
+    "flashFloodWarning": "Avertissement d'inondation !",
+    "multipleFloodAlerts": "Plusieurs alertes inondation",
+    "dewPoint": "Point de rosée",
+    "uvIndex": "Indice UV",
+    "incompleteLocalisationMessage": "La traduction pour la langue {language} n'est pas terminée.",
     "@incompleteLocalisationMessage": {
         "placeholders": {
             "language": {
@@ -263,6 +263,6 @@
             }
         }
     },
-    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "helpLocalizeWeatherFast": "Aidez à traduire WeatherFast",
     "ok": "OK"
 }
