@@ -9,137 +9,140 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get home => 'Home';
+  String get home => 'Accueil';
 
   @override
-  String get insights => 'Insights';
+  String get insights => 'Statistiques';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Paramètres';
 
   @override
-  String get updatingWeather => 'Updating weather…';
+  String get updatingWeather => 'Mise à jour de la météo…';
 
   @override
   String get locationServicesDisabled =>
-      'Location services are disabled. Enable them in Settings.';
+      'Les services de localisation sont désactivés. Activez-les dans Paramètres';
 
   @override
   String get locationPermissionDenied =>
-      'Location permission denied. Enable it to auto-locate you.';
+      'L\'accès à la localisation a été refusé. Autorisez-le pour vous géolocaliser.';
 
   @override
   String get unableToFetchLocation =>
-      'Unable to fetch location weather. Please try again.';
+      'Impossible de récupérer la météo pour cet emplacement. Veuillez réessayer.';
 
   @override
   String failedToLoadWeather(String error) {
-    return 'Failed to load weather: $error';
+    return 'Échec du chargement de la météo : $error';
   }
 
   @override
-  String get searchPlace => 'Search a place';
+  String get searchPlace => 'Rechercher un lieu';
 
   @override
-  String get close => 'Close';
+  String get close => 'Fermer';
 
   @override
-  String get cityRegionOrCoordinates => 'City, region, or coordinates';
+  String get cityRegionOrCoordinates => 'Ville, région ou coordonnées';
 
   @override
-  String get loadingLocation => 'Loading location…';
+  String get loadingLocation => 'Chargement de l\'emplacement…';
 
   @override
-  String get searchLocation => 'Search location';
+  String get searchLocation => 'Rechercher un emplacement';
 
   @override
-  String get useCurrentLocation => 'Use current location';
+  String get useCurrentLocation => 'Utiliser l\'emplacement actuel';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Effacer';
 
   @override
-  String get dummyTime => 'Mon, Jan 1 • 12:00 PM';
+  String get dummyTime => 'Lun 1er jan • 12:00';
 
   @override
-  String get daytime => 'Daytime';
+  String get daytime => 'Journée';
 
   @override
-  String get night => 'Night';
+  String get night => 'Nuit';
 
   @override
-  String get dummyHighLow => 'H 80° · L 60°';
+  String get dummyHighLow => 'H 80° · B 60°';
 
   @override
   String highLowTemp(String high, String low) {
-    return 'H $high°  ·  L $low°';
+    return 'H $high°  ·  B $low°';
   }
 
   @override
-  String get feelsLike => 'Feels like';
+  String get feelsLike => 'Ressenti';
 
   @override
-  String get humidity => 'Humidity';
+  String get humidity => 'Humidité';
 
   @override
-  String get uvIndex => 'UV Index';
+  String get uvIndex => 'Indice UV';
 
   @override
-  String get dewPoint => 'Dew Point';
+  String get dewPoint => 'Point de rosée';
 
   @override
-  String get wind => 'Wind';
+  String get wind => 'Vent';
 
   @override
-  String get airQuality => 'Air Quality';
+  String get airQuality => 'Qualité de l\'air';
 
   @override
-  String get visibility => 'Visibility';
+  String get visibility => 'Visibilité';
 
   @override
-  String get precipChance => 'Precip chance';
+  String get precipChance => 'Risque de précipitations';
 
   @override
-  String get hourlyForecast => 'Hourly Forecast';
+  String get hourlyForecast => 'Prévisions par heure';
 
   @override
-  String get regionalOutlook => 'Regional Outlook';
+  String get regionalOutlook => 'Prévisions régionales';
 
   @override
-  String get dataFromOpenMeteo => 'Data from Open-Meteo';
+  String get dataFromOpenMeteo => 'Données issues d\'Open-Meteo';
 
   @override
-  String get dataFromNea => 'Data from NEA';
+  String get dataFromNea => 'Données issues de NEA';
 
   @override
-  String get todaysSuggestion => 'Today’s suggestion';
+  String get todaysSuggestion => 'Suggestion du jour';
 
   @override
-  String get adviceRain => 'Grab a light shell and keep moving.';
+  String get adviceRain => 'Enfilez une veste légère et continuez à marcher.';
 
   @override
-  String get adviceSnow => 'Layer up and mind slick paths.';
+  String get adviceSnow =>
+      'Habillez-vous chaudement et faites attention aux chemins glissants.';
 
   @override
-  String get adviceStorm => 'Stay indoors; lightning risk.';
+  String get adviceStorm => 'Restez à l\'intérieur ; risque d\'orage.';
 
   @override
-  String get adviceClear => 'Great light outside. Sunglasses recommended.';
+  String get adviceClear =>
+      'Il fait très clair dehors. Portez des lunettes de soleil.';
 
   @override
-  String get adviceCloud => 'Soft clouds today—perfect walking weather.';
+  String get adviceCloud =>
+      'Le ciel est nuageux aujourd\'hui : une météo idéale pour se promener.';
 
   @override
   String get adviceDefault =>
-      'Stay comfortable and check again in a few hours.';
+      'Restez calme et vérifiez à nouveau dans quelques heures.';
 
   @override
   String get futureAdviceRain =>
-      'Rain likely in ~3 hours. Keep an umbrella nearby.';
+      'Il risque de pleuvoir d\'ici environ 3 heures. Gardez un parapluie à portée de main.';
 
   @override
   String get futureAdviceSnow =>
-      'Snow later today—plan travel with extra time.';
+      'Il va neiger plus tard dans la journée : prévoyez plus de temps pour vos déplacements.';
 
   @override
   String get futureAdviceStorm =>
@@ -147,30 +150,30 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get futureAdviceClear =>
-      'Next few hours stay steady—good time to be outside.';
+      'Le temps devrait rester stable dans les prochaines heures : c\'est le moment idéal pour profiter du grand air.';
 
   @override
-  String get today => 'Today';
+  String get today => 'Aujourd\'hui';
 
   @override
-  String get tomorrow => 'Tomorrow';
+  String get tomorrow => 'Demain';
 
   @override
   String nextDays(int count) {
-    return 'Next $count days';
+    return 'Les $count prochains jours';
   }
 
   @override
-  String get weather => 'Weather';
+  String get weather => 'Météo';
 
   @override
   String precipPercent(String percent) {
-    return '$percent% precip';
+    return '$percent% de précipitations';
   }
 
   @override
   String toTime(String time) {
-    return 'to $time';
+    return 'à $time';
   }
 
   @override
@@ -185,92 +188,95 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String failedToLoadInsights(String error) {
-    return 'Failed to load Insights: $error';
+    return 'Échec du chargement des statistiques : $error';
   }
 
   @override
-  String get weatherInsights => 'Weather Insights';
+  String get weatherInsights => 'Statistiques météo';
 
   @override
-  String get analyzingConditions => 'Analyzing conditions...';
+  String get analyzingConditions => 'Analyse des conditions…';
 
   @override
-  String get activitySuggestions => 'Activity Suggestions';
+  String get activitySuggestions => 'Suggestions d\'activité';
 
   @override
-  String get healthAndSafety => 'Health & Safety';
+  String get healthAndSafety => 'Santé et sécurité';
 
   @override
-  String get whatToWear => 'What to Wear';
+  String get whatToWear => 'Quoi porter';
 
   @override
-  String get todaysTimeline => 'Today\'s Timeline';
+  String get todaysTimeline => 'Prévisions de la journée';
 
   @override
-  String get weekAhead => 'Week Ahead';
+  String get weekAhead => 'Semaine prochaine';
 
   @override
-  String get selectLocationFromHome => 'Select a location from Home';
+  String get selectLocationFromHome =>
+      'Sélectionnez un emplacement depuis l\'accueil';
 
   @override
-  String get toViewDetailedInsights => 'to view the detailed Insights';
+  String get toViewDetailedInsights =>
+      'pour consulter les statistiques détaillées';
 
   @override
-  String get widgetsRefreshed => 'Widgets refreshed';
+  String get widgetsRefreshed => 'Widgets actualisés';
 
   @override
   String widgetRefreshFailed(String error) {
-    return 'Widget refresh failed: $error';
+    return 'Échec de l\'actualisation des widgets : $error';
   }
 
   @override
-  String get language => 'Language';
+  String get language => 'Langue';
 
   @override
-  String get systemDefault => 'System Default';
+  String get systemDefault => 'Système';
 
   @override
-  String get preferences => 'Preferences';
+  String get preferences => 'Préférences';
 
   @override
-  String get useFahrenheit => 'Use Fahrenheit';
+  String get useFahrenheit => 'Utiliser le Fahrenheit';
 
   @override
-  String get showingFahrenheit => 'Showing °F';
+  String get showingFahrenheit => 'Affiche °F';
 
   @override
-  String get showingCelsius => 'Showing °C';
+  String get showingCelsius => 'Affiche °C';
 
   @override
-  String get about => 'About';
+  String get about => 'À propos';
 
   @override
-  String get openSourceLicenses => 'Open-Source Licenses';
+  String get openSourceLicenses => 'Licences Open-Source';
 
   @override
   String get viewLicensesForOpenSourcePackages =>
-      'View licenses for open-source packages';
+      'Voir les licences pour les paquets open-source';
 
   @override
   String usedInWeatherFastVersion(String version) {
-    return ' used in WeatherFast $version';
+    return ' utilisé dans WeatherFast $version';
   }
 
   @override
-  String get debug => 'Debug';
+  String get debug => 'Débogage';
 
   @override
-  String get forceRefreshWidgets => 'Force refresh widgets';
+  String get forceRefreshWidgets => 'Forcer l\'actualisation des widgets';
 
   @override
-  String get reloadWidgetDataWarning => 'Reload widget data (USE SPARINGLY!!!)';
+  String get reloadWidgetDataWarning =>
+      'Actualiser les données du widget (AVEC MODÉRATION !!!)';
 
   @override
   String get testRatingBottomSheet => 'Test Rating Bottom Sheet';
 
   @override
   String get simulateSuccessfulWeatherFetchTrigger =>
-      'Simulate successful weather fetch trigger';
+      'Simuler le succès de la récupération des données météo';
 
   @override
   String get resetRatingPreferences => 'Reset Rating Preferences';
@@ -282,20 +288,21 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ratingPreferencesReset => 'Rating preferences reset';
 
   @override
-  String get support => 'Support';
+  String get support => 'Assistance';
 
   @override
-  String get systemStatus => 'System Status';
+  String get systemStatus => 'État du système';
 
   @override
   String get checkOperationalStatusOfServices =>
-      'Check the operational status of services';
+      'Vérifier l\'état opérationnel des services';
 
   @override
-  String get helpAndFeedback => 'Help & Feedback';
+  String get helpAndFeedback => 'Aide et commentaires';
 
   @override
-  String get getHelpOrSendFeedback => 'Get help or send feedback';
+  String get getHelpOrSendFeedback =>
+      'Obtenir de l\'aider ou envoyer des commentaires';
 
   @override
   String versionBuildNumber(String version, String buildNumber) {
@@ -303,101 +310,104 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get featureRequest => 'Feature Request';
+  String get featureRequest => 'Demande de fonctionnalité';
 
   @override
-  String get suggestFeature => 'Suggest a new feature for WeatherFast';
+  String get suggestFeature =>
+      'Suggérer une nouvelle fonctionnalité pour WeatherFast';
 
   @override
-  String get bugReport => 'Bug Report';
+  String get bugReport => 'Signaler un bug';
 
   @override
-  String get reportBug => 'Report a bug or issue';
+  String get reportBug => 'Signaler un bug ou un problème';
 
   @override
   String get notifications => 'Notifications';
 
   @override
-  String get loadingNotificationTitle => 'Loading notification title...';
+  String get loadingNotificationTitle =>
+      'Chargement du titre de la notification…';
 
   @override
-  String get loadingNotificationDesc => 'Loading notification description...';
+  String get loadingNotificationDesc =>
+      'Chargement de la description de la notification…';
 
   @override
   String failedToLoadNotifications(String error) {
-    return 'Failed to load notifications: $error';
+    return 'Échec du chargement des notifications : $error';
   }
 
   @override
   String errorLoadingNotifications(String error) {
-    return 'Error loading notifications: $error';
+    return 'Erreur lors du chargement des notifications : $error';
   }
 
   @override
-  String get retry => 'Retry';
+  String get retry => 'Réessayer';
 
   @override
-  String get noNewNotifications => 'No new notifications';
+  String get noNewNotifications => 'Aucune nouvelle notification';
 
   @override
   String get notificationTitle => 'Notification';
 
   @override
-  String get couldNotOpenLink => 'Could not open link';
+  String get couldNotOpenLink => 'Impossible d\'ouvrir le lien';
 
   @override
-  String get openLink => 'Open Link';
+  String get openLink => 'Ouvrir le lien';
 
   @override
-  String get mapSettings => 'Map Settings';
+  String get mapSettings => 'Paramètres de la carte';
 
   @override
-  String get radarOpacity => 'Radar Opacity';
+  String get radarOpacity => 'Opacité du radar';
 
   @override
-  String get dataSources => 'Data Sources';
+  String get dataSources => 'Sources des données';
 
   @override
-  String get mapLayers => 'Map Layers:';
+  String get mapLayers => 'Couches de la carte :';
 
   @override
-  String get baseMapsMapbox => 'Base maps are provided by Mapbox.';
+  String get baseMapsMapbox => 'Les cartes de base sont fournies par Mapbox.';
 
   @override
-  String get weatherData => 'Weather Data:';
+  String get weatherData => 'Données météo :';
 
   @override
   String get livePrecipitationRainviewer =>
-      'Live precipitation radar layers are provided by RainViewer.';
+      'Les couches du radar de précipitations sont fournies par RainViewer.';
 
   @override
-  String get attribution => 'Attribution:';
+  String get attribution => 'Attribution :';
 
   @override
   String get attributionText =>
       '© Mapbox, © OpenStreetMap contributors, © RainViewer.';
 
   @override
-  String get weatherMap => 'Weather Map';
+  String get weatherMap => 'Carte météo';
 
   @override
-  String get loading => 'Loading...';
+  String get loading => 'Chargement…';
 
   @override
-  String get enjoyingWeatherFast => 'Enjoying WeatherFast?';
+  String get enjoyingWeatherFast => 'Vous aimez WeatherFast ?';
 
   @override
   String get rateAppDescription =>
-      'If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!';
+      'Si vous aimez utiliser notre application, merci de prendre un instant pour la noter dans le Play Store. Votre soutien compte beaucoup pour nous !';
 
   @override
-  String get rateNow => 'Rate Now';
+  String get rateNow => 'Laisser un avis';
 
   @override
-  String get remindMeLater => 'Remind Me in 2 Days';
+  String get remindMeLater => 'Me le rappeler dans 2 jours';
 
   @override
-  String get noThanks => 'No Thanks';
+  String get noThanks => 'Non merci';
 
   @override
   String neaAttribution(String date) {
@@ -408,84 +418,86 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sgOpenDataLicence => 'Singapore Open Data Licence version 1.0';
 
   @override
-  String get weatherDataProvidedByOM => 'Weather data provided by Open-Meteo';
+  String get weatherDataProvidedByOM => 'Données météo fournies par Open-Meteo';
 
   @override
-  String get neaWebsite => 'NEA Website';
+  String get neaWebsite => 'Site Web de NEA';
 
   @override
   String get dataGovSg => 'Data.gov.sg';
 
   @override
-  String get website => 'Website';
+  String get website => 'Site Web';
 
   @override
-  String get apiDocs => 'API Docs';
+  String get apiDocs => 'Documentation API';
 
   @override
-  String get terms => 'Terms';
+  String get terms => 'Conditions d\'utilisation';
 
   @override
-  String get loadingClearWeather => 'Clear';
+  String get loadingClearWeather => 'Effacer';
 
   @override
   String get loadingTempF => '72°F';
 
   @override
-  String get tapToViewInteractiveRadar => 'Tap to view interactive radar';
+  String get tapToViewInteractiveRadar =>
+      'Cliquez pour visualiser le radar interactif';
 
   @override
-  String get weatherMapsUnavailableOnWeb => 'Weather Maps Unavailable on Web';
+  String get weatherMapsUnavailableOnWeb =>
+      'Les cartes météo ne sont pas disponibles sur le Web';
 
   @override
   String get interactiveWeatherRadarDescription =>
-      'Interactive weather radar and high-resolution maps are optimized for our mobile experience.';
+      'Le radar météo interactif et les cartes haute résolution sont optimisés pour notre expérience mobile.';
 
   @override
-  String get getItOnPlayStore => 'Get it on Play Store';
+  String get getItOnPlayStore => 'Obtenir sur le Play Store';
 
   @override
-  String get multipleFloodAlerts => 'Multiple Flood Alerts';
+  String get multipleFloodAlerts => 'Plusieurs alertes inondation';
 
   @override
   String activeWarnings(int count) {
-    return '$count active warnings';
+    return '$count avertissements actifs';
   }
 
   @override
-  String get tapToViewAllAlerts => 'Tap to view all alerts';
+  String get tapToViewAllAlerts => 'Cliquez pour voir les alertes';
 
   @override
-  String get activeFloodAlerts => 'Active Flood Alerts';
+  String get activeFloodAlerts => 'Alertes inondation en cours';
 
   @override
-  String get area => 'Area';
+  String get area => 'Zone';
 
   @override
   String get description => 'Description';
 
   @override
-  String get instruction => 'Instruction';
+  String get instruction => 'Instructions';
 
   @override
-  String get severity => 'Severity';
+  String get severity => 'Niveau de risque';
 
   @override
-  String get response => 'Response';
+  String get response => 'Réponse';
 
   @override
-  String get flashFloodWarning => 'Flash Flood Warning!';
+  String get flashFloodWarning => 'Avertissement d\'inondation !';
 
   @override
-  String get floodAlert => 'Flood Alert';
+  String get floodAlert => 'Alerte inondation';
 
   @override
   String incompleteLocalisationMessage(String language) {
-    return 'The localization for the language $language has not been completed.';
+    return 'La traduction pour la langue $language n\'est pas terminée.';
   }
 
   @override
-  String get helpLocalizeWeatherFast => 'Help localize WeatherFast';
+  String get helpLocalizeWeatherFast => 'Aidez à traduire WeatherFast';
 
   @override
   String get ok => 'OK';
