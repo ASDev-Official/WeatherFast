@@ -1,1 +1,268 @@
-{}
+{
+    "airQuality": "Air Quality",
+    "weekAhead": "Week Ahead",
+    "suggestFeature": "Suggest a new feature for WeatherFast",
+    "close": "Close",
+    "activitySuggestions": "Activity Suggestions",
+    "failedToLoadWeather": "Failed to load weather: {error}",
+    "@failedToLoadWeather": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "baseMapsMapbox": "Base maps are provided by Mapbox.",
+    "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
+    "reportBug": "Report a bug or issue",
+    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
+    "notificationTitle": "Notification",
+    "failedToLoadNotifications": "Failed to load notifications: {error}",
+    "@failedToLoadNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "highLowTemp": "H {high}°  ·  L {low}°",
+    "@highLowTemp": {
+        "placeholders": {
+            "high": {
+                "type": "String"
+            },
+            "low": {
+                "type": "String"
+            }
+        }
+    },
+    "dataFromNea": "Data from NEA",
+    "night": "Night",
+    "useCurrentLocation": "Use current location",
+    "openSourceLicenses": "Open-Source Licenses",
+    "adviceRain": "Grab a light shell and keep moving.",
+    "noNewNotifications": "No new notifications",
+    "loadingNotificationTitle": "Loading notification title...",
+    "nextDays": "Next {count} days",
+    "@nextDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "resetRatingPreferences": "Reset Rating Preferences",
+    "tapToViewAllAlerts": "Tap to view all alerts",
+    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+    "@incompleteLocalisationMessage": {
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "apiDocs": "API Docs",
+    "featureRequest": "Feature Request",
+    "mapSettings": "Map Settings",
+    "visibility": "Visibility",
+    "website": "Website",
+    "dataFromOpenMeteo": "Data from Open-Meteo",
+    "tapToViewInteractiveRadar": "Tap to view interactive radar",
+    "adviceClear": "Great light outside. Sunglasses recommended.",
+    "usedInWeatherFastVersion": " used in WeatherFast {version}",
+    "@usedInWeatherFastVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "clear": "Clear",
+    "precipChance": "Precip chance",
+    "selectLocationFromHome": "Select a location from Home",
+    "dataSources": "Data Sources",
+    "bugReport": "Bug Report",
+    "updatingWeather": "Updating weather…",
+    "resetShownCountAndTimestamps": "Reset shown count and timestamps",
+    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
+    "healthAndSafety": "Health & Safety",
+    "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
+    "description": "Description",
+    "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
+    "loadingLocation": "Loading location…",
+    "precipPercent": "{percent}% precip",
+    "@precipPercent": {
+        "placeholders": {
+            "percent": {
+                "type": "String"
+            }
+        }
+    },
+    "toTime": "to {time}",
+    "@toTime": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "preferences": "Preferences",
+    "futureAdviceSnow": "Snow later today—plan travel with extra time.",
+    "terms": "Terms",
+    "searchLocation": "Search location",
+    "instruction": "Instruction",
+    "showingFahrenheit": "Showing °F",
+    "toViewDetailedInsights": "to view the detailed Insights",
+    "dummyTime": "Mon, Jan 1 • 12:00 PM",
+    "adviceCloud": "Soft clouds today—perfect walking weather.",
+    "visibilityKm": "{dist} km",
+    "@visibilityKm": {
+        "placeholders": {
+            "dist": {
+                "type": "String"
+            }
+        }
+    },
+    "cityRegionOrCoordinates": "City, region, or coordinates",
+    "support": "Support",
+    "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
+    "checkOperationalStatusOfServices": "Check the operational status of services",
+    "forceRefreshWidgets": "Force refresh widgets",
+    "ok": "OK",
+    "mapLayers": "Map Layers:",
+    "remindMeLater": "Remind Me in 2 Days",
+    "adviceSnow": "Layer up and mind slick paths.",
+    "debug": "Debug",
+    "getItOnPlayStore": "Get it on Play Store",
+    "adviceStorm": "Stay indoors; lightning risk.",
+    "retry": "Retry",
+    "feelsLike": "Feels like",
+    "weather": "Weather",
+    "widgetRefreshFailed": "Widget refresh failed: {error}",
+    "@widgetRefreshFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "showingCelsius": "Showing °C",
+    "enjoyingWeatherFast": "Enjoying WeatherFast?",
+    "notifications": "Notifications",
+    "versionBuildNumber": "Version {version} ({buildNumber})",
+    "@versionBuildNumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        }
+    },
+    "insights": "Insights",
+    "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
+    "dewPoint": "Dew Point",
+    "failedToLoadInsights": "Failed to load Insights: {error}",
+    "@failedToLoadInsights": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "regionalOutlook": "Regional Outlook",
+    "tomorrow": "Tomorrow",
+    "todaysTimeline": "Today's Timeline",
+    "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI), from the National Environment Agency, and Flood Alerts across Singapore, from the PUB, Singapore's national water agency, accessed on {date}, which is made available under the terms of the ",
+    "@neaAttribution": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "about": "About",
+    "severity": "Severity",
+    "systemDefault": "System Default",
+    "windSpeed": "{speed} km/h {dir}",
+    "@windSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            },
+            "dir": {
+                "type": "String"
+            }
+        }
+    },
+    "errorLoadingNotifications": "Error loading notifications: {error}",
+    "@errorLoadingNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "rateNow": "Rate Now",
+    "neaWebsite": "NEA Website",
+    "adviceDefault": "Stay comfortable and check again in a few hours.",
+    "weatherMap": "Weather Map",
+    "whatToWear": "What to Wear",
+    "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
+    "home": "Home",
+    "activeWarnings": "{count} active warnings",
+    "@activeWarnings": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "searchPlace": "Search a place",
+    "activeFloodAlerts": "Active Flood Alerts",
+    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
+    "weatherInsights": "Weather Insights",
+    "testRatingBottomSheet": "Test Rating Bottom Sheet",
+    "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
+    "loadingTempF": "72°F",
+    "language": "Language",
+    "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
+    "response": "Response",
+    "hourlyForecast": "Hourly Forecast",
+    "openLink": "Open Link",
+    "todaysSuggestion": "Today’s suggestion",
+    "getHelpOrSendFeedback": "Get help or send feedback",
+    "humidity": "Humidity",
+    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
+    "area": "Area",
+    "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
+    "settings": "Settings",
+    "loading": "Loading...",
+    "systemStatus": "System Status",
+    "analyzingConditions": "Analyzing conditions...",
+    "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
+    "couldNotOpenLink": "Could not open link",
+    "dummyHighLow": "H 80° · L 60°",
+    "weatherData": "Weather Data:",
+    "loadingNotificationDesc": "Loading notification description...",
+    "daytime": "Daytime",
+    "noThanks": "No Thanks",
+    "helpAndFeedback": "Help & Feedback",
+    "dataGovSg": "Data.gov.sg",
+    "floodAlert": "Flood Alert",
+    "loadingClearWeather": "Clear",
+    "uvIndex": "UV Index",
+    "radarOpacity": "Radar Opacity",
+    "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
+    "attribution": "Attribution:",
+    "flashFloodWarning": "Flash Flood Warning!",
+    "useFahrenheit": "Use Fahrenheit",
+    "ratingPreferencesReset": "Rating preferences reset",
+    "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
+    "today": "Today",
+    "multipleFloodAlerts": "Multiple Flood Alerts",
+    "widgetsRefreshed": "Widgets refreshed",
+    "wind": "Wind"
+}
