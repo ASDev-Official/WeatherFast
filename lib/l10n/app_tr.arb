@@ -161,7 +161,7 @@
             }
         }
     },
-    "insights": "Insights",
+    "insights": "Tahminler",
     "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
     "dewPoint": "Dew Point",
     "failedToLoadInsights": "Failed to load Insights: {error}",
@@ -211,7 +211,7 @@
     "weatherMap": "Weather Map",
     "whatToWear": "What to Wear",
     "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
-    "home": "Home",
+    "home": "Ana Sayfa",
     "activeWarnings": "{count} active warnings",
     "@activeWarnings": {
         "placeholders": {
@@ -238,7 +238,7 @@
     "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
     "area": "Area",
     "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
-    "settings": "Settings",
+    "settings": "Ayarlar",
     "loading": "Loading...",
     "systemStatus": "System Status",
     "analyzingConditions": "Analyzing conditions...",
