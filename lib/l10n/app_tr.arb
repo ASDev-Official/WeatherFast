@@ -12,12 +12,12 @@
             }
         }
     },
-    "baseMapsMapbox": "Base maps are provided by Mapbox.",
+    "baseMapsMapbox": "Temel haritalar Mapbox tarafından sağlanmaktadır.",
     "futureAdviceStorm": "Fırtına yaklaşıyor. Dışarıdaki işlerinizi hemen bitirin.",
-    "reportBug": "Report a bug or issue",
+    "reportBug": "Hata veya sorunu bildir",
     "futureAdviceRain": "~3 saat içinde yağmur beklentisi. Yanınızda şemsiye bulundurun.",
-    "notificationTitle": "Notification",
-    "failedToLoadNotifications": "Failed to load notifications: {error}",
+    "notificationTitle": "Bildirim",
+    "failedToLoadNotifications": "Bildirimler yüklenemedi: {error}",
     "@failedToLoadNotifications": {
         "placeholders": {
             "error": {
@@ -41,8 +41,8 @@
     "useCurrentLocation": "Mevcut konumu kullan",
     "openSourceLicenses": "Açık Kaynak Lisansları",
     "adviceRain": "Yanına ince bir hırka al ve yola koyul.",
-    "noNewNotifications": "No new notifications",
-    "loadingNotificationTitle": "Loading notification title...",
+    "noNewNotifications": "Yeni bildirim yok",
+    "loadingNotificationTitle": "Bildirim başlığı yükleniyor...",
     "nextDays": "Önümüzdeki {count} gün",
     "@nextDays": {
         "placeholders": {
@@ -52,8 +52,8 @@
         }
     },
     "resetRatingPreferences": "Değerlendirme Tercihlerini Sıfırla",
-    "tapToViewAllAlerts": "Tap to view all alerts",
-    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+    "tapToViewAllAlerts": "Tüm alarmları görmek için dokunun",
+    "incompleteLocalisationMessage": "{language} dilinin yerelleştirmesi henüz tamamlanmadı.",
     "@incompleteLocalisationMessage": {
         "placeholders": {
             "language": {
@@ -63,11 +63,11 @@
     },
     "apiDocs": "API Docs",
     "featureRequest": "Özellik Talebi",
-    "mapSettings": "Map Settings",
+    "mapSettings": "Harita Ayarları",
     "visibility": "Görüş Mesafesi",
     "website": "Website",
     "dataFromOpenMeteo": "Open-Meteo verisi",
-    "tapToViewInteractiveRadar": "Tap to view interactive radar",
+    "tapToViewInteractiveRadar": "Etkileşimli radarı görüntülemek için dokunun",
     "adviceClear": "Dışarıda hava güneşli. Güneş gözlüğünü unutma.",
     "usedInWeatherFastVersion": " WeatherFast {version} sürümünde kullanıldı",
     "@usedInWeatherFastVersion": {
@@ -79,16 +79,16 @@
     },
     "clear": "Açık",
     "precipChance": "Yağış Oranı",
-    "selectLocationFromHome": "Ana sayfadan bir konum seçin.",
-    "dataSources": "Data Sources",
+    "selectLocationFromHome": "Ana sayfadan bir konum seçin",
+    "dataSources": "Veri Kaynakları",
     "bugReport": "Hata Bildirimi",
     "updatingWeather": "Hava durumu güncelleniyor…",
     "resetShownCountAndTimestamps": "Gösterim sayısını ve zaman damgalarını sıfırla",
-    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "helpLocalizeWeatherFast": "WeatherFast yerelleştirmesine katkıda bulunun",
     "reloadWidgetDataWarning": "Widget verilerini yeniden yükleyin (GEREKMEDİKÇE KULLANMAYIN!!!)",
     "healthAndSafety": "Sağlık & Güvenlik",
     "unableToFetchLocation": "Konum hava bilgisi alınamadı. Lütfen tekrar deneyin.",
-    "description": "Description",
+    "description": "Açıklama",
     "simulateSuccessfulWeatherFetchTrigger": "Hava durumu başarıyla çekildi tetiklemesini simüle et",
     "loadingLocation": "Konum yükleniyor…",
     "precipPercent": "%{percent} yağış ihtimali",
@@ -99,7 +99,7 @@
             }
         }
     },
-    "toTime": "to {time}",
+    "toTime": "{time} saatine kadar",
     "@toTime": {
         "placeholders": {
             "time": {
@@ -109,9 +109,9 @@
     },
     "preferences": "Tercihler",
     "futureAdviceSnow": "İlerleyen vakitlerde kar bekleniyor; yolculuğunuza ek süre ayırın.",
-    "terms": "Terms",
+    "terms": "Koşullar",
     "searchLocation": "Konum ara",
-    "instruction": "Instruction",
+    "instruction": "Talimat",
     "showingFahrenheit": "°F gösteriliyor",
     "toViewDetailedInsights": "detaylı tahminlere bakmak için",
     "dummyTime": "1 Haz, Pzt • 12:00",
@@ -126,17 +126,17 @@
     },
     "cityRegionOrCoordinates": "Şehir, bölge veya koordinatlar",
     "support": "Destek",
-    "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
+    "rateAppDescription": "Uygulamamızı beğendiyseniz, lütfen bir dakikanızı ayırıp Play Store'da puan verin. Desteğiniz bizim için çok değerli!",
     "checkOperationalStatusOfServices": "Hizmetlerin çalışma durumunu kontrol edin",
     "forceRefreshWidgets": "Widget'ları yenilemeye zorla",
-    "ok": "OK",
-    "mapLayers": "Map Layers:",
-    "remindMeLater": "Remind Me in 2 Days",
+    "ok": "Tamam",
+    "mapLayers": "Harita Katmanları:",
+    "remindMeLater": "2 Gün Sonra Hatırlat",
     "adviceSnow": "Sıkı giyin ve kaygan zeminlere dikkat et.",
     "debug": "Geliştirici",
-    "getItOnPlayStore": "Get it on Play Store",
+    "getItOnPlayStore": "Play Store'dan indirin",
     "adviceStorm": "Yıldırım tehlikesi; Dışarı çıkmayın.",
-    "retry": "Retry",
+    "retry": "Tekrar Dene",
     "feelsLike": "Hissedilen",
     "weather": "Hava durumu",
     "widgetRefreshFailed": "Widget yenilenemedi: {error}",
@@ -148,8 +148,8 @@
         }
     },
     "showingCelsius": "°C gösteriliyor",
-    "enjoyingWeatherFast": "Enjoying WeatherFast?",
-    "notifications": "Notifications",
+    "enjoyingWeatherFast": "WeatherFast'ı beğendiniz mi?",
+    "notifications": "Bildirimler",
     "versionBuildNumber": "Versiyon {version} ({buildNumber})",
     "@versionBuildNumber": {
         "placeholders": {
@@ -162,7 +162,7 @@
         }
     },
     "insights": "Tahminler",
-    "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
+    "sgOpenDataLicence": "Singapur Açık Veri Lisansı sürüm 1.0",
     "dewPoint": "Çiy Noktası",
     "failedToLoadInsights": "Tahminler yüklenemedi: {error}",
     "@failedToLoadInsights": {
@@ -175,7 +175,7 @@
     "regionalOutlook": "Bölgesel Tahmin",
     "tomorrow": "Yarın",
     "todaysTimeline": "Bugünün Akışı",
-    "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI), from the National Environment Agency, and Flood Alerts across Singapore, from the PUB, Singapore's national water agency, accessed on {date}, which is made available under the terms of the ",
+    "neaAttribution": "Ulusal Çevre Ajansı (NEA) tarafından sağlanan; 2 Saatlik Hava Tahmini, 24 Saatlik Hava Tahmini, 4 Günlük Hava Tahmini, Singapur Genelinde Hava Sıcaklığı, Yağış, Bağıl Nem ve Rüzgar Hızı ile Kirletici Standartları Endeksi (PSI) verilerini ve Singapur'un ulusal su kuruluşu PUB tarafından sağlanan Sel Uyarıları verilerini içerir. {date} tarihinde erişilen bu veriler şu lisans koşulları kapsamındadır: ",
     "@neaAttribution": {
         "placeholders": {
             "date": {
@@ -184,7 +184,7 @@
         }
     },
     "about": "Hakkında",
-    "severity": "Severity",
+    "severity": "Şiddet",
     "systemDefault": "Sistem Varsayılanı",
     "windSpeed": "{speed} km/s {dir}",
     "@windSpeed": {
@@ -197,7 +197,7 @@
             }
         }
     },
-    "errorLoadingNotifications": "Error loading notifications: {error}",
+    "errorLoadingNotifications": "Bildirimleri yükleme hatası: {error}",
     "@errorLoadingNotifications": {
         "placeholders": {
             "error": {
@@ -205,14 +205,14 @@
             }
         }
     },
-    "rateNow": "Rate Now",
-    "neaWebsite": "NEA Website",
+    "rateNow": "Şimdi Puan Verin",
+    "neaWebsite": "NEA Websitesi",
     "adviceDefault": "Keyfinize bakın, birkaç saat sonra tekrar kontrol edin.",
-    "weatherMap": "Weather Map",
+    "weatherMap": "Hava Durumu Haritası",
     "whatToWear": "Ne Giymeli",
-    "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
+    "weatherMapsUnavailableOnWeb": "Web Hava Durumu Haritası Kullanılamıyor",
     "home": "Ana Sayfa",
-    "activeWarnings": "{count} active warnings",
+    "activeWarnings": "{count} adet etkin uyarı",
     "@activeWarnings": {
         "placeholders": {
             "count": {
@@ -221,48 +221,48 @@
         }
     },
     "searchPlace": "Konum ara",
-    "activeFloodAlerts": "Active Flood Alerts",
+    "activeFloodAlerts": "Etkin Sel Uyarıları",
     "locationPermissionDenied": "Konum izni verilmedi. Otomatik konumlandırma için etkinleştirin.",
     "weatherInsights": "Hava Durumu Tahminleri",
     "testRatingBottomSheet": "Değerlendirme Panelini Test Et",
-    "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
+    "livePrecipitationRainviewer": "Canlı yağış radarı RainViewer tarafından sağlanmaktadır.",
     "loadingTempF": "72°F",
     "language": "Dil",
     "viewLicensesForOpenSourcePackages": "Açık kaynak lisanslarını görüntüle",
-    "response": "Response",
+    "response": "Cevap",
     "hourlyForecast": "Saatlik Tahmin",
-    "openLink": "Open Link",
+    "openLink": "Bağlantıyı aç",
     "todaysSuggestion": "Günün önerisi",
     "getHelpOrSendFeedback": "Yardım alın veya geri bildirim gönderin",
     "humidity": "Nem",
     "locationServicesDisabled": "Konum hizmeti devre dışı. Lütfen ayarlardan konum hizmetini açın.",
-    "area": "Area",
+    "area": "Bölge",
     "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
     "settings": "Ayarlar",
-    "loading": "Loading...",
+    "loading": "Yükleniyor...",
     "systemStatus": "Sistem Durumu",
     "analyzingConditions": "Hava durumu analiz ediliyor...",
-    "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
-    "couldNotOpenLink": "Could not open link",
+    "weatherDataProvidedByOM": "Hava durumu verileri Open-Meteo tarafından sağlanmaktadır",
+    "couldNotOpenLink": "Bağlantı açılamadı",
     "dummyHighLow": "mak 80° · min 60°",
-    "weatherData": "Weather Data:",
-    "loadingNotificationDesc": "Loading notification description...",
+    "weatherData": "Hava Durumu Verisi:",
+    "loadingNotificationDesc": "Bildirim açıklaması yükleniyor...",
     "daytime": "Gündüz",
-    "noThanks": "No Thanks",
+    "noThanks": "Hayır, Teşekkürler",
     "helpAndFeedback": "Yardım & Geri bildirim",
     "dataGovSg": "Data.gov.sg",
-    "floodAlert": "Flood Alert",
-    "loadingClearWeather": "Clear",
+    "floodAlert": "Sel Uyarısı",
+    "loadingClearWeather": "Temiz",
     "uvIndex": "UV Endeksi",
-    "radarOpacity": "Radar Opacity",
+    "radarOpacity": "Radar Şeffaflığı",
     "futureAdviceClear": "Hava birkaç saat daha sabit; tam dışarı çıkmalık.",
-    "attribution": "Attribution:",
-    "flashFloodWarning": "Flash Flood Warning!",
+    "attribution": "Atıflar:",
+    "flashFloodWarning": "Ani Sel Uyarısı!",
     "useFahrenheit": "Fahrenheit kullan",
     "ratingPreferencesReset": "Değerlendirme tercihleri sıfırlandı",
-    "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
+    "interactiveWeatherRadarDescription": "Etkileşimli hava durumu radarı ve yüksek çözünürlüklü haritalar, mobil deneyimimiz için optimize edilmiştir.",
     "today": "Bugün",
-    "multipleFloodAlerts": "Multiple Flood Alerts",
+    "multipleFloodAlerts": "Birden Fazla Sel Uyarısı",
     "widgetsRefreshed": "Widget'lar yenilendi",
     "wind": "Rüzgar"
 }
