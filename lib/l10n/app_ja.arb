@@ -11,7 +11,7 @@
     },
     "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
     "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
-    "highLowTemp": "H {high}°  ·  L {low}°",
+    "highLowTemp": "最高 {high}°  ·  最低 {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
@@ -95,10 +95,10 @@
     "locationPermissionDenied": "位置情報の許可が拒否されました。自動的に位置を特定するように設定してください。",
     "hourlyForecast": "Hourly Forecast",
     "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
+    "humidity": "湿度",
     "locationServicesDisabled": "位置情報サービスは無効です。設定で有効にしてください。",
     "settings": "セッティング",
-    "dummyHighLow": "H 80° · L 60°",
+    "dummyHighLow": "最高 80° · 最低 60°",
     "daytime": "昼間",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
     "today": "Today",
@@ -254,7 +254,7 @@
     "flashFloodWarning": "Flash Flood Warning!",
     "multipleFloodAlerts": "Multiple Flood Alerts",
     "dewPoint": "Dew Point",
-    "uvIndex": "UV Index",
+    "uvIndex": "UV指数",
     "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
     "@incompleteLocalisationMessage": {
         "placeholders": {
