@@ -66,21 +66,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get night => '夜';
 
   @override
-  String get dummyHighLow => 'H 80° · L 60°';
+  String get dummyHighLow => '最高 80° · 最低 60°';
 
   @override
   String highLowTemp(String high, String low) {
-    return 'H $high°  ·  L $low°';
+    return '最高 $high°  ·  最低 $low°';
   }
 
   @override
   String get feelsLike => '感じ';
 
   @override
-  String get humidity => 'Humidity';
+  String get humidity => '湿度';
 
   @override
-  String get uvIndex => 'UV Index';
+  String get uvIndex => 'UV指数';
 
   @override
   String get dewPoint => 'Dew Point';
