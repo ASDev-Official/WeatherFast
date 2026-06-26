@@ -248,5 +248,111 @@
   "unitMiles": "Miles (mi)",
   "performanceMode": "Performance Mode",
   "disableExtraVisualEffects": "Disable extra visual effects",
-  "bestTimesTitle": "Best Times"
+  "bestTimesTitle": "Best Times",
+
+  "insightsActivityLimitOutdoorTitle": "Limit Outdoor Effort",
+  "insightsActivityLimitOutdoorDesc": "Air quality is poor—favor light or indoor activities",
+  "insightsActivityIndoorTitle": "Indoor Activities",
+  "insightsActivityIndoorDesc": "Visit museums, cafes, or indoor entertainment",
+  "insightsActivityCyclingTitle": "Perfect for Cycling",
+  "insightsActivityCyclingDesc": "Great weather for a bike ride—mild temps and clear skies",
+  "insightsActivityOutdoorSportsTitle": "Outdoor Sports",
+  "insightsActivityOutdoorSportsDesc": "Ideal conditions for outdoor activities and sports",
+  "insightsActivityBeachTitle": "Beach Day",
+  "insightsActivityBeachDesc": "Perfect beach weather—bring sunscreen!",
+  "insightsActivityHikingTitle": "Hiking Weather",
+  "insightsActivityHikingDesc": "Cool and comfortable for a nature walk",
+  "insightsActivityGeneralTitle": "General Activities",
+  "insightsActivityGeneralDesc": "Moderate weather—plan accordingly",
+
+  "insightsHealthAirQualityTitle": "Air Quality Alert",
+  "insightsHealthAirQualityDesc": "Consider a mask outdoors and limit intense activity until air improves.",
+  "insightsHealthUVTitle": "UV Protection Critical",
+  "insightsHealthUVDesc": "Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.",
+  "insightsHealthHeatTitle": "Stay Hydrated",
+  "insightsHealthHeatDesc": "Drink water regularly. Avoid prolonged sun exposure 11am-3pm.",
+  "insightsHealthColdTitle": "Cold Weather Alert",
+  "insightsHealthColdDesc": "Watch for frostbite. Layer clothing and cover extremities.",
+  "insightsHealthWindTitle": "Wind Advisory",
+  "insightsHealthWindDesc": "Secure loose items. Be cautious when driving.",
+  "insightsHealthOptimalTitle": "Optimal Conditions",
+  "insightsHealthOptimalDesc": "Perfect weather for physical activity and outdoor time.",
+
+  "insightsClothingHot": "Light, breathable clothing. Hat and sunglasses recommended.",
+  "insightsClothingWarm": "Comfortable summer wear. Light layers for morning/evening.",
+  "insightsClothingMild": "Long sleeves or light jacket recommended.",
+  "insightsClothingCool": "Jacket or sweater needed. Long pants suggested.",
+  "insightsClothingCold": "Warm jacket essential. Layer up for comfort.",
+  "insightsClothingFreeze": "Heavy winter coat, gloves, and warm layers required.",
+  "insightsClothingRainSuffix": " Bring waterproof gear.",
+
+  "insightsHourlyMorning": "Morning",
+  "insightsHourlyAfternoon": "Afternoon",
+  "insightsHourlyEvening": "Evening",
+  "insightsHourlyMorningChilly": "Chilly start—extra layer needed",
+  "insightsHourlyMorningComfort": "Comfortable morning temperatures",
+  "insightsHourlyAfternoonHot": "Peak heat—seek shade",
+  "insightsHourlyAfternoonPleasant": "Pleasant afternoon expected",
+  "insightsHourlyEveningCool": "Cool evening—bring a jacket",
+  "insightsHourlyEveningMild": "Mild evening conditions",
+
+  "insightsWeekLimitedData": "Limited forecast data available",
+  "insightsWeekDataUnavailable": "Forecast data unavailable",
+  "insightsWeekVariableSwing": "Variable week ahead with {swing}°C temperature swing. ",
+  "@insightsWeekVariableSwing": {
+    "placeholders": {
+      "swing": { "type": "String" }
+    }
+  },
+  "insightsWeekStable": "Stable conditions expected with consistent temperatures. ",
+  "insightsWeekWarm": "Generally warm throughout the week.",
+  "insightsWeekCool": "Cool weather pattern persisting.",
+  "insightsWeekModerate": "Moderate temperatures prevailing.",
+
+  "insightsBestTimeSingapore": "Best Time: 7-9 AM & 5-8 PM",
+  "insightsBestTimeSingaporeDesc": "Optimal conditions for outdoor activities in Singapore",
+  "insightsBestTimeNoData": "No data",
+  "insightsBestTimeNoDataDesc": "Unable to determine best times",
+  "insightsBestTimeLimited": "Limited data",
+  "insightsBestTimeLimitedDesc": "Hourly data unavailable",
+  "insightsBestTimeAt": "Best Time: {time}",
+  "@insightsBestTimeAt": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+  "insightsBestTimeDesc": "Optimal conditions for outdoor activities",
+  "insightsTimeAM": "{hour} AM",
+  "@insightsTimeAM": {
+    "placeholders": {
+      "hour": { "type": "String" }
+    }
+  },
+  "insightsTimePM": "{hour} PM",
+  "@insightsTimePM": {
+    "placeholders": {
+      "hour": { "type": "String" }
+    }
+  },
+  "insightsTimeNoon": "12 PM",
+
+  "insightsRecRain": "☔ Bring an umbrella—rain likely",
+  "insightsRecHeatHigh": "🌡️ Stay hydrated—heat warning",
+  "insightsRecHeatMid": "☀️ Apply sunscreen",
+  "insightsRecCold": "🧊 Bundle up—cold weather ahead",
+  "insightsRecWind": "💨 Secure loose items—strong winds",
+  "insightsRecUV": "🛡️ High UV—protect your skin",
+  "insightsRecAir": "😷 Air quality is poor—limit outdoor exertion",
+  "insightsRecWarming": "📈 Warming trend—dress in layers",
+  "insightsRecCooling": "📉 Cooling trend ahead",
+  "insightsRecPleasant": "✨ Pleasant weather expected",
+
+  "insightsSummaryAllClear": "All systems go—great conditions ahead!",
+  "insightsSummaryRain": "Rainy day incoming—prepare accordingly",
+  "insightsSummaryHeat": "Hot and intense—stay cool",
+  "insightsSummaryCold": "Frigid conditions—bundle up",
+  "insightsSummaryWind": "Windy day—hold onto your hat",
+  "insightsSummaryUV": "Strong UV—protect yourself",
+  "insightsSummaryAir": "Air quality is poor—take it easy outside",
+  "insightsSummaryVariable": "Variable conditions expected"
 }

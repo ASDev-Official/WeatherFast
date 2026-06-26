@@ -544,4 +544,268 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get bestTimesTitle => 'Best Times';
+
+  @override
+  String get insightsActivityLimitOutdoorTitle => 'Limit Outdoor Effort';
+
+  @override
+  String get insightsActivityLimitOutdoorDesc =>
+      'Air quality is poor—favor light or indoor activities';
+
+  @override
+  String get insightsActivityIndoorTitle => 'Indoor Activities';
+
+  @override
+  String get insightsActivityIndoorDesc =>
+      'Visit museums, cafes, or indoor entertainment';
+
+  @override
+  String get insightsActivityCyclingTitle => 'Perfect for Cycling';
+
+  @override
+  String get insightsActivityCyclingDesc =>
+      'Great weather for a bike ride—mild temps and clear skies';
+
+  @override
+  String get insightsActivityOutdoorSportsTitle => 'Outdoor Sports';
+
+  @override
+  String get insightsActivityOutdoorSportsDesc =>
+      'Ideal conditions for outdoor activities and sports';
+
+  @override
+  String get insightsActivityBeachTitle => 'Beach Day';
+
+  @override
+  String get insightsActivityBeachDesc =>
+      'Perfect beach weather—bring sunscreen!';
+
+  @override
+  String get insightsActivityHikingTitle => 'Hiking Weather';
+
+  @override
+  String get insightsActivityHikingDesc =>
+      'Cool and comfortable for a nature walk';
+
+  @override
+  String get insightsActivityGeneralTitle => 'General Activities';
+
+  @override
+  String get insightsActivityGeneralDesc => 'Moderate weather—plan accordingly';
+
+  @override
+  String get insightsHealthAirQualityTitle => 'Air Quality Alert';
+
+  @override
+  String get insightsHealthAirQualityDesc =>
+      'Consider a mask outdoors and limit intense activity until air improves.';
+
+  @override
+  String get insightsHealthUVTitle => 'UV Protection Critical';
+
+  @override
+  String get insightsHealthUVDesc =>
+      'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.';
+
+  @override
+  String get insightsHealthHeatTitle => 'Stay Hydrated';
+
+  @override
+  String get insightsHealthHeatDesc =>
+      'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.';
+
+  @override
+  String get insightsHealthColdTitle => 'Cold Weather Alert';
+
+  @override
+  String get insightsHealthColdDesc =>
+      'Watch for frostbite. Layer clothing and cover extremities.';
+
+  @override
+  String get insightsHealthWindTitle => 'Wind Advisory';
+
+  @override
+  String get insightsHealthWindDesc =>
+      'Secure loose items. Be cautious when driving.';
+
+  @override
+  String get insightsHealthOptimalTitle => 'Optimal Conditions';
+
+  @override
+  String get insightsHealthOptimalDesc =>
+      'Perfect weather for physical activity and outdoor time.';
+
+  @override
+  String get insightsClothingHot =>
+      'Light, breathable clothing. Hat and sunglasses recommended.';
+
+  @override
+  String get insightsClothingWarm =>
+      'Comfortable summer wear. Light layers for morning/evening.';
+
+  @override
+  String get insightsClothingMild =>
+      'Long sleeves or light jacket recommended.';
+
+  @override
+  String get insightsClothingCool =>
+      'Jacket or sweater needed. Long pants suggested.';
+
+  @override
+  String get insightsClothingCold =>
+      'Warm jacket essential. Layer up for comfort.';
+
+  @override
+  String get insightsClothingFreeze =>
+      'Heavy winter coat, gloves, and warm layers required.';
+
+  @override
+  String get insightsClothingRainSuffix => ' Bring waterproof gear.';
+
+  @override
+  String get insightsHourlyMorning => 'Morning';
+
+  @override
+  String get insightsHourlyAfternoon => 'Afternoon';
+
+  @override
+  String get insightsHourlyEvening => 'Evening';
+
+  @override
+  String get insightsHourlyMorningChilly => 'Chilly start—extra layer needed';
+
+  @override
+  String get insightsHourlyMorningComfort => 'Comfortable morning temperatures';
+
+  @override
+  String get insightsHourlyAfternoonHot => 'Peak heat—seek shade';
+
+  @override
+  String get insightsHourlyAfternoonPleasant => 'Pleasant afternoon expected';
+
+  @override
+  String get insightsHourlyEveningCool => 'Cool evening—bring a jacket';
+
+  @override
+  String get insightsHourlyEveningMild => 'Mild evening conditions';
+
+  @override
+  String get insightsWeekLimitedData => 'Limited forecast data available';
+
+  @override
+  String get insightsWeekDataUnavailable => 'Forecast data unavailable';
+
+  @override
+  String insightsWeekVariableSwing(String swing) {
+    return 'Variable week ahead with $swing°C temperature swing. ';
+  }
+
+  @override
+  String get insightsWeekStable =>
+      'Stable conditions expected with consistent temperatures. ';
+
+  @override
+  String get insightsWeekWarm => 'Generally warm throughout the week.';
+
+  @override
+  String get insightsWeekCool => 'Cool weather pattern persisting.';
+
+  @override
+  String get insightsWeekModerate => 'Moderate temperatures prevailing.';
+
+  @override
+  String get insightsBestTimeSingapore => 'Best Time: 7-9 AM & 5-8 PM';
+
+  @override
+  String get insightsBestTimeSingaporeDesc =>
+      'Optimal conditions for outdoor activities in Singapore';
+
+  @override
+  String get insightsBestTimeNoData => 'No data';
+
+  @override
+  String get insightsBestTimeNoDataDesc => 'Unable to determine best times';
+
+  @override
+  String get insightsBestTimeLimited => 'Limited data';
+
+  @override
+  String get insightsBestTimeLimitedDesc => 'Hourly data unavailable';
+
+  @override
+  String insightsBestTimeAt(String time) {
+    return 'Best Time: $time';
+  }
+
+  @override
+  String get insightsBestTimeDesc =>
+      'Optimal conditions for outdoor activities';
+
+  @override
+  String insightsTimeAM(String hour) {
+    return '$hour AM';
+  }
+
+  @override
+  String insightsTimePM(String hour) {
+    return '$hour PM';
+  }
+
+  @override
+  String get insightsTimeNoon => '12 PM';
+
+  @override
+  String get insightsRecRain => '☔ Bring an umbrella—rain likely';
+
+  @override
+  String get insightsRecHeatHigh => '🌡️ Stay hydrated—heat warning';
+
+  @override
+  String get insightsRecHeatMid => '☀️ Apply sunscreen';
+
+  @override
+  String get insightsRecCold => '🧊 Bundle up—cold weather ahead';
+
+  @override
+  String get insightsRecWind => '💨 Secure loose items—strong winds';
+
+  @override
+  String get insightsRecUV => '🛡️ High UV—protect your skin';
+
+  @override
+  String get insightsRecAir => '😷 Air quality is poor—limit outdoor exertion';
+
+  @override
+  String get insightsRecWarming => '📈 Warming trend—dress in layers';
+
+  @override
+  String get insightsRecCooling => '📉 Cooling trend ahead';
+
+  @override
+  String get insightsRecPleasant => '✨ Pleasant weather expected';
+
+  @override
+  String get insightsSummaryAllClear =>
+      'All systems go—great conditions ahead!';
+
+  @override
+  String get insightsSummaryRain => 'Rainy day incoming—prepare accordingly';
+
+  @override
+  String get insightsSummaryHeat => 'Hot and intense—stay cool';
+
+  @override
+  String get insightsSummaryCold => 'Frigid conditions—bundle up';
+
+  @override
+  String get insightsSummaryWind => 'Windy day—hold onto your hat';
+
+  @override
+  String get insightsSummaryUV => 'Strong UV—protect yourself';
+
+  @override
+  String get insightsSummaryAir => 'Air quality is poor—take it easy outside';
+
+  @override
+  String get insightsSummaryVariable => 'Variable conditions expected';
 }

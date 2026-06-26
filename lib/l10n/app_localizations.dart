@@ -1105,6 +1105,474 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Best Times'**
   String get bestTimesTitle;
+
+  /// No description provided for @insightsActivityLimitOutdoorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit Outdoor Effort'**
+  String get insightsActivityLimitOutdoorTitle;
+
+  /// No description provided for @insightsActivityLimitOutdoorDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality is poor—favor light or indoor activities'**
+  String get insightsActivityLimitOutdoorDesc;
+
+  /// No description provided for @insightsActivityIndoorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Indoor Activities'**
+  String get insightsActivityIndoorTitle;
+
+  /// No description provided for @insightsActivityIndoorDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Visit museums, cafes, or indoor entertainment'**
+  String get insightsActivityIndoorDesc;
+
+  /// No description provided for @insightsActivityCyclingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect for Cycling'**
+  String get insightsActivityCyclingTitle;
+
+  /// No description provided for @insightsActivityCyclingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Great weather for a bike ride—mild temps and clear skies'**
+  String get insightsActivityCyclingDesc;
+
+  /// No description provided for @insightsActivityOutdoorSportsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor Sports'**
+  String get insightsActivityOutdoorSportsTitle;
+
+  /// No description provided for @insightsActivityOutdoorSportsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Ideal conditions for outdoor activities and sports'**
+  String get insightsActivityOutdoorSportsDesc;
+
+  /// No description provided for @insightsActivityBeachTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Beach Day'**
+  String get insightsActivityBeachTitle;
+
+  /// No description provided for @insightsActivityBeachDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect beach weather—bring sunscreen!'**
+  String get insightsActivityBeachDesc;
+
+  /// No description provided for @insightsActivityHikingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hiking Weather'**
+  String get insightsActivityHikingTitle;
+
+  /// No description provided for @insightsActivityHikingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Cool and comfortable for a nature walk'**
+  String get insightsActivityHikingDesc;
+
+  /// No description provided for @insightsActivityGeneralTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'General Activities'**
+  String get insightsActivityGeneralTitle;
+
+  /// No description provided for @insightsActivityGeneralDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate weather—plan accordingly'**
+  String get insightsActivityGeneralDesc;
+
+  /// No description provided for @insightsHealthAirQualityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Air Quality Alert'**
+  String get insightsHealthAirQualityTitle;
+
+  /// No description provided for @insightsHealthAirQualityDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Consider a mask outdoors and limit intense activity until air improves.'**
+  String get insightsHealthAirQualityDesc;
+
+  /// No description provided for @insightsHealthUVTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'UV Protection Critical'**
+  String get insightsHealthUVTitle;
+
+  /// No description provided for @insightsHealthUVDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.'**
+  String get insightsHealthUVDesc;
+
+  /// No description provided for @insightsHealthHeatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay Hydrated'**
+  String get insightsHealthHeatTitle;
+
+  /// No description provided for @insightsHealthHeatDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.'**
+  String get insightsHealthHeatDesc;
+
+  /// No description provided for @insightsHealthColdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cold Weather Alert'**
+  String get insightsHealthColdTitle;
+
+  /// No description provided for @insightsHealthColdDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch for frostbite. Layer clothing and cover extremities.'**
+  String get insightsHealthColdDesc;
+
+  /// No description provided for @insightsHealthWindTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind Advisory'**
+  String get insightsHealthWindTitle;
+
+  /// No description provided for @insightsHealthWindDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure loose items. Be cautious when driving.'**
+  String get insightsHealthWindDesc;
+
+  /// No description provided for @insightsHealthOptimalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal Conditions'**
+  String get insightsHealthOptimalTitle;
+
+  /// No description provided for @insightsHealthOptimalDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect weather for physical activity and outdoor time.'**
+  String get insightsHealthOptimalDesc;
+
+  /// No description provided for @insightsClothingHot.
+  ///
+  /// In en, this message translates to:
+  /// **'Light, breathable clothing. Hat and sunglasses recommended.'**
+  String get insightsClothingHot;
+
+  /// No description provided for @insightsClothingWarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Comfortable summer wear. Light layers for morning/evening.'**
+  String get insightsClothingWarm;
+
+  /// No description provided for @insightsClothingMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Long sleeves or light jacket recommended.'**
+  String get insightsClothingMild;
+
+  /// No description provided for @insightsClothingCool.
+  ///
+  /// In en, this message translates to:
+  /// **'Jacket or sweater needed. Long pants suggested.'**
+  String get insightsClothingCool;
+
+  /// No description provided for @insightsClothingCold.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm jacket essential. Layer up for comfort.'**
+  String get insightsClothingCold;
+
+  /// No description provided for @insightsClothingFreeze.
+  ///
+  /// In en, this message translates to:
+  /// **'Heavy winter coat, gloves, and warm layers required.'**
+  String get insightsClothingFreeze;
+
+  /// No description provided for @insightsClothingRainSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **' Bring waterproof gear.'**
+  String get insightsClothingRainSuffix;
+
+  /// No description provided for @insightsHourlyMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get insightsHourlyMorning;
+
+  /// No description provided for @insightsHourlyAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get insightsHourlyAfternoon;
+
+  /// No description provided for @insightsHourlyEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get insightsHourlyEvening;
+
+  /// No description provided for @insightsHourlyMorningChilly.
+  ///
+  /// In en, this message translates to:
+  /// **'Chilly start—extra layer needed'**
+  String get insightsHourlyMorningChilly;
+
+  /// No description provided for @insightsHourlyMorningComfort.
+  ///
+  /// In en, this message translates to:
+  /// **'Comfortable morning temperatures'**
+  String get insightsHourlyMorningComfort;
+
+  /// No description provided for @insightsHourlyAfternoonHot.
+  ///
+  /// In en, this message translates to:
+  /// **'Peak heat—seek shade'**
+  String get insightsHourlyAfternoonHot;
+
+  /// No description provided for @insightsHourlyAfternoonPleasant.
+  ///
+  /// In en, this message translates to:
+  /// **'Pleasant afternoon expected'**
+  String get insightsHourlyAfternoonPleasant;
+
+  /// No description provided for @insightsHourlyEveningCool.
+  ///
+  /// In en, this message translates to:
+  /// **'Cool evening—bring a jacket'**
+  String get insightsHourlyEveningCool;
+
+  /// No description provided for @insightsHourlyEveningMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild evening conditions'**
+  String get insightsHourlyEveningMild;
+
+  /// No description provided for @insightsWeekLimitedData.
+  ///
+  /// In en, this message translates to:
+  /// **'Limited forecast data available'**
+  String get insightsWeekLimitedData;
+
+  /// No description provided for @insightsWeekDataUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast data unavailable'**
+  String get insightsWeekDataUnavailable;
+
+  /// No description provided for @insightsWeekVariableSwing.
+  ///
+  /// In en, this message translates to:
+  /// **'Variable week ahead with {swing}°C temperature swing. '**
+  String insightsWeekVariableSwing(String swing);
+
+  /// No description provided for @insightsWeekStable.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable conditions expected with consistent temperatures. '**
+  String get insightsWeekStable;
+
+  /// No description provided for @insightsWeekWarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Generally warm throughout the week.'**
+  String get insightsWeekWarm;
+
+  /// No description provided for @insightsWeekCool.
+  ///
+  /// In en, this message translates to:
+  /// **'Cool weather pattern persisting.'**
+  String get insightsWeekCool;
+
+  /// No description provided for @insightsWeekModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate temperatures prevailing.'**
+  String get insightsWeekModerate;
+
+  /// No description provided for @insightsBestTimeSingapore.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Time: 7-9 AM & 5-8 PM'**
+  String get insightsBestTimeSingapore;
+
+  /// No description provided for @insightsBestTimeSingaporeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal conditions for outdoor activities in Singapore'**
+  String get insightsBestTimeSingaporeDesc;
+
+  /// No description provided for @insightsBestTimeNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get insightsBestTimeNoData;
+
+  /// No description provided for @insightsBestTimeNoDataDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine best times'**
+  String get insightsBestTimeNoDataDesc;
+
+  /// No description provided for @insightsBestTimeLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Limited data'**
+  String get insightsBestTimeLimited;
+
+  /// No description provided for @insightsBestTimeLimitedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Hourly data unavailable'**
+  String get insightsBestTimeLimitedDesc;
+
+  /// No description provided for @insightsBestTimeAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Time: {time}'**
+  String insightsBestTimeAt(String time);
+
+  /// No description provided for @insightsBestTimeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimal conditions for outdoor activities'**
+  String get insightsBestTimeDesc;
+
+  /// No description provided for @insightsTimeAM.
+  ///
+  /// In en, this message translates to:
+  /// **'{hour} AM'**
+  String insightsTimeAM(String hour);
+
+  /// No description provided for @insightsTimePM.
+  ///
+  /// In en, this message translates to:
+  /// **'{hour} PM'**
+  String insightsTimePM(String hour);
+
+  /// No description provided for @insightsTimeNoon.
+  ///
+  /// In en, this message translates to:
+  /// **'12 PM'**
+  String get insightsTimeNoon;
+
+  /// No description provided for @insightsRecRain.
+  ///
+  /// In en, this message translates to:
+  /// **'☔ Bring an umbrella—rain likely'**
+  String get insightsRecRain;
+
+  /// No description provided for @insightsRecHeatHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'🌡️ Stay hydrated—heat warning'**
+  String get insightsRecHeatHigh;
+
+  /// No description provided for @insightsRecHeatMid.
+  ///
+  /// In en, this message translates to:
+  /// **'☀️ Apply sunscreen'**
+  String get insightsRecHeatMid;
+
+  /// No description provided for @insightsRecCold.
+  ///
+  /// In en, this message translates to:
+  /// **'🧊 Bundle up—cold weather ahead'**
+  String get insightsRecCold;
+
+  /// No description provided for @insightsRecWind.
+  ///
+  /// In en, this message translates to:
+  /// **'💨 Secure loose items—strong winds'**
+  String get insightsRecWind;
+
+  /// No description provided for @insightsRecUV.
+  ///
+  /// In en, this message translates to:
+  /// **'🛡️ High UV—protect your skin'**
+  String get insightsRecUV;
+
+  /// No description provided for @insightsRecAir.
+  ///
+  /// In en, this message translates to:
+  /// **'😷 Air quality is poor—limit outdoor exertion'**
+  String get insightsRecAir;
+
+  /// No description provided for @insightsRecWarming.
+  ///
+  /// In en, this message translates to:
+  /// **'📈 Warming trend—dress in layers'**
+  String get insightsRecWarming;
+
+  /// No description provided for @insightsRecCooling.
+  ///
+  /// In en, this message translates to:
+  /// **'📉 Cooling trend ahead'**
+  String get insightsRecCooling;
+
+  /// No description provided for @insightsRecPleasant.
+  ///
+  /// In en, this message translates to:
+  /// **'✨ Pleasant weather expected'**
+  String get insightsRecPleasant;
+
+  /// No description provided for @insightsSummaryAllClear.
+  ///
+  /// In en, this message translates to:
+  /// **'All systems go—great conditions ahead!'**
+  String get insightsSummaryAllClear;
+
+  /// No description provided for @insightsSummaryRain.
+  ///
+  /// In en, this message translates to:
+  /// **'Rainy day incoming—prepare accordingly'**
+  String get insightsSummaryRain;
+
+  /// No description provided for @insightsSummaryHeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Hot and intense—stay cool'**
+  String get insightsSummaryHeat;
+
+  /// No description provided for @insightsSummaryCold.
+  ///
+  /// In en, this message translates to:
+  /// **'Frigid conditions—bundle up'**
+  String get insightsSummaryCold;
+
+  /// No description provided for @insightsSummaryWind.
+  ///
+  /// In en, this message translates to:
+  /// **'Windy day—hold onto your hat'**
+  String get insightsSummaryWind;
+
+  /// No description provided for @insightsSummaryUV.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong UV—protect yourself'**
+  String get insightsSummaryUV;
+
+  /// No description provided for @insightsSummaryAir.
+  ///
+  /// In en, this message translates to:
+  /// **'Air quality is poor—take it easy outside'**
+  String get insightsSummaryAir;
+
+  /// No description provided for @insightsSummaryVariable.
+  ///
+  /// In en, this message translates to:
+  /// **'Variable conditions expected'**
+  String get insightsSummaryVariable;
 }
 
 class _AppLocalizationsDelegate

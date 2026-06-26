@@ -145,6 +145,7 @@ class _DetailScreenState extends State<DetailScreen>
       final country = forecastData['location']?['country']?.toString() ?? '';
 
       final insights = _insightsService.generateInsights(
+        l10n: AppLocalizations.of(context)!,
         condition: _condition,
         currentTemp: _tempC ?? 0,
         highTemp: _hiC ?? 0,

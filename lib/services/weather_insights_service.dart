@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import '../l10n/app_localizations.dart';
+
 class WeatherInsightsService {
-  /// Generate comprehensive weather insights
+  /// Generate comprehensive weather insights.
+  /// [l10n] must be provided so that all returned strings are localised.
   Map<String, dynamic> generateInsights({
+    required AppLocalizations l10n,
     required String condition,
     required int currentTemp,
     required int highTemp,
@@ -27,17 +31,17 @@ class WeatherInsightsService {
     );
 
     return {
-      'summary': _generateSummary(risks, trends),
-      'recommendations': _generateRecommendations(risks, trends),
+      'summary': _generateSummary(l10n, risks, trends),
+      'recommendations': _generateRecommendations(l10n, risks, trends),
       'riskScores': risks,
       'trends': trends,
-      'activities': _generateActivitySuggestions(risks, currentTemp, condition),
-      'healthTips': _generateHealthTips(risks, uvIndex, currentTemp),
+      'activities': _generateActivitySuggestions(l10n, risks, currentTemp, condition),
+      'healthTips': _generateHealthTips(l10n, risks, uvIndex, currentTemp),
       'clothingAdvice':
-          _generateClothingAdvice(currentTemp, highTemp, lowTemp, condition),
-      'hourlyInsights': _generateHourlyInsights(dailyForecasts),
-      'weekAhead': _generateWeekAheadInsights(dailyForecasts),
-      'bestTimes': _findBestTimes(dailyForecasts, country),
+          _generateClothingAdvice(l10n, currentTemp, highTemp, lowTemp, condition),
+      'hourlyInsights': _generateHourlyInsights(l10n, dailyForecasts),
+      'weekAhead': _generateWeekAheadInsights(l10n, dailyForecasts),
+      'bestTimes': _findBestTimes(l10n, dailyForecasts, country),
     };
   }
 
@@ -147,9 +151,9 @@ class WeatherInsightsService {
     double sum = 0;
     int count = 0;
     for (var f in forecasts) {
-      final max = f['day']?['maxtemp_c'] as num?;
-      if (max != null) {
-        sum += max.toDouble();
+      final maxT = f['day']?['maxtemp_c'] as num?;
+      if (maxT != null) {
+        sum += maxT.toDouble();
         count++;
       }
     }
@@ -157,7 +161,10 @@ class WeatherInsightsService {
   }
 
   List<Map<String, String>> _generateActivitySuggestions(
-      Map<String, double> risks, int temp, String condition) {
+      AppLocalizations l10n,
+      Map<String, double> risks,
+      int temp,
+      String condition) {
     final activities = <Map<String, String>>[];
 
     // Check if air quality is poor
@@ -166,14 +173,13 @@ class WeatherInsightsService {
     if (poorAirQuality) {
       activities.add({
         'icon': '😷',
-        'title': 'Limit Outdoor Effort',
-        'description': 'Air quality is poor—favor light or indoor activities',
+        'title': l10n.insightsActivityLimitOutdoorTitle,
+        'description': l10n.insightsActivityLimitOutdoorDesc,
       });
-      // Skip outdoor activity suggestions when air quality is poor
       activities.add({
         'icon': '🏛️',
-        'title': 'Indoor Activities',
-        'description': 'Visit museums, cafes, or indoor entertainment',
+        'title': l10n.insightsActivityIndoorTitle,
+        'description': l10n.insightsActivityIndoorDesc,
       });
       return activities;
     }
@@ -181,41 +187,40 @@ class WeatherInsightsService {
     if (risks['rain']! < 0.3 && temp > 15 && temp < 30) {
       activities.add({
         'icon': '🚴',
-        'title': 'Perfect for Cycling',
-        'description':
-            'Great weather for a bike ride—mild temps and clear skies',
+        'title': l10n.insightsActivityCyclingTitle,
+        'description': l10n.insightsActivityCyclingDesc,
       });
     }
 
     if (risks['heat']! < 0.4 && risks['rain']! < 0.4) {
       activities.add({
         'icon': '⚽',
-        'title': 'Outdoor Sports',
-        'description': 'Ideal conditions for outdoor activities and sports',
+        'title': l10n.insightsActivityOutdoorSportsTitle,
+        'description': l10n.insightsActivityOutdoorSportsDesc,
       });
     }
 
     if (temp > 25 && risks['rain']! < 0.5) {
       activities.add({
         'icon': '🏖️',
-        'title': 'Beach Day',
-        'description': 'Perfect beach weather—bring sunscreen!',
+        'title': l10n.insightsActivityBeachTitle,
+        'description': l10n.insightsActivityBeachDesc,
       });
     }
 
     if (risks['rain']! > 0.6) {
       activities.add({
         'icon': '🏛️',
-        'title': 'Indoor Activities',
-        'description': 'Visit museums, cafes, or indoor entertainment',
+        'title': l10n.insightsActivityIndoorTitle,
+        'description': l10n.insightsActivityIndoorDesc,
       });
     }
 
     if (temp < 15 && risks['rain']! < 0.5) {
       activities.add({
         'icon': '🥾',
-        'title': 'Hiking Weather',
-        'description': 'Cool and comfortable for a nature walk',
+        'title': l10n.insightsActivityHikingTitle,
+        'description': l10n.insightsActivityHikingDesc,
       });
     }
 
@@ -223,23 +228,25 @@ class WeatherInsightsService {
         ? [
             {
               'icon': '🌤️',
-              'title': 'General Activities',
-              'description': 'Moderate weather—plan accordingly',
+              'title': l10n.insightsActivityGeneralTitle,
+              'description': l10n.insightsActivityGeneralDesc,
             }
           ]
         : activities;
   }
 
   List<Map<String, String>> _generateHealthTips(
-      Map<String, double> risks, double uv, int temp) {
+      AppLocalizations l10n,
+      Map<String, double> risks,
+      double uv,
+      int temp) {
     final tips = <Map<String, String>>[];
 
     if (risks['air'] != null && risks['air']! > 0.5) {
       tips.add({
         'icon': '😷',
-        'title': 'Air Quality Alert',
-        'description':
-            'Consider a mask outdoors and limit intense activity until air improves.',
+        'title': l10n.insightsHealthAirQualityTitle,
+        'description': l10n.insightsHealthAirQualityDesc,
         'severity': 'high',
       });
     }
@@ -247,9 +254,8 @@ class WeatherInsightsService {
     if (risks['uv']! > 0.6) {
       tips.add({
         'icon': '☀️',
-        'title': 'UV Protection Critical',
-        'description':
-            'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.',
+        'title': l10n.insightsHealthUVTitle,
+        'description': l10n.insightsHealthUVDesc,
         'severity': 'high',
       });
     }
@@ -257,9 +263,8 @@ class WeatherInsightsService {
     if (risks['heat']! > 0.7) {
       tips.add({
         'icon': '💧',
-        'title': 'Stay Hydrated',
-        'description':
-            'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.',
+        'title': l10n.insightsHealthHeatTitle,
+        'description': l10n.insightsHealthHeatDesc,
         'severity': 'high',
       });
     }
@@ -267,9 +272,8 @@ class WeatherInsightsService {
     if (risks['cold']! > 0.6) {
       tips.add({
         'icon': '🧊',
-        'title': 'Cold Weather Alert',
-        'description':
-            'Watch for frostbite. Layer clothing and cover extremities.',
+        'title': l10n.insightsHealthColdTitle,
+        'description': l10n.insightsHealthColdDesc,
         'severity': 'high',
       });
     }
@@ -277,8 +281,8 @@ class WeatherInsightsService {
     if (risks['wind']! > 0.5) {
       tips.add({
         'icon': '💨',
-        'title': 'Wind Advisory',
-        'description': 'Secure loose items. Be cautious when driving.',
+        'title': l10n.insightsHealthWindTitle,
+        'description': l10n.insightsHealthWindDesc,
         'severity': 'medium',
       });
     }
@@ -286,9 +290,8 @@ class WeatherInsightsService {
     if (temp > 20 && temp < 25 && risks['rain']! < 0.3) {
       tips.add({
         'icon': '✨',
-        'title': 'Optimal Conditions',
-        'description':
-            'Perfect weather for physical activity and outdoor time.',
+        'title': l10n.insightsHealthOptimalTitle,
+        'description': l10n.insightsHealthOptimalDesc,
         'severity': 'low',
       });
     }
@@ -297,32 +300,32 @@ class WeatherInsightsService {
   }
 
   Map<String, String> _generateClothingAdvice(
-      int current, int high, int low, String condition) {
-    String advice = '';
-    String icon = '👕';
+      AppLocalizations l10n, int current, int high, int low, String condition) {
+    String advice;
+    String icon;
 
     if (high > 30) {
       icon = '🩳';
-      advice = 'Light, breathable clothing. Hat and sunglasses recommended.';
+      advice = l10n.insightsClothingHot;
     } else if (high > 25) {
       icon = '👕';
-      advice = 'Comfortable summer wear. Light layers for morning/evening.';
+      advice = l10n.insightsClothingWarm;
     } else if (high > 20) {
       icon = '👖';
-      advice = 'Long sleeves or light jacket recommended.';
+      advice = l10n.insightsClothingMild;
     } else if (high > 15) {
       icon = '🧥';
-      advice = 'Jacket or sweater needed. Long pants suggested.';
+      advice = l10n.insightsClothingCool;
     } else if (high > 10) {
       icon = '🧥';
-      advice = 'Warm jacket essential. Layer up for comfort.';
+      advice = l10n.insightsClothingCold;
     } else {
       icon = '🧤';
-      advice = 'Heavy winter coat, gloves, and warm layers required.';
+      advice = l10n.insightsClothingFreeze;
     }
 
     if (condition.toLowerCase().contains('rain')) {
-      advice += ' Bring waterproof gear.';
+      advice += l10n.insightsClothingRainSuffix;
       icon = '☔';
     }
 
@@ -330,13 +333,14 @@ class WeatherInsightsService {
   }
 
   List<Map<String, dynamic>> _generateHourlyInsights(
-      List<Map<String, dynamic>> dailyForecasts) {
+      AppLocalizations l10n, List<Map<String, dynamic>> dailyForecasts) {
     final insights = <Map<String, dynamic>>[];
 
     if (dailyForecasts.isEmpty) return insights;
 
     final today = dailyForecasts.first;
-    final hourly = (today['hour'] as List?)?.cast<Map<String, dynamic>>() ?? [];
+    final hourly =
+        (today['hour'] as List?)?.cast<Map<String, dynamic>>() ?? [];
 
     if (hourly.length >= 24) {
       // Morning (6-9am)
@@ -348,11 +352,11 @@ class WeatherInsightsService {
         final avgMorning =
             morningTemps.reduce((a, b) => a + b) / morningTemps.length;
         insights.add({
-          'time': 'Morning',
+          'time': l10n.insightsHourlyMorning,
           'temp': avgMorning.round(),
           'insight': avgMorning < 10
-              ? 'Chilly start—extra layer needed'
-              : 'Comfortable morning temperatures',
+              ? l10n.insightsHourlyMorningChilly
+              : l10n.insightsHourlyMorningComfort,
         });
       }
 
@@ -365,11 +369,11 @@ class WeatherInsightsService {
         final avgAfternoon =
             afternoonTemps.reduce((a, b) => a + b) / afternoonTemps.length;
         insights.add({
-          'time': 'Afternoon',
+          'time': l10n.insightsHourlyAfternoon,
           'temp': avgAfternoon.round(),
           'insight': avgAfternoon > 30
-              ? 'Peak heat—seek shade'
-              : 'Pleasant afternoon expected',
+              ? l10n.insightsHourlyAfternoonHot
+              : l10n.insightsHourlyAfternoonPleasant,
         });
       }
 
@@ -382,11 +386,11 @@ class WeatherInsightsService {
         final avgEvening =
             eveningTemps.reduce((a, b) => a + b) / eveningTemps.length;
         insights.add({
-          'time': 'Evening',
+          'time': l10n.insightsHourlyEvening,
           'temp': avgEvening.round(),
           'insight': avgEvening < 15
-              ? 'Cool evening—bring a jacket'
-              : 'Mild evening conditions',
+              ? l10n.insightsHourlyEveningCool
+              : l10n.insightsHourlyEveningMild,
         });
       }
     }
@@ -395,9 +399,9 @@ class WeatherInsightsService {
   }
 
   Map<String, String> _generateWeekAheadInsights(
-      List<Map<String, dynamic>> dailyForecasts) {
+      AppLocalizations l10n, List<Map<String, dynamic>> dailyForecasts) {
     if (dailyForecasts.length < 7) {
-      return {'summary': 'Limited forecast data available'};
+      return {'summary': l10n.insightsWeekLimitedData};
     }
 
     final temps = dailyForecasts
@@ -407,55 +411,58 @@ class WeatherInsightsService {
         .toList();
 
     if (temps.isEmpty) {
-      return {'summary': 'Forecast data unavailable'};
+      return {'summary': l10n.insightsWeekDataUnavailable};
     }
 
     final avgTemp = temps.reduce((a, b) => a + b) / temps.length;
     final maxTemp = temps.reduce(max);
     final minTemp = temps.reduce(min);
 
-    String summary = '';
+    String summary;
     if (maxTemp - minTemp > 10) {
-      summary =
-          'Variable week ahead with ${(maxTemp - minTemp).round()}°C temperature swing. ';
+      summary = l10n.insightsWeekVariableSwing(
+          (maxTemp - minTemp).round().toString());
     } else {
-      summary = 'Stable conditions expected with consistent temperatures. ';
+      summary = l10n.insightsWeekStable;
     }
 
     if (avgTemp > 25) {
-      summary += 'Generally warm throughout the week.';
+      summary += l10n.insightsWeekWarm;
     } else if (avgTemp < 15) {
-      summary += 'Cool weather pattern persisting.';
+      summary += l10n.insightsWeekCool;
     } else {
-      summary += 'Moderate temperatures prevailing.';
+      summary += l10n.insightsWeekModerate;
     }
 
     return {'summary': summary, 'avgTemp': avgTemp.round().toString()};
   }
 
   Map<String, String> _findBestTimes(
-      List<Map<String, dynamic>> dailyForecasts, String country) {
+      AppLocalizations l10n,
+      List<Map<String, dynamic>> dailyForecasts,
+      String country) {
     if (country.toLowerCase().contains('singapore')) {
       return {
-        'title': 'Best Time: 7-9 AM & 5-8 PM',
-        'description': 'Optimal conditions for outdoor activities in Singapore',
+        'title': l10n.insightsBestTimeSingapore,
+        'description': l10n.insightsBestTimeSingaporeDesc,
       };
     }
 
     if (dailyForecasts.isEmpty) {
       return {
-        'title': 'No data',
-        'description': 'Unable to determine best times'
+        'title': l10n.insightsBestTimeNoData,
+        'description': l10n.insightsBestTimeNoDataDesc,
       };
     }
 
     final today = dailyForecasts.first;
-    final hourly = (today['hour'] as List?)?.cast<Map<String, dynamic>>() ?? [];
+    final hourly =
+        (today['hour'] as List?)?.cast<Map<String, dynamic>>() ?? [];
 
     if (hourly.isEmpty) {
       return {
-        'title': 'Limited data',
-        'description': 'Hourly data unavailable'
+        'title': l10n.insightsBestTimeLimited,
+        'description': l10n.insightsBestTimeLimitedDesc,
       };
     }
 
@@ -482,74 +489,81 @@ class WeatherInsightsService {
       }
     }
 
-    final hourStr = bestHour == 12
-        ? '12 PM'
-        : bestHour > 12
-            ? '${bestHour - 12} PM'
-            : '$bestHour AM';
+    final String hourStr;
+    if (bestHour == 12) {
+      hourStr = l10n.insightsTimeNoon;
+    } else if (bestHour > 12) {
+      hourStr = l10n.insightsTimePM((bestHour - 12).toString());
+    } else {
+      hourStr = l10n.insightsTimeAM(bestHour.toString());
+    }
 
     return {
-      'title': 'Best Time: $hourStr',
-      'description': 'Optimal conditions for outdoor activities',
+      'title': l10n.insightsBestTimeAt(hourStr),
+      'description': l10n.insightsBestTimeDesc,
     };
   }
 
   List<String> _generateRecommendations(
-      Map<String, double> risks, Map<String, dynamic> trends) {
+      AppLocalizations l10n,
+      Map<String, double> risks,
+      Map<String, dynamic> trends) {
     final recs = <String>[];
 
     if (risks['rain']! > 0.6) {
-      recs.add('☔ Bring an umbrella—rain likely');
+      recs.add(l10n.insightsRecRain);
     }
     if (risks['heat']! > 0.7) {
-      recs.add('🌡️ Stay hydrated—heat warning');
+      recs.add(l10n.insightsRecHeatHigh);
     } else if (risks['heat']! > 0.4) {
-      recs.add('☀️ Apply sunscreen');
+      recs.add(l10n.insightsRecHeatMid);
     }
     if (risks['cold']! > 0.7) {
-      recs.add('🧊 Bundle up—cold weather ahead');
+      recs.add(l10n.insightsRecCold);
     }
     if (risks['wind']! > 0.6) {
-      recs.add('💨 Secure loose items—strong winds');
+      recs.add(l10n.insightsRecWind);
     }
     if (risks['uv']! > 0.6) {
-      recs.add('🛡️ High UV—protect your skin');
+      recs.add(l10n.insightsRecUV);
     }
     if (risks['air'] != null && risks['air']! > 0.6) {
-      recs.add('😷 Air quality is poor—limit outdoor exertion');
+      recs.add(l10n.insightsRecAir);
     }
     if (trends['direction'] == 'warming') {
-      recs.add('📈 Warming trend—dress in layers');
+      recs.add(l10n.insightsRecWarming);
     } else if (trends['direction'] == 'cooling') {
-      recs.add('📉 Cooling trend ahead');
+      recs.add(l10n.insightsRecCooling);
     }
 
-    return recs.isEmpty ? ['✨ Pleasant weather expected'] : recs;
+    return recs.isEmpty ? [l10n.insightsRecPleasant] : recs;
   }
 
   String _generateSummary(
-      Map<String, double> risks, Map<String, dynamic> trends) {
+      AppLocalizations l10n,
+      Map<String, double> risks,
+      Map<String, dynamic> trends) {
     final topRisks = risks.entries.where((e) => e.value > 0.5).toList()
       ..sort((a, b) => b.value.compareTo(a.value));
 
-    if (topRisks.isEmpty) return 'All systems go—great conditions ahead!';
+    if (topRisks.isEmpty) return l10n.insightsSummaryAllClear;
 
     final risk = topRisks.first;
     switch (risk.key) {
       case 'rain':
-        return 'Rainy day incoming—prepare accordingly';
+        return l10n.insightsSummaryRain;
       case 'heat':
-        return 'Hot and intense—stay cool';
+        return l10n.insightsSummaryHeat;
       case 'cold':
-        return 'Frigid conditions—bundle up';
+        return l10n.insightsSummaryCold;
       case 'wind':
-        return 'Windy day—hold onto your hat';
+        return l10n.insightsSummaryWind;
       case 'uv':
-        return 'Strong UV—protect yourself';
+        return l10n.insightsSummaryUV;
       case 'air':
-        return 'Air quality is poor—take it easy outside';
+        return l10n.insightsSummaryAir;
       default:
-        return 'Variable conditions expected';
+        return l10n.insightsSummaryVariable;
     }
   }
 }
