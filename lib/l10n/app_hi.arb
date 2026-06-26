@@ -264,5 +264,21 @@
         }
     },
     "helpLocalizeWeatherFast": "WeatherFast का अनुवाद करने में मदद करें",
-    "ok": "ठीक है"
+    "ok": "ठीक है",
+    "unitMph": "mph",
+    "unitMiles": "Miles (mi)",
+    "temperature": "Temperature",
+    "unitKmh": "km/h",
+    "notificationsTooltip": "Notifications",
+    "unitKilometers": "Kilometers (km)",
+    "unitKnots": "knots",
+    "bestTimesTitle": "Best Times",
+    "performanceMode": "Performance Mode",
+    "disableExtraVisualEffects": "Disable extra visual effects",
+    "units": "Units",
+    "windSpeedLabel": "Wind Speed",
+    "temperatureWindVisibility": "Temperature, Wind, Visibility",
+    "celsius": "Celsius (°C)",
+    "fahrenheit": "Fahrenheit (°F)",
+    "unitMs": "m/s"
 }
