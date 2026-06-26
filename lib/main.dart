@@ -251,18 +251,18 @@ class _WeatherShellState extends State<WeatherShell> {
             surfaceTintColor: Colors.transparent,
             selectedIndex: _index,
             onDestinationSelected: (value) => setState(() => _index = value),
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                icon: Icon(Icons.home_rounded),
-                label: 'Home',
+                icon: const Icon(Icons.home_rounded),
+                label: AppLocalizations.of(context)!.home,
               ),
               NavigationDestination(
-                icon: Icon(Icons.timeline_rounded),
-                label: 'Insights',
+                icon: const Icon(Icons.timeline_rounded),
+                label: AppLocalizations.of(context)!.insights,
               ),
               NavigationDestination(
-                icon: Icon(Icons.settings_rounded),
-                label: 'Settings',
+                icon: const Icon(Icons.settings_rounded),
+                label: AppLocalizations.of(context)!.settings,
               ),
             ],
           );

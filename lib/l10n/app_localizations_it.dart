@@ -489,4 +489,52 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get notificationsTooltip => 'Notifications';
+
+  @override
+  String get units => 'Units';
+
+  @override
+  String get temperatureWindVisibility => 'Temperature, Wind, Visibility';
+
+  @override
+  String get temperature => 'Temperature';
+
+  @override
+  String get celsius => 'Celsius (°C)';
+
+  @override
+  String get fahrenheit => 'Fahrenheit (°F)';
+
+  @override
+  String get windSpeedLabel => 'Wind Speed';
+
+  @override
+  String get unitKmh => 'km/h';
+
+  @override
+  String get unitMph => 'mph';
+
+  @override
+  String get unitMs => 'm/s';
+
+  @override
+  String get unitKnots => 'knots';
+
+  @override
+  String get unitKilometers => 'Kilometers (km)';
+
+  @override
+  String get unitMiles => 'Miles (mi)';
+
+  @override
+  String get performanceMode => 'Performance Mode';
+
+  @override
+  String get disableExtraVisualEffects => 'Disable extra visual effects';
+
+  @override
+  String get bestTimesTitle => 'Best Times';
 }

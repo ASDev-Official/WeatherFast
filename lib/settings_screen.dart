@@ -339,8 +339,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onTertiaryContainer,
                             ),
                           ),
-                          title: const Text('Units'),
-                          subtitle: const Text('Temperature, Wind, Visibility'),
+                          title: Text(AppLocalizations.of(context)!.units),
+                          subtitle: Text(AppLocalizations.of(context)!.temperatureWindVisibility),
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: () {
                             Navigator.push(
@@ -364,8 +364,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: colorScheme.onTertiaryContainer,
                             ),
                           ),
-                          title: const Text('Performance Mode'),
-                          subtitle: const Text('Disable extra visual effects'),
+                          title: Text(AppLocalizations.of(context)!.performanceMode),
+                          subtitle: Text(AppLocalizations.of(context)!.disableExtraVisualEffects),
                           value: _performanceMode,
                           onChanged: _togglePerformanceMode,
                         ),

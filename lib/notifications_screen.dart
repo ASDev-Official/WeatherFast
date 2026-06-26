@@ -43,13 +43,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         });
       } else {
         setState(() {
-          _error = 'Failed to load notifications: ${response.statusCode}';
+          _error = AppLocalizations.of(context)!.failedToLoadNotifications(response.statusCode.toString());
           _isLoading = false;
         });
       }
     } catch (e) {
       setState(() {
-        _error = 'Error loading notifications: $e';
+        _error = AppLocalizations.of(context)!.errorLoadingNotifications(e.toString());
         _isLoading = false;
       });
     }

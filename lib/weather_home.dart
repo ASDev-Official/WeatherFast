@@ -481,7 +481,7 @@ class _WeatherHomeState extends State<WeatherHome> {
               actions: [
                 IconButton(
                   icon: const Icon(Icons.notifications_rounded),
-                  tooltip: 'Notifications',
+                  tooltip: AppLocalizations.of(context)!.notificationsTooltip,
                   onPressed: () {
                     Navigator.push(
                       context,

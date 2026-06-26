@@ -654,7 +654,7 @@ class _DetailScreenState extends State<DetailScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    _bestTimes['title'] ?? 'Best Times',
+                    _bestTimes['title'] ?? AppLocalizations.of(context)!.bestTimesTitle,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

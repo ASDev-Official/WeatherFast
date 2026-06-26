@@ -232,5 +232,21 @@
     }
   },
   "helpLocalizeWeatherFast": "Help localize WeatherFast",
-  "ok": "OK"
+  "ok": "OK",
+  "notificationsTooltip": "Notifications",
+  "units": "Units",
+  "temperatureWindVisibility": "Temperature, Wind, Visibility",
+  "temperature": "Temperature",
+  "celsius": "Celsius (°C)",
+  "fahrenheit": "Fahrenheit (°F)",
+  "windSpeedLabel": "Wind Speed",
+  "unitKmh": "km/h",
+  "unitMph": "mph",
+  "unitMs": "m/s",
+  "unitKnots": "knots",
+  "unitKilometers": "Kilometers (km)",
+  "unitMiles": "Miles (mi)",
+  "performanceMode": "Performance Mode",
+  "disableExtraVisualEffects": "Disable extra visual effects",
+  "bestTimesTitle": "Best Times"
 }

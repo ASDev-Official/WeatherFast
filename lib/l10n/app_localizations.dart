@@ -1009,6 +1009,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OK'**
   String get ok;
+
+  /// No description provided for @notificationsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTooltip;
+
+  /// No description provided for @units.
+  ///
+  /// In en, this message translates to:
+  /// **'Units'**
+  String get units;
+
+  /// No description provided for @temperatureWindVisibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature, Wind, Visibility'**
+  String get temperatureWindVisibility;
+
+  /// No description provided for @temperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get temperature;
+
+  /// No description provided for @celsius.
+  ///
+  /// In en, this message translates to:
+  /// **'Celsius (°C)'**
+  String get celsius;
+
+  /// No description provided for @fahrenheit.
+  ///
+  /// In en, this message translates to:
+  /// **'Fahrenheit (°F)'**
+  String get fahrenheit;
+
+  /// No description provided for @windSpeedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind Speed'**
+  String get windSpeedLabel;
+
+  /// No description provided for @unitKmh.
+  ///
+  /// In en, this message translates to:
+  /// **'km/h'**
+  String get unitKmh;
+
+  /// No description provided for @unitMph.
+  ///
+  /// In en, this message translates to:
+  /// **'mph'**
+  String get unitMph;
+
+  /// No description provided for @unitMs.
+  ///
+  /// In en, this message translates to:
+  /// **'m/s'**
+  String get unitMs;
+
+  /// No description provided for @unitKnots.
+  ///
+  /// In en, this message translates to:
+  /// **'knots'**
+  String get unitKnots;
+
+  /// No description provided for @unitKilometers.
+  ///
+  /// In en, this message translates to:
+  /// **'Kilometers (km)'**
+  String get unitKilometers;
+
+  /// No description provided for @unitMiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Miles (mi)'**
+  String get unitMiles;
+
+  /// No description provided for @performanceMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Mode'**
+  String get performanceMode;
+
+  /// No description provided for @disableExtraVisualEffects.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable extra visual effects'**
+  String get disableExtraVisualEffects;
+
+  /// No description provided for @bestTimesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Times'**
+  String get bestTimesTitle;
 }
 
 class _AppLocalizationsDelegate
