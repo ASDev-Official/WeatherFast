@@ -1,7 +1,7 @@
 {
-    "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "airQuality": "Kualitas Udara",
+    "close": "Tutup",
+    "failedToLoadWeather": "Gagal memuat cuaca: {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -9,9 +9,9 @@
             }
         }
     },
-    "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
-    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
-    "highLowTemp": "H {high}°  ·  L {low}°",
+    "futureAdviceStorm": "Badai diperkirakan terjadi dalam beberapa jam ke depan. Selesaikan aktivitas di luar ruangan sesegera mungkin.",
+    "futureAdviceRain": "Hujan diperkirakan turun sekitar 3 jam lagi. Siapkan payung.",
+    "highLowTemp": "T {high}°  ·  R {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
@@ -22,10 +22,10 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
-    "adviceRain": "Grab a light shell and keep moving.",
+    "dataFromNea": "Data dari NEA",
+    "night": "Malam",
+    "useCurrentLocation": "Gunakan lokasi sekarang",
+    "adviceRain": "Kenakan jaket tipis dan tetap beraktivitas.",
     "nextDays": "Next {count} days",
     "@nextDays": {
         "placeholders": {
@@ -34,14 +34,14 @@
             }
         }
     },
-    "visibility": "Visibility",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
-    "adviceClear": "Great light outside. Sunglasses recommended.",
-    "clear": "Clear",
-    "precipChance": "Precip chance",
-    "updatingWeather": "Updating weather…",
-    "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
-    "loadingLocation": "Loading location…",
+    "visibility": "Jarak Pandang",
+    "dataFromOpenMeteo": "Data dari Open-Meteo",
+    "adviceClear": "Cuaca cerah. Disarankan memakai kacamata hitam.",
+    "clear": "Bersihkan",
+    "precipChance": "Peluang hujan",
+    "updatingWeather": "Memperbarui cuaca…",
+    "unableToFetchLocation": "Gagal mengambil informasi cuaca berdasarkan lokasi. Silakan coba lagi.",
+    "loadingLocation": "Memuat lokasi…",
     "precipPercent": "{percent}% precip",
     "@precipPercent": {
         "placeholders": {
@@ -58,10 +58,10 @@
             }
         }
     },
-    "futureAdviceSnow": "Snow later today—plan travel with extra time.",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
-    "adviceCloud": "Soft clouds today—perfect walking weather.",
+    "futureAdviceSnow": "Salju diperkirakan turun nanti hari ini. Sisihkan waktu lebih untuk perjalanan Anda.",
+    "searchLocation": "Cari lokasi",
+    "dummyTime": "Sen, Jan 1 • 12:00 PM",
+    "adviceCloud": "Cuaca berawan ringan hari ini—cocok untuk berjalan kaki.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
         "placeholders": {
@@ -70,13 +70,13 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
-    "adviceSnow": "Layer up and mind slick paths.",
-    "adviceStorm": "Stay indoors; lightning risk.",
-    "feelsLike": "Feels like",
+    "cityRegionOrCoordinates": "Kota, daerah, atau koordinat",
+    "adviceSnow": "Kenakan pakaian berlapis dan berhati-hatilah di jalan yang licin.",
+    "adviceStorm": "Tetap di dalam ruangan; berisiko terjadi petir.",
+    "feelsLike": "Terasa seperti",
     "weather": "Weather",
-    "insights": "Insights",
-    "regionalOutlook": "Regional Outlook",
+    "insights": "Wawasan",
+    "regionalOutlook": "Prakiraan Wilayah",
     "tomorrow": "Tomorrow",
     "windSpeed": "{speed} km/h {dir}",
     "@windSpeed": {
@@ -89,20 +89,20 @@
             }
         }
     },
-    "adviceDefault": "Stay comfortable and check again in a few hours.",
-    "home": "Home",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
-    "hourlyForecast": "Hourly Forecast",
-    "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
-    "settings": "Settings",
-    "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
+    "adviceDefault": "Tetap nyaman dan periksa lagi dalam beberapa jam.",
+    "home": "Beranda",
+    "searchPlace": "Cari lokasi",
+    "locationPermissionDenied": "Izin lokasi ditolak. Aktifkan agar kami dapat menentukan lokasi Anda secara otomatis.",
+    "hourlyForecast": "Prakiraan Per Jam",
+    "todaysSuggestion": "Saran hari ini",
+    "humidity": "Kelembapan",
+    "locationServicesDisabled": "Layanan lokasi dinonaktifkan. Aktifkan di Pengaturan.",
+    "settings": "Pengaturan",
+    "dummyHighLow": "T 80° · R 60°",
+    "daytime": "Pagi hari",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-    "today": "Today",
-    "wind": "Wind",
+    "today": "Hari Ini",
+    "wind": "Angin",
     "weekAhead": "Week Ahead",
     "suggestFeature": "Suggest a new feature for WeatherFast",
     "activitySuggestions": "Activity Suggestions",
@@ -253,8 +253,8 @@
     "floodAlert": "Flood Alert",
     "flashFloodWarning": "Flash Flood Warning!",
     "multipleFloodAlerts": "Multiple Flood Alerts",
-    "dewPoint": "Dew Point",
-    "uvIndex": "UV Index",
+    "dewPoint": "Titik Embun",
+    "uvIndex": "Indeks UV",
     "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
     "@incompleteLocalisationMessage": {
         "placeholders": {
