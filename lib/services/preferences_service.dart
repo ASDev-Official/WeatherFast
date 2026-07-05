@@ -177,5 +177,17 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(_kSavedLocations, locations);
   }
+
+  static const String _kWidgetLocation = 'widget_location';
+
+  static Future<String> loadWidgetLocation() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_kWidgetLocation) ?? 'Current Location';
+  }
+
+  static Future<void> saveWidgetLocation(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kWidgetLocation, value);
+  }
 }
 

@@ -576,7 +576,6 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
   final TextEditingController _searchController = TextEditingController();
 
   String? _currentLocation;
-  String? _currentLocationQuery;
   Map<String, dynamic>? _weatherData;
   Map<String, dynamic>? _forecastData;
   DateTime? _localTime;
@@ -791,7 +790,6 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
               _weatherData = snapshot.weatherData;
               _forecastData = snapshot.forecastData;
               _currentLocation = snapshot.weatherData['location']?['name'];
-              _currentLocationQuery = snapshot.locationQuery;
               _localTime = _resolveLocalTime(snapshot.weatherData);
               _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
             });
@@ -812,7 +810,6 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
             _weatherData = snapshot.weatherData;
             _forecastData = snapshot.forecastData;
             _currentLocation = snapshot.weatherData['location']?['name'];
-            _currentLocationQuery = snapshot.locationQuery;
             _localTime = _resolveLocalTime(snapshot.weatherData);
             _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
           });
@@ -829,7 +826,6 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
     }
 
     if (initialQuery != null && initialQuery.isNotEmpty) {
-      _currentLocationQuery = initialQuery;
       await _fetchWeather(initialQuery, showOverlay: !hasInitialData);
       return;
     }
@@ -914,6 +910,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
 
   Future<void> _fetchWeatherForCurrentLocation({
     bool showOverlay = true,
+    bool forceRefresh = false,
   }) async {
     if (showOverlay) {
       _showUpdatingOverlay();
@@ -943,7 +940,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
         ),
       );
       final coords = '${position.latitude},${position.longitude}';
-      await _fetchWeather(coords, showOverlay: showOverlay);
+      await _fetchWeather(coords, showOverlay: showOverlay, forceRefresh: forceRefresh);
     } catch (e) {
       if (!mounted) return;
       _showError(AppLocalizations.of(context)!.unableToFetchLocation);
@@ -962,18 +959,16 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
 
   Future<void> _onRefresh() async {
     final futures = <Future>[];
-    if (_currentLocationQuery != null) {
-      futures.add(_fetchWeather(_currentLocationQuery!));
-    } else if (_currentLocation != null) {
-      futures.add(_fetchWeather(_currentLocation!));
+    if (widget.locationQuery == null) {
+      futures.add(_fetchWeatherForCurrentLocation(showOverlay: false, forceRefresh: true));
     } else {
-      futures.add(_fetchWeatherForCurrentLocation());
+      futures.add(_fetchWeather(widget.locationQuery!, showOverlay: false, forceRefresh: true));
     }
     futures.add(_fetchChoreographerEvents());
     await Future.wait(futures);
   }
 
-  Future<void> _fetchWeather(String location, {bool showOverlay = true}) async {
+  Future<void> _fetchWeather(String location, {bool showOverlay = true, bool forceRefresh = false}) async {
     if (!mounted) return;
     if (showOverlay) {
       _showUpdatingOverlay();
@@ -981,7 +976,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
     setState(() => _isRefreshing = true);
 
     try {
-      final data = await _weatherService.fetchAllWeatherData(location);
+      final data = await _weatherService.fetchAllWeatherData(location, forceRefresh: forceRefresh);
       final weather = data['weather']!;
       final forecast = data['forecast']!;
       final localTime = _resolveLocalTime(weather);
@@ -993,7 +988,6 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
         _weatherData = weather;
         _forecastData = forecast;
         _currentLocation = locationName;
-        _currentLocationQuery = location;
         _localTime = localTime;
         _isDaytime = isDaytime;
       });
@@ -1027,10 +1021,20 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
           forecastData: forecast,
         );
       }
-      await WidgetRefreshService.storeAndRefresh(
-        weatherData: weather,
-        useFahrenheit: GlobalData.useFahrenheit,
-      );
+      final widgetLocation = await PreferencesService.loadWidgetLocation();
+      bool shouldUpdateWidget = false;
+      if (widgetLocation == 'Current Location') {
+        shouldUpdateWidget = widget.locationQuery == null;
+      } else {
+        shouldUpdateWidget = widget.locationQuery == widgetLocation;
+      }
+
+      if (shouldUpdateWidget) {
+        await WidgetRefreshService.storeAndRefresh(
+          weatherData: weather,
+          useFahrenheit: GlobalData.useFahrenheit,
+        );
+      }
       // Notify parent of location change
       if (locationName != null && locationName.isNotEmpty) {
         widget.onLocationLoaded(locationName, localTime, weather, isDaytime);

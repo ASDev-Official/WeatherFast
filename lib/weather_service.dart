@@ -14,9 +14,9 @@ class WeatherService {
 
   /// Fetch both current and forecast data in one optimized pass
   Future<Map<String, Map<String, dynamic>>> fetchAllWeatherData(
-      String location, {bool forceGlobalOpenMeteo = false}) async {
+      String location, {bool forceGlobalOpenMeteo = false, bool forceRefresh = false}) async {
     final cacheKey = '${location.trim().toLowerCase()}_$forceGlobalOpenMeteo';
-    if (_calendarWeatherCache.containsKey(cacheKey)) {
+    if (!forceRefresh && _calendarWeatherCache.containsKey(cacheKey)) {
       return _calendarWeatherCache[cacheKey]!;
     }
 

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:intl/intl.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'global_data.dart';
 import 'unit_converter.dart';
@@ -412,9 +413,25 @@ class WidgetRefreshService {
       return;
     }
 
-    final location = await HomeWidget.getWidgetData<String>(_kLocationQuery);
+    final widgetLocation = await PreferencesService.loadWidgetLocation();
+    
+    String? locationToFetch;
+    if (widgetLocation == 'Current Location') {
+      try {
+        final position = await Geolocator.getCurrentPosition(
+          locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high,
+          ),
+        );
+        locationToFetch = '${position.latitude},${position.longitude}';
+      } catch (e) {
+        locationToFetch = await HomeWidget.getWidgetData<String>(_kLocationQuery);
+      }
+    } else {
+      locationToFetch = widgetLocation;
+    }
 
-    if (location == null || location.isEmpty) {
+    if (locationToFetch == null || locationToFetch.isEmpty) {
       await HomeWidget.saveWidgetData<String>(
         _kConditionText,
         'Open app to set location',
@@ -452,14 +469,14 @@ class WidgetRefreshService {
 
     final useFahrenheit = await PreferencesService.loadUseFahrenheit();
     final weatherService = WeatherService();
-    final weatherData = await weatherService.fetchWeather(location);
-    final forecastData = await weatherService.fetchForecast(location);
+    final weatherData = await weatherService.fetchWeather(locationToFetch);
+    final forecastData = await weatherService.fetchForecast(locationToFetch);
 
     GlobalData.useFahrenheit = useFahrenheit;
 
-    await PreferencesService.saveLastLocationQuery(location);
+    await PreferencesService.saveLastLocationQuery(locationToFetch);
     await WeatherCacheService.saveSnapshot(
-      locationQuery: location,
+      locationQuery: locationToFetch,
       weatherData: weatherData,
       forecastData: forecastData,
     );

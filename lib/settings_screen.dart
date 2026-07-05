@@ -26,11 +26,22 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool _performanceMode;
   bool _isRefreshingWidgets = false;
+  String _widgetLocation = 'Current Location';
 
   @override
   void initState() {
     super.initState();
     _performanceMode = GlobalData.performanceModeNotifier.value;
+    _loadWidgetLocation();
+  }
+
+  Future<void> _loadWidgetLocation() async {
+    final loc = await PreferencesService.loadWidgetLocation();
+    if (mounted) {
+      setState(() {
+        _widgetLocation = loc;
+      });
+    }
   }
 
   Future<void> _togglePerformanceMode(bool value) async {
@@ -39,6 +50,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _performanceMode = value;
       GlobalData.performanceModeNotifier.value = value;
     });
+  }
+
+  Future<void> _selectWidgetLocation() async {
+    final savedLocations = await PreferencesService.loadSavedLocations();
+    final options = ['Current Location', ...savedLocations];
+
+    final selected = await showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Widget Location'),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: options.length,
+              itemBuilder: (context, index) {
+                final loc = options[index];
+                return ListTile(
+                  title: Text(loc == 'Current Location' ? (AppLocalizations.of(context)?.currentLocation ?? loc) : loc),
+                  trailing: _widgetLocation == loc
+                      ? Icon(Icons.check_rounded, color: Theme.of(context).colorScheme.primary)
+                      : null,
+                  onTap: () => Navigator.pop(context, loc),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+
+    if (selected != null && selected != _widgetLocation) {
+      await PreferencesService.saveWidgetLocation(selected);
+      setState(() {
+        _widgetLocation = selected;
+      });
+      _forceRefreshWidgets();
+    }
   }
 
 
@@ -369,6 +419,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           subtitle: Text(AppLocalizations.of(context)!.disableExtraVisualEffects),
                           value: _performanceMode,
                           onChanged: _togglePerformanceMode,
+                        ),
+
+                        ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.widgets_rounded,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                          title: const Text('Widget Location'),
+                          subtitle: Text(_widgetLocation == 'Current Location' ? (AppLocalizations.of(context)?.currentLocation ?? 'Current Location') : _widgetLocation),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: _selectWidgetLocation,
                         ),
 
                         ListTile(
