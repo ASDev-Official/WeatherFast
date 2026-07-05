@@ -13,6 +13,7 @@ import 'services/rating_service.dart';
 import 'l10n/app_localizations.dart';
 import 'webview_screen.dart';
 import 'units_screen.dart';
+import 'calendar_settings_screen.dart';
 import 'package:m3e_core/m3e_core.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -378,6 +379,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
+                              Icons.calendar_month_rounded,
+                              color: colorScheme.onTertiaryContainer,
+                            ),
+                          ),
+                          title: Text(AppLocalizations.of(context)!.weatherChoreographer),
+                          subtitle: Text(AppLocalizations.of(context)!.weatherChoreographerSubtitle),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const CalendarSettingsScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.tertiaryContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
                               Icons.language_rounded,
                               color: colorScheme.onTertiaryContainer,
                             ),
@@ -532,6 +558,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text(AppLocalizations.of(context)!.ratingPreferencesReset)),
+                            );
+                          }
+                        },
+                      ),
+                      ListTile(
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: colorScheme.errorContainer,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.calendar_today_rounded,
+                            color: colorScheme.onErrorContainer,
+                          ),
+                        ),
+                        title: Text(AppLocalizations.of(context)!.resetCalendarPromo),
+                        subtitle: Text(AppLocalizations.of(context)!.resetCalendarPromoSubtitle),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () async {
+                          await PreferencesService.saveCalendarPromoShown(false);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(AppLocalizations.of(context)!.calendarPromoReset)),
                             );
                           }
                         },

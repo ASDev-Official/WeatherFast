@@ -598,69 +598,69 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get insightsHealthAirQualityDesc =>
-      'Consider a mask outdoors and limit intense activity until air improves.';
+      'Consider a mask outdoors and limit intense activity until air improves।';
 
   @override
   String get insightsHealthUVTitle => 'UV Protection Critical';
 
   @override
   String get insightsHealthUVDesc =>
-      'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.';
+      'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat।';
 
   @override
   String get insightsHealthHeatTitle => 'Stay Hydrated';
 
   @override
   String get insightsHealthHeatDesc =>
-      'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.';
+      'Drink water regularly. Avoid prolonged sun exposure 11am-3pm।';
 
   @override
   String get insightsHealthColdTitle => 'Cold Weather Alert';
 
   @override
   String get insightsHealthColdDesc =>
-      'Watch for frostbite. Layer clothing and cover extremities.';
+      'Watch for frostbite. Layer clothing and cover extremities।';
 
   @override
   String get insightsHealthWindTitle => 'Wind Advisory';
 
   @override
   String get insightsHealthWindDesc =>
-      'Secure loose items. Be cautious when driving.';
+      'Secure loose items. Be cautious when driving।';
 
   @override
   String get insightsHealthOptimalTitle => 'Optimal Conditions';
 
   @override
   String get insightsHealthOptimalDesc =>
-      'Perfect weather for physical activity and outdoor time.';
+      'Perfect weather for physical activity and outdoor time।';
 
   @override
   String get insightsClothingHot =>
-      'Light, breathable clothing. Hat and sunglasses recommended.';
+      'Light, breathable clothing. Hat and sunglasses recommended।';
 
   @override
   String get insightsClothingWarm =>
-      'Comfortable summer wear. Light layers for morning/evening.';
+      'Comfortable summer wear. Light layers for morning/evening।';
 
   @override
   String get insightsClothingMild =>
-      'Long sleeves or light jacket recommended.';
+      'Long sleeves or light jacket recommended।';
 
   @override
   String get insightsClothingCool =>
-      'Jacket or sweater needed. Long pants suggested.';
+      'Jacket or sweater needed. Long pants suggested।';
 
   @override
   String get insightsClothingCold =>
-      'Warm jacket essential. Layer up for comfort.';
+      'Warm jacket essential. Layer up for comfort।';
 
   @override
   String get insightsClothingFreeze =>
-      'Heavy winter coat, gloves, and warm layers required.';
+      'Heavy winter coat, gloves, and warm layers required।';
 
   @override
-  String get insightsClothingRainSuffix => ' Bring waterproof gear.';
+  String get insightsClothingRainSuffix => ' Bring waterproof gear।';
 
   @override
   String get insightsHourlyMorning => 'Morning';
@@ -705,13 +705,13 @@ class AppLocalizationsHi extends AppLocalizations {
       'Stable conditions expected with consistent temperatures. ';
 
   @override
-  String get insightsWeekWarm => 'Generally warm throughout the week.';
+  String get insightsWeekWarm => 'Generally warm throughout the week।';
 
   @override
-  String get insightsWeekCool => 'Cool weather pattern persisting.';
+  String get insightsWeekCool => 'Cool weather pattern persisting।';
 
   @override
-  String get insightsWeekModerate => 'Moderate temperatures prevailing.';
+  String get insightsWeekModerate => 'Moderate temperatures prevailing।';
 
   @override
   String get insightsBestTimeSingapore => 'Best Time: 7-9 AM & 5-8 PM';
@@ -808,4 +808,141 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get insightsSummaryVariable => 'Variable conditions expected';
+
+  @override
+  String get weatherChoreographer => 'Today\'s Events';
+
+  @override
+  String get tomorrowsEvents => 'Tomorrow\'s Events';
+
+  @override
+  String get weatherChoreographerSubtitle =>
+      'Show weather for your calendar events';
+
+  @override
+  String get calendarSettingsTitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsSubtitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsDescription =>
+      'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.';
+
+  @override
+  String get enableChoreographer => 'Enable Calendar Sync';
+
+  @override
+  String get showWeatherForCalendarEvents => 'Show weather for calendar events';
+
+  @override
+  String get selectCalendars => 'Select Calendars';
+
+  @override
+  String get noCalendarsFound => 'No calendars found or permission denied.';
+
+  @override
+  String get unnamedCalendar => 'Unnamed Calendar';
+
+  @override
+  String get newWeatherChoreographer => 'New: Calendar Sync';
+
+  @override
+  String get weatherChoreographerPromoDescription =>
+      'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.';
+
+  @override
+  String get weatherChoreographerPromoPrivacy =>
+      'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.';
+
+  @override
+  String get notNow => 'Not Now';
+
+  @override
+  String get enable => 'Enable';
+
+  @override
+  String get resetCalendarPromo => 'Reset Calendar Promo';
+
+  @override
+  String get resetCalendarPromoSubtitle =>
+      'Reset the shown state of the Calendar Sync bottom sheet';
+
+  @override
+  String get calendarPromoReset => 'Calendar promo preferences reset';
+
+  @override
+  String get eventDetails => 'Event Details';
+
+  @override
+  String weatherForArea(String area) {
+    return 'Weather for $area';
+  }
+
+  @override
+  String get loadingWeather => 'Loading weather details...';
+
+  @override
+  String get noWeatherAvailable =>
+      'Weather details currently unavailable for this location.';
+
+  @override
+  String get meetingEnvironment => 'Meeting Environment';
+
+  @override
+  String get indoor => 'Indoor';
+
+  @override
+  String get outdoor => 'Outdoor';
+
+  @override
+  String get smartRecommendations => 'Smart Recommendations';
+
+  @override
+  String get recCommuteRain =>
+      'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!';
+
+  @override
+  String recCommuteHot(int temp) {
+    return 'Outside is very hot ($temp°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!';
+  }
+
+  @override
+  String recCommuteCold(int temp) {
+    return 'Outside is cold ($temp°). Wear warm layers so you can easily adjust once you enter the heated venue.';
+  }
+
+  @override
+  String get recIndoorAllClear =>
+      '🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!';
+
+  @override
+  String get recIndoorCommuteHeader =>
+      '🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n';
+
+  @override
+  String get recOutdoorRain =>
+      '⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.';
+
+  @override
+  String recOutdoorHot(int temp) {
+    return '🥵 It\'s hot outside ($temp°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.';
+  }
+
+  @override
+  String recOutdoorCold(int temp) {
+    return '🥶 It\'s chilly outside ($temp°). Dress warmly with a jacket, and consider a warm beverage.';
+  }
+
+  @override
+  String recOutdoorWindy(String wind) {
+    return '💨 Expect gusty winds (up to $wind km/h). Secure any loose papers or materials.';
+  }
+
+  @override
+  String get recOutdoorAllClear =>
+      '🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.';
+
+  @override
+  String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
 }

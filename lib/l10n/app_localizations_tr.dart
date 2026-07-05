@@ -121,13 +121,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get adviceSnow => 'Sıkı giyin ve kaygan zeminlere dikkat et.';
 
   @override
-  String get adviceStorm => 'Yıldırım tehlikesi; Dışarı çıkmayın.';
+  String get adviceStorm => 'Yıldırım tehlikesi: Dışarı çıkmayın.';
 
   @override
   String get adviceClear => 'Dışarıda hava güneşli. Güneş gözlüğünü unutma.';
 
   @override
-  String get adviceCloud => 'Hafif bulutlu bir gün; tam yürüyüş havası.';
+  String get adviceCloud => 'Hafif bulutlu bir gün, tam yürüyüş havası.';
 
   @override
   String get adviceDefault =>
@@ -147,7 +147,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get futureAdviceClear =>
-      'Hava birkaç saat daha sabit; tam dışarı çıkmalık.';
+      'Hava birkaç saat daha sabit, tam dışarı çıkmalık.';
 
   @override
   String get today => 'Bugün';
@@ -332,7 +332,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String errorLoadingNotifications(String error) {
-    return 'Bildirimleri yükleme hatası: $error';
+    return 'Bildirimler yüklenirken hata oluştu: $error';
   }
 
   @override
@@ -498,25 +498,25 @@ class AppLocalizationsTr extends AppLocalizations {
   String get ok => 'Tamam';
 
   @override
-  String get notificationsTooltip => 'Notifications';
+  String get notificationsTooltip => 'Bildirimler';
 
   @override
-  String get units => 'Units';
+  String get units => 'Birimler';
 
   @override
-  String get temperatureWindVisibility => 'Temperature, Wind, Visibility';
+  String get temperatureWindVisibility => 'Sıcaklık, Rüzgar, Görüş Mesafesi';
 
   @override
-  String get temperature => 'Temperature';
+  String get temperature => 'Sıcaklık';
 
   @override
-  String get celsius => 'Celsius (°C)';
+  String get celsius => 'Santigrat (°C)';
 
   @override
   String get fahrenheit => 'Fahrenheit (°F)';
 
   @override
-  String get windSpeedLabel => 'Wind Speed';
+  String get windSpeedLabel => 'Rüzgar Hızı';
 
   @override
   String get unitKmh => 'km/h';
@@ -531,281 +531,427 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unitKnots => 'knots';
 
   @override
-  String get unitKilometers => 'Kilometers (km)';
+  String get unitKilometers => 'Kilometre (km)';
 
   @override
-  String get unitMiles => 'Miles (mi)';
+  String get unitMiles => 'Mil (mi)';
 
   @override
-  String get performanceMode => 'Performance Mode';
+  String get performanceMode => 'Performans Modu';
 
   @override
-  String get disableExtraVisualEffects => 'Disable extra visual effects';
+  String get disableExtraVisualEffects => 'Görsel efektleri devre dışı bırak';
 
   @override
-  String get bestTimesTitle => 'Best Times';
+  String get bestTimesTitle => 'En Uygun Saatler';
 
   @override
-  String get insightsActivityLimitOutdoorTitle => 'Limit Outdoor Effort';
+  String get insightsActivityLimitOutdoorTitle =>
+      'Açık Havada Kendinizi Zorlamayın';
 
   @override
   String get insightsActivityLimitOutdoorDesc =>
-      'Air quality is poor—favor light or indoor activities';
+      'Düşük hava kalitesi: Kapalı alanları ve hafif aktiviteleri tercih edin';
 
   @override
-  String get insightsActivityIndoorTitle => 'Indoor Activities';
+  String get insightsActivityIndoorTitle => 'Kapalı Alan Aktiviteleri';
 
   @override
   String get insightsActivityIndoorDesc =>
-      'Visit museums, cafes, or indoor entertainment';
+      'Müzeleri gezebilir, kafelerde veya kapalı mekanlarda vakit geçirebilirsiniz';
 
   @override
-  String get insightsActivityCyclingTitle => 'Perfect for Cycling';
+  String get insightsActivityCyclingTitle => 'Tam Bisiklet Havası';
 
   @override
   String get insightsActivityCyclingDesc =>
-      'Great weather for a bike ride—mild temps and clear skies';
+      'Bisiklet sürmek için harika, ılık hava ve açık gökyüzü';
 
   @override
-  String get insightsActivityOutdoorSportsTitle => 'Outdoor Sports';
+  String get insightsActivityOutdoorSportsTitle => 'Açık Hava Sporları';
 
   @override
   String get insightsActivityOutdoorSportsDesc =>
-      'Ideal conditions for outdoor activities and sports';
+      'Açık hava aktiviteleri ve spor için uygun hava';
 
   @override
-  String get insightsActivityBeachTitle => 'Beach Day';
+  String get insightsActivityBeachTitle => 'Sahil Günü';
 
   @override
   String get insightsActivityBeachDesc =>
-      'Perfect beach weather—bring sunscreen!';
+      'Tam plaj havası; güneş kremini unutma!';
 
   @override
-  String get insightsActivityHikingTitle => 'Hiking Weather';
+  String get insightsActivityHikingTitle => 'Doğa Yürüyüşü';
 
   @override
   String get insightsActivityHikingDesc =>
-      'Cool and comfortable for a nature walk';
+      'Doğa yürüyüşü için serin ve keyifli bir hava';
 
   @override
-  String get insightsActivityGeneralTitle => 'General Activities';
+  String get insightsActivityGeneralTitle => 'Genel Aktiviteler';
 
   @override
-  String get insightsActivityGeneralDesc => 'Moderate weather—plan accordingly';
+  String get insightsActivityGeneralDesc => 'Ilıman hava, hazırlıklı olun';
 
   @override
-  String get insightsHealthAirQualityTitle => 'Air Quality Alert';
+  String get insightsHealthAirQualityTitle => 'Hava Kalitesi Uyarısı';
 
   @override
   String get insightsHealthAirQualityDesc =>
-      'Consider a mask outdoors and limit intense activity until air improves.';
+      'Maske takın ve hava düzelene kadar yoğun aktiviteleri kısıtlayın.';
 
   @override
-  String get insightsHealthUVTitle => 'UV Protection Critical';
+  String get insightsHealthUVTitle => 'Yüksek UV Riski';
 
   @override
   String get insightsHealthUVDesc =>
-      'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.';
+      '2 saatte bir SPF 30+ güneş kremi uygulayın. Şapka ve güneş gözlüğü kullanın.';
 
   @override
-  String get insightsHealthHeatTitle => 'Stay Hydrated';
+  String get insightsHealthHeatTitle => 'Bol Su İçin';
 
   @override
   String get insightsHealthHeatDesc =>
-      'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.';
+      'Düzenli su tüketin. 11:00-15:00 arası güneşe çıkmamaya özen gösterin.';
 
   @override
-  String get insightsHealthColdTitle => 'Cold Weather Alert';
+  String get insightsHealthColdTitle => 'Soğuk Hava Uyarısı';
 
   @override
   String get insightsHealthColdDesc =>
-      'Watch for frostbite. Layer clothing and cover extremities.';
+      'Donma riskine dikkat! Sıkı giyinin, el ve ayaklarınızı açıkta bırakmayın.';
 
   @override
-  String get insightsHealthWindTitle => 'Wind Advisory';
+  String get insightsHealthWindTitle => 'Rüzgar Uyarısı';
 
   @override
   String get insightsHealthWindDesc =>
-      'Secure loose items. Be cautious when driving.';
+      'Uçabilecek eşyaları sabitleyin. Araç sürerken dikkatli olun.';
 
   @override
-  String get insightsHealthOptimalTitle => 'Optimal Conditions';
+  String get insightsHealthOptimalTitle => 'En Uygun Hava';
 
   @override
   String get insightsHealthOptimalDesc =>
-      'Perfect weather for physical activity and outdoor time.';
+      'Spor yapmak ve dışarıda vakit geçirmek için harika bir hava.';
 
   @override
   String get insightsClothingHot =>
-      'Light, breathable clothing. Hat and sunglasses recommended.';
+      'Hafif, nefes alan giysiler giyin. Şapka ve gözlük önerilir.';
 
   @override
   String get insightsClothingWarm =>
-      'Comfortable summer wear. Light layers for morning/evening.';
+      'Rahat yazlıklar giyin; sabah ve akşam için yanınıza ince bir şeyler alın.';
 
   @override
   String get insightsClothingMild =>
-      'Long sleeves or light jacket recommended.';
+      'Uzun kollu ya da ince bir ceket iyi gider.';
 
   @override
   String get insightsClothingCool =>
-      'Jacket or sweater needed. Long pants suggested.';
+      'Yanına ceket veya kazak al, altına da pantolon giysen iyi olur.';
 
   @override
   String get insightsClothingCold =>
-      'Warm jacket essential. Layer up for comfort.';
+      'Kalın bir ceket şart, rahat etmek için sıkı giyin.';
 
   @override
   String get insightsClothingFreeze =>
-      'Heavy winter coat, gloves, and warm layers required.';
+      'Kışlık mont, eldiven ve sıcak tutacak kıyafetler şart; iyice giyin.';
 
   @override
-  String get insightsClothingRainSuffix => ' Bring waterproof gear.';
+  String get insightsClothingRainSuffix => ' Su geçirmez eşyalarını unutma.';
 
   @override
-  String get insightsHourlyMorning => 'Morning';
+  String get insightsHourlyMorning => 'Sabah';
 
   @override
-  String get insightsHourlyAfternoon => 'Afternoon';
+  String get insightsHourlyAfternoon => 'Öğleden sonra';
 
   @override
-  String get insightsHourlyEvening => 'Evening';
+  String get insightsHourlyEvening => 'Akşam';
 
   @override
-  String get insightsHourlyMorningChilly => 'Chilly start—extra layer needed';
+  String get insightsHourlyMorningChilly =>
+      'Sabah serinliği: Ekstra kıyafet al';
 
   @override
-  String get insightsHourlyMorningComfort => 'Comfortable morning temperatures';
+  String get insightsHourlyMorningComfort =>
+      'Güne tatlı bir serinlikle başlıyoruz';
 
   @override
-  String get insightsHourlyAfternoonHot => 'Peak heat—seek shade';
+  String get insightsHourlyAfternoonHot => 'Güneş tam tepede: Gölgeye kaçın';
 
   @override
-  String get insightsHourlyAfternoonPleasant => 'Pleasant afternoon expected';
+  String get insightsHourlyAfternoonPleasant =>
+      'Öğleden sonra keyifli bir hava bekleniyor';
 
   @override
-  String get insightsHourlyEveningCool => 'Cool evening—bring a jacket';
+  String get insightsHourlyEveningCool =>
+      'Akşam hava serin, yanına bir ceket al';
 
   @override
-  String get insightsHourlyEveningMild => 'Mild evening conditions';
+  String get insightsHourlyEveningMild => 'Ilık bir akşam havası';
 
   @override
-  String get insightsWeekLimitedData => 'Limited forecast data available';
+  String get insightsWeekLimitedData => 'Kısıtlı tahmin verisi mevcut';
 
   @override
-  String get insightsWeekDataUnavailable => 'Forecast data unavailable';
+  String get insightsWeekDataUnavailable => 'Tahmin verilerine ulaşılamıyor';
 
   @override
   String insightsWeekVariableSwing(String swing) {
-    return 'Variable week ahead with $swing°C temperature swing. ';
+    return 'Önümüzdeki hafta $swing°C\'lik sıcaklık oynaması var. ';
   }
 
   @override
   String get insightsWeekStable =>
-      'Stable conditions expected with consistent temperatures. ';
+      'Hava sıcaklıklarında ani bir değişim beklenmiyor. ';
 
   @override
-  String get insightsWeekWarm => 'Generally warm throughout the week.';
+  String get insightsWeekWarm => 'Genel olarak sıcak bir hafta bekleniyor.';
 
   @override
-  String get insightsWeekCool => 'Cool weather pattern persisting.';
+  String get insightsWeekCool => 'Serin hava etkisini sürdürüyor.';
 
   @override
-  String get insightsWeekModerate => 'Moderate temperatures prevailing.';
+  String get insightsWeekModerate => 'Ilıman hava etkisini sürdürüyor.';
 
   @override
-  String get insightsBestTimeSingapore => 'Best Time: 7-9 AM & 5-8 PM';
+  String get insightsBestTimeSingapore =>
+      'En İyi Saatler: 07:00 - 09:00 ve 17:00 - 20:00';
 
   @override
   String get insightsBestTimeSingaporeDesc =>
-      'Optimal conditions for outdoor activities in Singapore';
+      'Singapur\'da dışarıda vakit geçirmek için harika bir hava var';
 
   @override
-  String get insightsBestTimeNoData => 'No data';
+  String get insightsBestTimeNoData => 'Veri yok';
 
   @override
-  String get insightsBestTimeNoDataDesc => 'Unable to determine best times';
+  String get insightsBestTimeNoDataDesc => 'İdeal saatler hesaplanamadı';
 
   @override
-  String get insightsBestTimeLimited => 'Limited data';
+  String get insightsBestTimeLimited => 'Sınırlı veri';
 
   @override
-  String get insightsBestTimeLimitedDesc => 'Hourly data unavailable';
+  String get insightsBestTimeLimitedDesc => 'Saatlik verilere ulaşılamıyor';
 
   @override
   String insightsBestTimeAt(String time) {
-    return 'Best Time: $time';
+    return 'İdeal Saat: $time';
   }
 
   @override
   String get insightsBestTimeDesc =>
-      'Optimal conditions for outdoor activities';
+      'Dışarıda vakit geçirmek için harika bir hava';
 
   @override
   String insightsTimeAM(String hour) {
-    return '$hour AM';
+    return 'Öğleden önce $hour';
   }
 
   @override
   String insightsTimePM(String hour) {
-    return '$hour PM';
+    return 'Öğleden sonra $hour';
   }
 
   @override
-  String get insightsTimeNoon => '12 PM';
+  String get insightsTimeNoon => '12.00';
 
   @override
-  String get insightsRecRain => '☔ Bring an umbrella—rain likely';
+  String get insightsRecRain => '☔ Şemsiyeni al, yağmur bekleniyor';
 
   @override
-  String get insightsRecHeatHigh => '🌡️ Stay hydrated—heat warning';
+  String get insightsRecHeatHigh => '🌡️ Yüksek sıcaklık; bol su için';
 
   @override
-  String get insightsRecHeatMid => '☀️ Apply sunscreen';
+  String get insightsRecHeatMid => '☀️ Güneş kremi sürün';
 
   @override
-  String get insightsRecCold => '🧊 Bundle up—cold weather ahead';
+  String get insightsRecCold => '🧊 Soğuk hava geliyor, sıkı giyinin';
 
   @override
-  String get insightsRecWind => '💨 Secure loose items—strong winds';
+  String get insightsRecWind =>
+      '💨 Şiddetli rüzgar uyarısı: Eşyaları sabitleyin';
 
   @override
-  String get insightsRecUV => '🛡️ High UV—protect your skin';
+  String get insightsRecUV => '🛡️ Yüksek UV: Koruyucu önlem alın';
 
   @override
-  String get insightsRecAir => '😷 Air quality is poor—limit outdoor exertion';
+  String get insightsRecAir =>
+      '😷 Kötü hava kalitesi: Kendinizi fazla yormayın';
 
   @override
-  String get insightsRecWarming => '📈 Warming trend—dress in layers';
+  String get insightsRecWarming =>
+      '📈 Hava ısınıyor; gün içindeki değişimlere göre giyin';
 
   @override
-  String get insightsRecCooling => '📉 Cooling trend ahead';
+  String get insightsRecCooling => '📉 Havalar soğuyor';
 
   @override
-  String get insightsRecPleasant => '✨ Pleasant weather expected';
+  String get insightsRecPleasant => '✨ Keyifli bir hava bekleniyor';
 
   @override
   String get insightsSummaryAllClear =>
-      'All systems go—great conditions ahead!';
+      'Her şey yolunda, önümüzde harika bir hava var!';
 
   @override
-  String get insightsSummaryRain => 'Rainy day incoming—prepare accordingly';
+  String get insightsSummaryRain => 'Yağmur geliyor, hazırlıklı olun';
 
   @override
-  String get insightsSummaryHeat => 'Hot and intense—stay cool';
+  String get insightsSummaryHeat => 'Aşırı sıcak: Kendinizi serin tutun';
 
   @override
-  String get insightsSummaryCold => 'Frigid conditions—bundle up';
+  String get insightsSummaryCold => 'Dondurucu soğuk: Sıkı giyinin';
 
   @override
-  String get insightsSummaryWind => 'Windy day—hold onto your hat';
+  String get insightsSummaryWind => 'Rüzgarlı bir gün, şapkanızı sıkı tutun';
 
   @override
-  String get insightsSummaryUV => 'Strong UV—protect yourself';
+  String get insightsSummaryUV => 'Yüksek UV uyarısı: Önlem alın';
 
   @override
-  String get insightsSummaryAir => 'Air quality is poor—take it easy outside';
+  String get insightsSummaryAir => 'Kötü hava kalitesi: Kendinizi yormayın';
 
   @override
-  String get insightsSummaryVariable => 'Variable conditions expected';
+  String get insightsSummaryVariable => 'Değişken hava bekleniyor';
+
+  @override
+  String get weatherChoreographer => 'Today\'s Events';
+
+  @override
+  String get tomorrowsEvents => 'Tomorrow\'s Events';
+
+  @override
+  String get weatherChoreographerSubtitle =>
+      'Show weather for your calendar events';
+
+  @override
+  String get calendarSettingsTitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsSubtitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsDescription =>
+      'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.';
+
+  @override
+  String get enableChoreographer => 'Enable Calendar Sync';
+
+  @override
+  String get showWeatherForCalendarEvents => 'Show weather for calendar events';
+
+  @override
+  String get selectCalendars => 'Select Calendars';
+
+  @override
+  String get noCalendarsFound => 'No calendars found or permission denied.';
+
+  @override
+  String get unnamedCalendar => 'Unnamed Calendar';
+
+  @override
+  String get newWeatherChoreographer => 'New: Calendar Sync';
+
+  @override
+  String get weatherChoreographerPromoDescription =>
+      'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.';
+
+  @override
+  String get weatherChoreographerPromoPrivacy =>
+      'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.';
+
+  @override
+  String get notNow => 'Not Now';
+
+  @override
+  String get enable => 'Enable';
+
+  @override
+  String get resetCalendarPromo => 'Reset Calendar Promo';
+
+  @override
+  String get resetCalendarPromoSubtitle =>
+      'Reset the shown state of the Calendar Sync bottom sheet';
+
+  @override
+  String get calendarPromoReset => 'Calendar promo preferences reset';
+
+  @override
+  String get eventDetails => 'Event Details';
+
+  @override
+  String weatherForArea(String area) {
+    return 'Weather for $area';
+  }
+
+  @override
+  String get loadingWeather => 'Loading weather details...';
+
+  @override
+  String get noWeatherAvailable =>
+      'Weather details currently unavailable for this location.';
+
+  @override
+  String get meetingEnvironment => 'Meeting Environment';
+
+  @override
+  String get indoor => 'Indoor';
+
+  @override
+  String get outdoor => 'Outdoor';
+
+  @override
+  String get smartRecommendations => 'Smart Recommendations';
+
+  @override
+  String get recCommuteRain =>
+      'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!';
+
+  @override
+  String recCommuteHot(int temp) {
+    return 'Outside is very hot ($temp°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!';
+  }
+
+  @override
+  String recCommuteCold(int temp) {
+    return 'Outside is cold ($temp°). Wear warm layers so you can easily adjust once you enter the heated venue.';
+  }
+
+  @override
+  String get recIndoorAllClear =>
+      '🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!';
+
+  @override
+  String get recIndoorCommuteHeader =>
+      '🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n';
+
+  @override
+  String get recOutdoorRain =>
+      '⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.';
+
+  @override
+  String recOutdoorHot(int temp) {
+    return '🥵 It\'s hot outside ($temp°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.';
+  }
+
+  @override
+  String recOutdoorCold(int temp) {
+    return '🥶 It\'s chilly outside ($temp°). Dress warmly with a jacket, and consider a warm beverage.';
+  }
+
+  @override
+  String recOutdoorWindy(String wind) {
+    return '💨 Expect gusty winds (up to $wind km/h). Secure any loose papers or materials.';
+  }
+
+  @override
+  String get recOutdoorAllClear =>
+      '🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.';
+
+  @override
+  String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
 }

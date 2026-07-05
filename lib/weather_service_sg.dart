@@ -103,6 +103,7 @@ class SingaporeWeatherService {
         'lon': lon,
         'tz_id': 'Asia/Singapore',
         'localtime': current['localtime'],
+        'utc_offset_seconds': 28800,
       },
       'source': 'nea',
       'current': currentData,

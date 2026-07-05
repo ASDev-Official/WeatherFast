@@ -1573,6 +1573,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Variable conditions expected'**
   String get insightsSummaryVariable;
+
+  /// No description provided for @weatherChoreographer.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Events'**
+  String get weatherChoreographer;
+
+  /// No description provided for @tomorrowsEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow\'s Events'**
+  String get tomorrowsEvents;
+
+  /// No description provided for @weatherChoreographerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show weather for your calendar events'**
+  String get weatherChoreographerSubtitle;
+
+  /// No description provided for @calendarSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar Sync'**
+  String get calendarSettingsTitle;
+
+  /// No description provided for @calendarSettingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar Sync'**
+  String get calendarSettingsSubtitle;
+
+  /// No description provided for @calendarSettingsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.'**
+  String get calendarSettingsDescription;
+
+  /// No description provided for @enableChoreographer.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Calendar Sync'**
+  String get enableChoreographer;
+
+  /// No description provided for @showWeatherForCalendarEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Show weather for calendar events'**
+  String get showWeatherForCalendarEvents;
+
+  /// No description provided for @selectCalendars.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Calendars'**
+  String get selectCalendars;
+
+  /// No description provided for @noCalendarsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No calendars found or permission denied.'**
+  String get noCalendarsFound;
+
+  /// No description provided for @unnamedCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Unnamed Calendar'**
+  String get unnamedCalendar;
+
+  /// No description provided for @newWeatherChoreographer.
+  ///
+  /// In en, this message translates to:
+  /// **'New: Calendar Sync'**
+  String get newWeatherChoreographer;
+
+  /// No description provided for @weatherChoreographerPromoDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.'**
+  String get weatherChoreographerPromoDescription;
+
+  /// No description provided for @weatherChoreographerPromoPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.'**
+  String get weatherChoreographerPromoPrivacy;
+
+  /// No description provided for @notNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Now'**
+  String get notNow;
+
+  /// No description provided for @enable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get enable;
+
+  /// No description provided for @resetCalendarPromo.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Calendar Promo'**
+  String get resetCalendarPromo;
+
+  /// No description provided for @resetCalendarPromoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset the shown state of the Calendar Sync bottom sheet'**
+  String get resetCalendarPromoSubtitle;
+
+  /// No description provided for @calendarPromoReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar promo preferences reset'**
+  String get calendarPromoReset;
+
+  /// No description provided for @eventDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get eventDetails;
+
+  /// No description provided for @weatherForArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather for {area}'**
+  String weatherForArea(String area);
+
+  /// No description provided for @loadingWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading weather details...'**
+  String get loadingWeather;
+
+  /// No description provided for @noWeatherAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather details currently unavailable for this location.'**
+  String get noWeatherAvailable;
+
+  /// No description provided for @meetingEnvironment.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting Environment'**
+  String get meetingEnvironment;
+
+  /// No description provided for @indoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Indoor'**
+  String get indoor;
+
+  /// No description provided for @outdoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Outdoor'**
+  String get outdoor;
+
+  /// No description provided for @smartRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Recommendations'**
+  String get smartRecommendations;
+
+  /// No description provided for @recCommuteRain.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!'**
+  String get recCommuteRain;
+
+  /// No description provided for @recCommuteHot.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside is very hot ({temp}°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!'**
+  String recCommuteHot(int temp);
+
+  /// No description provided for @recCommuteCold.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside is cold ({temp}°). Wear warm layers so you can easily adjust once you enter the heated venue.'**
+  String recCommuteCold(int temp);
+
+  /// No description provided for @recIndoorAllClear.
+  ///
+  /// In en, this message translates to:
+  /// **'🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!'**
+  String get recIndoorAllClear;
+
+  /// No description provided for @recIndoorCommuteHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n'**
+  String get recIndoorCommuteHeader;
+
+  /// No description provided for @recOutdoorRain.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.'**
+  String get recOutdoorRain;
+
+  /// No description provided for @recOutdoorHot.
+  ///
+  /// In en, this message translates to:
+  /// **'🥵 It\'s hot outside ({temp}°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.'**
+  String recOutdoorHot(int temp);
+
+  /// No description provided for @recOutdoorCold.
+  ///
+  /// In en, this message translates to:
+  /// **'🥶 It\'s chilly outside ({temp}°). Dress warmly with a jacket, and consider a warm beverage.'**
+  String recOutdoorCold(int temp);
+
+  /// No description provided for @recOutdoorWindy.
+  ///
+  /// In en, this message translates to:
+  /// **'💨 Expect gusty winds (up to {wind} km/h). Secure any loose papers or materials.'**
+  String recOutdoorWindy(String wind);
+
+  /// No description provided for @recOutdoorAllClear.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.'**
+  String get recOutdoorAllClear;
+
+  /// No description provided for @recOutdoorHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'🌳 Outdoor Notice:\n'**
+  String get recOutdoorHeader;
 }
 
 class _AppLocalizationsDelegate

@@ -10,6 +10,39 @@ class PreferencesService {
   static const String _kPerformanceMode = 'performance_mode';
   static const String _kWindUnit = 'wind_unit';
   static const String _kVisibilityUnit = 'visibility_unit';
+  static const String _kCalendarEnabled = 'calendar_enabled';
+  static const String _kEnabledCalendarIds = 'enabled_calendar_ids';
+  static const String _kCalendarPromoShown = 'calendar_promo_shown';
+
+  static Future<bool> loadCalendarPromoShown() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_kCalendarPromoShown) ?? false;
+  }
+
+  static Future<void> saveCalendarPromoShown(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kCalendarPromoShown, value);
+  }
+
+  static Future<bool> loadCalendarEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_kCalendarEnabled) ?? false;
+  }
+
+  static Future<void> saveCalendarEnabled(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kCalendarEnabled, value);
+  }
+
+  static Future<List<String>> loadEnabledCalendarIds() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(_kEnabledCalendarIds) ?? [];
+  }
+
+  static Future<void> saveEnabledCalendarIds(List<String> value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_kEnabledCalendarIds, value);
+  }
 
   static Future<bool> loadPerformanceMode() async {
     final prefs = await SharedPreferences.getInstance();
@@ -122,4 +155,15 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_kVisibilityUnit, value);
   }
+
+  static Future<String> loadMeetingType(String eventKey) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('meeting_type_$eventKey') ?? 'outdoor';
+  }
+
+  static Future<void> saveMeetingType(String eventKey, String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('meeting_type_$eventKey', value);
+  }
 }
+

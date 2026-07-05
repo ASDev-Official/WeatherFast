@@ -21,6 +21,10 @@ import 'ui/weather_map_snippet.dart';
 import 'weather_map_screen.dart';
 import 'weather_service.dart';
 import 'weather_service_sg.dart';
+import 'services/calendar_service.dart';
+import 'calendar_settings_screen.dart';
+import 'calendar_event_details_screen.dart';
+import 'package:m3e_core/m3e_core.dart';
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key, required this.onLocationSelected});
@@ -48,6 +52,7 @@ class _WeatherHomeState extends State<WeatherHome> {
   List<Map<String, dynamic>>? _sgFloodAlerts;
   bool _isShowingFloodAnimation = false;
   String? _lastAnimatedFloodHeadline;
+  List<CalendarEventItem>? _choreographerEvents;
 
   void _showUpdatingOverlay() {
     if (_updatingOverlay != null) return;
@@ -84,6 +89,120 @@ class _WeatherHomeState extends State<WeatherHome> {
     super.initState();
     _initializeExpandedDays();
     _hydrateAndRefresh();
+    _checkCalendarPromo();
+  }
+
+  Future<void> _checkCalendarPromo() async {
+    final promoShown = await PreferencesService.loadCalendarPromoShown();
+    if (!promoShown && mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showCalendarPromoModal();
+      });
+    }
+  }
+
+  void _showCalendarPromoModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      isDismissible: false,
+      enableDrag: false,
+      builder: (sheetContext) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(sheetContext).viewInsets.bottom + 16,
+            left: 24,
+            right: 24,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.calendar_month_rounded, color: Theme.of(sheetContext).colorScheme.primary, size: 28),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(sheetContext)!.newWeatherChoreographer,
+                      style: Theme.of(sheetContext).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                AppLocalizations.of(sheetContext)!.weatherChoreographerPromoDescription,
+                style: Theme.of(sheetContext).textTheme.bodyLarge,
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(sheetContext).colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.privacy_tip_outlined, color: Theme.of(sheetContext).colorScheme.onSecondaryContainer, size: 20),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(sheetContext)!.weatherChoreographerPromoPrivacy,
+                        style: Theme.of(sheetContext).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(sheetContext).colorScheme.onSecondaryContainer,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      await PreferencesService.saveCalendarPromoShown(true);
+                      if (sheetContext.mounted) Navigator.pop(sheetContext);
+                    },
+                    child: Text(AppLocalizations.of(sheetContext)!.notNow),
+                  ),
+                  const SizedBox(width: 12),
+                  FilledButton(
+                    onPressed: () async {
+                      await PreferencesService.saveCalendarPromoShown(true);
+                      if (sheetContext.mounted) {
+                        Navigator.pop(sheetContext);
+                      }
+                      
+                      final hasPermissions = await CalendarService.requestPermissions();
+                      if (hasPermissions) {
+                        await PreferencesService.saveCalendarEnabled(true);
+                        if (mounted) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const CalendarSettingsScreen(),
+                            ),
+                          ).then((_) => _fetchChoreographerEvents());
+                        }
+                      }
+                    },
+                    child: Text(AppLocalizations.of(sheetContext)!.enable),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _initializeExpandedDays() {
@@ -104,6 +223,9 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   Future<void> _hydrateAndRefresh() async {
+    // Start fetching calendar events immediately in parallel
+    _fetchChoreographerEvents();
+
     String? initialQuery;
     var hasInitialData = false;
 
@@ -159,6 +281,29 @@ class _WeatherHomeState extends State<WeatherHome> {
     }
 
     await _fetchWeatherForCurrentLocation(showOverlay: !hasInitialData);
+  }
+
+  Future<void> _fetchChoreographerEvents() async {
+    final events = await CalendarService.getTodayEventsWithLocation();
+    if (mounted) {
+      setState(() {
+        _choreographerEvents = events;
+      });
+      _prefetchEventsWeather(events);
+    }
+  }
+
+  void _prefetchEventsWeather(List<CalendarEventItem> events) {
+    final weatherService = WeatherService();
+    for (var event in events) {
+      final loc = event.location.trim();
+      if (loc.isNotEmpty) {
+        weatherService.fetchAllWeatherData(loc, forceGlobalOpenMeteo: true).catchError((_) {
+          // Ignore prefetch errors
+          return <String, Map<String, dynamic>>{};
+        });
+      }
+    }
   }
 
   Future<void> _fetchSgFloodAlerts() async {
@@ -262,13 +407,16 @@ class _WeatherHomeState extends State<WeatherHome> {
   }
 
   Future<void> _onRefresh() async {
+    final futures = <Future>[];
     if (_currentLocationQuery != null) {
-      await _fetchWeather(_currentLocationQuery!);
+      futures.add(_fetchWeather(_currentLocationQuery!));
     } else if (_currentLocation != null) {
-      await _fetchWeather(_currentLocation!);
+      futures.add(_fetchWeather(_currentLocation!));
     } else {
-      await _fetchWeatherForCurrentLocation();
+      futures.add(_fetchWeatherForCurrentLocation());
     }
+    futures.add(_fetchChoreographerEvents());
+    await Future.wait(futures);
   }
 
   Future<void> _fetchWeather(String location, {bool showOverlay = true}) async {
@@ -328,6 +476,7 @@ class _WeatherHomeState extends State<WeatherHome> {
       if (mounted) {
         RatingService.checkAndShowRating(context);
       }
+      await _fetchChoreographerEvents();
     } catch (e) {
       if (mounted) _showError(AppLocalizations.of(context)!.failedToLoadWeather(e.toString()));
     } finally {
@@ -534,6 +683,18 @@ class _WeatherHomeState extends State<WeatherHome> {
                             high: maxToday,
                             low: minToday,
                           ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: AnimatedCrossFade(
+                      duration: const Duration(milliseconds: 350),
+                      firstChild: const SizedBox.shrink(),
+                      secondChild: _hasEventsToDisplay()
+                          ? _buildChoreographerEvents()
+                          : const SizedBox.shrink(),
+                      crossFadeState: _hasEventsToDisplay()
+                          ? CrossFadeState.showSecond
+                          : CrossFadeState.showFirst,
+                    ),
                   ),
                   if (_sgFloodAlerts != null)
                     SliverToBoxAdapter(child: _buildFloodAlerts()),
@@ -813,6 +974,167 @@ class _WeatherHomeState extends State<WeatherHome> {
           const SizedBox(height: 12),
         ],
       ),
+    );
+  }
+
+  bool _hasEventsToDisplay() {
+    final events = _choreographerEvents;
+    if (events == null || events.isEmpty) return false;
+
+    final now = DateTime.now();
+    final todayDate = DateTime(now.year, now.month, now.day);
+    final tomorrowDate = todayDate.add(const Duration(days: 1));
+
+    final todayEvents = events.where((e) =>
+        e.startTime.year == todayDate.year &&
+        e.startTime.month == todayDate.month &&
+        e.startTime.day == todayDate.day).toList();
+
+    final tomorrowEvents = events.where((e) =>
+        e.startTime.year == tomorrowDate.year &&
+        e.startTime.month == tomorrowDate.month &&
+        e.startTime.day == tomorrowDate.day).toList();
+
+    final eventsLeftToday = todayEvents.where((e) =>
+        (e.endTime ?? e.startTime).isAfter(now)).toList();
+
+    final isAfter6PM = now.hour >= 18;
+
+    if (todayEvents.isNotEmpty) {
+      if (isAfter6PM && eventsLeftToday.isNotEmpty) {
+        return true; // Show today and tomorrow
+      } else if (isAfter6PM && eventsLeftToday.isEmpty) {
+        return tomorrowEvents.isNotEmpty; // Show tomorrow's events if any
+      } else {
+        return true; // Show today's events
+      }
+    } else {
+      if (isAfter6PM) {
+        return tomorrowEvents.isNotEmpty; // Show tomorrow's events if any
+      }
+    }
+    return false;
+  }
+
+  Widget _buildChoreographerEvents() {
+    final events = _choreographerEvents;
+    if (events == null || events.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final now = DateTime.now();
+    final todayDate = DateTime(now.year, now.month, now.day);
+    final tomorrowDate = todayDate.add(const Duration(days: 1));
+
+    final todayEvents = events.where((e) =>
+        e.startTime.year == todayDate.year &&
+        e.startTime.month == todayDate.month &&
+        e.startTime.day == todayDate.day).toList();
+
+    final tomorrowEvents = events.where((e) =>
+        e.startTime.year == tomorrowDate.year &&
+        e.startTime.month == tomorrowDate.month &&
+        e.startTime.day == tomorrowDate.day).toList();
+
+    final eventsLeftToday = todayEvents.where((e) =>
+        (e.endTime ?? e.startTime).isAfter(now)).toList();
+
+    final isAfter6PM = now.hour >= 18;
+
+    List<CalendarEventItem> todayToDisplay = [];
+    List<CalendarEventItem> tomorrowToDisplay = [];
+
+    if (todayEvents.isNotEmpty) {
+      if (isAfter6PM && eventsLeftToday.isNotEmpty) {
+        todayToDisplay = todayEvents;
+        tomorrowToDisplay = tomorrowEvents;
+      } else if (isAfter6PM && eventsLeftToday.isEmpty) {
+        tomorrowToDisplay = tomorrowEvents;
+      } else {
+        todayToDisplay = todayEvents;
+      }
+    } else {
+      if (isAfter6PM) {
+        tomorrowToDisplay = tomorrowEvents;
+      }
+    }
+
+    if (todayToDisplay.isEmpty && tomorrowToDisplay.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (todayToDisplay.isNotEmpty) ...[
+            _buildEventSectionHeader(AppLocalizations.of(context)!.weatherChoreographer),
+            const SizedBox(height: 8),
+            _buildEventCardList(todayToDisplay),
+          ],
+          if (todayToDisplay.isNotEmpty && tomorrowToDisplay.isNotEmpty)
+            const SizedBox(height: 16),
+          if (tomorrowToDisplay.isNotEmpty) ...[
+            _buildEventSectionHeader(AppLocalizations.of(context)!.tomorrowsEvents),
+            const SizedBox(height: 8),
+            _buildEventCardList(tomorrowToDisplay),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEventSectionHeader(String title) {
+    return Row(
+      children: [
+        Icon(Icons.calendar_month_rounded, size: 16, color: Theme.of(context).colorScheme.primary),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEventCardList(List<CalendarEventItem> eventsList) {
+    return M3ECardColumn(
+      innerRadius: 12.0,
+      color: ElevationOverlay.applySurfaceTint(
+        Theme.of(context).cardTheme.color ?? Theme.of(context).colorScheme.surface,
+        Theme.of(context).cardTheme.surfaceTintColor,
+        Theme.of(context).cardTheme.elevation ?? 2.0,
+      ),
+      children: eventsList.map((event) {
+        return ListTile(
+          leading: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              Icons.event_rounded,
+              color: Theme.of(context).colorScheme.onSecondaryContainer,
+            ),
+          ),
+          title: Text(event.title),
+          subtitle: Text('${DateFormat('h:mm a').format(event.startTime)} • ${event.location}'),
+          trailing: const Icon(Icons.chevron_right_rounded),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CalendarEventDetailsScreen(event: event),
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 

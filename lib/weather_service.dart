@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'weather_service_sg.dart';
 
 class WeatherService {
+  static final Map<String, Map<String, Map<String, dynamic>>> _calendarWeatherCache = {};
+
   final String _geoUrl = 'https://geocoding-api.open-meteo.com/v1/search';
   final String _weatherUrl = 'https://api.open-meteo.com/v1/forecast';
   final String _airQualityUrl =
@@ -12,7 +14,12 @@ class WeatherService {
 
   /// Fetch both current and forecast data in one optimized pass
   Future<Map<String, Map<String, dynamic>>> fetchAllWeatherData(
-      String location) async {
+      String location, {bool forceGlobalOpenMeteo = false}) async {
+    final cacheKey = '${location.trim().toLowerCase()}_$forceGlobalOpenMeteo';
+    if (_calendarWeatherCache.containsKey(cacheKey)) {
+      return _calendarWeatherCache[cacheKey]!;
+    }
+
     try {
       final coords = await _getLocationCoordinates(location);
       if (coords == null) throw Exception('Location not found');
@@ -23,7 +30,8 @@ class WeatherService {
       final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 &&
           lon <= 104.15;
 
-      if (country.contains('singapore') || isSingaporeCoords) {
+      final Map<String, Map<String, dynamic>> result;
+      if (!forceGlobalOpenMeteo && (country.contains('singapore') || isSingaporeCoords)) {
         final sg = SingaporeWeatherService();
         final sgData = await sg.fetchWeatherFromCoords(lat, lon);
 
@@ -31,13 +39,16 @@ class WeatherService {
         final weather = _mapSgToWeather(sgData, coords);
         final forecast = _mapSgToForecast(sgData, coords);
 
-        return {'weather': weather, 'forecast': forecast};
+        result = {'weather': weather, 'forecast': forecast};
+      } else {
+        // Non-Singapore locations
+        final weather = await fetchWeather(location, forceGlobalOpenMeteo: forceGlobalOpenMeteo);
+        final forecast = await fetchForecast(location, forceGlobalOpenMeteo: forceGlobalOpenMeteo);
+        result = {'weather': weather, 'forecast': forecast};
       }
 
-      // Non-Singapore locations
-      final weather = await fetchWeather(location);
-      final forecast = await fetchForecast(location);
-      return {'weather': weather, 'forecast': forecast};
+      _calendarWeatherCache[cacheKey] = result;
+      return result;
     } catch (e) {
       throw Exception('Failed to load all weather data: $e');
     }
@@ -124,7 +135,7 @@ class WeatherService {
 
   /// Fetch current weather and forecast for a location
   /// Returns data compatible with the app's existing UI expectations
-  Future<Map<String, dynamic>> fetchWeather(String location) async {
+  Future<Map<String, dynamic>> fetchWeather(String location, {bool forceGlobalOpenMeteo = false}) async {
     try {
       // First, get coordinates for the location
       final coords = await _getLocationCoordinates(location);
@@ -140,7 +151,7 @@ class WeatherService {
         
         final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 && lon <= 104.15;
         
-        if (country.contains('singapore') || isSingaporeCoords) {
+        if (!forceGlobalOpenMeteo && (country.contains('singapore') || isSingaporeCoords)) {
           final sg = SingaporeWeatherService();
           return await sg.fetchWeatherFromCoords(lat, lon);
         }
@@ -256,6 +267,7 @@ class WeatherService {
           'lon': coords['lon'],
           'tz_id': weatherData['timezone'] ?? 'UTC',
           'localtime': currentTime ?? '',
+          'utc_offset_seconds': weatherData['utc_offset_seconds'] ?? 0,
         },
         'current': {
           'temp_c': (weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0,
@@ -368,7 +380,7 @@ class WeatherService {
   }
 
   /// Fetch 14-day forecast for a location
-  Future<Map<String, dynamic>> fetchForecast(String location) async {
+  Future<Map<String, dynamic>> fetchForecast(String location, {bool forceGlobalOpenMeteo = false}) async {
     try {
       final coords = await _getLocationCoordinates(location);
       if (coords == null) {
@@ -383,7 +395,7 @@ class WeatherService {
         
         final isSingaporeCoords = lat >= 1.15 && lat <= 1.50 && lon >= 103.55 && lon <= 104.15;
 
-        if (country.contains('singapore') || isSingaporeCoords) {
+        if (!forceGlobalOpenMeteo && (country.contains('singapore') || isSingaporeCoords)) {
           final sg = SingaporeWeatherService();
           final sgData = await sg.fetchWeatherFromCoords(lat, lon);
           // Map SG widget_next_days to forecastday expected shape
@@ -567,6 +579,7 @@ class WeatherService {
           'lat': coords['lat'],
           'lon': coords['lon'],
           'tz_id': weatherData['timezone'] ?? 'UTC',
+          'utc_offset_seconds': weatherData['utc_offset_seconds'] ?? 0,
         },
         'current': {
           'temp_c': (weatherData['current']['temperature_2m'] as num?)?.toDouble() ?? 0.0,
@@ -738,8 +751,61 @@ class WeatherService {
       }
 
       // Otherwise, search by location name
+      var coords = await _queryGeocoding(location);
+      if (coords != null) return coords;
+
+      // If the location has commas, it might be a detailed address.
+      // We will try to resolve it by searching the parts of the address from right to left.
+      if (location.contains(',')) {
+        final parts = location.split(',').map((e) => e.trim()).toList();
+        
+        // Try searching for the city/region parts. Usually the second-to-last, or the one before it.
+        // E.g., "1600 Amphitheatre Pkwy, Mountain View, CA 94043" -> parts: ["1600 Amphitheatre Pkwy", "Mountain View", "CA 94043"]
+        // We can try to query "Mountain View, CA" or just "Mountain View".
+        for (int i = parts.length - 2; i >= 0; i--) {
+          if (parts[i].isEmpty) continue;
+          
+          // Skip if the part is just numbers (like street number or zip code)
+          if (RegExp(r'^\d+$').hasMatch(parts[i])) continue;
+          
+          // Try querying this part
+          coords = await _queryGeocoding(parts[i]);
+          if (coords != null) return coords;
+          
+          // Also try combining this part and the next part (e.g., "Mountain View, CA")
+          if (i + 1 < parts.length) {
+            final nextPartClean = parts[i+1].replaceAll(RegExp(r'\d+'), '').trim();
+            if (nextPartClean.isNotEmpty) {
+              coords = await _queryGeocoding('${parts[i]}, $nextPartClean');
+              if (coords != null) return coords;
+            }
+          }
+        }
+        
+        // As a last resort, try the last part if it's not a generic country
+        if (parts.isNotEmpty) {
+          final lastPart = parts.last.replaceAll(RegExp(r'\d+'), '').trim();
+          if (lastPart.isNotEmpty && 
+              lastPart.toLowerCase() != 'usa' && 
+              lastPart.toLowerCase() != 'united states' && 
+              lastPart.toLowerCase() != 'uk' && 
+              lastPart.toLowerCase() != 'united kingdom') {
+            coords = await _queryGeocoding(lastPart);
+            if (coords != null) return coords;
+          }
+        }
+      }
+      
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> _queryGeocoding(String query) async {
+    try {
       final url = Uri.parse(
-        '$_geoUrl?name=$location&count=1&language=en&format=json',
+        '$_geoUrl?name=${Uri.encodeComponent(query)}&count=1&language=en&format=json',
       );
       final response = await http.get(url);
 
@@ -758,7 +824,7 @@ class WeatherService {
         };
       }
       return null;
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }

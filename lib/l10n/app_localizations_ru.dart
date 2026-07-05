@@ -9,63 +9,63 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get home => 'Home';
+  String get home => 'Главная';
 
   @override
-  String get insights => 'Insights';
+  String get insights => 'Аналитика';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Настройки';
 
   @override
-  String get updatingWeather => 'Updating weather…';
+  String get updatingWeather => 'Обновление погоды…';
 
   @override
   String get locationServicesDisabled =>
-      'Location services are disabled. Enable them in Settings.';
+      'Местоположение отключено. Включите показ местоположения в настройках.';
 
   @override
   String get locationPermissionDenied =>
-      'Location permission denied. Enable it to auto-locate you.';
+      'Доступ к местоположению запрещён. Разрешите его для автоматического определения местоположения.';
 
   @override
   String get unableToFetchLocation =>
-      'Unable to fetch location weather. Please try again.';
+      'Не удалось получить данные о погоде в вашем регионе. Пожалуйста, попробуйте ещё раз.';
 
   @override
   String failedToLoadWeather(String error) {
-    return 'Failed to load weather: $error';
+    return 'Не удалось загрузить данные о погоде: $error';
   }
 
   @override
-  String get searchPlace => 'Search a place';
+  String get searchPlace => 'Найти место';
 
   @override
-  String get close => 'Close';
+  String get close => 'Закрыть';
 
   @override
-  String get cityRegionOrCoordinates => 'City, region, or coordinates';
+  String get cityRegionOrCoordinates => 'Город, регион или координаты';
 
   @override
-  String get loadingLocation => 'Loading location…';
+  String get loadingLocation => 'Загрузка локации…';
 
   @override
-  String get searchLocation => 'Search location';
+  String get searchLocation => 'Поиск локации';
 
   @override
-  String get useCurrentLocation => 'Use current location';
+  String get useCurrentLocation => 'Использовать текущее местоположение';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Чистое';
 
   @override
-  String get dummyTime => 'Mon, Jan 1 • 12:00 PM';
+  String get dummyTime => 'Пн, 1 янв. • 12:00';
 
   @override
-  String get daytime => 'Daytime';
+  String get daytime => 'Дневное время';
 
   @override
-  String get night => 'Night';
+  String get night => 'Ночь';
 
   @override
   String get dummyHighLow => 'H 80° · L 60°';
@@ -76,123 +76,127 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get feelsLike => 'Feels like';
+  String get feelsLike => 'Ощущается как';
 
   @override
-  String get humidity => 'Humidity';
+  String get humidity => 'Влажность';
 
   @override
-  String get uvIndex => 'UV Index';
+  String get uvIndex => 'УФ-индекс';
 
   @override
-  String get dewPoint => 'Dew Point';
+  String get dewPoint => 'Точка росы';
 
   @override
-  String get wind => 'Wind';
+  String get wind => 'Ветер';
 
   @override
-  String get airQuality => 'Air Quality';
+  String get airQuality => 'Качество воздуха';
 
   @override
-  String get visibility => 'Visibility';
+  String get visibility => 'Видимость';
 
   @override
-  String get precipChance => 'Precip chance';
+  String get precipChance => 'Вероятность осадков';
 
   @override
-  String get hourlyForecast => 'Hourly Forecast';
+  String get hourlyForecast => 'Почасовой прогноз';
 
   @override
-  String get regionalOutlook => 'Regional Outlook';
+  String get regionalOutlook => 'Обзор региона';
 
   @override
-  String get dataFromOpenMeteo => 'Data from Open-Meteo';
+  String get dataFromOpenMeteo => 'Данные от Open-Meteo';
 
   @override
-  String get dataFromNea => 'Data from NEA';
+  String get dataFromNea => 'Данные от NEA';
 
   @override
-  String get todaysSuggestion => 'Today’s suggestion';
+  String get todaysSuggestion => 'Рекомендация на сегодня';
 
   @override
-  String get adviceRain => 'Grab a light shell and keep moving.';
+  String get adviceRain =>
+      'Возьмите с собой лёгкую ветровку и продолжайте прогулку.';
 
   @override
-  String get adviceSnow => 'Layer up and mind slick paths.';
+  String get adviceSnow =>
+      'Наденьте несколько слоёв одежды и будьте осторожны на скользкой дороге.';
 
   @override
-  String get adviceStorm => 'Stay indoors; lightning risk.';
+  String get adviceStorm =>
+      'Оставайтесь в помещении. Высокий риск удара молнии.';
 
   @override
-  String get adviceClear => 'Great light outside. Sunglasses recommended.';
+  String get adviceClear =>
+      'На улице яркое солнце. Рекомендуется надеть солнцезащитные очки.';
 
   @override
-  String get adviceCloud => 'Soft clouds today—perfect walking weather.';
+  String get adviceCloud => 'Лёгкая облачность. Отличная погода для прогулки.';
 
   @override
   String get adviceDefault =>
-      'Stay comfortable and check again in a few hours.';
+      'Комфортная погода. Проверьте прогноз снова через несколько часов.';
 
   @override
   String get futureAdviceRain =>
-      'Rain likely in ~3 hours. Keep an umbrella nearby.';
+      'Дождь будет примерно через ~3 часа. Захватите с собой зонтик.';
 
   @override
   String get futureAdviceSnow =>
-      'Snow later today—plan travel with extra time.';
+      'Сегодня позже пойдёт снег. Закладывайте дополнительное время на дорогу.';
 
   @override
   String get futureAdviceStorm =>
-      'Storm window in a few hours. Wrap up outdoor tasks soon.';
+      'Через несколько часов ожидается шторм. Завершите дела на улице как можно скорее.';
 
   @override
   String get futureAdviceClear =>
-      'Next few hours stay steady—good time to be outside.';
+      'В ближайшие несколько часов погода останется стабильной. Самое время выйти на улицу.';
 
   @override
-  String get today => 'Today';
+  String get today => 'Сегодня';
 
   @override
-  String get tomorrow => 'Tomorrow';
+  String get tomorrow => 'Завтра';
 
   @override
   String nextDays(int count) {
-    return 'Next $count days';
+    return 'Следующие­ $count дней';
   }
 
   @override
-  String get weather => 'Weather';
+  String get weather => 'Погода';
 
   @override
   String precipPercent(String percent) {
-    return '$percent% precip';
+    return '$percent% вероятность осадков';
   }
 
   @override
   String toTime(String time) {
-    return 'to $time';
+    return 'к $time';
   }
 
   @override
   String windSpeed(String speed, String dir) {
-    return '$speed km/h $dir';
+    return '$speed км/ч $dir';
   }
 
   @override
   String visibilityKm(String dist) {
-    return '$dist km';
+    return '$dist км';
   }
 
   @override
   String failedToLoadInsights(String error) {
-    return 'Failed to load Insights: $error';
+    return 'Не удалось загрузить аналитику: $error';
   }
 
   @override
-  String get weatherInsights => 'Weather Insights';
+  String get weatherInsights => 'Аналитика погоды';
 
   @override
-  String get analyzingConditions => 'Analyzing conditions...';
+  String get analyzingConditions => 'Анализ условий...';
 
   @override
   String get activitySuggestions => 'Activity Suggestions';
@@ -801,4 +805,141 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get insightsSummaryVariable => 'Variable conditions expected';
+
+  @override
+  String get weatherChoreographer => 'Today\'s Events';
+
+  @override
+  String get tomorrowsEvents => 'Tomorrow\'s Events';
+
+  @override
+  String get weatherChoreographerSubtitle =>
+      'Show weather for your calendar events';
+
+  @override
+  String get calendarSettingsTitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsSubtitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsDescription =>
+      'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.';
+
+  @override
+  String get enableChoreographer => 'Enable Calendar Sync';
+
+  @override
+  String get showWeatherForCalendarEvents => 'Show weather for calendar events';
+
+  @override
+  String get selectCalendars => 'Select Calendars';
+
+  @override
+  String get noCalendarsFound => 'No calendars found or permission denied.';
+
+  @override
+  String get unnamedCalendar => 'Unnamed Calendar';
+
+  @override
+  String get newWeatherChoreographer => 'New: Calendar Sync';
+
+  @override
+  String get weatherChoreographerPromoDescription =>
+      'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.';
+
+  @override
+  String get weatherChoreographerPromoPrivacy =>
+      'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.';
+
+  @override
+  String get notNow => 'Not Now';
+
+  @override
+  String get enable => 'Enable';
+
+  @override
+  String get resetCalendarPromo => 'Reset Calendar Promo';
+
+  @override
+  String get resetCalendarPromoSubtitle =>
+      'Reset the shown state of the Calendar Sync bottom sheet';
+
+  @override
+  String get calendarPromoReset => 'Calendar promo preferences reset';
+
+  @override
+  String get eventDetails => 'Event Details';
+
+  @override
+  String weatherForArea(String area) {
+    return 'Weather for $area';
+  }
+
+  @override
+  String get loadingWeather => 'Loading weather details...';
+
+  @override
+  String get noWeatherAvailable =>
+      'Weather details currently unavailable for this location.';
+
+  @override
+  String get meetingEnvironment => 'Meeting Environment';
+
+  @override
+  String get indoor => 'Indoor';
+
+  @override
+  String get outdoor => 'Outdoor';
+
+  @override
+  String get smartRecommendations => 'Smart Recommendations';
+
+  @override
+  String get recCommuteRain =>
+      'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!';
+
+  @override
+  String recCommuteHot(int temp) {
+    return 'Outside is very hot ($temp°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!';
+  }
+
+  @override
+  String recCommuteCold(int temp) {
+    return 'Outside is cold ($temp°). Wear warm layers so you can easily adjust once you enter the heated venue.';
+  }
+
+  @override
+  String get recIndoorAllClear =>
+      '🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!';
+
+  @override
+  String get recIndoorCommuteHeader =>
+      '🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n';
+
+  @override
+  String get recOutdoorRain =>
+      '⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.';
+
+  @override
+  String recOutdoorHot(int temp) {
+    return '🥵 It\'s hot outside ($temp°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.';
+  }
+
+  @override
+  String recOutdoorCold(int temp) {
+    return '🥶 It\'s chilly outside ($temp°). Dress warmly with a jacket, and consider a warm beverage.';
+  }
+
+  @override
+  String recOutdoorWindy(String wind) {
+    return '💨 Expect gusty winds (up to $wind km/h). Secure any loose papers or materials.';
+  }
+
+  @override
+  String get recOutdoorAllClear =>
+      '🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.';
+
+  @override
+  String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
 }

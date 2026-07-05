@@ -30,6 +30,10 @@
 	<string>This app needs access to location to show you local weather information.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location to show you local weather information.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs access to calendar events to show weather forecasts for your upcoming events.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>This app needs full access to your calendar to read your upcoming events and display their weather forecasts.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

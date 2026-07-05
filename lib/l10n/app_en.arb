@@ -354,5 +354,76 @@
   "insightsSummaryWind": "Windy day—hold onto your hat",
   "insightsSummaryUV": "Strong UV—protect yourself",
   "insightsSummaryAir": "Air quality is poor—take it easy outside",
-  "insightsSummaryVariable": "Variable conditions expected"
+  "insightsSummaryVariable": "Variable conditions expected",
+
+  "weatherChoreographer": "Today's Events",
+  "tomorrowsEvents": "Tomorrow's Events",
+  "weatherChoreographerSubtitle": "Show weather for your calendar events",
+  "calendarSettingsTitle": "Calendar Sync",
+  "calendarSettingsSubtitle": "Calendar Sync",
+  "calendarSettingsDescription": "When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.",
+  "enableChoreographer": "Enable Calendar Sync",
+  "showWeatherForCalendarEvents": "Show weather for calendar events",
+  "selectCalendars": "Select Calendars",
+  "noCalendarsFound": "No calendars found or permission denied.",
+  "unnamedCalendar": "Unnamed Calendar",
+  "newWeatherChoreographer": "New: Calendar Sync",
+  "weatherChoreographerPromoDescription": "WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.",
+  "weatherChoreographerPromoPrivacy": "Privacy Note: All calendar data is processed securely on your device and never sent to any servers.",
+  "notNow": "Not Now",
+  "enable": "Enable",
+  "resetCalendarPromo": "Reset Calendar Promo",
+  "resetCalendarPromoSubtitle": "Reset the shown state of the Calendar Sync bottom sheet",
+  "calendarPromoReset": "Calendar promo preferences reset",
+  "eventDetails": "Event Details",
+  "weatherForArea": "Weather for {area}",
+  "@weatherForArea": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "loadingWeather": "Loading weather details...",
+  "noWeatherAvailable": "Weather details currently unavailable for this location.",
+  "meetingEnvironment": "Meeting Environment",
+  "indoor": "Indoor",
+  "outdoor": "Outdoor",
+  "smartRecommendations": "Smart Recommendations",
+  "recCommuteRain": "Rain is forecast. Don't forget an umbrella or raincoat for your commute!",
+  "recCommuteHot": "Outside is very hot ({temp}°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!",
+  "@recCommuteHot": {
+    "placeholders": {
+      "temp": { "type": "int" }
+    }
+  },
+  "recCommuteCold": "Outside is cold ({temp}°). Wear warm layers so you can easily adjust once you enter the heated venue.",
+  "@recCommuteCold": {
+    "placeholders": {
+      "temp": { "type": "int" }
+    }
+  },
+  "recIndoorAllClear": "🏢 Since your meeting is indoors, you'll be comfortable and protected from the elements. Enjoy your meeting!",
+  "recIndoorCommuteHeader": "🏢 Protected Indoors: Once inside, you'll be shielded from the weather. For your commute:\n",
+  "recOutdoorRain": "⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.",
+  "recOutdoorHot": "🥵 It's hot outside ({temp}°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.",
+  "@recOutdoorHot": {
+    "placeholders": {
+      "temp": { "type": "int" }
+    }
+  },
+  "recOutdoorCold": "🥶 It's chilly outside ({temp}°). Dress warmly with a jacket, and consider a warm beverage.",
+  "@recOutdoorCold": {
+    "placeholders": {
+      "temp": { "type": "int" }
+    }
+  },
+  "recOutdoorWindy": "💨 Expect gusty winds (up to {wind} km/h). Secure any loose papers or materials.",
+  "@recOutdoorWindy": {
+    "placeholders": {
+      "wind": { "type": "String" }
+    }
+  },
+  "recOutdoorAllClear": "🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.",
+  "recOutdoorHeader": "🌳 Outdoor Notice:\n"
 }

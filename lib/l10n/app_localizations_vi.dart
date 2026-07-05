@@ -801,4 +801,141 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get insightsSummaryVariable => 'Variable conditions expected';
+
+  @override
+  String get weatherChoreographer => 'Today\'s Events';
+
+  @override
+  String get tomorrowsEvents => 'Tomorrow\'s Events';
+
+  @override
+  String get weatherChoreographerSubtitle =>
+      'Show weather for your calendar events';
+
+  @override
+  String get calendarSettingsTitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsSubtitle => 'Calendar Sync';
+
+  @override
+  String get calendarSettingsDescription =>
+      'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.';
+
+  @override
+  String get enableChoreographer => 'Enable Calendar Sync';
+
+  @override
+  String get showWeatherForCalendarEvents => 'Show weather for calendar events';
+
+  @override
+  String get selectCalendars => 'Select Calendars';
+
+  @override
+  String get noCalendarsFound => 'No calendars found or permission denied.';
+
+  @override
+  String get unnamedCalendar => 'Unnamed Calendar';
+
+  @override
+  String get newWeatherChoreographer => 'New: Calendar Sync';
+
+  @override
+  String get weatherChoreographerPromoDescription =>
+      'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.';
+
+  @override
+  String get weatherChoreographerPromoPrivacy =>
+      'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.';
+
+  @override
+  String get notNow => 'Not Now';
+
+  @override
+  String get enable => 'Enable';
+
+  @override
+  String get resetCalendarPromo => 'Reset Calendar Promo';
+
+  @override
+  String get resetCalendarPromoSubtitle =>
+      'Reset the shown state of the Calendar Sync bottom sheet';
+
+  @override
+  String get calendarPromoReset => 'Calendar promo preferences reset';
+
+  @override
+  String get eventDetails => 'Event Details';
+
+  @override
+  String weatherForArea(String area) {
+    return 'Weather for $area';
+  }
+
+  @override
+  String get loadingWeather => 'Loading weather details...';
+
+  @override
+  String get noWeatherAvailable =>
+      'Weather details currently unavailable for this location.';
+
+  @override
+  String get meetingEnvironment => 'Meeting Environment';
+
+  @override
+  String get indoor => 'Indoor';
+
+  @override
+  String get outdoor => 'Outdoor';
+
+  @override
+  String get smartRecommendations => 'Smart Recommendations';
+
+  @override
+  String get recCommuteRain =>
+      'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!';
+
+  @override
+  String recCommuteHot(int temp) {
+    return 'Outside is very hot ($temp°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!';
+  }
+
+  @override
+  String recCommuteCold(int temp) {
+    return 'Outside is cold ($temp°). Wear warm layers so you can easily adjust once you enter the heated venue.';
+  }
+
+  @override
+  String get recIndoorAllClear =>
+      '🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!';
+
+  @override
+  String get recIndoorCommuteHeader =>
+      '🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n';
+
+  @override
+  String get recOutdoorRain =>
+      '⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.';
+
+  @override
+  String recOutdoorHot(int temp) {
+    return '🥵 It\'s hot outside ($temp°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.';
+  }
+
+  @override
+  String recOutdoorCold(int temp) {
+    return '🥶 It\'s chilly outside ($temp°). Dress warmly with a jacket, and consider a warm beverage.';
+  }
+
+  @override
+  String recOutdoorWindy(String wind) {
+    return '💨 Expect gusty winds (up to $wind km/h). Secure any loose papers or materials.';
+  }
+
+  @override
+  String get recOutdoorAllClear =>
+      '🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.';
+
+  @override
+  String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
 }
