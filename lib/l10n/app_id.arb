@@ -1,471 +1,485 @@
 {
-  "airQuality": "Kualitas Udara",
-  "close": "Tutup",
-  "failedToLoadWeather": "Gagal memuat cuaca: {error}",
-  "@failedToLoadWeather": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
+    "airQuality": "Kualitas Udara",
+    "close": "Tutup",
+    "failedToLoadWeather": "Gagal memuat cuaca: {error}",
+    "@failedToLoadWeather": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "futureAdviceStorm": "Badai diperkirakan terjadi dalam beberapa jam ke depan. Selesaikan aktivitas di luar ruangan sesegera mungkin.",
+    "futureAdviceRain": "Hujan diperkirakan turun sekitar 3 jam lagi. Siapkan payung.",
+    "highLowTemp": "T {high}°  ·  R {low}°",
+    "@highLowTemp": {
+        "placeholders": {
+            "high": {
+                "type": "String"
+            },
+            "low": {
+                "type": "String"
+            }
+        }
+    },
+    "dataFromNea": "Data dari NEA",
+    "night": "Malam",
+    "useCurrentLocation": "Gunakan lokasi sekarang",
+    "adviceRain": "Kenakan jaket tipis dan tetap beraktivitas.",
+    "nextDays": "Next {count} days",
+    "@nextDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "visibility": "Jarak Pandang",
+    "dataFromOpenMeteo": "Data dari Open-Meteo",
+    "adviceClear": "Cuaca cerah. Disarankan memakai kacamata hitam.",
+    "adviceClearNight": "Clear skies tonight.",
+    "clear": "Bersihkan",
+    "precipChance": "Peluang hujan",
+    "updatingWeather": "Memperbarui cuaca…",
+    "unableToFetchLocation": "Gagal mengambil informasi cuaca berdasarkan lokasi. Silakan coba lagi.",
+    "loadingLocation": "Memuat lokasi…",
+    "precipPercent": "{percent}% precip",
+    "@precipPercent": {
+        "placeholders": {
+            "percent": {
+                "type": "String"
+            }
+        }
+    },
+    "toTime": "to {time}",
+    "@toTime": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "futureAdviceSnow": "Salju diperkirakan turun nanti hari ini. Sisihkan waktu lebih untuk perjalanan Anda.",
+    "searchLocation": "Cari lokasi",
+    "dummyTime": "Sen, Jan 1 • 12:00 PM",
+    "adviceCloud": "Cuaca berawan ringan hari ini—cocok untuk berjalan kaki.",
+    "visibilityKm": "{dist} km",
+    "@visibilityKm": {
+        "placeholders": {
+            "dist": {
+                "type": "String"
+            }
+        }
+    },
+    "cityRegionOrCoordinates": "Kota, daerah, atau koordinat",
+    "adviceSnow": "Kenakan pakaian berlapis dan berhati-hatilah di jalan yang licin.",
+    "adviceStorm": "Tetap di dalam ruangan; berisiko terjadi petir.",
+    "feelsLike": "Terasa seperti",
+    "weather": "Weather",
+    "insights": "Wawasan",
+    "regionalOutlook": "Prakiraan Wilayah",
+    "tomorrow": "Tomorrow",
+    "windSpeed": "{speed} km/h {dir}",
+    "@windSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            },
+            "dir": {
+                "type": "String"
+            }
+        }
+    },
+    "adviceDefault": "Tetap nyaman dan periksa lagi dalam beberapa jam.",
+    "home": "Beranda",
+    "searchPlace": "Cari lokasi",
+    "locationPermissionDenied": "Izin lokasi ditolak. Aktifkan agar kami dapat menentukan lokasi Anda secara otomatis.",
+    "hourlyForecast": "Prakiraan Per Jam",
+    "todaysSuggestion": "Saran hari ini",
+    "humidity": "Kelembapan",
+    "locationServicesDisabled": "Layanan lokasi dinonaktifkan. Aktifkan di Pengaturan.",
+    "settings": "Pengaturan",
+    "dummyHighLow": "T 80° · R 60°",
+    "daytime": "Pagi hari",
+    "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
+    "today": "Hari Ini",
+    "wind": "Angin",
+    "weekAhead": "Week Ahead",
+    "suggestFeature": "Suggest a new feature for WeatherFast",
+    "activitySuggestions": "Activity Suggestions",
+    "baseMapsMapbox": "Base maps are provided by Mapbox.",
+    "reportBug": "Report a bug or issue",
+    "notificationTitle": "Notification",
+    "failedToLoadNotifications": "Failed to load notifications: {error}",
+    "@failedToLoadNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "openSourceLicenses": "Open-Source Licenses",
+    "noNewNotifications": "No new notifications",
+    "loadingNotificationTitle": "Loading notification title...",
+    "resetRatingPreferences": "Reset Rating Preferences",
+    "apiDocs": "API Docs",
+    "featureRequest": "Feature Request",
+    "mapSettings": "Map Settings",
+    "website": "Website",
+    "tapToViewInteractiveRadar": "Tap to view interactive radar",
+    "usedInWeatherFastVersion": " used in WeatherFast {version}",
+    "@usedInWeatherFastVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "selectLocationFromHome": "Select a location from Home",
+    "dataSources": "Data Sources",
+    "bugReport": "Bug Report",
+    "resetShownCountAndTimestamps": "Reset shown count and timestamps",
+    "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
+    "healthAndSafety": "Health & Safety",
+    "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
+    "preferences": "Preferences",
+    "terms": "Terms",
+    "showingFahrenheit": "Showing °F",
+    "toViewDetailedInsights": "to view the detailed Insights",
+    "support": "Support",
+    "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
+    "checkOperationalStatusOfServices": "Check the operational status of services",
+    "forceRefreshWidgets": "Force refresh widgets",
+    "mapLayers": "Map Layers:",
+    "remindMeLater": "Remind Me in 2 Days",
+    "debug": "Debug",
+    "getItOnPlayStore": "Get it on Play Store",
+    "retry": "Retry",
+    "widgetRefreshFailed": "Widget refresh failed: {error}",
+    "@widgetRefreshFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "showingCelsius": "Showing °C",
+    "enjoyingWeatherFast": "Enjoying WeatherFast?",
+    "notifications": "Notifications",
+    "versionBuildNumber": "Version {version} ({buildNumber})",
+    "@versionBuildNumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        }
+    },
+    "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
+    "failedToLoadInsights": "Failed to load Insights: {error}",
+    "@failedToLoadInsights": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "todaysTimeline": "Today's Timeline",
+    "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
+    "@neaAttribution": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "about": "About",
+    "systemDefault": "System Default",
+    "errorLoadingNotifications": "Error loading notifications: {error}",
+    "@errorLoadingNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "rateNow": "Rate Now",
+    "neaWebsite": "NEA Website",
+    "weatherMap": "Weather Map",
+    "whatToWear": "What to Wear",
+    "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
+    "weatherInsights": "Weather Insights",
+    "testRatingBottomSheet": "Test Rating Bottom Sheet",
+    "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
+    "loadingTempF": "72°F",
+    "language": "Language",
+    "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
+    "openLink": "Open Link",
+    "getHelpOrSendFeedback": "Get help or send feedback",
+    "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
+    "loading": "Loading...",
+    "systemStatus": "System Status",
+    "analyzingConditions": "Analyzing conditions...",
+    "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
+    "couldNotOpenLink": "Could not open link",
+    "weatherData": "Weather Data:",
+    "loadingNotificationDesc": "Loading notification description...",
+    "noThanks": "No Thanks",
+    "helpAndFeedback": "Help & Feedback",
+    "dataGovSg": "Data.gov.sg",
+    "loadingClearWeather": "Clear",
+    "radarOpacity": "Radar Opacity",
+    "attribution": "Attribution:",
+    "useFahrenheit": "Use Fahrenheit",
+    "ratingPreferencesReset": "Rating preferences reset",
+    "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
+    "widgetsRefreshed": "Widgets refreshed",
+    "tapToViewAllAlerts": "Tap to view all alerts",
+    "description": "Description",
+    "instruction": "Instruction",
+    "severity": "Severity",
+    "activeWarnings": "{count} active warnings",
+    "@activeWarnings": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "activeFloodAlerts": "Active Flood Alerts",
+    "response": "Response",
+    "area": "Area",
+    "floodAlert": "Flood Alert",
+    "flashFloodWarning": "Flash Flood Warning!",
+    "multipleFloodAlerts": "Multiple Flood Alerts",
+    "dewPoint": "Titik Embun",
+    "uvIndex": "Indeks UV",
+    "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
+    "@incompleteLocalisationMessage": {
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "helpLocalizeWeatherFast": "Help localize WeatherFast",
+    "ok": "OK",
+    "unitMph": "mph",
+    "unitMiles": "Miles (mi)",
+    "temperature": "Temperature",
+    "unitKmh": "km/h",
+    "notificationsTooltip": "Notifications",
+    "unitKilometers": "Kilometers (km)",
+    "unitKnots": "knots",
+    "bestTimesTitle": "Best Times",
+    "performanceMode": "Performance Mode",
+    "disableExtraVisualEffects": "Disable extra visual effects",
+    "units": "Units",
+    "windSpeedLabel": "Wind Speed",
+    "temperatureWindVisibility": "Temperature, Wind, Visibility",
+    "celsius": "Celsius (°C)",
+    "fahrenheit": "Fahrenheit (°F)",
+    "unitMs": "m/s",
+    "insightsBestTimeSingaporeDesc": "Optimal conditions for outdoor activities in Singapore",
+    "insightsHealthOptimalTitle": "Optimal Conditions",
+    "insightsActivityOutdoorSportsDesc": "Ideal conditions for outdoor activities and sports",
+    "insightsActivityIndoorTitle": "Indoor Activities",
+    "insightsWeekWarm": "Generally warm throughout the week.",
+    "insightsClothingHot": "Light, breathable clothing. Hat and sunglasses recommended.",
+    "insightsSummaryAllClear": "All systems go—great conditions ahead!",
+    "insightsRecHeatHigh": "🌡️ Stay hydrated—heat warning",
+    "insightsTimeAM": "{hour} AM",
+    "@insightsTimeAM": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsActivityGeneralDesc": "Moderate weather—plan accordingly",
+    "insightsHourlyMorningChilly": "Chilly start—extra layer needed",
+    "insightsRecPleasant": "✨ Pleasant weather expected",
+    "insightsSummaryCold": "Frigid conditions—bundle up",
+    "insightsTimeNoon": "12 PM",
+    "insightsRecAir": "😷 Air quality is poor—limit outdoor exertion",
+    "insightsClothingCold": "Warm jacket essential. Layer up for comfort.",
+    "insightsHealthAirQualityDesc": "Consider a mask outdoors and limit intense activity until air improves.",
+    "insightsHourlyMorningComfort": "Comfortable morning temperatures",
+    "insightsHourlyAfternoonPleasant": "Pleasant afternoon expected",
+    "insightsHealthUVDesc": "Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.",
+    "insightsWeekCool": "Cool weather pattern persisting.",
+    "insightsClothingCool": "Jacket or sweater needed. Long pants suggested.",
+    "insightsBestTimeLimitedDesc": "Hourly data unavailable",
+    "insightsHourlyAfternoonHot": "Peak heat—seek shade",
+    "insightsRecUV": "🛡️ High UV—protect your skin",
+    "insightsActivityLimitOutdoorTitle": "Limit Outdoor Effort",
+    "insightsActivityHikingDesc": "Cool and comfortable for a nature walk",
+    "insightsHealthColdDesc": "Watch for frostbite. Layer clothing and cover extremities.",
+    "insightsBestTimeNoDataDesc": "Unable to determine best times",
+    "insightsHourlyEveningCool": "Cool evening—bring a jacket",
+    "insightsSummaryWind": "Windy day—hold onto your hat",
+    "insightsActivityBeachTitle": "Beach Day",
+    "insightsRecCold": "🧊 Bundle up—cold weather ahead",
+    "insightsClothingRainSuffix": " Bring waterproof gear.",
+    "insightsHealthHeatTitle": "Stay Hydrated",
+    "insightsTimePM": "{hour} PM",
+    "@insightsTimePM": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsBestTimeNoData": "No data",
+    "insightsHealthColdTitle": "Cold Weather Alert",
+    "insightsWeekDataUnavailable": "Forecast data unavailable",
+    "insightsSummaryVariable": "Variable conditions expected",
+    "insightsRecHeatMid": "☀️ Apply sunscreen",
+    "insightsHealthAirQualityTitle": "Air Quality Alert",
+    "insightsClothingFreeze": "Heavy winter coat, gloves, and warm layers required.",
+    "insightsActivityLimitOutdoorDesc": "Air quality is poor—favor light or indoor activities",
+    "insightsSummaryAir": "Air quality is poor—take it easy outside",
+    "insightsHealthWindTitle": "Wind Advisory",
+    "insightsActivityBeachDesc": "Perfect beach weather—bring sunscreen!",
+    "insightsActivityCyclingDesc": "Great weather for a bike ride—mild temps and clear skies",
+    "insightsHealthOptimalDesc": "Perfect weather for physical activity and outdoor time.",
+    "insightsWeekLimitedData": "Limited forecast data available",
+    "insightsClothingMild": "Long sleeves or light jacket recommended.",
+    "insightsBestTimeSingapore": "Best Time: 7-9 AM & 5-8 PM",
+    "insightsClothingWarm": "Comfortable summer wear. Light layers for morning/evening.",
+    "insightsWeekModerate": "Moderate temperatures prevailing.",
+    "insightsWeekVariableSwing": "Variable week ahead with {swing}°C temperature swing. ",
+    "@insightsWeekVariableSwing": {
+        "placeholders": {
+            "swing": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsBestTimeLimited": "Limited data",
+    "insightsHourlyAfternoon": "Afternoon",
+    "insightsActivityIndoorDesc": "Visit museums, cafes, or indoor entertainment",
+    "insightsBestTimeAt": "Best Time: {time}",
+    "@insightsBestTimeAt": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsBestTimeDesc": "Optimal conditions for outdoor activities",
+    "insightsRecWarming": "📈 Warming trend—dress in layers",
+    "insightsSummaryHeat": "Hot and intense—stay cool",
+    "insightsHourlyEveningMild": "Mild evening conditions",
+    "insightsActivityOutdoorSportsTitle": "Outdoor Sports",
+    "insightsHourlyMorning": "Morning",
+    "insightsHourlyEvening": "Evening",
+    "insightsActivityHikingTitle": "Hiking Weather",
+    "insightsSummaryUV": "Strong UV—protect yourself",
+    "insightsRecCooling": "📉 Cooling trend ahead",
+    "insightsActivityCyclingTitle": "Perfect for Cycling",
+    "insightsSummaryRain": "Rainy day incoming—prepare accordingly",
+    "insightsHealthUVTitle": "UV Protection Critical",
+    "insightsRecWind": "💨 Secure loose items—strong winds",
+    "insightsHealthWindDesc": "Secure loose items. Be cautious when driving.",
+    "insightsActivityGeneralTitle": "General Activities",
+    "insightsHealthHeatDesc": "Drink water regularly. Avoid prolonged sun exposure 11am-3pm.",
+    "insightsWeekStable": "Stable conditions expected with consistent temperatures. ",
+    "insightsRecRain": "☔ Bring an umbrella—rain likely",
+    "smartRecommendations": "Smart Recommendations",
+    "calendarPromoReset": "Calendar promo preferences reset",
+    "outdoor": "Outdoor",
+    "weatherForArea": "Weather for {area}",
+    "@weatherForArea": {
+        "placeholders": {
+            "area": {
+                "type": "String"
+            }
+        }
+    },
+    "noWeatherAvailable": "Weather details currently unavailable for this location.",
+    "weatherChoreographerPromoPrivacy": "Privacy Note: All calendar data is processed securely on your device and never sent to any servers.",
+    "newWeatherChoreographer": "New: Calendar Sync",
+    "calendarSettingsTitle": "Calendar Sync",
+    "recOutdoorHeader": "🌳 Outdoor Notice:\n",
+    "weatherChoreographerPromoDescription": "WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.",
+    "recCommuteHot": "Outside is very hot ({temp}°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!",
+    "@recCommuteHot": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarSettingsSubtitle": "Calendar Sync",
+    "resetCalendarPromoSubtitle": "Reset the shown state of the Calendar Sync bottom sheet",
+    "resetCalendarPromo": "Reset Calendar Promo",
+    "enableChoreographer": "Enable Calendar Sync",
+    "recOutdoorRain": "⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.",
+    "eventDetails": "Event Details",
+    "noCalendarsFound": "No calendars found or permission denied.",
+    "recCommuteRain": "Rain is forecast. Don't forget an umbrella or raincoat for your commute!",
+    "recOutdoorHot": "🥵 It's hot outside ({temp}°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.",
+    "@recOutdoorHot": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "unnamedCalendar": "Unnamed Calendar",
+    "tomorrowsEvents": "Tomorrow's Events",
+    "recOutdoorAllClear": "🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.",
+    "recOutdoorCold": "🥶 It's chilly outside ({temp}°). Dress warmly with a jacket, and consider a warm beverage.",
+    "@recOutdoorCold": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "weatherChoreographer": "Today's Events",
+    "loadingWeather": "Loading weather details...",
+    "showWeatherForCalendarEvents": "Show weather for calendar events",
+    "enable": "Enable",
+    "recIndoorAllClear": "🏢 Since your meeting is indoors, you'll be comfortable and protected from the elements. Enjoy your meeting!",
+    "weatherChoreographerSubtitle": "Show weather for your calendar events",
+    "calendarSettingsDescription": "When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.",
+    "recIndoorCommuteHeader": "🏢 Protected Indoors: Once inside, you'll be shielded from the weather. For your commute:\n",
+    "meetingEnvironment": "Meeting Environment",
+    "notNow": "Not Now",
+    "recCommuteCold": "Outside is cold ({temp}°). Wear warm layers so you can easily adjust once you enter the heated venue.",
+    "@recCommuteCold": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "indoor": "Indoor",
+    "selectCalendars": "Select Calendars",
+    "recOutdoorWindy": "💨 Expect gusty winds (up to {wind} km/h). Secure any loose papers or materials.",
+    "@recOutdoorWindy": {
+        "placeholders": {
+            "wind": {
+                "type": "String"
+            }
+        }
+    },
+    "currentLocation": "Current Location",
+    "locations": "Locations",
+    "savedLocations": "Saved Locations",
+    "noSavedLocations": "No saved locations",
+    "saveLocation": "Save Location",
+    "removeLocation": "Remove Location",
+    "locationSavedMessage": "Saved {location}",
+    "@locationSavedMessage": {
+        "placeholders": {
+            "location": {
+                "type": "String"
+            }
+        }
     }
-  },
-  "futureAdviceStorm": "Badai diperkirakan terjadi dalam beberapa jam ke depan. Selesaikan aktivitas di luar ruangan sesegera mungkin.",
-  "futureAdviceRain": "Hujan diperkirakan turun sekitar 3 jam lagi. Siapkan payung.",
-  "highLowTemp": "T {high}°  ·  R {low}°",
-  "@highLowTemp": {
-    "placeholders": {
-      "high": {
-        "type": "String"
-      },
-      "low": {
-        "type": "String"
-      }
-    }
-  },
-  "dataFromNea": "Data dari NEA",
-  "night": "Malam",
-  "useCurrentLocation": "Gunakan lokasi sekarang",
-  "adviceRain": "Kenakan jaket tipis dan tetap beraktivitas.",
-  "nextDays": "Next {count} days",
-  "@nextDays": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "visibility": "Jarak Pandang",
-  "dataFromOpenMeteo": "Data dari Open-Meteo",
-  "adviceClear": "Cuaca cerah. Disarankan memakai kacamata hitam.",
-  "adviceClearNight": "Clear skies tonight.",
-  "clear": "Bersihkan",
-  "precipChance": "Peluang hujan",
-  "updatingWeather": "Memperbarui cuaca…",
-  "unableToFetchLocation": "Gagal mengambil informasi cuaca berdasarkan lokasi. Silakan coba lagi.",
-  "loadingLocation": "Memuat lokasi…",
-  "precipPercent": "{percent}% precip",
-  "@precipPercent": {
-    "placeholders": {
-      "percent": {
-        "type": "String"
-      }
-    }
-  },
-  "toTime": "to {time}",
-  "@toTime": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "futureAdviceSnow": "Salju diperkirakan turun nanti hari ini. Sisihkan waktu lebih untuk perjalanan Anda.",
-  "searchLocation": "Cari lokasi",
-  "dummyTime": "Sen, Jan 1 • 12:00 PM",
-  "adviceCloud": "Cuaca berawan ringan hari ini—cocok untuk berjalan kaki.",
-  "visibilityKm": "{dist} km",
-  "@visibilityKm": {
-    "placeholders": {
-      "dist": {
-        "type": "String"
-      }
-    }
-  },
-  "cityRegionOrCoordinates": "Kota, daerah, atau koordinat",
-  "adviceSnow": "Kenakan pakaian berlapis dan berhati-hatilah di jalan yang licin.",
-  "adviceStorm": "Tetap di dalam ruangan; berisiko terjadi petir.",
-  "feelsLike": "Terasa seperti",
-  "weather": "Weather",
-  "insights": "Wawasan",
-  "regionalOutlook": "Prakiraan Wilayah",
-  "tomorrow": "Tomorrow",
-  "windSpeed": "{speed} km/h {dir}",
-  "@windSpeed": {
-    "placeholders": {
-      "speed": {
-        "type": "String"
-      },
-      "dir": {
-        "type": "String"
-      }
-    }
-  },
-  "adviceDefault": "Tetap nyaman dan periksa lagi dalam beberapa jam.",
-  "home": "Beranda",
-  "searchPlace": "Cari lokasi",
-  "locationPermissionDenied": "Izin lokasi ditolak. Aktifkan agar kami dapat menentukan lokasi Anda secara otomatis.",
-  "hourlyForecast": "Prakiraan Per Jam",
-  "todaysSuggestion": "Saran hari ini",
-  "humidity": "Kelembapan",
-  "locationServicesDisabled": "Layanan lokasi dinonaktifkan. Aktifkan di Pengaturan.",
-  "settings": "Pengaturan",
-  "dummyHighLow": "T 80° · R 60°",
-  "daytime": "Pagi hari",
-  "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-  "today": "Hari Ini",
-  "wind": "Angin",
-  "weekAhead": "Week Ahead",
-  "suggestFeature": "Suggest a new feature for WeatherFast",
-  "activitySuggestions": "Activity Suggestions",
-  "baseMapsMapbox": "Base maps are provided by Mapbox.",
-  "reportBug": "Report a bug or issue",
-  "notificationTitle": "Notification",
-  "failedToLoadNotifications": "Failed to load notifications: {error}",
-  "@failedToLoadNotifications": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "openSourceLicenses": "Open-Source Licenses",
-  "noNewNotifications": "No new notifications",
-  "loadingNotificationTitle": "Loading notification title...",
-  "resetRatingPreferences": "Reset Rating Preferences",
-  "apiDocs": "API Docs",
-  "featureRequest": "Feature Request",
-  "mapSettings": "Map Settings",
-  "website": "Website",
-  "tapToViewInteractiveRadar": "Tap to view interactive radar",
-  "usedInWeatherFastVersion": " used in WeatherFast {version}",
-  "@usedInWeatherFastVersion": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
-  "selectLocationFromHome": "Select a location from Home",
-  "dataSources": "Data Sources",
-  "bugReport": "Bug Report",
-  "resetShownCountAndTimestamps": "Reset shown count and timestamps",
-  "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
-  "healthAndSafety": "Health & Safety",
-  "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
-  "preferences": "Preferences",
-  "terms": "Terms",
-  "showingFahrenheit": "Showing °F",
-  "toViewDetailedInsights": "to view the detailed Insights",
-  "support": "Support",
-  "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
-  "checkOperationalStatusOfServices": "Check the operational status of services",
-  "forceRefreshWidgets": "Force refresh widgets",
-  "mapLayers": "Map Layers:",
-  "remindMeLater": "Remind Me in 2 Days",
-  "debug": "Debug",
-  "getItOnPlayStore": "Get it on Play Store",
-  "retry": "Retry",
-  "widgetRefreshFailed": "Widget refresh failed: {error}",
-  "@widgetRefreshFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "showingCelsius": "Showing °C",
-  "enjoyingWeatherFast": "Enjoying WeatherFast?",
-  "notifications": "Notifications",
-  "versionBuildNumber": "Version {version} ({buildNumber})",
-  "@versionBuildNumber": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      },
-      "buildNumber": {
-        "type": "String"
-      }
-    }
-  },
-  "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
-  "failedToLoadInsights": "Failed to load Insights: {error}",
-  "@failedToLoadInsights": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "todaysTimeline": "Today's Timeline",
-  "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
-  "@neaAttribution": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "about": "About",
-  "systemDefault": "System Default",
-  "errorLoadingNotifications": "Error loading notifications: {error}",
-  "@errorLoadingNotifications": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "rateNow": "Rate Now",
-  "neaWebsite": "NEA Website",
-  "weatherMap": "Weather Map",
-  "whatToWear": "What to Wear",
-  "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
-  "weatherInsights": "Weather Insights",
-  "testRatingBottomSheet": "Test Rating Bottom Sheet",
-  "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
-  "loadingTempF": "72°F",
-  "language": "Language",
-  "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
-  "openLink": "Open Link",
-  "getHelpOrSendFeedback": "Get help or send feedback",
-  "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
-  "loading": "Loading...",
-  "systemStatus": "System Status",
-  "analyzingConditions": "Analyzing conditions...",
-  "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
-  "couldNotOpenLink": "Could not open link",
-  "weatherData": "Weather Data:",
-  "loadingNotificationDesc": "Loading notification description...",
-  "noThanks": "No Thanks",
-  "helpAndFeedback": "Help & Feedback",
-  "dataGovSg": "Data.gov.sg",
-  "loadingClearWeather": "Clear",
-  "radarOpacity": "Radar Opacity",
-  "attribution": "Attribution:",
-  "useFahrenheit": "Use Fahrenheit",
-  "ratingPreferencesReset": "Rating preferences reset",
-  "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
-  "widgetsRefreshed": "Widgets refreshed",
-  "tapToViewAllAlerts": "Tap to view all alerts",
-  "description": "Description",
-  "instruction": "Instruction",
-  "severity": "Severity",
-  "activeWarnings": "{count} active warnings",
-  "@activeWarnings": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "activeFloodAlerts": "Active Flood Alerts",
-  "response": "Response",
-  "area": "Area",
-  "floodAlert": "Flood Alert",
-  "flashFloodWarning": "Flash Flood Warning!",
-  "multipleFloodAlerts": "Multiple Flood Alerts",
-  "dewPoint": "Titik Embun",
-  "uvIndex": "Indeks UV",
-  "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
-  "@incompleteLocalisationMessage": {
-    "placeholders": {
-      "language": {
-        "type": "String"
-      }
-    }
-  },
-  "helpLocalizeWeatherFast": "Help localize WeatherFast",
-  "ok": "OK",
-  "unitMph": "mph",
-  "unitMiles": "Miles (mi)",
-  "temperature": "Temperature",
-  "unitKmh": "km/h",
-  "notificationsTooltip": "Notifications",
-  "unitKilometers": "Kilometers (km)",
-  "unitKnots": "knots",
-  "bestTimesTitle": "Best Times",
-  "performanceMode": "Performance Mode",
-  "disableExtraVisualEffects": "Disable extra visual effects",
-  "units": "Units",
-  "windSpeedLabel": "Wind Speed",
-  "temperatureWindVisibility": "Temperature, Wind, Visibility",
-  "celsius": "Celsius (°C)",
-  "fahrenheit": "Fahrenheit (°F)",
-  "unitMs": "m/s",
-  "insightsBestTimeSingaporeDesc": "Optimal conditions for outdoor activities in Singapore",
-  "insightsHealthOptimalTitle": "Optimal Conditions",
-  "insightsActivityOutdoorSportsDesc": "Ideal conditions for outdoor activities and sports",
-  "insightsActivityIndoorTitle": "Indoor Activities",
-  "insightsWeekWarm": "Generally warm throughout the week.",
-  "insightsClothingHot": "Light, breathable clothing. Hat and sunglasses recommended.",
-  "insightsSummaryAllClear": "All systems go—great conditions ahead!",
-  "insightsRecHeatHigh": "🌡️ Stay hydrated—heat warning",
-  "insightsTimeAM": "{hour} AM",
-  "@insightsTimeAM": {
-    "placeholders": {
-      "hour": {
-        "type": "String"
-      }
-    }
-  },
-  "insightsActivityGeneralDesc": "Moderate weather—plan accordingly",
-  "insightsHourlyMorningChilly": "Chilly start—extra layer needed",
-  "insightsRecPleasant": "✨ Pleasant weather expected",
-  "insightsSummaryCold": "Frigid conditions—bundle up",
-  "insightsTimeNoon": "12 PM",
-  "insightsRecAir": "😷 Air quality is poor—limit outdoor exertion",
-  "insightsClothingCold": "Warm jacket essential. Layer up for comfort.",
-  "insightsHealthAirQualityDesc": "Consider a mask outdoors and limit intense activity until air improves.",
-  "insightsHourlyMorningComfort": "Comfortable morning temperatures",
-  "insightsHourlyAfternoonPleasant": "Pleasant afternoon expected",
-  "insightsHealthUVDesc": "Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.",
-  "insightsWeekCool": "Cool weather pattern persisting.",
-  "insightsClothingCool": "Jacket or sweater needed. Long pants suggested.",
-  "insightsBestTimeLimitedDesc": "Hourly data unavailable",
-  "insightsHourlyAfternoonHot": "Peak heat—seek shade",
-  "insightsRecUV": "🛡️ High UV—protect your skin",
-  "insightsActivityLimitOutdoorTitle": "Limit Outdoor Effort",
-  "insightsActivityHikingDesc": "Cool and comfortable for a nature walk",
-  "insightsHealthColdDesc": "Watch for frostbite. Layer clothing and cover extremities.",
-  "insightsBestTimeNoDataDesc": "Unable to determine best times",
-  "insightsHourlyEveningCool": "Cool evening—bring a jacket",
-  "insightsSummaryWind": "Windy day—hold onto your hat",
-  "insightsActivityBeachTitle": "Beach Day",
-  "insightsRecCold": "🧊 Bundle up—cold weather ahead",
-  "insightsClothingRainSuffix": " Bring waterproof gear.",
-  "insightsHealthHeatTitle": "Stay Hydrated",
-  "insightsTimePM": "{hour} PM",
-  "@insightsTimePM": {
-    "placeholders": {
-      "hour": {
-        "type": "String"
-      }
-    }
-  },
-  "insightsBestTimeNoData": "No data",
-  "insightsHealthColdTitle": "Cold Weather Alert",
-  "insightsWeekDataUnavailable": "Forecast data unavailable",
-  "insightsSummaryVariable": "Variable conditions expected",
-  "insightsRecHeatMid": "☀️ Apply sunscreen",
-  "insightsHealthAirQualityTitle": "Air Quality Alert",
-  "insightsClothingFreeze": "Heavy winter coat, gloves, and warm layers required.",
-  "insightsActivityLimitOutdoorDesc": "Air quality is poor—favor light or indoor activities",
-  "insightsSummaryAir": "Air quality is poor—take it easy outside",
-  "insightsHealthWindTitle": "Wind Advisory",
-  "insightsActivityBeachDesc": "Perfect beach weather—bring sunscreen!",
-  "insightsActivityCyclingDesc": "Great weather for a bike ride—mild temps and clear skies",
-  "insightsHealthOptimalDesc": "Perfect weather for physical activity and outdoor time.",
-  "insightsWeekLimitedData": "Limited forecast data available",
-  "insightsClothingMild": "Long sleeves or light jacket recommended.",
-  "insightsBestTimeSingapore": "Best Time: 7-9 AM & 5-8 PM",
-  "insightsClothingWarm": "Comfortable summer wear. Light layers for morning/evening.",
-  "insightsWeekModerate": "Moderate temperatures prevailing.",
-  "insightsWeekVariableSwing": "Variable week ahead with {swing}°C temperature swing. ",
-  "@insightsWeekVariableSwing": {
-    "placeholders": {
-      "swing": {
-        "type": "String"
-      }
-    }
-  },
-  "insightsBestTimeLimited": "Limited data",
-  "insightsHourlyAfternoon": "Afternoon",
-  "insightsActivityIndoorDesc": "Visit museums, cafes, or indoor entertainment",
-  "insightsBestTimeAt": "Best Time: {time}",
-  "@insightsBestTimeAt": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "insightsBestTimeDesc": "Optimal conditions for outdoor activities",
-  "insightsRecWarming": "📈 Warming trend—dress in layers",
-  "insightsSummaryHeat": "Hot and intense—stay cool",
-  "insightsHourlyEveningMild": "Mild evening conditions",
-  "insightsActivityOutdoorSportsTitle": "Outdoor Sports",
-  "insightsHourlyMorning": "Morning",
-  "insightsHourlyEvening": "Evening",
-  "insightsActivityHikingTitle": "Hiking Weather",
-  "insightsSummaryUV": "Strong UV—protect yourself",
-  "insightsRecCooling": "📉 Cooling trend ahead",
-  "insightsActivityCyclingTitle": "Perfect for Cycling",
-  "insightsSummaryRain": "Rainy day incoming—prepare accordingly",
-  "insightsHealthUVTitle": "UV Protection Critical",
-  "insightsRecWind": "💨 Secure loose items—strong winds",
-  "insightsHealthWindDesc": "Secure loose items. Be cautious when driving.",
-  "insightsActivityGeneralTitle": "General Activities",
-  "insightsHealthHeatDesc": "Drink water regularly. Avoid prolonged sun exposure 11am-3pm.",
-  "insightsWeekStable": "Stable conditions expected with consistent temperatures. ",
-  "insightsRecRain": "☔ Bring an umbrella—rain likely",
-  "smartRecommendations": "Smart Recommendations",
-  "calendarPromoReset": "Calendar promo preferences reset",
-  "outdoor": "Outdoor",
-  "weatherForArea": "Weather for {area}",
-  "@weatherForArea": {
-    "placeholders": {
-      "area": {
-        "type": "String"
-      }
-    }
-  },
-  "noWeatherAvailable": "Weather details currently unavailable for this location.",
-  "weatherChoreographerPromoPrivacy": "Privacy Note: All calendar data is processed securely on your device and never sent to any servers.",
-  "newWeatherChoreographer": "New: Calendar Sync",
-  "calendarSettingsTitle": "Calendar Sync",
-  "recOutdoorHeader": "🌳 Outdoor Notice:\n",
-  "weatherChoreographerPromoDescription": "WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.",
-  "recCommuteHot": "Outside is very hot ({temp}°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!",
-  "@recCommuteHot": {
-    "placeholders": {
-      "temp": {
-        "type": "int"
-      }
-    }
-  },
-  "calendarSettingsSubtitle": "Calendar Sync",
-  "resetCalendarPromoSubtitle": "Reset the shown state of the Calendar Sync bottom sheet",
-  "resetCalendarPromo": "Reset Calendar Promo",
-  "enableChoreographer": "Enable Calendar Sync",
-  "recOutdoorRain": "⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.",
-  "eventDetails": "Event Details",
-  "noCalendarsFound": "No calendars found or permission denied.",
-  "recCommuteRain": "Rain is forecast. Don't forget an umbrella or raincoat for your commute!",
-  "recOutdoorHot": "🥵 It's hot outside ({temp}°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.",
-  "@recOutdoorHot": {
-    "placeholders": {
-      "temp": {
-        "type": "int"
-      }
-    }
-  },
-  "unnamedCalendar": "Unnamed Calendar",
-  "tomorrowsEvents": "Tomorrow's Events",
-  "recOutdoorAllClear": "🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.",
-  "recOutdoorCold": "🥶 It's chilly outside ({temp}°). Dress warmly with a jacket, and consider a warm beverage.",
-  "@recOutdoorCold": {
-    "placeholders": {
-      "temp": {
-        "type": "int"
-      }
-    }
-  },
-  "weatherChoreographer": "Today's Events",
-  "loadingWeather": "Loading weather details...",
-  "showWeatherForCalendarEvents": "Show weather for calendar events",
-  "enable": "Enable",
-  "recIndoorAllClear": "🏢 Since your meeting is indoors, you'll be comfortable and protected from the elements. Enjoy your meeting!",
-  "weatherChoreographerSubtitle": "Show weather for your calendar events",
-  "calendarSettingsDescription": "When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.",
-  "recIndoorCommuteHeader": "🏢 Protected Indoors: Once inside, you'll be shielded from the weather. For your commute:\n",
-  "meetingEnvironment": "Meeting Environment",
-  "notNow": "Not Now",
-  "recCommuteCold": "Outside is cold ({temp}°). Wear warm layers so you can easily adjust once you enter the heated venue.",
-  "@recCommuteCold": {
-    "placeholders": {
-      "temp": {
-        "type": "int"
-      }
-    }
-  },
-  "indoor": "Indoor",
-  "selectCalendars": "Select Calendars",
-  "recOutdoorWindy": "💨 Expect gusty winds (up to {wind} km/h). Secure any loose papers or materials.",
-  "@recOutdoorWindy": {
-    "placeholders": {
-      "wind": {
-        "type": "String"
-      }
-    }
-  }
 }
