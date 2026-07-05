@@ -56,6 +56,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final savedLocations = await PreferencesService.loadSavedLocations();
     final options = ['Current Location', ...savedLocations];
 
+    if (!mounted) return;
+
     final selected = await showDialog<String>(
       context: context,
       builder: (context) {
