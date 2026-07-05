@@ -127,6 +127,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get adviceClear => 'Great light outside. Sunglasses recommended.';
 
   @override
+  String get adviceClearNight => 'Clear skies tonight.';
+
+  @override
   String get adviceCloud => 'Soft clouds today—perfect walking weather.';
 
   @override

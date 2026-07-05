@@ -1,390 +1,391 @@
 {
-    "airQuality": "Hava Kalitesi",
-    "weekAhead": "Sonraki Hafta",
-    "suggestFeature": "WeatherFast için yeni bir özellik önerin",
-    "close": "Kapat",
-    "activitySuggestions": "Etkinlik Önerileri",
-    "failedToLoadWeather": "Hava durumu yüklenemedi: {error}",
-    "@failedToLoadWeather": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "baseMapsMapbox": "Temel haritalar Mapbox tarafından sağlanmaktadır.",
-    "futureAdviceStorm": "Fırtına yaklaşıyor. Dışarıdaki işlerinizi hemen bitirin.",
-    "reportBug": "Hata veya sorunu bildir",
-    "futureAdviceRain": "~3 saat içinde yağmur beklentisi. Yanınızda şemsiye bulundurun.",
-    "notificationTitle": "Bildirim",
-    "failedToLoadNotifications": "Bildirimler yüklenemedi: {error}",
-    "@failedToLoadNotifications": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "highLowTemp": "mak {high}°  ·  min {low}°",
-    "@highLowTemp": {
-        "placeholders": {
-            "high": {
-                "type": "String"
-            },
-            "low": {
-                "type": "String"
-            }
-        }
-    },
-    "dataFromNea": "NEA verisi",
-    "night": "Gece",
-    "useCurrentLocation": "Mevcut konumu kullan",
-    "openSourceLicenses": "Açık Kaynak Lisansları",
-    "adviceRain": "Yanına ince bir hırka al ve yola koyul.",
-    "noNewNotifications": "Yeni bildirim yok",
-    "loadingNotificationTitle": "Bildirim başlığı yükleniyor...",
-    "nextDays": "Önümüzdeki {count} gün",
-    "@nextDays": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "resetRatingPreferences": "Değerlendirme Tercihlerini Sıfırla",
-    "tapToViewAllAlerts": "Tüm alarmları görmek için dokunun",
-    "incompleteLocalisationMessage": "{language} dilinin yerelleştirmesi henüz tamamlanmadı.",
-    "@incompleteLocalisationMessage": {
-        "placeholders": {
-            "language": {
-                "type": "String"
-            }
-        }
-    },
-    "apiDocs": "API Docs",
-    "featureRequest": "Özellik Talebi",
-    "mapSettings": "Harita Ayarları",
-    "visibility": "Görüş Mesafesi",
-    "website": "Website",
-    "dataFromOpenMeteo": "Open-Meteo verisi",
-    "tapToViewInteractiveRadar": "Etkileşimli radarı görüntülemek için dokunun",
-    "adviceClear": "Dışarıda hava güneşli. Güneş gözlüğünü unutma.",
-    "usedInWeatherFastVersion": " WeatherFast {version} sürümünde kullanıldı",
-    "@usedInWeatherFastVersion": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-    "clear": "Açık",
-    "precipChance": "Yağış Oranı",
-    "selectLocationFromHome": "Ana sayfadan bir konum seçin",
-    "dataSources": "Veri Kaynakları",
-    "bugReport": "Hata Bildirimi",
-    "updatingWeather": "Hava durumu güncelleniyor…",
-    "resetShownCountAndTimestamps": "Gösterim sayısını ve zaman damgalarını sıfırla",
-    "helpLocalizeWeatherFast": "WeatherFast yerelleştirmesine katkıda bulunun",
-    "reloadWidgetDataWarning": "Widget verilerini yeniden yükleyin (GEREKMEDİKÇE KULLANMAYIN!!!)",
-    "healthAndSafety": "Sağlık & Güvenlik",
-    "unableToFetchLocation": "Konum hava bilgisi alınamadı. Lütfen tekrar deneyin.",
-    "description": "Açıklama",
-    "simulateSuccessfulWeatherFetchTrigger": "Hava durumu başarıyla çekildi tetiklemesini simüle et",
-    "loadingLocation": "Konum yükleniyor…",
-    "precipPercent": "%{percent} yağış ihtimali",
-    "@precipPercent": {
-        "placeholders": {
-            "percent": {
-                "type": "String"
-            }
-        }
-    },
-    "toTime": "{time} saatine kadar",
-    "@toTime": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "preferences": "Tercihler",
-    "futureAdviceSnow": "İlerleyen vakitlerde kar bekleniyor; yolculuğunuza ek süre ayırın.",
-    "terms": "Koşullar",
-    "searchLocation": "Konum ara",
-    "instruction": "Talimat",
-    "showingFahrenheit": "°F gösteriliyor",
-    "toViewDetailedInsights": "detaylı tahminlere bakmak için",
-    "dummyTime": "1 Haz, Pzt • 12:00",
-    "adviceCloud": "Hafif bulutlu bir gün, tam yürüyüş havası.",
-    "visibilityKm": "{dist} km",
-    "@visibilityKm": {
-        "placeholders": {
-            "dist": {
-                "type": "String"
-            }
-        }
-    },
-    "cityRegionOrCoordinates": "Şehir, bölge veya koordinatlar",
-    "support": "Destek",
-    "rateAppDescription": "Uygulamamızı beğendiyseniz, lütfen bir dakikanızı ayırıp Play Store'da puan verin. Desteğiniz bizim için çok değerli!",
-    "checkOperationalStatusOfServices": "Hizmetlerin çalışma durumunu kontrol edin",
-    "forceRefreshWidgets": "Widget'ları yenilemeye zorla",
-    "ok": "Tamam",
-    "mapLayers": "Harita Katmanları:",
-    "remindMeLater": "2 Gün Sonra Hatırlat",
-    "adviceSnow": "Sıkı giyin ve kaygan zeminlere dikkat et.",
-    "debug": "Geliştirici",
-    "getItOnPlayStore": "Play Store'dan indirin",
-    "adviceStorm": "Yıldırım tehlikesi: Dışarı çıkmayın.",
-    "retry": "Tekrar Dene",
-    "feelsLike": "Hissedilen",
-    "weather": "Hava durumu",
-    "widgetRefreshFailed": "Widget yenilenemedi: {error}",
-    "@widgetRefreshFailed": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "showingCelsius": "°C gösteriliyor",
-    "enjoyingWeatherFast": "WeatherFast'ı beğendiniz mi?",
-    "notifications": "Bildirimler",
-    "versionBuildNumber": "Versiyon {version} ({buildNumber})",
-    "@versionBuildNumber": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            },
-            "buildNumber": {
-                "type": "String"
-            }
-        }
-    },
-    "insights": "Tahminler",
-    "sgOpenDataLicence": "Singapur Açık Veri Lisansı sürüm 1.0",
-    "dewPoint": "Çiy Noktası",
-    "failedToLoadInsights": "Tahminler yüklenemedi: {error}",
-    "@failedToLoadInsights": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "regionalOutlook": "Bölgesel Tahmin",
-    "tomorrow": "Yarın",
-    "todaysTimeline": "Bugünün Akışı",
-    "neaAttribution": "Ulusal Çevre Ajansı (NEA) tarafından sağlanan; 2 Saatlik Hava Tahmini, 24 Saatlik Hava Tahmini, 4 Günlük Hava Tahmini, Singapur Genelinde Hava Sıcaklığı, Yağış, Bağıl Nem ve Rüzgar Hızı ile Kirletici Standartları Endeksi (PSI) verilerini ve Singapur'un ulusal su kuruluşu PUB tarafından sağlanan Sel Uyarıları verilerini içerir. {date} tarihinde erişilen bu veriler şu lisans koşulları kapsamındadır: ",
-    "@neaAttribution": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "about": "Hakkında",
-    "severity": "Şiddet",
-    "systemDefault": "Sistem Varsayılanı",
-    "windSpeed": "{speed} km/s {dir}",
-    "@windSpeed": {
-        "placeholders": {
-            "speed": {
-                "type": "String"
-            },
-            "dir": {
-                "type": "String"
-            }
-        }
-    },
-    "errorLoadingNotifications": "Bildirimler yüklenirken hata oluştu: {error}",
-    "@errorLoadingNotifications": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "rateNow": "Şimdi Puan Verin",
-    "neaWebsite": "NEA Websitesi",
-    "adviceDefault": "Keyfinize bakın, birkaç saat sonra tekrar kontrol edin.",
-    "weatherMap": "Hava Durumu Haritası",
-    "whatToWear": "Ne Giymeli",
-    "weatherMapsUnavailableOnWeb": "Web Hava Durumu Haritası Kullanılamıyor",
-    "home": "Ana Sayfa",
-    "activeWarnings": "{count} adet etkin uyarı",
-    "@activeWarnings": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "searchPlace": "Konum ara",
-    "activeFloodAlerts": "Etkin Sel Uyarıları",
-    "locationPermissionDenied": "Konum izni verilmedi. Otomatik konumlandırma için etkinleştirin.",
-    "weatherInsights": "Hava Durumu Tahminleri",
-    "testRatingBottomSheet": "Değerlendirme Panelini Test Et",
-    "livePrecipitationRainviewer": "Canlı yağış radarı RainViewer tarafından sağlanmaktadır.",
-    "loadingTempF": "72°F",
-    "language": "Dil",
-    "viewLicensesForOpenSourcePackages": "Açık kaynak lisanslarını görüntüle",
-    "response": "Cevap",
-    "hourlyForecast": "Saatlik Tahmin",
-    "openLink": "Bağlantıyı aç",
-    "todaysSuggestion": "Günün önerisi",
-    "getHelpOrSendFeedback": "Yardım alın veya geri bildirim gönderin",
-    "humidity": "Nem",
-    "locationServicesDisabled": "Konum hizmeti devre dışı. Lütfen ayarlardan konum hizmetini açın.",
-    "area": "Bölge",
-    "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
-    "settings": "Ayarlar",
-    "loading": "Yükleniyor...",
-    "systemStatus": "Sistem Durumu",
-    "analyzingConditions": "Hava durumu analiz ediliyor...",
-    "weatherDataProvidedByOM": "Hava durumu verileri Open-Meteo tarafından sağlanmaktadır",
-    "couldNotOpenLink": "Bağlantı açılamadı",
-    "dummyHighLow": "mak 80° · min 60°",
-    "weatherData": "Hava Durumu Verisi:",
-    "loadingNotificationDesc": "Bildirim açıklaması yükleniyor...",
-    "daytime": "Gündüz",
-    "noThanks": "Hayır, Teşekkürler",
-    "helpAndFeedback": "Yardım & Geri bildirim",
-    "dataGovSg": "Data.gov.sg",
-    "floodAlert": "Sel Uyarısı",
-    "loadingClearWeather": "Temiz",
-    "uvIndex": "UV Endeksi",
-    "radarOpacity": "Radar Şeffaflığı",
-    "futureAdviceClear": "Hava birkaç saat daha sabit, tam dışarı çıkmalık.",
-    "attribution": "Atıflar:",
-    "flashFloodWarning": "Ani Sel Uyarısı!",
-    "useFahrenheit": "Fahrenheit kullan",
-    "ratingPreferencesReset": "Değerlendirme tercihleri sıfırlandı",
-    "interactiveWeatherRadarDescription": "Etkileşimli hava durumu radarı ve yüksek çözünürlüklü haritalar, mobil deneyimimiz için optimize edilmiştir.",
-    "today": "Bugün",
-    "multipleFloodAlerts": "Birden Fazla Sel Uyarısı",
-    "widgetsRefreshed": "Widget'lar yenilendi",
-    "wind": "Rüzgar",
-    "unitMph": "mph",
-    "unitMiles": "Mil (mi)",
-    "temperature": "Sıcaklık",
-    "unitKmh": "km/h",
-    "notificationsTooltip": "Bildirimler",
-    "unitKilometers": "Kilometre (km)",
-    "unitKnots": "knots",
-    "bestTimesTitle": "En Uygun Saatler",
-    "performanceMode": "Performans Modu",
-    "disableExtraVisualEffects": "Görsel efektleri devre dışı bırak",
-    "units": "Birimler",
-    "windSpeedLabel": "Rüzgar Hızı",
-    "temperatureWindVisibility": "Sıcaklık, Rüzgar, Görüş Mesafesi",
-    "celsius": "Santigrat (°C)",
-    "fahrenheit": "Fahrenheit (°F)",
-    "unitMs": "m/s",
-    "insightsBestTimeSingaporeDesc": "Singapur'da dışarıda vakit geçirmek için harika bir hava var",
-    "insightsHealthOptimalTitle": "En Uygun Hava",
-    "insightsActivityOutdoorSportsDesc": "Açık hava aktiviteleri ve spor için uygun hava",
-    "insightsActivityIndoorTitle": "Kapalı Alan Aktiviteleri",
-    "insightsWeekWarm": "Genel olarak sıcak bir hafta bekleniyor.",
-    "insightsClothingHot": "Hafif, nefes alan giysiler giyin. Şapka ve gözlük önerilir.",
-    "insightsSummaryAllClear": "Her şey yolunda, önümüzde harika bir hava var!",
-    "insightsRecHeatHigh": "🌡️ Yüksek sıcaklık; bol su için",
-    "insightsTimeAM": "Öğleden önce {hour}",
-    "@insightsTimeAM": {
-        "placeholders": {
-            "hour": {
-                "type": "String"
-            }
-        }
-    },
-    "insightsActivityGeneralDesc": "Ilıman hava, hazırlıklı olun",
-    "insightsHourlyMorningChilly": "Sabah serinliği: Ekstra kıyafet al",
-    "insightsRecPleasant": "✨ Keyifli bir hava bekleniyor",
-    "insightsSummaryCold": "Dondurucu soğuk: Sıkı giyinin",
-    "insightsTimeNoon": "12.00",
-    "insightsRecAir": "😷 Kötü hava kalitesi: Kendinizi fazla yormayın",
-    "insightsClothingCold": "Kalın bir ceket şart, rahat etmek için sıkı giyin.",
-    "insightsHealthAirQualityDesc": "Maske takın ve hava düzelene kadar yoğun aktiviteleri kısıtlayın.",
-    "insightsHourlyMorningComfort": "Güne tatlı bir serinlikle başlıyoruz",
-    "insightsHourlyAfternoonPleasant": "Öğleden sonra keyifli bir hava bekleniyor",
-    "insightsHealthUVDesc": "2 saatte bir SPF 30+ güneş kremi uygulayın. Şapka ve güneş gözlüğü kullanın.",
-    "insightsWeekCool": "Serin hava etkisini sürdürüyor.",
-    "insightsClothingCool": "Yanına ceket veya kazak al, altına da pantolon giysen iyi olur.",
-    "insightsBestTimeLimitedDesc": "Saatlik verilere ulaşılamıyor",
-    "insightsHourlyAfternoonHot": "Güneş tam tepede: Gölgeye kaçın",
-    "insightsRecUV": "🛡️ Yüksek UV: Koruyucu önlem alın",
-    "insightsActivityLimitOutdoorTitle": "Açık Havada Kendinizi Zorlamayın",
-    "insightsActivityHikingDesc": "Doğa yürüyüşü için serin ve keyifli bir hava",
-    "insightsHealthColdDesc": "Donma riskine dikkat! Sıkı giyinin, el ve ayaklarınızı açıkta bırakmayın.",
-    "insightsBestTimeNoDataDesc": "İdeal saatler hesaplanamadı",
-    "insightsHourlyEveningCool": "Akşam hava serin, yanına bir ceket al",
-    "insightsSummaryWind": "Rüzgarlı bir gün, şapkanızı sıkı tutun",
-    "insightsActivityBeachTitle": "Sahil Günü",
-    "insightsRecCold": "🧊 Soğuk hava geliyor, sıkı giyinin",
-    "insightsClothingRainSuffix": " Su geçirmez eşyalarını unutma.",
-    "insightsHealthHeatTitle": "Bol Su İçin",
-    "insightsTimePM": "Öğleden sonra {hour}",
-    "@insightsTimePM": {
-        "placeholders": {
-            "hour": {
-                "type": "String"
-            }
-        }
-    },
-    "insightsBestTimeNoData": "Veri yok",
-    "insightsHealthColdTitle": "Soğuk Hava Uyarısı",
-    "insightsWeekDataUnavailable": "Tahmin verilerine ulaşılamıyor",
-    "insightsSummaryVariable": "Değişken hava bekleniyor",
-    "insightsRecHeatMid": "☀️ Güneş kremi sürün",
-    "insightsHealthAirQualityTitle": "Hava Kalitesi Uyarısı",
-    "insightsClothingFreeze": "Kışlık mont, eldiven ve sıcak tutacak kıyafetler şart; iyice giyin.",
-    "insightsActivityLimitOutdoorDesc": "Düşük hava kalitesi: Kapalı alanları ve hafif aktiviteleri tercih edin",
-    "insightsSummaryAir": "Kötü hava kalitesi: Kendinizi yormayın",
-    "insightsHealthWindTitle": "Rüzgar Uyarısı",
-    "insightsActivityBeachDesc": "Tam plaj havası; güneş kremini unutma!",
-    "insightsActivityCyclingDesc": "Bisiklet sürmek için harika, ılık hava ve açık gökyüzü",
-    "insightsHealthOptimalDesc": "Spor yapmak ve dışarıda vakit geçirmek için harika bir hava.",
-    "insightsWeekLimitedData": "Kısıtlı tahmin verisi mevcut",
-    "insightsClothingMild": "Uzun kollu ya da ince bir ceket iyi gider.",
-    "insightsBestTimeSingapore": "En İyi Saatler: 07:00 - 09:00 ve 17:00 - 20:00",
-    "insightsClothingWarm": "Rahat yazlıklar giyin; sabah ve akşam için yanınıza ince bir şeyler alın.",
-    "insightsWeekModerate": "Ilıman hava etkisini sürdürüyor.",
-    "insightsWeekVariableSwing": "Önümüzdeki hafta {swing}°C'lik sıcaklık oynaması var. ",
-    "@insightsWeekVariableSwing": {
-        "placeholders": {
-            "swing": {
-                "type": "String"
-            }
-        }
-    },
-    "insightsBestTimeLimited": "Sınırlı veri",
-    "insightsHourlyAfternoon": "Öğleden sonra",
-    "insightsActivityIndoorDesc": "Müzeleri gezebilir, kafelerde veya kapalı mekanlarda vakit geçirebilirsiniz",
-    "insightsBestTimeAt": "İdeal Saat: {time}",
-    "@insightsBestTimeAt": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "insightsBestTimeDesc": "Dışarıda vakit geçirmek için harika bir hava",
-    "insightsRecWarming": "📈 Hava ısınıyor; gün içindeki değişimlere göre giyin",
-    "insightsSummaryHeat": "Aşırı sıcak: Kendinizi serin tutun",
-    "insightsHourlyEveningMild": "Ilık bir akşam havası",
-    "insightsActivityOutdoorSportsTitle": "Açık Hava Sporları",
-    "insightsHourlyMorning": "Sabah",
-    "insightsHourlyEvening": "Akşam",
-    "insightsActivityHikingTitle": "Doğa Yürüyüşü",
-    "insightsSummaryUV": "Yüksek UV uyarısı: Önlem alın",
-    "insightsRecCooling": "📉 Havalar soğuyor",
-    "insightsActivityCyclingTitle": "Tam Bisiklet Havası",
-    "insightsSummaryRain": "Yağmur geliyor, hazırlıklı olun",
-    "insightsHealthUVTitle": "Yüksek UV Riski",
-    "insightsRecWind": "💨 Şiddetli rüzgar uyarısı: Eşyaları sabitleyin",
-    "insightsHealthWindDesc": "Uçabilecek eşyaları sabitleyin. Araç sürerken dikkatli olun.",
-    "insightsActivityGeneralTitle": "Genel Aktiviteler",
-    "insightsHealthHeatDesc": "Düzenli su tüketin. 11:00-15:00 arası güneşe çıkmamaya özen gösterin.",
-    "insightsWeekStable": "Hava sıcaklıklarında ani bir değişim beklenmiyor. ",
-    "insightsRecRain": "☔ Şemsiyeni al, yağmur bekleniyor"
+  "airQuality": "Hava Kalitesi",
+  "weekAhead": "Sonraki Hafta",
+  "suggestFeature": "WeatherFast için yeni bir özellik önerin",
+  "close": "Kapat",
+  "activitySuggestions": "Etkinlik Önerileri",
+  "failedToLoadWeather": "Hava durumu yüklenemedi: {error}",
+  "@failedToLoadWeather": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "baseMapsMapbox": "Temel haritalar Mapbox tarafından sağlanmaktadır.",
+  "futureAdviceStorm": "Fırtına yaklaşıyor. Dışarıdaki işlerinizi hemen bitirin.",
+  "reportBug": "Hata veya sorunu bildir",
+  "futureAdviceRain": "~3 saat içinde yağmur beklentisi. Yanınızda şemsiye bulundurun.",
+  "notificationTitle": "Bildirim",
+  "failedToLoadNotifications": "Bildirimler yüklenemedi: {error}",
+  "@failedToLoadNotifications": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "highLowTemp": "mak {high}°  ·  min {low}°",
+  "@highLowTemp": {
+    "placeholders": {
+      "high": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      }
+    }
+  },
+  "dataFromNea": "NEA verisi",
+  "night": "Gece",
+  "useCurrentLocation": "Mevcut konumu kullan",
+  "openSourceLicenses": "Açık Kaynak Lisansları",
+  "adviceRain": "Yanına ince bir hırka al ve yola koyul.",
+  "noNewNotifications": "Yeni bildirim yok",
+  "loadingNotificationTitle": "Bildirim başlığı yükleniyor...",
+  "nextDays": "Önümüzdeki {count} gün",
+  "@nextDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resetRatingPreferences": "Değerlendirme Tercihlerini Sıfırla",
+  "tapToViewAllAlerts": "Tüm alarmları görmek için dokunun",
+  "incompleteLocalisationMessage": "{language} dilinin yerelleştirmesi henüz tamamlanmadı.",
+  "@incompleteLocalisationMessage": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "apiDocs": "API Docs",
+  "featureRequest": "Özellik Talebi",
+  "mapSettings": "Harita Ayarları",
+  "visibility": "Görüş Mesafesi",
+  "website": "Website",
+  "dataFromOpenMeteo": "Open-Meteo verisi",
+  "tapToViewInteractiveRadar": "Etkileşimli radarı görüntülemek için dokunun",
+  "adviceClear": "Dışarıda hava güneşli. Güneş gözlüğünü unutma.",
+  "adviceClearNight": "Bu gece gökyüzü açık.",
+  "usedInWeatherFastVersion": " WeatherFast {version} sürümünde kullanıldı",
+  "@usedInWeatherFastVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "clear": "Açık",
+  "precipChance": "Yağış Oranı",
+  "selectLocationFromHome": "Ana sayfadan bir konum seçin",
+  "dataSources": "Veri Kaynakları",
+  "bugReport": "Hata Bildirimi",
+  "updatingWeather": "Hava durumu güncelleniyor…",
+  "resetShownCountAndTimestamps": "Gösterim sayısını ve zaman damgalarını sıfırla",
+  "helpLocalizeWeatherFast": "WeatherFast yerelleştirmesine katkıda bulunun",
+  "reloadWidgetDataWarning": "Widget verilerini yeniden yükleyin (GEREKMEDİKÇE KULLANMAYIN!!!)",
+  "healthAndSafety": "Sağlık & Güvenlik",
+  "unableToFetchLocation": "Konum hava bilgisi alınamadı. Lütfen tekrar deneyin.",
+  "description": "Açıklama",
+  "simulateSuccessfulWeatherFetchTrigger": "Hava durumu başarıyla çekildi tetiklemesini simüle et",
+  "loadingLocation": "Konum yükleniyor…",
+  "precipPercent": "%{percent} yağış ihtimali",
+  "@precipPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "toTime": "{time} saatine kadar",
+  "@toTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "preferences": "Tercihler",
+  "futureAdviceSnow": "İlerleyen vakitlerde kar bekleniyor; yolculuğunuza ek süre ayırın.",
+  "terms": "Koşullar",
+  "searchLocation": "Konum ara",
+  "instruction": "Talimat",
+  "showingFahrenheit": "°F gösteriliyor",
+  "toViewDetailedInsights": "detaylı tahminlere bakmak için",
+  "dummyTime": "1 Haz, Pzt • 12:00",
+  "adviceCloud": "Hafif bulutlu bir gün, tam yürüyüş havası.",
+  "visibilityKm": "{dist} km",
+  "@visibilityKm": {
+    "placeholders": {
+      "dist": {
+        "type": "String"
+      }
+    }
+  },
+  "cityRegionOrCoordinates": "Şehir, bölge veya koordinatlar",
+  "support": "Destek",
+  "rateAppDescription": "Uygulamamızı beğendiyseniz, lütfen bir dakikanızı ayırıp Play Store'da puan verin. Desteğiniz bizim için çok değerli!",
+  "checkOperationalStatusOfServices": "Hizmetlerin çalışma durumunu kontrol edin",
+  "forceRefreshWidgets": "Widget'ları yenilemeye zorla",
+  "ok": "Tamam",
+  "mapLayers": "Harita Katmanları:",
+  "remindMeLater": "2 Gün Sonra Hatırlat",
+  "adviceSnow": "Sıkı giyin ve kaygan zeminlere dikkat et.",
+  "debug": "Geliştirici",
+  "getItOnPlayStore": "Play Store'dan indirin",
+  "adviceStorm": "Yıldırım tehlikesi: Dışarı çıkmayın.",
+  "retry": "Tekrar Dene",
+  "feelsLike": "Hissedilen",
+  "weather": "Hava durumu",
+  "widgetRefreshFailed": "Widget yenilenemedi: {error}",
+  "@widgetRefreshFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "showingCelsius": "°C gösteriliyor",
+  "enjoyingWeatherFast": "WeatherFast'ı beğendiniz mi?",
+  "notifications": "Bildirimler",
+  "versionBuildNumber": "Versiyon {version} ({buildNumber})",
+  "@versionBuildNumber": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "insights": "Tahminler",
+  "sgOpenDataLicence": "Singapur Açık Veri Lisansı sürüm 1.0",
+  "dewPoint": "Çiy Noktası",
+  "failedToLoadInsights": "Tahminler yüklenemedi: {error}",
+  "@failedToLoadInsights": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "regionalOutlook": "Bölgesel Tahmin",
+  "tomorrow": "Yarın",
+  "todaysTimeline": "Bugünün Akışı",
+  "neaAttribution": "Ulusal Çevre Ajansı (NEA) tarafından sağlanan; 2 Saatlik Hava Tahmini, 24 Saatlik Hava Tahmini, 4 Günlük Hava Tahmini, Singapur Genelinde Hava Sıcaklığı, Yağış, Bağıl Nem ve Rüzgar Hızı ile Kirletici Standartları Endeksi (PSI) verilerini ve Singapur'un ulusal su kuruluşu PUB tarafından sağlanan Sel Uyarıları verilerini içerir. {date} tarihinde erişilen bu veriler şu lisans koşulları kapsamındadır: ",
+  "@neaAttribution": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "about": "Hakkında",
+  "severity": "Şiddet",
+  "systemDefault": "Sistem Varsayılanı",
+  "windSpeed": "{speed} km/s {dir}",
+  "@windSpeed": {
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      },
+      "dir": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingNotifications": "Bildirimler yüklenirken hata oluştu: {error}",
+  "@errorLoadingNotifications": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "rateNow": "Şimdi Puan Verin",
+  "neaWebsite": "NEA Websitesi",
+  "adviceDefault": "Keyfinize bakın, birkaç saat sonra tekrar kontrol edin.",
+  "weatherMap": "Hava Durumu Haritası",
+  "whatToWear": "Ne Giymeli",
+  "weatherMapsUnavailableOnWeb": "Web Hava Durumu Haritası Kullanılamıyor",
+  "home": "Ana Sayfa",
+  "activeWarnings": "{count} adet etkin uyarı",
+  "@activeWarnings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchPlace": "Konum ara",
+  "activeFloodAlerts": "Etkin Sel Uyarıları",
+  "locationPermissionDenied": "Konum izni verilmedi. Otomatik konumlandırma için etkinleştirin.",
+  "weatherInsights": "Hava Durumu Tahminleri",
+  "testRatingBottomSheet": "Değerlendirme Panelini Test Et",
+  "livePrecipitationRainviewer": "Canlı yağış radarı RainViewer tarafından sağlanmaktadır.",
+  "loadingTempF": "72°F",
+  "language": "Dil",
+  "viewLicensesForOpenSourcePackages": "Açık kaynak lisanslarını görüntüle",
+  "response": "Cevap",
+  "hourlyForecast": "Saatlik Tahmin",
+  "openLink": "Bağlantıyı aç",
+  "todaysSuggestion": "Günün önerisi",
+  "getHelpOrSendFeedback": "Yardım alın veya geri bildirim gönderin",
+  "humidity": "Nem",
+  "locationServicesDisabled": "Konum hizmeti devre dışı. Lütfen ayarlardan konum hizmetini açın.",
+  "area": "Bölge",
+  "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
+  "settings": "Ayarlar",
+  "loading": "Yükleniyor...",
+  "systemStatus": "Sistem Durumu",
+  "analyzingConditions": "Hava durumu analiz ediliyor...",
+  "weatherDataProvidedByOM": "Hava durumu verileri Open-Meteo tarafından sağlanmaktadır",
+  "couldNotOpenLink": "Bağlantı açılamadı",
+  "dummyHighLow": "mak 80° · min 60°",
+  "weatherData": "Hava Durumu Verisi:",
+  "loadingNotificationDesc": "Bildirim açıklaması yükleniyor...",
+  "daytime": "Gündüz",
+  "noThanks": "Hayır, Teşekkürler",
+  "helpAndFeedback": "Yardım & Geri bildirim",
+  "dataGovSg": "Data.gov.sg",
+  "floodAlert": "Sel Uyarısı",
+  "loadingClearWeather": "Temiz",
+  "uvIndex": "UV Endeksi",
+  "radarOpacity": "Radar Şeffaflığı",
+  "futureAdviceClear": "Hava birkaç saat daha sabit, tam dışarı çıkmalık.",
+  "attribution": "Atıflar:",
+  "flashFloodWarning": "Ani Sel Uyarısı!",
+  "useFahrenheit": "Fahrenheit kullan",
+  "ratingPreferencesReset": "Değerlendirme tercihleri sıfırlandı",
+  "interactiveWeatherRadarDescription": "Etkileşimli hava durumu radarı ve yüksek çözünürlüklü haritalar, mobil deneyimimiz için optimize edilmiştir.",
+  "today": "Bugün",
+  "multipleFloodAlerts": "Birden Fazla Sel Uyarısı",
+  "widgetsRefreshed": "Widget'lar yenilendi",
+  "wind": "Rüzgar",
+  "unitMph": "mph",
+  "unitMiles": "Mil (mi)",
+  "temperature": "Sıcaklık",
+  "unitKmh": "km/h",
+  "notificationsTooltip": "Bildirimler",
+  "unitKilometers": "Kilometre (km)",
+  "unitKnots": "knots",
+  "bestTimesTitle": "En Uygun Saatler",
+  "performanceMode": "Performans Modu",
+  "disableExtraVisualEffects": "Görsel efektleri devre dışı bırak",
+  "units": "Birimler",
+  "windSpeedLabel": "Rüzgar Hızı",
+  "temperatureWindVisibility": "Sıcaklık, Rüzgar, Görüş Mesafesi",
+  "celsius": "Santigrat (°C)",
+  "fahrenheit": "Fahrenheit (°F)",
+  "unitMs": "m/s",
+  "insightsBestTimeSingaporeDesc": "Singapur'da dışarıda vakit geçirmek için harika bir hava var",
+  "insightsHealthOptimalTitle": "En Uygun Hava",
+  "insightsActivityOutdoorSportsDesc": "Açık hava aktiviteleri ve spor için uygun hava",
+  "insightsActivityIndoorTitle": "Kapalı Alan Aktiviteleri",
+  "insightsWeekWarm": "Genel olarak sıcak bir hafta bekleniyor.",
+  "insightsClothingHot": "Hafif, nefes alan giysiler giyin. Şapka ve gözlük önerilir.",
+  "insightsSummaryAllClear": "Her şey yolunda, önümüzde harika bir hava var!",
+  "insightsRecHeatHigh": "🌡️ Yüksek sıcaklık; bol su için",
+  "insightsTimeAM": "Öğleden önce {hour}",
+  "@insightsTimeAM": {
+    "placeholders": {
+      "hour": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsActivityGeneralDesc": "Ilıman hava, hazırlıklı olun",
+  "insightsHourlyMorningChilly": "Sabah serinliği: Ekstra kıyafet al",
+  "insightsRecPleasant": "✨ Keyifli bir hava bekleniyor",
+  "insightsSummaryCold": "Dondurucu soğuk: Sıkı giyinin",
+  "insightsTimeNoon": "12.00",
+  "insightsRecAir": "😷 Kötü hava kalitesi: Kendinizi fazla yormayın",
+  "insightsClothingCold": "Kalın bir ceket şart, rahat etmek için sıkı giyin.",
+  "insightsHealthAirQualityDesc": "Maske takın ve hava düzelene kadar yoğun aktiviteleri kısıtlayın.",
+  "insightsHourlyMorningComfort": "Güne tatlı bir serinlikle başlıyoruz",
+  "insightsHourlyAfternoonPleasant": "Öğleden sonra keyifli bir hava bekleniyor",
+  "insightsHealthUVDesc": "2 saatte bir SPF 30+ güneş kremi uygulayın. Şapka ve güneş gözlüğü kullanın.",
+  "insightsWeekCool": "Serin hava etkisini sürdürüyor.",
+  "insightsClothingCool": "Yanına ceket veya kazak al, altına da pantolon giysen iyi olur.",
+  "insightsBestTimeLimitedDesc": "Saatlik verilere ulaşılamıyor",
+  "insightsHourlyAfternoonHot": "Güneş tam tepede: Gölgeye kaçın",
+  "insightsRecUV": "🛡️ Yüksek UV: Koruyucu önlem alın",
+  "insightsActivityLimitOutdoorTitle": "Açık Havada Kendinizi Zorlamayın",
+  "insightsActivityHikingDesc": "Doğa yürüyüşü için serin ve keyifli bir hava",
+  "insightsHealthColdDesc": "Donma riskine dikkat! Sıkı giyinin, el ve ayaklarınızı açıkta bırakmayın.",
+  "insightsBestTimeNoDataDesc": "İdeal saatler hesaplanamadı",
+  "insightsHourlyEveningCool": "Akşam hava serin, yanına bir ceket al",
+  "insightsSummaryWind": "Rüzgarlı bir gün, şapkanızı sıkı tutun",
+  "insightsActivityBeachTitle": "Sahil Günü",
+  "insightsRecCold": "🧊 Soğuk hava geliyor, sıkı giyinin",
+  "insightsClothingRainSuffix": " Su geçirmez eşyalarını unutma.",
+  "insightsHealthHeatTitle": "Bol Su İçin",
+  "insightsTimePM": "Öğleden sonra {hour}",
+  "@insightsTimePM": {
+    "placeholders": {
+      "hour": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsBestTimeNoData": "Veri yok",
+  "insightsHealthColdTitle": "Soğuk Hava Uyarısı",
+  "insightsWeekDataUnavailable": "Tahmin verilerine ulaşılamıyor",
+  "insightsSummaryVariable": "Değişken hava bekleniyor",
+  "insightsRecHeatMid": "☀️ Güneş kremi sürün",
+  "insightsHealthAirQualityTitle": "Hava Kalitesi Uyarısı",
+  "insightsClothingFreeze": "Kışlık mont, eldiven ve sıcak tutacak kıyafetler şart; iyice giyin.",
+  "insightsActivityLimitOutdoorDesc": "Düşük hava kalitesi: Kapalı alanları ve hafif aktiviteleri tercih edin",
+  "insightsSummaryAir": "Kötü hava kalitesi: Kendinizi yormayın",
+  "insightsHealthWindTitle": "Rüzgar Uyarısı",
+  "insightsActivityBeachDesc": "Tam plaj havası; güneş kremini unutma!",
+  "insightsActivityCyclingDesc": "Bisiklet sürmek için harika, ılık hava ve açık gökyüzü",
+  "insightsHealthOptimalDesc": "Spor yapmak ve dışarıda vakit geçirmek için harika bir hava.",
+  "insightsWeekLimitedData": "Kısıtlı tahmin verisi mevcut",
+  "insightsClothingMild": "Uzun kollu ya da ince bir ceket iyi gider.",
+  "insightsBestTimeSingapore": "En İyi Saatler: 07:00 - 09:00 ve 17:00 - 20:00",
+  "insightsClothingWarm": "Rahat yazlıklar giyin; sabah ve akşam için yanınıza ince bir şeyler alın.",
+  "insightsWeekModerate": "Ilıman hava etkisini sürdürüyor.",
+  "insightsWeekVariableSwing": "Önümüzdeki hafta {swing}°C'lik sıcaklık oynaması var. ",
+  "@insightsWeekVariableSwing": {
+    "placeholders": {
+      "swing": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsBestTimeLimited": "Sınırlı veri",
+  "insightsHourlyAfternoon": "Öğleden sonra",
+  "insightsActivityIndoorDesc": "Müzeleri gezebilir, kafelerde veya kapalı mekanlarda vakit geçirebilirsiniz",
+  "insightsBestTimeAt": "İdeal Saat: {time}",
+  "@insightsBestTimeAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "insightsBestTimeDesc": "Dışarıda vakit geçirmek için harika bir hava",
+  "insightsRecWarming": "📈 Hava ısınıyor; gün içindeki değişimlere göre giyin",
+  "insightsSummaryHeat": "Aşırı sıcak: Kendinizi serin tutun",
+  "insightsHourlyEveningMild": "Ilık bir akşam havası",
+  "insightsActivityOutdoorSportsTitle": "Açık Hava Sporları",
+  "insightsHourlyMorning": "Sabah",
+  "insightsHourlyEvening": "Akşam",
+  "insightsActivityHikingTitle": "Doğa Yürüyüşü",
+  "insightsSummaryUV": "Yüksek UV uyarısı: Önlem alın",
+  "insightsRecCooling": "📉 Havalar soğuyor",
+  "insightsActivityCyclingTitle": "Tam Bisiklet Havası",
+  "insightsSummaryRain": "Yağmur geliyor, hazırlıklı olun",
+  "insightsHealthUVTitle": "Yüksek UV Riski",
+  "insightsRecWind": "💨 Şiddetli rüzgar uyarısı: Eşyaları sabitleyin",
+  "insightsHealthWindDesc": "Uçabilecek eşyaları sabitleyin. Araç sürerken dikkatli olun.",
+  "insightsActivityGeneralTitle": "Genel Aktiviteler",
+  "insightsHealthHeatDesc": "Düzenli su tüketin. 11:00-15:00 arası güneşe çıkmamaya özen gösterin.",
+  "insightsWeekStable": "Hava sıcaklıklarında ani bir değişim beklenmiyor. ",
+  "insightsRecRain": "☔ Şemsiyeni al, yağmur bekleniyor"
 }

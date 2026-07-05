@@ -28,8 +28,12 @@
   "highLowTemp": "H {high}°  ·  L {low}°",
   "@highLowTemp": {
     "placeholders": {
-      "high": { "type": "String" },
-      "low": { "type": "String" }
+      "high": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      }
     }
   },
   "feelsLike": "Feels like",
@@ -49,6 +53,7 @@
   "adviceSnow": "Layer up and mind slick paths.",
   "adviceStorm": "Stay indoors; lightning risk.",
   "adviceClear": "Great light outside. Sunglasses recommended.",
+  "adviceClearNight": "Clear skies tonight.",
   "adviceCloud": "Soft clouds today—perfect walking weather.",
   "adviceDefault": "Stay comfortable and check again in a few hours.",
   "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
@@ -60,39 +65,53 @@
   "nextDays": "Next {count} days",
   "@nextDays": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "weather": "Weather",
   "precipPercent": "{percent}% precip",
   "@precipPercent": {
     "placeholders": {
-      "percent": { "type": "String" }
+      "percent": {
+        "type": "String"
+      }
     }
   },
   "toTime": "to {time}",
   "@toTime": {
     "placeholders": {
-      "time": { "type": "String" }
+      "time": {
+        "type": "String"
+      }
     }
   },
   "windSpeed": "{speed} km/h {dir}",
   "@windSpeed": {
     "placeholders": {
-      "speed": { "type": "String" },
-      "dir": { "type": "String" }
+      "speed": {
+        "type": "String"
+      },
+      "dir": {
+        "type": "String"
+      }
     }
   },
   "visibilityKm": "{dist} km",
   "@visibilityKm": {
     "placeholders": {
-      "dist": { "type": "String" }
+      "dist": {
+        "type": "String"
+      }
     }
   },
   "failedToLoadInsights": "Failed to load Insights: {error}",
   "@failedToLoadInsights": {
     "placeholders": {
-      "error": { "type": "String" }
+      "error": {
+        "type": "String"
+      }
     }
   },
   "weatherInsights": "Weather Insights",
@@ -108,7 +127,9 @@
   "widgetRefreshFailed": "Widget refresh failed: {error}",
   "@widgetRefreshFailed": {
     "placeholders": {
-      "error": { "type": "String" }
+      "error": {
+        "type": "String"
+      }
     }
   },
   "language": "Language",
@@ -123,7 +144,9 @@
   "usedInWeatherFastVersion": " used in WeatherFast {version}",
   "@usedInWeatherFastVersion": {
     "placeholders": {
-      "version": { "type": "String" }
+      "version": {
+        "type": "String"
+      }
     }
   },
   "debug": "Debug",
@@ -142,8 +165,12 @@
   "versionBuildNumber": "Version {version} ({buildNumber})",
   "@versionBuildNumber": {
     "placeholders": {
-      "version": { "type": "String" },
-      "buildNumber": { "type": "String" }
+      "version": {
+        "type": "String"
+      },
+      "buildNumber": {
+        "type": "String"
+      }
     }
   },
   "featureRequest": "Feature Request",
@@ -156,13 +183,17 @@
   "failedToLoadNotifications": "Failed to load notifications: {error}",
   "@failedToLoadNotifications": {
     "placeholders": {
-      "error": { "type": "String" }
+      "error": {
+        "type": "String"
+      }
     }
   },
   "errorLoadingNotifications": "Error loading notifications: {error}",
   "@errorLoadingNotifications": {
     "placeholders": {
-      "error": { "type": "String" }
+      "error": {
+        "type": "String"
+      }
     }
   },
   "retry": "Retry",
@@ -189,7 +220,9 @@
   "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI), from the National Environment Agency, and Flood Alerts across Singapore, from the PUB, Singapore's national water agency, accessed on {date}, which is made available under the terms of the ",
   "@neaAttribution": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
@@ -249,7 +282,6 @@
   "performanceMode": "Performance Mode",
   "disableExtraVisualEffects": "Disable extra visual effects",
   "bestTimesTitle": "Best Times",
-
   "insightsActivityLimitOutdoorTitle": "Limit Outdoor Effort",
   "insightsActivityLimitOutdoorDesc": "Air quality is poor—favor light or indoor activities",
   "insightsActivityIndoorTitle": "Indoor Activities",
@@ -264,7 +296,6 @@
   "insightsActivityHikingDesc": "Cool and comfortable for a nature walk",
   "insightsActivityGeneralTitle": "General Activities",
   "insightsActivityGeneralDesc": "Moderate weather—plan accordingly",
-
   "insightsHealthAirQualityTitle": "Air Quality Alert",
   "insightsHealthAirQualityDesc": "Consider a mask outdoors and limit intense activity until air improves.",
   "insightsHealthUVTitle": "UV Protection Critical",
@@ -277,7 +308,6 @@
   "insightsHealthWindDesc": "Secure loose items. Be cautious when driving.",
   "insightsHealthOptimalTitle": "Optimal Conditions",
   "insightsHealthOptimalDesc": "Perfect weather for physical activity and outdoor time.",
-
   "insightsClothingHot": "Light, breathable clothing. Hat and sunglasses recommended.",
   "insightsClothingWarm": "Comfortable summer wear. Light layers for morning/evening.",
   "insightsClothingMild": "Long sleeves or light jacket recommended.",
@@ -285,7 +315,6 @@
   "insightsClothingCold": "Warm jacket essential. Layer up for comfort.",
   "insightsClothingFreeze": "Heavy winter coat, gloves, and warm layers required.",
   "insightsClothingRainSuffix": " Bring waterproof gear.",
-
   "insightsHourlyMorning": "Morning",
   "insightsHourlyAfternoon": "Afternoon",
   "insightsHourlyEvening": "Evening",
@@ -295,20 +324,20 @@
   "insightsHourlyAfternoonPleasant": "Pleasant afternoon expected",
   "insightsHourlyEveningCool": "Cool evening—bring a jacket",
   "insightsHourlyEveningMild": "Mild evening conditions",
-
   "insightsWeekLimitedData": "Limited forecast data available",
   "insightsWeekDataUnavailable": "Forecast data unavailable",
   "insightsWeekVariableSwing": "Variable week ahead with {swing}°C temperature swing. ",
   "@insightsWeekVariableSwing": {
     "placeholders": {
-      "swing": { "type": "String" }
+      "swing": {
+        "type": "String"
+      }
     }
   },
   "insightsWeekStable": "Stable conditions expected with consistent temperatures. ",
   "insightsWeekWarm": "Generally warm throughout the week.",
   "insightsWeekCool": "Cool weather pattern persisting.",
   "insightsWeekModerate": "Moderate temperatures prevailing.",
-
   "insightsBestTimeSingapore": "Best Time: 7-9 AM & 5-8 PM",
   "insightsBestTimeSingaporeDesc": "Optimal conditions for outdoor activities in Singapore",
   "insightsBestTimeNoData": "No data",
@@ -318,24 +347,29 @@
   "insightsBestTimeAt": "Best Time: {time}",
   "@insightsBestTimeAt": {
     "placeholders": {
-      "time": { "type": "String" }
+      "time": {
+        "type": "String"
+      }
     }
   },
   "insightsBestTimeDesc": "Optimal conditions for outdoor activities",
   "insightsTimeAM": "{hour} AM",
   "@insightsTimeAM": {
     "placeholders": {
-      "hour": { "type": "String" }
+      "hour": {
+        "type": "String"
+      }
     }
   },
   "insightsTimePM": "{hour} PM",
   "@insightsTimePM": {
     "placeholders": {
-      "hour": { "type": "String" }
+      "hour": {
+        "type": "String"
+      }
     }
   },
   "insightsTimeNoon": "12 PM",
-
   "insightsRecRain": "☔ Bring an umbrella—rain likely",
   "insightsRecHeatHigh": "🌡️ Stay hydrated—heat warning",
   "insightsRecHeatMid": "☀️ Apply sunscreen",
@@ -346,7 +380,6 @@
   "insightsRecWarming": "📈 Warming trend—dress in layers",
   "insightsRecCooling": "📉 Cooling trend ahead",
   "insightsRecPleasant": "✨ Pleasant weather expected",
-
   "insightsSummaryAllClear": "All systems go—great conditions ahead!",
   "insightsSummaryRain": "Rainy day incoming—prepare accordingly",
   "insightsSummaryHeat": "Hot and intense—stay cool",
@@ -355,7 +388,6 @@
   "insightsSummaryUV": "Strong UV—protect yourself",
   "insightsSummaryAir": "Air quality is poor—take it easy outside",
   "insightsSummaryVariable": "Variable conditions expected",
-
   "weatherChoreographer": "Today's Events",
   "tomorrowsEvents": "Tomorrow's Events",
   "weatherChoreographerSubtitle": "Show weather for your calendar events",
@@ -394,13 +426,17 @@
   "recCommuteHot": "Outside is very hot ({temp}°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!",
   "@recCommuteHot": {
     "placeholders": {
-      "temp": { "type": "int" }
+      "temp": {
+        "type": "int"
+      }
     }
   },
   "recCommuteCold": "Outside is cold ({temp}°). Wear warm layers so you can easily adjust once you enter the heated venue.",
   "@recCommuteCold": {
     "placeholders": {
-      "temp": { "type": "int" }
+      "temp": {
+        "type": "int"
+      }
     }
   },
   "recIndoorAllClear": "🏢 Since your meeting is indoors, you'll be comfortable and protected from the elements. Enjoy your meeting!",
@@ -409,19 +445,25 @@
   "recOutdoorHot": "🥵 It's hot outside ({temp}°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.",
   "@recOutdoorHot": {
     "placeholders": {
-      "temp": { "type": "int" }
+      "temp": {
+        "type": "int"
+      }
     }
   },
   "recOutdoorCold": "🥶 It's chilly outside ({temp}°). Dress warmly with a jacket, and consider a warm beverage.",
   "@recOutdoorCold": {
     "placeholders": {
-      "temp": { "type": "int" }
+      "temp": {
+        "type": "int"
+      }
     }
   },
   "recOutdoorWindy": "💨 Expect gusty winds (up to {wind} km/h). Secure any loose papers or materials.",
   "@recOutdoorWindy": {
     "placeholders": {
-      "wind": { "type": "String" }
+      "wind": {
+        "type": "String"
+      }
     }
   },
   "recOutdoorAllClear": "🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.",

@@ -362,6 +362,7 @@ class WeatherService {
           'dewpoint_f': (((weatherData['current']['dew_point_2m'] as num?)
               ?.toDouble() ?? 0.0) * 9 / 5) + 32,
           'uv': (weatherData['current']['uv_index'] as num?)?.toDouble() ?? 0.0,
+          'is_day': (weatherData['current']?['is_day'] as num?)?.toInt() ?? 1,
         },
         'widget_today_high_c': todayHighC,
         'widget_today_high_f': todayHighC == null
@@ -668,6 +669,7 @@ class WeatherService {
           'dewpoint_f': (((weatherData['current']['dew_point_2m'] as num?)
               ?.toDouble() ?? 0.0) * 9 / 5) + 32,
           'uv': (weatherData['current']['uv_index'] as num?)?.toDouble() ?? 0.0,
+          'is_day': (weatherData['current']?['is_day'] as num?)?.toInt() ?? 1,
         },
         'forecast': {'forecastday': forecastDays},
       };
@@ -833,11 +835,11 @@ class WeatherService {
   Future<Map<String, dynamic>> _fetchWeatherData(double lat, double lon) async {
     final url = Uri.parse(
       '$_weatherUrl?latitude=$lat&longitude=$lon'
-          '&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl,visibility,dew_point_2m,uv_index'
-      '&hourly=temperature_2m,apparent_temperature,weather_code,visibility,precipitation_probability,wind_speed_10m,relative_humidity_2m'
-      '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
-      '&timezone=auto'
-      '&forecast_days=14',
+          '&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,wind_direction_10m,pressure_msl,visibility,dew_point_2m,uv_index,is_day'
+          '&hourly=temperature_2m,apparent_temperature,weather_code,visibility,precipitation_probability,wind_speed_10m,relative_humidity_2m'
+          '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+          '&timezone=auto'
+          '&forecast_days=14',
     );
 
     final response = await http.get(url);

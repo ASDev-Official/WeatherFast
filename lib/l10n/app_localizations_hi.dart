@@ -127,6 +127,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get adviceClear => 'धूप निकली है। धूप का चश्मा पहनो।';
 
   @override
+  String get adviceClearNight => 'आज रात आसमान साफ है।';
+
+  @override
   String get adviceCloud => 'आज हल्के बादल हैं -- घूमना अच्छा रहेगा।';
 
   @override

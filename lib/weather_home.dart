@@ -1807,7 +1807,10 @@ class _WeatherHomeState extends State<WeatherHome> {
       return AppLocalizations.of(context)!.adviceStorm;
     }
     if (lower.contains('clear') || lower.contains('sunny')) {
-      return AppLocalizations.of(context)!.adviceClear;
+      final isDay = _isDaytime ?? true;
+      return isDay
+          ? AppLocalizations.of(context)!.adviceClear
+          : AppLocalizations.of(context)!.adviceClearNight;
     }
     if (lower.contains('cloud')) {
       return AppLocalizations.of(context)!.adviceCloud;

@@ -362,6 +362,12 @@ abstract class AppLocalizations {
   /// **'Great light outside. Sunglasses recommended.'**
   String get adviceClear;
 
+  /// No description provided for @adviceClearNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear skies tonight.'**
+  String get adviceClearNight;
+
   /// No description provided for @adviceCloud.
   ///
   /// In en, this message translates to:

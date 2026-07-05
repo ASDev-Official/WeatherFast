@@ -131,6 +131,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'На улице яркое солнце. Рекомендуется надеть солнцезащитные очки.';
 
   @override
+  String get adviceClearNight => 'Ясное небо сегодня вечером.';
+
+  @override
   String get adviceCloud => 'Лёгкая облачность. Отличная погода для прогулки.';
 
   @override

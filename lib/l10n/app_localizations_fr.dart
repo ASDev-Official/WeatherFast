@@ -129,6 +129,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Il fait très clair dehors. Portez des lunettes de soleil.';
 
   @override
+  String get adviceClearNight => 'Ciel dégagé ce soir.';
+
+  @override
   String get adviceCloud =>
       'Le ciel est nuageux aujourd\'hui : une météo idéale pour se promener.';
 

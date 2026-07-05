@@ -127,6 +127,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get adviceClear => 'Dışarıda hava güneşli. Güneş gözlüğünü unutma.';
 
   @override
+  String get adviceClearNight => 'Bu gece gökyüzü açık.';
+
+  @override
   String get adviceCloud => 'Hafif bulutlu bir gün, tam yürüyüş havası.';
 
   @override

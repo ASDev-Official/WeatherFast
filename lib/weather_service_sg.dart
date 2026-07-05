@@ -91,6 +91,10 @@ class SingaporeWeatherService {
       'dewpoint_f': (((currentOm?['dew_point_2m'] as num?)?.toDouble() ?? 0.0) *
           9 / 5) + 32,
       'uv': (currentOm?['uv_index'] as num?)?.toDouble() ?? 0.0,
+      'is_day': (currentOm?['is_day'] as num?)?.toInt() ?? (() {
+        final hour = DateTime.now().toUtc().add(const Duration(hours: 8)).hour;
+        return (hour >= 6 && hour < 19) ? 1 : 0;
+      })(),
       ...?psi,
     };
 
@@ -188,7 +192,7 @@ class SingaporeWeatherService {
   Future<Map<String, dynamic>> _fetchOpenMeteo(double lat, double lon) async {
     final url = Uri.parse(
       'https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon'
-          '&current=dew_point_2m,uv_index'
+          '&current=dew_point_2m,uv_index,is_day'
       '&hourly=temperature_2m,weather_code,precipitation_probability'
       '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
       '&timezone=auto',
