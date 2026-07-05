@@ -9,151 +9,153 @@ class AppLocalizationsId extends AppLocalizations {
   AppLocalizationsId([String locale = 'id']) : super(locale);
 
   @override
-  String get home => 'Home';
+  String get home => 'Beranda';
 
   @override
-  String get insights => 'Insights';
+  String get insights => 'Wawasan';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Pengaturan';
 
   @override
-  String get updatingWeather => 'Updating weather…';
+  String get updatingWeather => 'Memperbarui cuaca…';
 
   @override
   String get locationServicesDisabled =>
-      'Location services are disabled. Enable them in Settings.';
+      'Layanan lokasi dinonaktifkan. Aktifkan di Pengaturan.';
 
   @override
   String get locationPermissionDenied =>
-      'Location permission denied. Enable it to auto-locate you.';
+      'Izin lokasi ditolak. Aktifkan agar kami dapat menentukan lokasi Anda secara otomatis.';
 
   @override
   String get unableToFetchLocation =>
-      'Unable to fetch location weather. Please try again.';
+      'Gagal mengambil informasi cuaca berdasarkan lokasi. Silakan coba lagi.';
 
   @override
   String failedToLoadWeather(String error) {
-    return 'Failed to load weather: $error';
+    return 'Gagal memuat cuaca: $error';
   }
 
   @override
-  String get searchPlace => 'Search a place';
+  String get searchPlace => 'Cari lokasi';
 
   @override
-  String get close => 'Close';
+  String get close => 'Tutup';
 
   @override
-  String get cityRegionOrCoordinates => 'City, region, or coordinates';
+  String get cityRegionOrCoordinates => 'Kota, daerah, atau koordinat';
 
   @override
-  String get loadingLocation => 'Loading location…';
+  String get loadingLocation => 'Memuat lokasi…';
 
   @override
-  String get searchLocation => 'Search location';
+  String get searchLocation => 'Cari lokasi';
 
   @override
-  String get useCurrentLocation => 'Use current location';
+  String get useCurrentLocation => 'Gunakan lokasi sekarang';
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Bersihkan';
 
   @override
-  String get dummyTime => 'Mon, Jan 1 • 12:00 PM';
+  String get dummyTime => 'Sen, Jan 1 • 12:00 PM';
 
   @override
-  String get daytime => 'Daytime';
+  String get daytime => 'Pagi hari';
 
   @override
-  String get night => 'Night';
+  String get night => 'Malam';
 
   @override
-  String get dummyHighLow => 'H 80° · L 60°';
+  String get dummyHighLow => 'T 80° · R 60°';
 
   @override
   String highLowTemp(String high, String low) {
-    return 'H $high°  ·  L $low°';
+    return 'T $high°  ·  R $low°';
   }
 
   @override
-  String get feelsLike => 'Feels like';
+  String get feelsLike => 'Terasa seperti';
 
   @override
-  String get humidity => 'Humidity';
+  String get humidity => 'Kelembapan';
 
   @override
-  String get uvIndex => 'UV Index';
+  String get uvIndex => 'Indeks UV';
 
   @override
-  String get dewPoint => 'Dew Point';
+  String get dewPoint => 'Titik Embun';
 
   @override
-  String get wind => 'Wind';
+  String get wind => 'Angin';
 
   @override
-  String get airQuality => 'Air Quality';
+  String get airQuality => 'Kualitas Udara';
 
   @override
-  String get visibility => 'Visibility';
+  String get visibility => 'Jarak Pandang';
 
   @override
-  String get precipChance => 'Precip chance';
+  String get precipChance => 'Peluang hujan';
 
   @override
-  String get hourlyForecast => 'Hourly Forecast';
+  String get hourlyForecast => 'Prakiraan Per Jam';
 
   @override
-  String get regionalOutlook => 'Regional Outlook';
+  String get regionalOutlook => 'Prakiraan Wilayah';
 
   @override
-  String get dataFromOpenMeteo => 'Data from Open-Meteo';
+  String get dataFromOpenMeteo => 'Data dari Open-Meteo';
 
   @override
-  String get dataFromNea => 'Data from NEA';
+  String get dataFromNea => 'Data dari NEA';
 
   @override
-  String get todaysSuggestion => 'Today’s suggestion';
+  String get todaysSuggestion => 'Saran hari ini';
 
   @override
-  String get adviceRain => 'Grab a light shell and keep moving.';
+  String get adviceRain => 'Kenakan jaket tipis dan tetap beraktivitas.';
 
   @override
-  String get adviceSnow => 'Layer up and mind slick paths.';
+  String get adviceSnow =>
+      'Kenakan pakaian berlapis dan berhati-hatilah di jalan yang licin.';
 
   @override
-  String get adviceStorm => 'Stay indoors; lightning risk.';
+  String get adviceStorm => 'Tetap di dalam ruangan; berisiko terjadi petir.';
 
   @override
-  String get adviceClear => 'Great light outside. Sunglasses recommended.';
+  String get adviceClear => 'Cuaca cerah. Disarankan memakai kacamata hitam.';
 
   @override
   String get adviceClearNight => 'Clear skies tonight.';
 
   @override
-  String get adviceCloud => 'Soft clouds today—perfect walking weather.';
+  String get adviceCloud =>
+      'Cuaca berawan ringan hari ini—cocok untuk berjalan kaki.';
 
   @override
   String get adviceDefault =>
-      'Stay comfortable and check again in a few hours.';
+      'Tetap nyaman dan periksa lagi dalam beberapa jam.';
 
   @override
   String get futureAdviceRain =>
-      'Rain likely in ~3 hours. Keep an umbrella nearby.';
+      'Hujan diperkirakan turun sekitar 3 jam lagi. Siapkan payung.';
 
   @override
   String get futureAdviceSnow =>
-      'Snow later today—plan travel with extra time.';
+      'Salju diperkirakan turun nanti hari ini. Sisihkan waktu lebih untuk perjalanan Anda.';
 
   @override
   String get futureAdviceStorm =>
-      'Storm window in a few hours. Wrap up outdoor tasks soon.';
+      'Badai diperkirakan terjadi dalam beberapa jam ke depan. Selesaikan aktivitas di luar ruangan sesegera mungkin.';
 
   @override
   String get futureAdviceClear =>
       'Next few hours stay steady—good time to be outside.';
 
   @override
-  String get today => 'Today';
+  String get today => 'Hari Ini';
 
   @override
   String get tomorrow => 'Tomorrow';
@@ -941,4 +943,27 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
+
+  @override
+  String get savedLocations => 'Saved Locations';
+
+  @override
+  String get saveLocation => 'Save Location';
+
+  @override
+  String get removeLocation => 'Remove Location';
+
+  @override
+  String get noSavedLocations => 'No saved locations';
+
+  @override
+  String get locations => 'Locations';
+
+  @override
+  String get currentLocation => 'Current Location';
+
+  @override
+  String locationSavedMessage(String location) {
+    return 'Saved $location';
+  }
 }

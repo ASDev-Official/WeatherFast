@@ -24,7 +24,7 @@ class AnimatedWeatherBackdrop extends StatefulWidget {
 }
 
 class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
   late _Palette _palette;
   late _SceneProfile _profile;
@@ -95,6 +95,10 @@ class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
 
   @override
   Widget build(BuildContext context) {
+    if (!_controller.isAnimating) {
+      _controller.repeat();
+    }
+    
     final disableAnimations =
         MediaQuery.maybeOf(context)?.disableAnimations ?? false;
 
@@ -141,9 +145,11 @@ class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
             final t = disableAnimations ? 0.3 : _controller.value;
             final wave = sin(2 * pi * t) * 0.08 * widget.intensity;
 
-            return Stack(
-              fit: StackFit.expand,
-              children: [
+            return ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
                 DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -194,13 +200,8 @@ class _AnimatedWeatherBackdropState extends State<AnimatedWeatherBackdrop>
                       painter: _LightningPainter(phase: t),
                     ),
                   ),
-                Positioned.fill(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                    child: const SizedBox(),
-                  ),
-                ),
               ],
+            ),
             );
           },
             );

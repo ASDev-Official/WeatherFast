@@ -1807,6 +1807,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🌳 Outdoor Notice:\n'**
   String get recOutdoorHeader;
+
+  /// No description provided for @savedLocations.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Locations'**
+  String get savedLocations;
+
+  /// No description provided for @saveLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Location'**
+  String get saveLocation;
+
+  /// No description provided for @removeLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Location'**
+  String get removeLocation;
+
+  /// No description provided for @noSavedLocations.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved locations'**
+  String get noSavedLocations;
+
+  /// No description provided for @locations.
+  ///
+  /// In en, this message translates to:
+  /// **'Locations'**
+  String get locations;
+
+  /// No description provided for @currentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Location'**
+  String get currentLocation;
+
+  /// No description provided for @locationSavedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {location}'**
+  String locationSavedMessage(String location);
 }
 
 class _AppLocalizationsDelegate

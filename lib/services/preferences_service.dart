@@ -165,5 +165,17 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('meeting_type_$eventKey', value);
   }
+
+  static const String _kSavedLocations = 'saved_locations_list';
+
+  static Future<List<String>> loadSavedLocations() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(_kSavedLocations) ?? [];
+  }
+
+  static Future<void> saveSavedLocations(List<String> locations) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_kSavedLocations, locations);
+  }
 }
 

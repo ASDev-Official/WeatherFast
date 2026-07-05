@@ -941,4 +941,27 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
+
+  @override
+  String get savedLocations => 'Saved Locations';
+
+  @override
+  String get saveLocation => 'Save Location';
+
+  @override
+  String get removeLocation => 'Remove Location';
+
+  @override
+  String get noSavedLocations => 'No saved locations';
+
+  @override
+  String get locations => 'Locations';
+
+  @override
+  String get currentLocation => 'Current Location';
+
+  @override
+  String locationSavedMessage(String location) {
+    return 'Saved $location';
+  }
 }

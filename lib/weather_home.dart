@@ -7,6 +7,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import 'l10n/app_localizations.dart';
 import 'notifications_screen.dart';
+import 'saved_locations_screen.dart';
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/rating_service.dart';
@@ -36,6 +37,540 @@ class WeatherHome extends StatefulWidget {
 }
 
 class _WeatherHomeState extends State<WeatherHome> {
+  final PageController _pageController = PageController();
+  int _currentPageIndex = 0;
+  List<String> _pages = ['current_location'];
+  List<String> _savedLocations = [];
+  String? _temporaryLocation;
+
+  // Cache of weather data for AppBar display
+  final Map<String, String> _resolvedNames = {};
+  final Map<String, DateTime> _resolvedTimes = {};
+  final Map<String, Map<String, dynamic>> _resolvedWeatherData = {};
+
+  DateTime? _localTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLocations();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadSavedLocations() async {
+    final saved = await PreferencesService.loadSavedLocations();
+    if (mounted) {
+      setState(() {
+        _savedLocations = saved;
+        _pages = ['current_location', ...saved];
+      });
+    }
+  }
+
+  Future<void> _saveLocation(String query) async {
+    final cleanQuery = query.trim();
+    if (cleanQuery.isEmpty) return;
+    if (cleanQuery == 'current_location') return; // Never save the sentinel key
+    if (_savedLocations.contains(cleanQuery)) return;
+
+    setState(() {
+      _savedLocations.add(cleanQuery);
+      // If it was a temporary page, promote it to permanent (keep it in _pages)
+      if (_temporaryLocation == cleanQuery) {
+        _temporaryLocation = null;
+      } else if (!_pages.contains(cleanQuery)) {
+        // Not in pages yet — add it
+        _pages.add(cleanQuery);
+      }
+    });
+    await PreferencesService.saveSavedLocations(_savedLocations);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${AppLocalizations.of(context)!.searchPlace}: ${AppLocalizations.of(context)!.locationSavedMessage(cleanQuery)}'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  Future<void> _removeSavedLocation(String query) async {
+    setState(() {
+      final indexToRemove = _pages.indexOf(query);
+      _savedLocations.remove(query);
+      _pages.remove(query);
+      _resolvedNames.remove(query);
+      _resolvedTimes.remove(query);
+      _resolvedWeatherData.remove(query);
+
+      if (_temporaryLocation == query) {
+        _temporaryLocation = null;
+      }
+      
+      WeatherCacheService.clearSnapshotFor(query);
+
+      if (_currentPageIndex == indexToRemove) {
+        if (_currentPageIndex >= _pages.length) {
+          _currentPageIndex = _pages.length - 1;
+        }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_pageController.hasClients) {
+            _pageController.jumpToPage(_currentPageIndex);
+          }
+        });
+      } else if (_currentPageIndex > indexToRemove) {
+        _currentPageIndex--;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_pageController.hasClients) {
+            _pageController.jumpToPage(_currentPageIndex);
+          }
+        });
+      }
+    });
+    await PreferencesService.saveSavedLocations(_savedLocations);
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      // Clean up temporary page if user swipes away from it
+      if (_temporaryLocation != null) {
+        final tempIndex = _pages.indexOf(_temporaryLocation!);
+        if (tempIndex != -1 && index != tempIndex) {
+          final isAnimating = _pageController.position.isScrollingNotifier.value;
+          if (!isAnimating || index < _currentPageIndex) {
+            final tempLoc = _temporaryLocation!;
+            _pages.removeAt(tempIndex);
+            _resolvedNames.remove(tempLoc);
+            _resolvedTimes.remove(tempLoc);
+            _resolvedWeatherData.remove(tempLoc);
+            _temporaryLocation = null;
+
+            if (index > tempIndex) {
+              index--;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (_pageController.hasClients) {
+                  _pageController.jumpToPage(index);
+                }
+              });
+            }
+          }
+        }
+      }
+
+      _currentPageIndex = index;
+    });
+
+    final activeKey = _pages[index];
+    final name = _resolvedNames[activeKey];
+    if (name != null) {
+      widget.onLocationSelected(name);
+    }
+  }
+
+  void _onPageLocationLoaded(
+    String pageKey,
+    String friendlyName,
+    DateTime localTime,
+    Map<String, dynamic> weatherData,
+    bool isDaytime,
+  ) {
+    if (!mounted) return;
+    _resolvedNames[pageKey] = friendlyName;
+    _resolvedTimes[pageKey] = localTime;
+    _resolvedWeatherData[pageKey] = weatherData;
+
+    if (_pages[_currentPageIndex] == pageKey) {
+      setState(() {
+        _localTime = localTime;
+      });
+      widget.onLocationSelected(friendlyName);
+    }
+  }
+
+  void _navigateToLocation(String query) {
+    final cleanQuery = query.trim();
+    if (cleanQuery.isEmpty) return;
+
+    // Find existing page with case-insensitive match
+    int index = -1;
+    for (int i = 0; i < _pages.length; i++) {
+      if (_pages[i].toLowerCase() == cleanQuery.toLowerCase()) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index != -1) {
+      // Page already exists — just scroll to it
+      setState(() {
+        // If the match was a different casing, clean up any stale temporary
+        if (_temporaryLocation != null &&
+            _temporaryLocation!.toLowerCase() == cleanQuery.toLowerCase() &&
+            _temporaryLocation != _pages[index]) {
+          _temporaryLocation = null;
+        }
+      });
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // Page doesn't exist yet — add it and navigate to it
+      int targetIndex = -1;
+      setState(() {
+        // Remove the previous temporary page if there is one
+        if (_temporaryLocation != null) {
+          _pages.remove(_temporaryLocation!);
+          _resolvedNames.remove(_temporaryLocation!);
+          _resolvedTimes.remove(_temporaryLocation!);
+          _resolvedWeatherData.remove(_temporaryLocation!);
+        }
+        _temporaryLocation = cleanQuery;
+        _pages.add(cleanQuery);
+        targetIndex = _pages.length - 1;
+      });
+
+      // Wait two frames: first for setState to rebuild the PageView with the
+      // new itemCount, second to ensure the controller sees the new max page.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _pageController.hasClients && targetIndex >= 0) {
+            _pageController.jumpToPage(targetIndex);
+          }
+        });
+      });
+    }
+  }
+
+  void _openSearchSheet() {
+    final media = MediaQuery.of(context);
+    final weatherService = WeatherService();
+    final TextEditingController searchController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: 0.75,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: media.viewInsets.bottom + 16,
+              left: 16,
+              right: 16,
+              top: 16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.searchPlace,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close_rounded),
+                      tooltip: AppLocalizations.of(context)!.close,
+                      onPressed: Navigator.of(context).pop,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TypeAheadField<String>(
+                  suggestionsCallback: (pattern) {
+                    if (pattern.isEmpty) return [];
+                    return weatherService.searchLocations(pattern);
+                  },
+                  builder: (context, controller, focusNode) {
+                    searchController.text = controller.text;
+                    return TextField(
+                      controller: controller,
+                      focusNode: focusNode,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.cityRegionOrCoordinates,
+                        prefixIcon: const Icon(Icons.search),
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      leading: const Icon(Icons.location_on_outlined),
+                      title: Text(suggestion),
+                    );
+                  },
+                  onSelected: (suggestion) {
+                    Navigator.of(context).pop();
+                    _navigateToLocation(suggestion);
+                  },
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _openSavedLocationsPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SavedLocationsScreen(
+          savedLocations: _savedLocations,
+          onSelectLocation: _navigateToLocation,
+          onRemoveLocation: _removeSavedLocation,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPageIndicator() {
+    if (_pages.length <= 1) return const SizedBox.shrink();
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(_pages.length, (index) {
+            final isActive = index == _currentPageIndex;
+            final isTemp = _pages[index] == _temporaryLocation;
+            final isCurrentLoc = _pages[index] == 'current_location';
+            
+            final color = isActive
+                ? (isTemp
+                    ? Colors.orangeAccent
+                    : Theme.of(context).colorScheme.primary)
+                : Theme.of(context)
+                    .colorScheme
+                    .onSurfaceVariant
+                    .withValues(alpha: 0.5);
+
+            if (isCurrentLoc) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                child: Icon(
+                  Icons.location_on,
+                  size: isActive ? 16 : 12,
+                  color: color,
+                ),
+              );
+            }
+
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              width: isActive ? 12 : 8,
+              height: 8,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color,
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final activeKey = _pages[_currentPageIndex];
+    final isCurrentLocation = activeKey == 'current_location';
+    final isSaved = _savedLocations.contains(activeKey);
+
+    String appBarTitle;
+    final resolvedName = _resolvedNames[activeKey];
+    if (resolvedName != null && resolvedName.isNotEmpty) {
+      appBarTitle = resolvedName;
+    } else {
+      appBarTitle = isCurrentLocation
+          ? AppLocalizations.of(context)!.currentLocation
+          : activeKey;
+    }
+
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.transparent,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(72),
+        child: Stack(
+          children: [
+            Container(
+              height: 72,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withValues(alpha: 0.85)
+                        : Colors.white.withValues(alpha: 0.85),
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Colors.black.withValues(alpha: 0.25)
+                        : Colors.white.withValues(alpha: 0.25),
+                    Colors.transparent,
+                  ],
+                  stops: const [0.0, 0.6, 1.0],
+                ),
+              ),
+            ),
+            AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              titleSpacing: 16,
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        appBarTitle,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      if (isCurrentLocation) ...[
+                        const SizedBox(width: 6),
+                        Icon(
+                          Icons.location_on_rounded,
+                          size: 16,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
+                    ],
+                  ),
+                  Builder(builder: (context) {
+                    final activeTime = _resolvedTimes[activeKey] ?? _localTime;
+                    if (activeTime == null) return const SizedBox.shrink();
+                    return Text(
+                      '${DateFormat('EEEE, MMM d').format(activeTime)} • ${DateFormat('h:mm a').format(activeTime)}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                    );
+                  }),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.notifications_rounded),
+                  tooltip: AppLocalizations.of(context)!.notificationsTooltip,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const NotificationsScreen(),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.list_rounded),
+                  tooltip: AppLocalizations.of(context)!.savedLocations,
+                  onPressed: _openSavedLocationsPage,
+                ),
+                if (!isCurrentLocation)
+                  IconButton(
+                    icon: Icon(
+                      isSaved
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_rounded,
+                      color: isSaved ? Colors.redAccent : null,
+                    ),
+                    tooltip: isSaved
+                        ? AppLocalizations.of(context)!.removeLocation
+                        : AppLocalizations.of(context)!.saveLocation,
+                    onPressed: () {
+                      if (isSaved) {
+                        _removeSavedLocation(activeKey);
+                      } else {
+                        _saveLocation(activeKey);
+                      }
+                    },
+                  ),
+                IconButton(
+                  icon: const Icon(Icons.search_rounded),
+                  tooltip: AppLocalizations.of(context)!.searchLocation,
+                  onPressed: _openSearchSheet,
+                ),
+                const SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
+      body: Stack(
+        children: [
+          PageView.builder(
+            controller: _pageController,
+            itemCount: _pages.length,
+            onPageChanged: _onPageChanged,
+            itemBuilder: (context, index) {
+              final pageKey = _pages[index];
+              // Each page independently determines its type —
+              // never rely on the currently *viewed* page's identity.
+              final isThisPageCurrentLocation = pageKey == 'current_location';
+              return _WeatherPageContent(
+                key: ValueKey(pageKey),
+                locationQuery: isThisPageCurrentLocation ? null : pageKey,
+                onLocationLoaded: (friendlyName, localTime, weatherData, isDaytime) {
+                  _onPageLocationLoaded(
+                    pageKey,
+                    friendlyName,
+                    localTime,
+                    weatherData,
+                    isDaytime,
+                  );
+                },
+                onError: (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error)),
+                  );
+                },
+              );
+            },
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _buildPageIndicator(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WeatherPageContent extends StatefulWidget {
+  const _WeatherPageContent({
+    super.key,
+    required this.locationQuery,
+    required this.onLocationLoaded,
+    required this.onError,
+  });
+
+  final String? locationQuery;
+  final Function(String, DateTime, Map<String, dynamic>, bool) onLocationLoaded;
+  final Function(String) onError;
+
+  @override
+  State<_WeatherPageContent> createState() => _WeatherPageContentState();
+}
+
+class _WeatherPageContentState extends State<_WeatherPageContent> with AutomaticKeepAliveClientMixin<_WeatherPageContent> {
   OverlayEntry? _updatingOverlay;
   final _weatherService = WeatherService();
   final TextEditingController _searchController = TextEditingController();
@@ -222,34 +757,56 @@ class _WeatherHomeState extends State<WeatherHome> {
     super.dispose();
   }
 
-  Future<void> _hydrateAndRefresh() async {
-    // Start fetching calendar events immediately in parallel
+    Future<void> _hydrateAndRefresh() async {
     _fetchChoreographerEvents();
 
-    String? initialQuery;
+    String? initialQuery = widget.locationQuery;
     var hasInitialData = false;
 
-    if (GlobalData.hasPreloaded && GlobalData.preloadedWeatherData != null) {
-      hasInitialData = true;
-      if (mounted) {
-        setState(() {
-          _weatherData = GlobalData.preloadedWeatherData;
-          _forecastData = GlobalData.preloadedForecastData;
-          _currentLocation = _weatherData?['location']?['name'];
-          _localTime = _resolveLocalTime(_weatherData);
-          _isDaytime = _weatherData?['current']?['is_day'] == 1;
-        });
-        if (_currentLocation != null && _currentLocation!.isNotEmpty) {
-          widget.onLocationSelected(_currentLocation!);
+    if (initialQuery == null) {
+      // Current Location logic (uses GPS)
+      if (GlobalData.hasPreloaded && GlobalData.preloadedWeatherData != null) {
+        hasInitialData = true;
+        if (mounted) {
+          setState(() {
+            _weatherData = GlobalData.preloadedWeatherData;
+            _forecastData = GlobalData.preloadedForecastData;
+            _currentLocation = _weatherData?['location']?['name'];
+            _localTime = _resolveLocalTime(_weatherData);
+            _isDaytime = _weatherData?['current']?['is_day'] == 1;
+          });
+          if (_currentLocation != null && _currentLocation!.isNotEmpty && _localTime != null && _weatherData != null && _isDaytime != null) {
+            widget.onLocationLoaded(_currentLocation!, _localTime!, _weatherData!, _isDaytime!);
+          }
         }
+        initialQuery = await PreferencesService.loadLastLocationQuery();
+        GlobalData.hasPreloaded = false;
+      } else {
+        final snapshot = await WeatherCacheService.loadSnapshot();
+        if (snapshot != null) {
+          hasInitialData = true;
+          initialQuery = snapshot.locationQuery;
+          if (mounted) {
+            setState(() {
+              _weatherData = snapshot.weatherData;
+              _forecastData = snapshot.forecastData;
+              _currentLocation = snapshot.weatherData['location']?['name'];
+              _currentLocationQuery = snapshot.locationQuery;
+              _localTime = _resolveLocalTime(snapshot.weatherData);
+              _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
+            });
+            if (_currentLocation != null && _currentLocation!.isNotEmpty && _localTime != null && _weatherData != null && _isDaytime != null) {
+              widget.onLocationLoaded(_currentLocation!, _localTime!, _weatherData!, _isDaytime!);
+            }
+          }
+        }
+        initialQuery ??= await PreferencesService.loadLastLocationQuery();
       }
-      initialQuery = await PreferencesService.loadLastLocationQuery();
-      GlobalData.hasPreloaded = false;
     } else {
-      final snapshot = await WeatherCacheService.loadSnapshot();
+      // Saved/Temporary location logic (uses query)
+      final snapshot = await WeatherCacheService.loadSnapshotFor(initialQuery);
       if (snapshot != null) {
         hasInitialData = true;
-        initialQuery = snapshot.locationQuery;
         if (mounted) {
           setState(() {
             _weatherData = snapshot.weatherData;
@@ -259,16 +816,13 @@ class _WeatherHomeState extends State<WeatherHome> {
             _localTime = _resolveLocalTime(snapshot.weatherData);
             _isDaytime = snapshot.weatherData['current']?['is_day'] == 1;
           });
-          if (_currentLocation != null && _currentLocation!.isNotEmpty) {
-            widget.onLocationSelected(_currentLocation!);
+          if (_currentLocation != null && _currentLocation!.isNotEmpty && _localTime != null && _weatherData != null && _isDaytime != null) {
+            widget.onLocationLoaded(_currentLocation!, _localTime!, _weatherData!, _isDaytime!);
           }
         }
       }
-
-      initialQuery ??= await PreferencesService.loadLastLocationQuery();
     }
 
-    // Load flood alerts once if we are likely in Singapore
     final isSg = await PreferencesService.loadIsSingapore();
     if (isSg) {
       _fetchSgFloodAlerts();
@@ -459,19 +1013,27 @@ class _WeatherHomeState extends State<WeatherHome> {
         setState(() => _sgFloodAlerts = null);
       }
 
-      await PreferencesService.saveLastLocationQuery(location);
-      await WeatherCacheService.saveSnapshot(
-        locationQuery: location,
-        weatherData: weather,
-        forecastData: forecast,
-      );
+      if (widget.locationQuery == null) {
+        await PreferencesService.saveLastLocationQuery(location);
+        await WeatherCacheService.saveSnapshot(
+          locationQuery: location,
+          weatherData: weather,
+          forecastData: forecast,
+        );
+      } else {
+        await WeatherCacheService.saveSnapshotFor(
+          widget.locationQuery!,
+          weatherData: weather,
+          forecastData: forecast,
+        );
+      }
       await WidgetRefreshService.storeAndRefresh(
         weatherData: weather,
         useFahrenheit: GlobalData.useFahrenheit,
       );
       // Notify parent of location change
       if (locationName != null && locationName.isNotEmpty) {
-        widget.onLocationSelected(locationName);
+        widget.onLocationLoaded(locationName, localTime, weather, isDaytime);
       }
       if (mounted) {
         RatingService.checkAndShowRating(context);
@@ -487,79 +1049,15 @@ class _WeatherHomeState extends State<WeatherHome> {
     }
   }
 
-  void _openSearchSheet() {
-    final media = MediaQuery.of(context);
-    showModalBottomSheet(
-      context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      builder: (context) {
-        return FractionallySizedBox(
-          heightFactor: 0.75,
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: media.viewInsets.bottom + 16,
-              left: 16,
-              right: 16,
-              top: 16,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.searchPlace,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.close_rounded),
-                      tooltip: AppLocalizations.of(context)!.close,
-                      onPressed: Navigator.of(context).pop,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                TypeAheadField<String>(
-                  suggestionsCallback: (pattern) {
-                    if (pattern.isEmpty) return [];
-                    return _weatherService.searchLocations(pattern);
-                  },
-                  builder: (context, controller, focusNode) {
-                    _searchController.text = controller.text;
-                    return TextField(
-                      controller: controller,
-                      focusNode: focusNode,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.cityRegionOrCoordinates,
-                        prefixIcon: const Icon(Icons.search),
-                      ),
-                    );
-                  },
-                  itemBuilder: (context, suggestion) {
-                    return ListTile(
-                      leading: const Icon(Icons.location_on_outlined),
-                      title: Text(suggestion),
-                    );
-                  },
-                  onSelected: (suggestion) {
-                    Navigator.of(context).pop();
-                    _fetchWeather(suggestion);
-                  },
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  
+
+  @override
+    @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final condition =
         _weatherData?['current']?['condition']?['text'] ?? 'Clear';
     final isDaytime = _isDaytime ?? true;
@@ -577,225 +1075,145 @@ class _WeatherHomeState extends State<WeatherHome> {
         ? today?['day']?['mintemp_f']
         : today?['day']?['mintemp_c'];
 
-    // AppBar fade animation
-
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(72),
-        child: Stack(
-          children: [
-            // Gradient background
-            Container(
-              height: 72,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Colors.black.withValues(alpha: 0.85)
-                        : Colors.white.withValues(alpha: 0.85),
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Colors.black.withValues(alpha: 0.25)
-                        : Colors.white.withValues(alpha: 0.25),
-                    Colors.transparent,
-                  ],
-                  stops: const [0.0, 0.6, 1.0],
-                ),
+    return Stack(
+      children: [
+        AnimatedWeatherBackdrop(
+          condition: condition,
+          isDaytime: isDaytime,
+          height: 360,
+          intensity: 0.65,
+        ),
+        SafeArea(
+          child: RefreshIndicator.adaptive(
+            onRefresh: _onRefresh,
+            displacement: 32,
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
               ),
-            ),
-            AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              titleSpacing: 16,
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  Text(
-                    _currentLocation ?? AppLocalizations.of(context)!.loadingLocation,
-                    style: Theme.of(context).textTheme.titleLarge,
+              slivers: [
+                const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                SliverToBoxAdapter(
+                  child: _weatherData == null
+                      ? _buildLoadingCard()
+                      : _buildHeroCard(
+                          condition: condition,
+                          temp: temp,
+                          high: maxToday,
+                          low: minToday,
+                        ),
+                ),
+                SliverToBoxAdapter(
+                  child: AnimatedCrossFade(
+                    duration: const Duration(milliseconds: 350),
+                    firstChild: const SizedBox.shrink(),
+                    secondChild: _hasEventsToDisplay()
+                        ? _buildChoreographerEvents()
+                        : const SizedBox.shrink(),
+                    crossFadeState: _hasEventsToDisplay()
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
                   ),
-                  if (_localTime != null)
-                    Text(
-                      '${DateFormat('EEEE, MMM d').format(_localTime!)} • ${DateFormat('h:mm a').format(_localTime!)}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+                if (_sgFloodAlerts != null)
+                  SliverToBoxAdapter(child: _buildFloodAlerts()),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverToBoxAdapter(child: _buildMetricsGrid()),
+                ),
+                SliverToBoxAdapter(child: _buildHourlyStrip()),
+                if (_weatherData != null &&
+                    _weatherData!['sg_regions'] != null)
+                  SliverToBoxAdapter(child: _buildSgRegionalForecast()),
+                SliverToBoxAdapter(child: _buildDailyForecast()),
+                if (_weatherData != null && _weatherData!['location'] != null)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: WeatherMapSnippet(
+                        lat: (_weatherData!['location']['lat'] as num)
+                            .toDouble(),
+                        lng: (_weatherData!['location']['lon'] as num)
+                            .toDouble(),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => WeatherMapScreen(
+                                initialLat:
+                                    (_weatherData!['location']['lat'] as num)
+                                        .toDouble(),
+                                initialLng:
+                                    (_weatherData!['location']['lon'] as num)
+                                        .toDouble(),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                ],
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.notifications_rounded),
-                  tooltip: AppLocalizations.of(context)!.notificationsTooltip,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const NotificationsScreen(),
-                      ),
-                    );
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.search_rounded),
-                  tooltip: AppLocalizations.of(context)!.searchLocation,
-                  onPressed: _openSearchSheet,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.my_location_rounded),
-                  tooltip: AppLocalizations.of(context)!.useCurrentLocation,
-                  onPressed: _fetchWeatherForCurrentLocation,
-                ),
-                const SizedBox(width: 8),
+                  ),
+                SliverToBoxAdapter(child: _buildInsights()),
+                if (_weatherData != null)
+                  SliverToBoxAdapter(
+                    child: OpenMeteoAttribution(
+                      source: _weatherData!['source'] ?? 'open-meteo',
+                    ),
+                  ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24)),
               ],
             ),
-          ],
-        ),
-      ),
-      body: Stack(
-        children: [
-          AnimatedWeatherBackdrop(
-            condition: condition,
-            isDaytime: isDaytime,
-            height: 360,
-            intensity: 0.65,
           ),
-          SafeArea(
-            child: RefreshIndicator.adaptive(
-              onRefresh: _onRefresh,
-              displacement: 32,
-              child: CustomScrollView(
-                physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics(),
-                ),
-                slivers: [
-                  const SliverToBoxAdapter(child: SizedBox(height: 12)),
-                  SliverToBoxAdapter(
-                    child: _weatherData == null
-                        ? _buildLoadingCard()
-                        : _buildHeroCard(
-                            condition: condition,
-                            temp: temp,
-                            high: maxToday,
-                            low: minToday,
-                          ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: AnimatedCrossFade(
-                      duration: const Duration(milliseconds: 350),
-                      firstChild: const SizedBox.shrink(),
-                      secondChild: _hasEventsToDisplay()
-                          ? _buildChoreographerEvents()
-                          : const SizedBox.shrink(),
-                      crossFadeState: _hasEventsToDisplay()
-                          ? CrossFadeState.showSecond
-                          : CrossFadeState.showFirst,
+        ),
+        if (_isShowingFloodAnimation)
+          Positioned.fill(
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: const Duration(milliseconds: 500),
+              builder: (context, value, child) {
+                return Container(
+                  color: Colors.red.withValues(alpha: 0.4 * value),
+                  child: Center(
+                    child: Opacity(
+                      opacity: value,
+                      child: child,
                     ),
                   ),
-                  if (_sgFloodAlerts != null)
-                    SliverToBoxAdapter(child: _buildFloodAlerts()),
-                  SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    sliver: SliverToBoxAdapter(child: _buildMetricsGrid()),
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    'assets/animations/flood_alert.json',
+                    width: 200,
+                    height: 200,
+                    repeat: false,
                   ),
-                  SliverToBoxAdapter(child: _buildHourlyStrip()),
-                  if (_weatherData != null &&
-                      _weatherData!['sg_regions'] != null)
-                    SliverToBoxAdapter(child: _buildSgRegionalForecast()),
-                  SliverToBoxAdapter(child: _buildDailyForecast()),
-                  if (_weatherData != null && _weatherData!['location'] != null)
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: WeatherMapSnippet(
-                          lat: (_weatherData!['location']['lat'] as num)
-                              .toDouble(),
-                          lng: (_weatherData!['location']['lon'] as num)
-                              .toDouble(),
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WeatherMapScreen(
-                                  initialLat:
-                                      (_weatherData!['location']['lat'] as num)
-                                          .toDouble(),
-                                  initialLng:
-                                      (_weatherData!['location']['lon'] as num)
-                                          .toDouble(),
-                                ),
-                              ),
-                            );
-                          },
+                  const SizedBox(height: 20),
+                  Text(
+                    AppLocalizations.of(context)!.flashFloodWarning,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                      shadows: [
+                        const Shadow(
+                          color: Colors.black54,
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
                         ),
-                      ),
+                      ],
                     ),
-                  SliverToBoxAdapter(child: _buildInsights()),
-                  if (_weatherData != null)
-                    SliverToBoxAdapter(
-                      child: OpenMeteoAttribution(
-                        source: _weatherData!['source'] ?? 'open-meteo',
-                      ),
-                    ),
-                  const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                  ),
                 ],
               ),
             ),
           ),
-          if (_isShowingFloodAnimation)
-            Positioned.fill(
-              child: TweenAnimationBuilder<double>(
-                tween: Tween(begin: 0.0, end: 1.0),
-                duration: const Duration(milliseconds: 500),
-                builder: (context, value, child) {
-                  return Container(
-                    color: Colors.red.withValues(alpha: 0.4 * value),
-                    child: Center(
-                      child: Opacity(
-                        opacity: value,
-                        child: child,
-                      ),
-                    ),
-                  );
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Lottie.asset(
-                      'assets/animations/flood_alert.json',
-                      width: 200,
-                      height: 200,
-                      repeat: false,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      AppLocalizations.of(context)!.flashFloodWarning,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2,
-                        shadows: [
-                          const Shadow(
-                            color: Colors.black54,
-                            blurRadius: 8,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-        ],
-      ),
+      ],
     );
   }
 
@@ -1327,17 +1745,26 @@ class _WeatherHomeState extends State<WeatherHome> {
       ),
     ];
 
-    return Wrap(
-      spacing: 12,
-      runSpacing: 12,
-      children: items
-          .map(
-            (item) => SizedBox(
-              width: (MediaQuery.of(context).size.width - 16 * 2 - 12) / 2,
-              child: item,
-            ),
-          )
-          .toList(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+        final spacing = 12.0;
+        final totalSpacing = spacing * (crossAxisCount - 1);
+        final itemWidth = (constraints.maxWidth - totalSpacing) / crossAxisCount;
+
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          children: items
+              .map(
+                (item) => SizedBox(
+                  width: itemWidth - 0.01, // Subtract tiny amount to prevent float rounding wrap
+                  child: item,
+                ),
+              )
+              .toList(),
+        );
+      },
     );
   }
 
@@ -1877,7 +2304,9 @@ class _WeatherHomeState extends State<WeatherHome> {
     final localtime = weatherData?['location']?['localtime']?.toString() ?? '';
     return DateTime.tryParse(localtime) ?? DateTime.now();
   }
+
 }
+
 
 class _CollapsibleDateHeader extends StatelessWidget {
   const _CollapsibleDateHeader({

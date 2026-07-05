@@ -467,5 +467,19 @@
     }
   },
   "recOutdoorAllClear": "🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.",
-  "recOutdoorHeader": "🌳 Outdoor Notice:\n"
+  "recOutdoorHeader": "🌳 Outdoor Notice:\n",
+  "savedLocations": "Saved Locations",
+  "saveLocation": "Save Location",
+  "removeLocation": "Remove Location",
+  "noSavedLocations": "No saved locations",
+  "locations": "Locations",
+  "currentLocation": "Current Location",
+  "locationSavedMessage": "Saved {location}",
+  "@locationSavedMessage": {
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  }
 }
