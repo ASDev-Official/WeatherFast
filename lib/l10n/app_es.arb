@@ -1,7 +1,7 @@
 {
-    "airQuality": "Air Quality",
-    "close": "Close",
-    "failedToLoadWeather": "Failed to load weather: {error}",
+    "airQuality": "Calidad del aire",
+    "close": "Cerrar",
+    "failedToLoadWeather": "Error al cargar el clima: {error}",
     "@failedToLoadWeather": {
         "placeholders": {
             "error": {
@@ -23,8 +23,8 @@
         }
     },
     "dataFromNea": "Data from NEA",
-    "night": "Night",
-    "useCurrentLocation": "Use current location",
+    "night": "Noche",
+    "useCurrentLocation": "Usar ubicación actual",
     "adviceRain": "Grab a light shell and keep moving.",
     "nextDays": "Next {count} days",
     "@nextDays": {
@@ -34,15 +34,15 @@
             }
         }
     },
-    "visibility": "Visibility",
+    "visibility": "Visibilidad",
     "dataFromOpenMeteo": "Data from Open-Meteo",
     "adviceClear": "Great light outside. Sunglasses recommended.",
     "adviceClearNight": "Clear skies tonight.",
-    "clear": "Clear",
-    "precipChance": "Precip chance",
-    "updatingWeather": "Updating weather…",
-    "unableToFetchLocation": "Unable to fetch location weather. Please try again.",
-    "loadingLocation": "Loading location…",
+    "clear": "Despejado",
+    "precipChance": "Probabilidad de lluvia",
+    "updatingWeather": "Cargando clima…",
+    "unableToFetchLocation": "No se pudo obtener el clima de la ubicación. Intente más tarde.",
+    "loadingLocation": "Cargando ubicación…",
     "precipPercent": "{percent}% precip",
     "@precipPercent": {
         "placeholders": {
@@ -60,8 +60,8 @@
         }
     },
     "futureAdviceSnow": "Snow later today—plan travel with extra time.",
-    "searchLocation": "Search location",
-    "dummyTime": "Mon, Jan 1 • 12:00 PM",
+    "searchLocation": "Buscar ubicación",
+    "dummyTime": "Lun, Ene 1 • 12:00 PM",
     "adviceCloud": "Soft clouds today—perfect walking weather.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
@@ -71,12 +71,12 @@
             }
         }
     },
-    "cityRegionOrCoordinates": "City, region, or coordinates",
+    "cityRegionOrCoordinates": "Ciudad, región o coordenadas",
     "adviceSnow": "Layer up and mind slick paths.",
     "adviceStorm": "Stay indoors; lightning risk.",
-    "feelsLike": "Feels like",
+    "feelsLike": "Se siente como",
     "weather": "Weather",
-    "insights": "Insights",
+    "insights": "Panorama",
     "regionalOutlook": "Regional Outlook",
     "tomorrow": "Tomorrow",
     "windSpeed": "{speed} km/h {dir}",
@@ -91,19 +91,19 @@
         }
     },
     "adviceDefault": "Stay comfortable and check again in a few hours.",
-    "home": "Home",
-    "searchPlace": "Search a place",
-    "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
-    "hourlyForecast": "Hourly Forecast",
+    "home": "Inicio",
+    "searchPlace": "Buscar un lugar",
+    "locationPermissionDenied": "Permiso de localización negado. Activelo para usar la auto localización.",
+    "hourlyForecast": "Pronostico por hora",
     "todaysSuggestion": "Today’s suggestion",
-    "humidity": "Humidity",
-    "locationServicesDisabled": "Location services are disabled. Enable them in Settings.",
-    "settings": "Settings",
+    "humidity": "Humedad",
+    "locationServicesDisabled": "El servicio de localización se encuentra desactivado. Activelo en ajustes.",
+    "settings": "Ajustes",
     "dummyHighLow": "H 80° · L 60°",
-    "daytime": "Daytime",
+    "daytime": "Día",
     "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
     "today": "Today",
-    "wind": "Wind",
+    "wind": "Viento",
     "weekAhead": "Week Ahead",
     "suggestFeature": "Suggest a new feature for WeatherFast",
     "activitySuggestions": "Activity Suggestions",
@@ -254,8 +254,8 @@
     "floodAlert": "Flood Alert",
     "flashFloodWarning": "Flash Flood Warning!",
     "multipleFloodAlerts": "Multiple Flood Alerts",
-    "dewPoint": "Dew Point",
-    "uvIndex": "UV Index",
+    "dewPoint": "Punto de rocío",
+    "uvIndex": "Índice UV",
     "incompleteLocalisationMessage": "The localization for the language {language} has not been completed.",
     "@incompleteLocalisationMessage": {
         "placeholders": {
