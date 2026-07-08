@@ -169,11 +169,14 @@ class _CalendarSettingsScreenState extends State<CalendarSettingsScreen> {
                 innerRadius: 12.0,
                 color: cardColor,
                 children: _calendars.map((calendar) {
+                  final hasValidId = calendar.id != null && calendar.id!.isNotEmpty;
                   return SwitchListTile(
                     title: Text(calendar.name ?? AppLocalizations.of(context)!.unnamedCalendar),
                     subtitle: Text(calendar.accountName ?? ''),
-                    value: _enabledCalendarIds.contains(calendar.id),
-                    onChanged: (value) => _toggleCalendar(calendar.id ?? '', value),
+                    value: hasValidId && _enabledCalendarIds.contains(calendar.id),
+                    onChanged: hasValidId
+                        ? (value) => _toggleCalendar(calendar.id!, value)
+                        : null,
                   );
                 }).toList(),
               ),

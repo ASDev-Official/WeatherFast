@@ -27,8 +27,8 @@ android {
         applicationId = "com.aadishsamir.weatherfast"
         minSdk = 24
         targetSdk = 37
-        versionCode = 38
-        versionName = "3.9.1"
+        versionCode = 39
+        versionName = "3.9.2"
     }
 
     signingConfigs {
@@ -45,6 +45,7 @@ android {
 
     buildTypes {
         getByName("release") {
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.getByName("release")
             } else {
