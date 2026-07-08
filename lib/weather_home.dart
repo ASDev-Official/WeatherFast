@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:geolocator/geolocator.dart';
@@ -627,6 +628,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
   }
 
   Future<void> _checkCalendarPromo() async {
+    if (kIsWeb) return;
     final promoShown = await PreferencesService.loadCalendarPromoShown();
     if (!promoShown && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -834,6 +836,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
   }
 
   Future<void> _fetchChoreographerEvents() async {
+    if (kIsWeb) return;
     final events = await CalendarService.getTodayEventsWithLocation();
     if (mounted) {
       setState(() {

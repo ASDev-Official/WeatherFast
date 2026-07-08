@@ -441,30 +441,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onTap: _selectWidgetLocation,
                         ),
 
-                        ListTile(
-                          leading: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: colorScheme.tertiaryContainer,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Icon(
-                              Icons.calendar_month_rounded,
-                              color: colorScheme.onTertiaryContainer,
-                            ),
-                          ),
-                          title: Text(AppLocalizations.of(context)!.weatherChoreographer),
-                          subtitle: Text(AppLocalizations.of(context)!.weatherChoreographerSubtitle),
-                          trailing: const Icon(Icons.chevron_right_rounded),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const CalendarSettingsScreen(),
+                        if (!kIsWeb)
+                          ListTile(
+                            leading: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: colorScheme.tertiaryContainer,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            );
-                          },
-                        ),
+                              child: Icon(
+                                Icons.calendar_month_rounded,
+                                color: colorScheme.onTertiaryContainer,
+                              ),
+                            ),
+                            title: Text(AppLocalizations.of(context)!.weatherChoreographer),
+                            subtitle: Text(AppLocalizations.of(context)!.weatherChoreographerSubtitle),
+                            trailing: const Icon(Icons.chevron_right_rounded),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const CalendarSettingsScreen(),
+                                ),
+                              );
+                            },
+                          ),
 
                         ListTile(
                           leading: Container(
@@ -632,30 +633,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           }
                         },
                       ),
-                      ListTile(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: colorScheme.errorContainer,
-                            borderRadius: BorderRadius.circular(8),
+                      if (!kIsWeb)
+                        ListTile(
+                          leading: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: colorScheme.errorContainer,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(
+                              Icons.calendar_today_rounded,
+                              color: colorScheme.onErrorContainer,
+                            ),
                           ),
-                          child: Icon(
-                            Icons.calendar_today_rounded,
-                            color: colorScheme.onErrorContainer,
-                          ),
+                          title: Text(AppLocalizations.of(context)!.resetCalendarPromo),
+                          subtitle: Text(AppLocalizations.of(context)!.resetCalendarPromoSubtitle),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () async {
+                            await PreferencesService.saveCalendarPromoShown(false);
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(AppLocalizations.of(context)!.calendarPromoReset)),
+                              );
+                            }
+                          },
                         ),
-                        title: Text(AppLocalizations.of(context)!.resetCalendarPromo),
-                        subtitle: Text(AppLocalizations.of(context)!.resetCalendarPromoSubtitle),
-                        trailing: const Icon(Icons.chevron_right_rounded),
-                        onTap: () async {
-                          await PreferencesService.saveCalendarPromoShown(false);
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(AppLocalizations.of(context)!.calendarPromoReset)),
-                            );
-                          }
-                        },
-                      ),
                     ],
                   ),
                     const SizedBox(height: 24),
