@@ -9,8 +9,8 @@
             }
         }
     },
-    "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
-    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
+    "futureAdviceStorm": "Posible tormenta en las próximas horas. Termina tus actividades al aire libre pronto.",
+    "futureAdviceRain": "Probabilidad de lluvia en ~ 3 horas. Mantén una sombrilla cercas.",
     "highLowTemp": "H {high}°  ·  L {low}°",
     "@highLowTemp": {
         "placeholders": {
@@ -22,11 +22,11 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
+    "dataFromNea": "Datos de NEA",
     "night": "Noche",
     "useCurrentLocation": "Usar ubicación actual",
-    "adviceRain": "Grab a light shell and keep moving.",
-    "nextDays": "Next {count} days",
+    "adviceRain": "Toma un paraguas y continúa con tu día.",
+    "nextDays": "Proximos {count} dias",
     "@nextDays": {
         "placeholders": {
             "count": {
@@ -35,15 +35,15 @@
         }
     },
     "visibility": "Visibilidad",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
-    "adviceClear": "Great light outside. Sunglasses recommended.",
-    "adviceClearNight": "Clear skies tonight.",
+    "dataFromOpenMeteo": "Datos de Open-Meteo",
+    "adviceClear": "Mucha luz solar afuera. Se recomienda usar lentes de sol.",
+    "adviceClearNight": "Cielos despejados está noche.",
     "clear": "Despejado",
     "precipChance": "Probabilidad de lluvia",
     "updatingWeather": "Cargando clima…",
     "unableToFetchLocation": "No se pudo obtener el clima de la ubicación. Intente más tarde.",
     "loadingLocation": "Cargando ubicación…",
-    "precipPercent": "{percent}% precip",
+    "precipPercent": "{percent}% de precipitación",
     "@precipPercent": {
         "placeholders": {
             "percent": {
@@ -59,10 +59,10 @@
             }
         }
     },
-    "futureAdviceSnow": "Snow later today—plan travel with extra time.",
+    "futureAdviceSnow": "Probabilidad de nevada más tarde, planea tus viajes con un extra de tiempo.",
     "searchLocation": "Buscar ubicación",
     "dummyTime": "Lun, Ene 1 • 12:00 PM",
-    "adviceCloud": "Soft clouds today—perfect walking weather.",
+    "adviceCloud": "Nubes ligeras, clima perfecto para salir a caminar.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
         "placeholders": {
@@ -72,13 +72,13 @@
         }
     },
     "cityRegionOrCoordinates": "Ciudad, región o coordenadas",
-    "adviceSnow": "Layer up and mind slick paths.",
-    "adviceStorm": "Stay indoors; lightning risk.",
+    "adviceSnow": "Abrígate bien y cuidado con el suelo resbaloso.",
+    "adviceStorm": "Evita salir, riesgo de rayos.",
     "feelsLike": "Se siente como",
-    "weather": "Weather",
+    "weather": "Clima",
     "insights": "Panorama",
-    "regionalOutlook": "Regional Outlook",
-    "tomorrow": "Tomorrow",
+    "regionalOutlook": "Perspectiva regional",
+    "tomorrow": "Mañana",
     "windSpeed": "{speed} km/h {dir}",
     "@windSpeed": {
         "placeholders": {
@@ -90,19 +90,19 @@
             }
         }
     },
-    "adviceDefault": "Stay comfortable and check again in a few hours.",
+    "adviceDefault": "Mantente cómodo y revisa en unas horas mas.",
     "home": "Inicio",
     "searchPlace": "Buscar un lugar",
     "locationPermissionDenied": "Permiso de localización negado. Activelo para usar la auto localización.",
     "hourlyForecast": "Pronostico por hora",
-    "todaysSuggestion": "Today’s suggestion",
+    "todaysSuggestion": "Sugerencia para hoy",
     "humidity": "Humedad",
     "locationServicesDisabled": "El servicio de localización se encuentra desactivado. Activelo en ajustes.",
     "settings": "Ajustes",
     "dummyHighLow": "H 80° · L 60°",
     "daytime": "Día",
-    "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-    "today": "Today",
+    "futureAdviceClear": "Las próximas horas permanecerán sin cambios, hace buen tiempo para salir.",
+    "today": "Hoy",
     "wind": "Viento",
     "weekAhead": "Week Ahead",
     "suggestFeature": "Suggest a new feature for WeatherFast",
