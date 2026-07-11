@@ -9,8 +9,8 @@
             }
         }
     },
-    "futureAdviceStorm": "Storm window in a few hours. Wrap up outdoor tasks soon.",
-    "futureAdviceRain": "Rain likely in ~3 hours. Keep an umbrella nearby.",
+    "futureAdviceStorm": "Posible tormenta en las próximas horas. Termina tus actividades al aire libre pronto.",
+    "futureAdviceRain": "Probabilidad de lluvia en ~ 3 horas. Mantén una sombrilla cercas.",
     "highLowTemp": "H {high}°  ·  L {low}°",
     "@highLowTemp": {
         "placeholders": {
@@ -22,11 +22,11 @@
             }
         }
     },
-    "dataFromNea": "Data from NEA",
+    "dataFromNea": "Datos de NEA",
     "night": "Noche",
     "useCurrentLocation": "Usar ubicación actual",
-    "adviceRain": "Grab a light shell and keep moving.",
-    "nextDays": "Next {count} days",
+    "adviceRain": "Toma un paraguas y continúa con tu día.",
+    "nextDays": "Proximos {count} dias",
     "@nextDays": {
         "placeholders": {
             "count": {
@@ -35,15 +35,15 @@
         }
     },
     "visibility": "Visibilidad",
-    "dataFromOpenMeteo": "Data from Open-Meteo",
-    "adviceClear": "Great light outside. Sunglasses recommended.",
-    "adviceClearNight": "Clear skies tonight.",
+    "dataFromOpenMeteo": "Datos de Open-Meteo",
+    "adviceClear": "Mucha luz solar afuera. Se recomienda usar lentes de sol.",
+    "adviceClearNight": "Cielos despejados está noche.",
     "clear": "Despejado",
     "precipChance": "Probabilidad de lluvia",
     "updatingWeather": "Cargando clima…",
     "unableToFetchLocation": "No se pudo obtener el clima de la ubicación. Intente más tarde.",
     "loadingLocation": "Cargando ubicación…",
-    "precipPercent": "{percent}% precip",
+    "precipPercent": "{percent}% de precipitación",
     "@precipPercent": {
         "placeholders": {
             "percent": {
@@ -51,7 +51,7 @@
             }
         }
     },
-    "toTime": "to {time}",
+    "toTime": "hasta {time}",
     "@toTime": {
         "placeholders": {
             "time": {
@@ -59,10 +59,10 @@
             }
         }
     },
-    "futureAdviceSnow": "Snow later today—plan travel with extra time.",
+    "futureAdviceSnow": "Probabilidad de nevada más tarde, planea tus viajes con un extra de tiempo.",
     "searchLocation": "Buscar ubicación",
     "dummyTime": "Lun, Ene 1 • 12:00 PM",
-    "adviceCloud": "Soft clouds today—perfect walking weather.",
+    "adviceCloud": "Nubes ligeras, clima perfecto para salir a caminar.",
     "visibilityKm": "{dist} km",
     "@visibilityKm": {
         "placeholders": {
@@ -72,13 +72,13 @@
         }
     },
     "cityRegionOrCoordinates": "Ciudad, región o coordenadas",
-    "adviceSnow": "Layer up and mind slick paths.",
-    "adviceStorm": "Stay indoors; lightning risk.",
+    "adviceSnow": "Abrígate bien y cuidado con el suelo resbaloso.",
+    "adviceStorm": "Evita salir, riesgo de rayos.",
     "feelsLike": "Se siente como",
-    "weather": "Weather",
+    "weather": "Clima",
     "insights": "Panorama",
-    "regionalOutlook": "Regional Outlook",
-    "tomorrow": "Tomorrow",
+    "regionalOutlook": "Perspectiva regional",
+    "tomorrow": "Mañana",
     "windSpeed": "{speed} km/h {dir}",
     "@windSpeed": {
         "placeholders": {
@@ -90,23 +90,23 @@
             }
         }
     },
-    "adviceDefault": "Stay comfortable and check again in a few hours.",
+    "adviceDefault": "Mantente cómodo y revisa en unas horas mas.",
     "home": "Inicio",
     "searchPlace": "Buscar un lugar",
     "locationPermissionDenied": "Permiso de localización negado. Activelo para usar la auto localización.",
     "hourlyForecast": "Pronostico por hora",
-    "todaysSuggestion": "Today’s suggestion",
+    "todaysSuggestion": "Sugerencia para hoy",
     "humidity": "Humedad",
     "locationServicesDisabled": "El servicio de localización se encuentra desactivado. Activelo en ajustes.",
     "settings": "Ajustes",
     "dummyHighLow": "H 80° · L 60°",
     "daytime": "Día",
-    "futureAdviceClear": "Next few hours stay steady—good time to be outside.",
-    "today": "Today",
+    "futureAdviceClear": "Las próximas horas permanecerán sin cambios, hace buen tiempo para salir.",
+    "today": "Hoy",
     "wind": "Viento",
-    "weekAhead": "Week Ahead",
+    "weekAhead": "Semanas en avanzada",
     "suggestFeature": "Suggest a new feature for WeatherFast",
-    "activitySuggestions": "Activity Suggestions",
+    "activitySuggestions": "Actividades sugeridas",
     "baseMapsMapbox": "Base maps are provided by Mapbox.",
     "reportBug": "Report a bug or issue",
     "notificationTitle": "Notification",
@@ -118,7 +118,7 @@
             }
         }
     },
-    "openSourceLicenses": "Open-Source Licenses",
+    "openSourceLicenses": "Licencias Open-Source",
     "noNewNotifications": "No new notifications",
     "loadingNotificationTitle": "Loading notification title...",
     "resetRatingPreferences": "Reset Rating Preferences",
@@ -127,7 +127,7 @@
     "mapSettings": "Map Settings",
     "website": "Website",
     "tapToViewInteractiveRadar": "Tap to view interactive radar",
-    "usedInWeatherFastVersion": " used in WeatherFast {version}",
+    "usedInWeatherFastVersion": " usedo en WeatherFast {version}",
     "@usedInWeatherFastVersion": {
         "placeholders": {
             "version": {
@@ -135,27 +135,27 @@
             }
         }
     },
-    "selectLocationFromHome": "Select a location from Home",
+    "selectLocationFromHome": "Elegir ubicación de casa",
     "dataSources": "Data Sources",
     "bugReport": "Bug Report",
     "resetShownCountAndTimestamps": "Reset shown count and timestamps",
-    "reloadWidgetDataWarning": "Reload widget data (USE SPARINGLY!!!)",
-    "healthAndSafety": "Health & Safety",
-    "simulateSuccessfulWeatherFetchTrigger": "Simulate successful weather fetch trigger",
-    "preferences": "Preferences",
+    "reloadWidgetDataWarning": "Recargar datos del widget (USA SPARINGLY!!!)",
+    "healthAndSafety": "Salud y Seguridad",
+    "simulateSuccessfulWeatherFetchTrigger": "Simular trigger de obtención exitosa del clima",
+    "preferences": "Preferencias",
     "terms": "Terms",
-    "showingFahrenheit": "Showing °F",
-    "toViewDetailedInsights": "to view the detailed Insights",
+    "showingFahrenheit": "Mostrando °F",
+    "toViewDetailedInsights": "para ver el panorama detallado",
     "support": "Support",
     "rateAppDescription": "If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!",
     "checkOperationalStatusOfServices": "Check the operational status of services",
-    "forceRefreshWidgets": "Force refresh widgets",
+    "forceRefreshWidgets": "Forzar actualización de widgets",
     "mapLayers": "Map Layers:",
     "remindMeLater": "Remind Me in 2 Days",
     "debug": "Debug",
     "getItOnPlayStore": "Get it on Play Store",
     "retry": "Retry",
-    "widgetRefreshFailed": "Widget refresh failed: {error}",
+    "widgetRefreshFailed": "Actualización fallida del widget: {error}",
     "@widgetRefreshFailed": {
         "placeholders": {
             "error": {
@@ -163,7 +163,7 @@
             }
         }
     },
-    "showingCelsius": "Showing °C",
+    "showingCelsius": "Mostrando °C",
     "enjoyingWeatherFast": "Enjoying WeatherFast?",
     "notifications": "Notifications",
     "versionBuildNumber": "Version {version} ({buildNumber})",
@@ -178,7 +178,7 @@
         }
     },
     "sgOpenDataLicence": "Singapore Open Data Licence version 1.0",
-    "failedToLoadInsights": "Failed to load Insights: {error}",
+    "failedToLoadInsights": "Error al cargar el panorama: {error}",
     "@failedToLoadInsights": {
         "placeholders": {
             "error": {
@@ -186,7 +186,7 @@
             }
         }
     },
-    "todaysTimeline": "Today's Timeline",
+    "todaysTimeline": "Linea del tiempo para hoy",
     "neaAttribution": "Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on {date} from the National Environment Agency which is made available under the terms of the ",
     "@neaAttribution": {
         "placeholders": {
@@ -195,8 +195,8 @@
             }
         }
     },
-    "about": "About",
-    "systemDefault": "System Default",
+    "about": "Acerca",
+    "systemDefault": "Determinado por el sistema",
     "errorLoadingNotifications": "Error loading notifications: {error}",
     "@errorLoadingNotifications": {
         "placeholders": {
@@ -208,20 +208,20 @@
     "rateNow": "Rate Now",
     "neaWebsite": "NEA Website",
     "weatherMap": "Weather Map",
-    "whatToWear": "What to Wear",
+    "whatToWear": "Que vestir",
     "weatherMapsUnavailableOnWeb": "Weather Maps Unavailable on Web",
-    "weatherInsights": "Weather Insights",
-    "testRatingBottomSheet": "Test Rating Bottom Sheet",
+    "weatherInsights": "Panorama del clima",
+    "testRatingBottomSheet": "Hoja de resumen de la calificación de la prueba",
     "livePrecipitationRainviewer": "Live precipitation radar layers are provided by RainViewer.",
     "loadingTempF": "72°F",
-    "language": "Language",
-    "viewLicensesForOpenSourcePackages": "View licenses for open-source packages",
+    "language": "Lenguaje",
+    "viewLicensesForOpenSourcePackages": "Ver licencias de paquetes open-source",
     "openLink": "Open Link",
     "getHelpOrSendFeedback": "Get help or send feedback",
     "attributionText": "© Mapbox, © OpenStreetMap contributors, © RainViewer.",
     "loading": "Loading...",
     "systemStatus": "System Status",
-    "analyzingConditions": "Analyzing conditions...",
+    "analyzingConditions": "Analizando condiciones...",
     "weatherDataProvidedByOM": "Weather data provided by Open-Meteo",
     "couldNotOpenLink": "Could not open link",
     "weatherData": "Weather Data:",
@@ -232,10 +232,10 @@
     "loadingClearWeather": "Clear",
     "radarOpacity": "Radar Opacity",
     "attribution": "Attribution:",
-    "useFahrenheit": "Use Fahrenheit",
+    "useFahrenheit": "Usar Fahrenheit",
     "ratingPreferencesReset": "Rating preferences reset",
     "interactiveWeatherRadarDescription": "Interactive weather radar and high-resolution maps are optimized for our mobile experience.",
-    "widgetsRefreshed": "Widgets refreshed",
+    "widgetsRefreshed": "Widgets actualizados",
     "tapToViewAllAlerts": "Tap to view all alerts",
     "description": "Description",
     "instruction": "Instruction",
