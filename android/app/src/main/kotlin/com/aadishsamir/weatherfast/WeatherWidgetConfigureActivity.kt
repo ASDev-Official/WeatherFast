@@ -36,7 +36,9 @@ class WeatherWidgetConfigureActivity : Activity() {
         val widgetFamily = resolveWidgetFamily(providerInfo?.provider)
 
         val titleView = findViewById<TextView>(R.id.widget_config_title)
+        val hourlySection = findViewById<View>(R.id.widget_config_hourly_section)
         val hourlyPicker = findViewById<NumberPicker>(R.id.widget_config_hourly_picker)
+        val hourlyUnavailableNote = findViewById<View>(R.id.widget_config_hourly_unavailable_note)
         val dailySection = findViewById<View>(R.id.widget_config_daily_section)
         val dailyPicker = findViewById<NumberPicker>(R.id.widget_config_daily_picker)
         val transparentSwitch = findViewById<android.widget.Switch>(R.id.widget_config_transparent_switch)
@@ -59,7 +61,6 @@ class WeatherWidgetConfigureActivity : Activity() {
         val bottomScaleSection = findViewById<View>(R.id.widget_config_bottom_scale_section)
         val bottomScaleSeek = findViewById<SeekBar>(R.id.widget_config_bottom_scale_seek)
         val bottomScaleLabel = findViewById<TextView>(R.id.widget_config_bottom_scale_label)
-
 
         // SeekBar: 30 steps → 0.5 to 2.0 in 0.05 increments. Default progress 10 = 1.0x
         fun progressToScale(p: Int) = 0.5f + p * 0.05f
@@ -109,7 +110,6 @@ class WeatherWidgetConfigureActivity : Activity() {
             override fun onStopTrackingTouch(seek: SeekBar?) {}
         })
 
-
         val flutterPrefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
         val flutterIsSg = flutterPrefs.getBoolean("flutter.is_singapore", false)
         
@@ -120,6 +120,16 @@ class WeatherWidgetConfigureActivity : Activity() {
 
         val mainScaleTitle = findViewById<TextView>(R.id.widget_config_main_scale_title)
 
+        // ── Small widget: no hourly forecast section ──────────────────────────────
+        if (widgetFamily == "small") {
+            hourlySection?.visibility = View.GONE
+            hourlyUnavailableNote?.visibility = View.VISIBLE
+        } else {
+            hourlySection?.visibility = View.VISIBLE
+            hourlyUnavailableNote?.visibility = View.GONE
+        }
+
+        // ── Scale section visibility ──────────────────────────────────────────────
         if (widgetFamily == "large") {
             bottomScaleSection.visibility = View.VISIBLE
             if (isSingapore) {
@@ -135,7 +145,7 @@ class WeatherWidgetConfigureActivity : Activity() {
         } else {
             bottomScaleSection.visibility = View.GONE
             topScaleSection.visibility = View.GONE
-            if (isSingapore) {
+            if (isSingapore && widgetFamily != "small") {
                 sgScaleSection.visibility = View.VISIBLE
                 mainScaleTitle?.text = "Right Partition Font Size"
             } else {
@@ -150,12 +160,14 @@ class WeatherWidgetConfigureActivity : Activity() {
             else -> "Configure Large Widget"
         }
 
+        // ── Hourly picker (only shown for medium / large) ─────────────────────────
+        if (widgetFamily != "small") {
+            hourlyPicker.minValue = 0
+            hourlyPicker.maxValue = 12  // cap at 12 for medium; large can go higher but 12 is practical
+            hourlyPicker.wrapSelectorWheel = false
+            hourlyPicker.value = (existing.hourlyCards ?: defaultHourlyCards(widgetFamily)).coerceIn(0, 12)
+        }
 
-        hourlyPicker.minValue = 0
-        hourlyPicker.maxValue = 24
-        hourlyPicker.wrapSelectorWheel = false
-        hourlyPicker.value = (existing.hourlyCards ?: defaultHourlyCards(widgetFamily)).coerceIn(0, 24)
-        
         transparentSwitch.isChecked = existing.isTransparent
         if (existing.isTextBlack) {
             colorBlack.isChecked = true
@@ -186,7 +198,11 @@ class WeatherWidgetConfigureActivity : Activity() {
         }
 
         saveButton.setOnClickListener {
-            val hourlyCards = hourlyPicker.value
+            // Small widgets: hourly cards always 0 (no hourly forecast)
+            val hourlyCards = when (widgetFamily) {
+                "small" -> 0
+                else -> hourlyPicker.value
+            }
             val dailyCards = if (widgetFamily == "large") dailyPicker.value else 0
             val isTransparent = transparentSwitch.isChecked
             val isTextBlack = colorBlack.isChecked
@@ -218,7 +234,7 @@ class WeatherWidgetConfigureActivity : Activity() {
 
     private fun defaultHourlyCards(widgetFamily: String): Int {
         return when (widgetFamily) {
-            "small" -> 4
+            "medium" -> 6
             else -> 6
         }
     }

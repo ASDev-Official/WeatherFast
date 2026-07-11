@@ -452,7 +452,10 @@ abstract class WeatherFastWidgetProviderBase(
         val effectiveWidthDp = maxOf(minWidthDp, maxWidthDp)
         val effectiveHeightDp = maxOf(minHeightDp, maxHeightDp)
         val widgetSettings = WeatherWidgetConfigStore.load(context, widgetId)
-        val hourlyCardsVisible = (widgetSettings.hourlyCards?.coerceIn(0, 12) ?: defaultHourlyCardsVisible(effectiveWidthDp)).coerceAtMost(12)
+        val hourlyCardsVisible = when (widgetFamily) {
+            "small" -> 0
+            else -> (widgetSettings.hourlyCards?.coerceIn(0, 12) ?: defaultHourlyCardsVisible(effectiveWidthDp)).coerceAtMost(12)
+        }
         val dailyCardsVisible = when (widgetFamily) {
             "large" -> {
                 val dailyUserCap = widgetSettings.dailyCards?.coerceIn(0, 7) ?: 4

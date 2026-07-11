@@ -70,7 +70,9 @@
                 android:textColor="@color/wf_widget_cfg_muted_text"
                 android:textSize="13sp" />
 
+            <!-- Hourly forecast card — hidden for small widgets -->
             <LinearLayout
+                android:id="@+id/widget_config_hourly_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -97,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Visible cards: 0 to 24"
+                        android:text="Visible cards: 0 to 12"
                         android:textColor="@color/wf_widget_cfg_muted_text"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -106,6 +108,49 @@
                     android:id="@+id/widget_config_hourly_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Shown instead of the hourly picker for small (2×2) widgets -->
+            <LinearLayout
+                android:id="@+id/widget_config_hourly_unavailable_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/widget_config_card_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_wf_partly"
+                    android:tint="@color/wf_widget_cfg_muted_text" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hourly Forecast Unavailable"
+                        android:textColor="@color/wf_widget_cfg_body_text"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="The small widget only displays temperature, condition, and today&#8217;s high/low. Use a medium or large widget to show hourly forecasts."
+                        android:textColor="@color/wf_widget_cfg_muted_text"
+                        android:textSize="13sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

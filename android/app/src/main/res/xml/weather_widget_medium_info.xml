@@ -7,7 +7,7 @@
     android:minHeight="110dp"
     android:previewImage="@mipmap/ic_launcher"
     android:previewLayout="@layout/weather_widget_preview_medium"
-    android:resizeMode="none"
+    android:resizeMode="horizontal|vertical"
     android:widgetFeatures="reconfigurable"
     android:targetCellWidth="4"
     android:targetCellHeight="2"
