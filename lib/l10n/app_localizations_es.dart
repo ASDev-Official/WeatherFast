@@ -65,18 +65,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get daytime => 'Día';
 
   @override
-  String get night => 'Noche';
+  String get night => 'Noche estos momentos';
 
   @override
   String get dummyHighLow => 'H 80° · L 60°';
 
   @override
   String highLowTemp(String high, String low) {
-    return 'H $high°  ·  L $low°';
+    return 'Max$high° · · · · · Min $low°';
   }
 
   @override
-  String get feelsLike => 'Se siente como';
+  String get feelsLike => 'Sensación termica';
 
   @override
   String get humidity => 'Humedad';
@@ -125,7 +125,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get adviceClear =>
-      'Mucha luz solar afuera. Se recomienda usar lentes de sol.';
+      'Mucha luz solar afuera. Se recomienda usar lentes de sol y sombrero.';
 
   @override
   String get adviceClearNight => 'Cielos despejados está noche.';
@@ -139,7 +139,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get futureAdviceRain =>
-      'Probabilidad de lluvia en ~ 3 horas. Mantén una sombrilla cercas.';
+      'Probabilidad de lluvia en ~ 3 horas. Mantén un paraguas cercas.';
 
   @override
   String get futureAdviceSnow =>
@@ -257,11 +257,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String usedInWeatherFastVersion(String version) {
-    return ' usedo en WeatherFast $version';
+    return ' ·usedo en WeatherFast $version­';
   }
 
   @override
-  String get debug => 'Debug';
+  String get debug => 'Depurar';
 
   @override
   String get forceRefreshWidgets => 'Forzar actualización de widgets';
@@ -279,470 +279,488 @@ class AppLocalizationsEs extends AppLocalizations {
       'Simular trigger de obtención exitosa del clima';
 
   @override
-  String get resetRatingPreferences => 'Reset Rating Preferences';
+  String get resetRatingPreferences =>
+      'Reiniciar preferencias de calificaciones';
 
   @override
-  String get resetShownCountAndTimestamps => 'Reset shown count and timestamps';
+  String get resetShownCountAndTimestamps =>
+      'Reiniciar cuenta y marcas de tiempo';
 
   @override
-  String get ratingPreferencesReset => 'Rating preferences reset';
+  String get ratingPreferencesReset =>
+      'Reiniciar preferencias de calificaciones';
 
   @override
-  String get support => 'Support';
+  String get support => 'Soporte';
 
   @override
-  String get systemStatus => 'System Status';
+  String get systemStatus => 'Estatus del sistema';
 
   @override
   String get checkOperationalStatusOfServices =>
-      'Check the operational status of services';
+      'Revisar el estatus operacional de los servicios';
 
   @override
-  String get helpAndFeedback => 'Help & Feedback';
+  String get helpAndFeedback => 'Ayuda y retroalimentación';
 
   @override
-  String get getHelpOrSendFeedback => 'Get help or send feedback';
+  String get getHelpOrSendFeedback =>
+      'Obtener ayuda y enviar retroalimentación';
 
   @override
   String versionBuildNumber(String version, String buildNumber) {
-    return 'Version $version ($buildNumber)';
+    return 'Versión $version ($buildNumber)';
   }
 
   @override
-  String get featureRequest => 'Feature Request';
+  String get featureRequest => 'Solicitar característica';
 
   @override
-  String get suggestFeature => 'Suggest a new feature for WeatherFast';
+  String get suggestFeature => 'Sugerir nueva característica para WeatherFast';
 
   @override
-  String get bugReport => 'Bug Report';
+  String get bugReport => 'Reportar bug';
 
   @override
-  String get reportBug => 'Report a bug or issue';
+  String get reportBug => 'Reportar un bug o problema';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => 'Notificaciones';
 
   @override
-  String get loadingNotificationTitle => 'Loading notification title...';
+  String get loadingNotificationTitle => 'Cargando pantalla de notificación...';
 
   @override
-  String get loadingNotificationDesc => 'Loading notification description...';
+  String get loadingNotificationDesc =>
+      'Cargando descripción de notificación...';
 
   @override
   String failedToLoadNotifications(String error) {
-    return 'Failed to load notifications: $error';
+    return 'Fallo al cargar notificaciones: $error';
   }
 
   @override
   String errorLoadingNotifications(String error) {
-    return 'Error loading notifications: $error';
+    return 'Error cargando notificaciones: $error';
   }
 
   @override
-  String get retry => 'Retry';
+  String get retry => 'Reintentar';
 
   @override
-  String get noNewNotifications => 'No new notifications';
+  String get noNewNotifications => 'Sin notificaciones nuevas';
 
   @override
-  String get notificationTitle => 'Notification';
+  String get notificationTitle => 'Notificación';
 
   @override
-  String get couldNotOpenLink => 'Could not open link';
+  String get couldNotOpenLink => 'No se pudo abrir el link';
 
   @override
-  String get openLink => 'Open Link';
+  String get openLink => 'Abrir Link';
 
   @override
-  String get mapSettings => 'Map Settings';
+  String get mapSettings => 'Ajustes del Mapa';
 
   @override
-  String get radarOpacity => 'Radar Opacity';
+  String get radarOpacity => 'Opacidad del Radar';
 
   @override
-  String get dataSources => 'Data Sources';
+  String get dataSources => 'Fuentes de los Datos';
 
   @override
-  String get mapLayers => 'Map Layers:';
+  String get mapLayers => 'Capas del Mapa:';
 
   @override
-  String get baseMapsMapbox => 'Base maps are provided by Mapbox.';
+  String get baseMapsMapbox => 'Mapas Base proporcionados por Mapbox.';
 
   @override
-  String get weatherData => 'Weather Data:';
+  String get weatherData => 'Datos del Clima:';
 
   @override
   String get livePrecipitationRainviewer =>
-      'Live precipitation radar layers are provided by RainViewer.';
+      'RainViewer proporciona capas de radar de precipitación en tiempo real.';
 
   @override
-  String get attribution => 'Attribution:';
+  String get attribution => 'Atribución:';
 
   @override
   String get attributionText =>
-      '© Mapbox, © OpenStreetMap contributors, © RainViewer.';
+      '© Mapbox, © Colaboradores de OpenStreetMap, © RainViewer.';
 
   @override
-  String get weatherMap => 'Weather Map';
+  String get weatherMap => 'Mapa Meteorológico';
 
   @override
-  String get loading => 'Loading...';
+  String get loading => 'Cargando...';
 
   @override
-  String get enjoyingWeatherFast => 'Enjoying WeatherFast?';
+  String get enjoyingWeatherFast => '¿Disfrutas de WeatherFast?';
 
   @override
   String get rateAppDescription =>
-      'If you like using our app, please take a moment to rate it in the Play Store. Your support means the world to us!';
+      'Si te gusta nuestra aplicación, tómate un momento para valorarla en la Play Store. ¡Tu apoyo es muy importante para nosotros!';
 
   @override
-  String get rateNow => 'Rate Now';
+  String get rateNow => 'Valora Ahora';
 
   @override
-  String get remindMeLater => 'Remind Me in 2 Days';
+  String get remindMeLater => 'Recuérdamelo en 2 días';
 
   @override
-  String get noThanks => 'No Thanks';
+  String get noThanks => 'No, gracias';
 
   @override
   String neaAttribution(String date) {
-    return 'Contains information from 2-hour Weather Forecast, 24-hour Weather Forecast, 4-day Weather Forecast, Air Temperature across Singapore, Rainfall across Singapore, Relative Humidity across Singapore, Relative Humidity across Singapore, Wind Speed across Singapore, and Pollutant Standards Index (PSI) accessed on $date from the National Environment Agency which is made available under the terms of the ';
+    return 'Contiene información de pronósticos meteorológicos de 2 horas, pronósticos meteorológicos de 24 horas, pronósticos meteorológicos de 4 días, temperatura del aire en Singapur, precipitaciones en Singapur, humedad relativa en Singapur, humedad relativa en Singapur, velocidad del viento en Singapur e índice de estándares de contaminantes (PSI) consultados el $date de la Agencia Nacional de Medio Ambiente, que se pone a disposición bajo los términos de la  · ';
   }
 
   @override
-  String get sgOpenDataLicence => 'Singapore Open Data Licence version 1.0';
+  String get sgOpenDataLicence =>
+      'Licencia de Datos Abiertos de Singapore versión 1.0';
 
   @override
-  String get weatherDataProvidedByOM => 'Weather data provided by Open-Meteo';
+  String get weatherDataProvidedByOM =>
+      'Datos meteorológicos proporcionados por Open-Meteo';
 
   @override
-  String get neaWebsite => 'NEA Website';
+  String get neaWebsite => 'Sitio web de NEA';
 
   @override
-  String get dataGovSg => 'Data.gov.sg';
+  String get dataGovSg => 'Datos.gov.sg';
 
   @override
-  String get website => 'Website';
+  String get website => 'Sitio web';
 
   @override
-  String get apiDocs => 'API Docs';
+  String get apiDocs => 'Documentación de la API';
 
   @override
-  String get terms => 'Terms';
+  String get terms => 'Términos';
 
   @override
-  String get loadingClearWeather => 'Clear';
+  String get loadingClearWeather => 'Claro';
 
   @override
   String get loadingTempF => '72°F';
 
   @override
-  String get tapToViewInteractiveRadar => 'Tap to view interactive radar';
+  String get tapToViewInteractiveRadar => 'Toca para ver el radar interactivo';
 
   @override
-  String get weatherMapsUnavailableOnWeb => 'Weather Maps Unavailable on Web';
+  String get weatherMapsUnavailableOnWeb =>
+      'Mapas Meteorológicos no Disponibles en la Web';
 
   @override
   String get interactiveWeatherRadarDescription =>
-      'Interactive weather radar and high-resolution maps are optimized for our mobile experience.';
+      'El radar meteorológico interactivo y los mapas de alta resolución están optimizados para la experiencia móvil.';
 
   @override
-  String get getItOnPlayStore => 'Get it on Play Store';
+  String get getItOnPlayStore => 'Consíguelo en Play Store';
 
   @override
-  String get multipleFloodAlerts => 'Multiple Flood Alerts';
+  String get multipleFloodAlerts => 'Múltiples Alertas de Inundación';
 
   @override
   String activeWarnings(int count) {
-    return '$count active warnings';
+    return '$count advertencias activas';
   }
 
   @override
-  String get tapToViewAllAlerts => 'Tap to view all alerts';
+  String get tapToViewAllAlerts => 'Toca para ver todas las alertas';
 
   @override
-  String get activeFloodAlerts => 'Active Flood Alerts';
+  String get activeFloodAlerts => 'Alertas de inundación activas';
 
   @override
   String get area => 'Area';
 
   @override
-  String get description => 'Description';
+  String get description => 'Descripción';
 
   @override
-  String get instruction => 'Instruction';
+  String get instruction => 'Instrucción';
 
   @override
-  String get severity => 'Severity';
+  String get severity => 'Gravedad';
 
   @override
-  String get response => 'Response';
+  String get response => 'Respuesta';
 
   @override
-  String get flashFloodWarning => 'Flash Flood Warning!';
+  String get flashFloodWarning => 'Alerta de inundación repentina!';
 
   @override
-  String get floodAlert => 'Flood Alert';
+  String get floodAlert => 'Alerta de inundación';
 
   @override
   String incompleteLocalisationMessage(String language) {
-    return 'The localization for the language $language has not been completed.';
+    return 'La localización para el idioma $language no se ha completado.';
   }
 
   @override
-  String get helpLocalizeWeatherFast => 'Help localize WeatherFast';
+  String get helpLocalizeWeatherFast => 'Ayuda a localizar WeatherFast';
 
   @override
   String get ok => 'OK';
 
   @override
-  String get notificationsTooltip => 'Notifications';
+  String get notificationsTooltip => 'Notificaciones';
 
   @override
-  String get units => 'Units';
+  String get units => 'Unidades';
 
   @override
-  String get temperatureWindVisibility => 'Temperature, Wind, Visibility';
+  String get temperatureWindVisibility => 'Temperatura, viento, visibilidad';
 
   @override
-  String get temperature => 'Temperature';
+  String get temperature => 'Temperatura';
 
   @override
   String get celsius => 'Celsius (°C)';
 
   @override
-  String get fahrenheit => 'Fahrenheit (°F)';
+  String get fahrenheit => 'Grados Fahrenheit (°F)';
 
   @override
-  String get windSpeedLabel => 'Wind Speed';
+  String get windSpeedLabel => 'Velocidad del viento';
 
   @override
-  String get unitKmh => 'km/h';
+  String get unitKmh => 'km/hora';
 
   @override
-  String get unitMph => 'mph';
+  String get unitMph => 'millas por hora';
 
   @override
   String get unitMs => 'm/s';
 
   @override
-  String get unitKnots => 'knots';
+  String get unitKnots => 'nudos';
 
   @override
-  String get unitKilometers => 'Kilometers (km)';
+  String get unitKilometers => 'Kilómetros (km)';
 
   @override
-  String get unitMiles => 'Miles (mi)';
+  String get unitMiles => 'Millas (mi)';
 
   @override
-  String get performanceMode => 'Performance Mode';
+  String get performanceMode => 'Modo de rendimiento';
 
   @override
-  String get disableExtraVisualEffects => 'Disable extra visual effects';
+  String get disableExtraVisualEffects =>
+      'Desactivar efectos visuales adicionales';
 
   @override
-  String get bestTimesTitle => 'Best Times';
+  String get bestTimesTitle => 'Los mejores momentos';
 
   @override
-  String get insightsActivityLimitOutdoorTitle => 'Limit Outdoor Effort';
+  String get insightsActivityLimitOutdoorTitle =>
+      'Limitar el esfuerzo al aire libre';
 
   @override
   String get insightsActivityLimitOutdoorDesc =>
-      'Air quality is poor—favor light or indoor activities';
+      'La calidad del aire es mala; se recomienda optar por actividades ligeras o en interiores';
 
   @override
-  String get insightsActivityIndoorTitle => 'Indoor Activities';
+  String get insightsActivityIndoorTitle => 'Actividades de interior';
 
   @override
   String get insightsActivityIndoorDesc =>
-      'Visit museums, cafes, or indoor entertainment';
+      'Visita museos, cafeterías o disfruta del entretenimiento bajo techo';
 
   @override
-  String get insightsActivityCyclingTitle => 'Perfect for Cycling';
+  String get insightsActivityCyclingTitle => 'Perfecto para el ciclismo';
 
   @override
   String get insightsActivityCyclingDesc =>
-      'Great weather for a bike ride—mild temps and clear skies';
+      'Un tiempo estupendo para dar un paseo en bicicleta: temperaturas suaves y cielos despejados';
 
   @override
-  String get insightsActivityOutdoorSportsTitle => 'Outdoor Sports';
+  String get insightsActivityOutdoorSportsTitle => 'Deportes al aire libre';
 
   @override
   String get insightsActivityOutdoorSportsDesc =>
-      'Ideal conditions for outdoor activities and sports';
+      'Condiciones ideales para actividades y deportes al aire libre';
 
   @override
-  String get insightsActivityBeachTitle => 'Beach Day';
+  String get insightsActivityBeachTitle => 'Día de playa';
 
   @override
   String get insightsActivityBeachDesc =>
-      'Perfect beach weather—bring sunscreen!';
+      '¡Clima perfecto para la playa! ¡No olvides el protector solar!';
 
   @override
-  String get insightsActivityHikingTitle => 'Hiking Weather';
+  String get insightsActivityHikingTitle => 'Clima para hacer senderismo';
 
   @override
   String get insightsActivityHikingDesc =>
-      'Cool and comfortable for a nature walk';
+      'Fresco y cómodo para un paseo por la naturaleza';
 
   @override
-  String get insightsActivityGeneralTitle => 'General Activities';
+  String get insightsActivityGeneralTitle => 'Actividades generales';
 
   @override
-  String get insightsActivityGeneralDesc => 'Moderate weather—plan accordingly';
+  String get insightsActivityGeneralDesc =>
+      'Clima moderado: planifique en consecuencia';
 
   @override
-  String get insightsHealthAirQualityTitle => 'Air Quality Alert';
+  String get insightsHealthAirQualityTitle =>
+      'Alerta sobre la calidad del aire';
 
   @override
   String get insightsHealthAirQualityDesc =>
-      'Consider a mask outdoors and limit intense activity until air improves.';
+      'Considere usar mascarilla al aire libre y limite la actividad física intensa hasta que mejore la calidad del aire.';
 
   @override
-  String get insightsHealthUVTitle => 'UV Protection Critical';
+  String get insightsHealthUVTitle => 'Protección UV fundamental';
 
   @override
   String get insightsHealthUVDesc =>
-      'Apply SPF 30+ sunscreen every 2 hours. Wear sunglasses and a hat.';
+      'Aplícate protector solar con FPS 30+ cada 2 horas. Usa gafas de sol y sombrero.';
 
   @override
-  String get insightsHealthHeatTitle => 'Stay Hydrated';
+  String get insightsHealthHeatTitle => 'Mantente hidratado';
 
   @override
   String get insightsHealthHeatDesc =>
-      'Drink water regularly. Avoid prolonged sun exposure 11am-3pm.';
+      'Beba agua con regularidad. Evite la exposición prolongada al sol entre las 12:00 y las 5:00.';
 
   @override
-  String get insightsHealthColdTitle => 'Cold Weather Alert';
+  String get insightsHealthColdTitle => 'Alerta de clima frío';
 
   @override
   String get insightsHealthColdDesc =>
-      'Watch for frostbite. Layer clothing and cover extremities.';
+      'Esté atento a la congelación. Vístase con varias capas de ropa y cúbrase las extremidades.';
 
   @override
-  String get insightsHealthWindTitle => 'Wind Advisory';
+  String get insightsHealthWindTitle => 'Aviso sobre vientos fuertes';
 
   @override
   String get insightsHealthWindDesc =>
-      'Secure loose items. Be cautious when driving.';
+      'Asegure los objetos sueltos. Tenga precaución al conducir.';
 
   @override
-  String get insightsHealthOptimalTitle => 'Optimal Conditions';
+  String get insightsHealthOptimalTitle => 'Condiciones óptimas';
 
   @override
   String get insightsHealthOptimalDesc =>
-      'Perfect weather for physical activity and outdoor time.';
+      'Clima perfecto para la actividad física y para disfrutar del aire libre.';
 
   @override
   String get insightsClothingHot =>
-      'Light, breathable clothing. Hat and sunglasses recommended.';
+      'Ropa ligera y transpirable. Se recomienda llevar sombrero y gafas de sol.';
 
   @override
   String get insightsClothingWarm =>
-      'Comfortable summer wear. Light layers for morning/evening.';
+      'Ropa cómoda para el verano. Capas ligeras para la mañana y la noche.';
 
   @override
   String get insightsClothingMild =>
-      'Long sleeves or light jacket recommended.';
+      'Se recomienda llevar manga larga o una chaqueta ligera.';
 
   @override
   String get insightsClothingCool =>
-      'Jacket or sweater needed. Long pants suggested.';
+      'Se necesita chaqueta o suéter. Se recomienda usar pantalones largos.';
 
   @override
   String get insightsClothingCold =>
-      'Warm jacket essential. Layer up for comfort.';
+      'Una chaqueta abrigada es imprescindible. Vístete por capas para mayor comodidad.';
 
   @override
   String get insightsClothingFreeze =>
-      'Heavy winter coat, gloves, and warm layers required.';
+      'Se requiere abrigo grueso de invierno, guantes y ropa de abrigo.';
 
   @override
-  String get insightsClothingRainSuffix => ' Bring waterproof gear.';
+  String get insightsClothingRainSuffix => ' Lleva ropa impermeable.';
 
   @override
-  String get insightsHourlyMorning => 'Morning';
+  String get insightsHourlyMorning => 'Mañana dia';
 
   @override
-  String get insightsHourlyAfternoon => 'Afternoon';
+  String get insightsHourlyAfternoon => 'Tarde';
 
   @override
-  String get insightsHourlyEvening => 'Evening';
+  String get insightsHourlyEvening => 'La Noche';
 
   @override
-  String get insightsHourlyMorningChilly => 'Chilly start—extra layer needed';
+  String get insightsHourlyMorningChilly =>
+      'Comienzo frío: se necesita una capa de ropa adicional';
 
   @override
-  String get insightsHourlyMorningComfort => 'Comfortable morning temperatures';
+  String get insightsHourlyMorningComfort =>
+      'Temperaturas agradables por la mañana';
 
   @override
-  String get insightsHourlyAfternoonHot => 'Peak heat—seek shade';
+  String get insightsHourlyAfternoonHot => 'Máximo calor: busque sombra';
 
   @override
-  String get insightsHourlyAfternoonPleasant => 'Pleasant afternoon expected';
+  String get insightsHourlyAfternoonPleasant => 'Se espera una tarde agradable';
 
   @override
-  String get insightsHourlyEveningCool => 'Cool evening—bring a jacket';
+  String get insightsHourlyEveningCool =>
+      'Noche fresca; Recomendación lleve una chaqueta';
 
   @override
-  String get insightsHourlyEveningMild => 'Mild evening conditions';
+  String get insightsHourlyEveningMild => 'Noche fresca; lleve una chaqueta';
 
   @override
-  String get insightsWeekLimitedData => 'Limited forecast data available';
+  String get insightsWeekLimitedData =>
+      'Datos de pronóstico limitados disponibles';
 
   @override
-  String get insightsWeekDataUnavailable => 'Forecast data unavailable';
+  String get insightsWeekDataUnavailable => 'Datos de previsión no disponibles';
 
   @override
   String insightsWeekVariableSwing(String swing) {
-    return 'Variable week ahead with $swing°C temperature swing. ';
+    return 'Semana variable por delante con una variación de temperatura de $swing°C ';
   }
 
   @override
   String get insightsWeekStable =>
-      'Stable conditions expected with consistent temperatures. ';
+      'Se prevén condiciones estables con temperaturas constantes. ';
 
   @override
-  String get insightsWeekWarm => 'Generally warm throughout the week.';
+  String get insightsWeekWarm => 'Generalmente cálido durante toda la semana.';
 
   @override
-  String get insightsWeekCool => 'Cool weather pattern persisting.';
+  String get insightsWeekCool => 'Persiste el patrón de clima frío.';
 
   @override
-  String get insightsWeekModerate => 'Moderate temperatures prevailing.';
+  String get insightsWeekModerate => 'Predominan las temperaturas moderadas.';
 
   @override
-  String get insightsBestTimeSingapore => 'Best Time: 7-9 AM & 5-8 PM';
+  String get insightsBestTimeSingapore =>
+      'Mejor horario: de 7 a 9 de la mañana y de 5 a 8 de la tarde';
 
   @override
   String get insightsBestTimeSingaporeDesc =>
-      'Optimal conditions for outdoor activities in Singapore';
+      'Condiciones óptimas para actividades al aire libre en Singapur';
 
   @override
-  String get insightsBestTimeNoData => 'No data';
+  String get insightsBestTimeNoData => 'No hay datos';
 
   @override
-  String get insightsBestTimeNoDataDesc => 'Unable to determine best times';
+  String get insightsBestTimeNoDataDesc =>
+      'No se pueden determinar los mejores momentos';
 
   @override
-  String get insightsBestTimeLimited => 'Limited data';
+  String get insightsBestTimeLimited => 'Datos limitados';
 
   @override
-  String get insightsBestTimeLimitedDesc => 'Hourly data unavailable';
+  String get insightsBestTimeLimitedDesc => 'Datos por hora no disponibles';
 
   @override
   String insightsBestTimeAt(String time) {
-    return 'Best Time: $time';
+    return 'Mejor momento: $time';
   }
 
   @override
   String get insightsBestTimeDesc =>
-      'Optimal conditions for outdoor activities';
+      'Condiciones óptimas para actividades al aire libre';
 
   @override
   String insightsTimeAM(String hour) {
-    return '$hour AM';
+    return '$hour . AM';
   }
 
   @override
@@ -751,220 +769,229 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get insightsTimeNoon => '12 PM';
+  String get insightsTimeNoon => '12:00 PM';
 
   @override
-  String get insightsRecRain => '☔ Bring an umbrella—rain likely';
+  String get insightsRecRain => '☔ Lleva un paraguas: es probable que llueva';
 
   @override
-  String get insightsRecHeatHigh => '🌡️ Stay hydrated—heat warning';
+  String get insightsRecHeatHigh => '🌡️ Mantente hidratado: alerta por calor';
 
   @override
-  String get insightsRecHeatMid => '☀️ Apply sunscreen';
+  String get insightsRecHeatMid => '☀️ Aplícate protector solar';
 
   @override
-  String get insightsRecCold => '🧊 Bundle up—cold weather ahead';
+  String get insightsRecCold => '🧊 Abrígate bien: se avecina frío';
 
   @override
-  String get insightsRecWind => '💨 Secure loose items—strong winds';
+  String get insightsRecWind =>
+      '💨 Asegure los objetos sueltos: vientos fuertes';
 
   @override
-  String get insightsRecUV => '🛡️ High UV—protect your skin';
+  String get insightsRecUV => '🛡️ Alta protección UV: protege tu piel';
 
   @override
-  String get insightsRecAir => '😷 Air quality is poor—limit outdoor exertion';
+  String get insightsRecAir =>
+      '😷 La calidad del aire es mala; limite el esfuerzo físico al aire libre';
 
   @override
-  String get insightsRecWarming => '📈 Warming trend—dress in layers';
+  String get insightsRecWarming => '📈 Tendencia de calor: vístete por capas';
 
   @override
-  String get insightsRecCooling => '📉 Cooling trend ahead';
+  String get insightsRecCooling =>
+      '📉 Se avecina una tendencia de enfriamiento';
 
   @override
-  String get insightsRecPleasant => '✨ Pleasant weather expected';
+  String get insightsRecPleasant => '✨ Se espera buen tiempo';
 
   @override
   String get insightsSummaryAllClear =>
-      'All systems go—great conditions ahead!';
+      '¡Todo listo! ¡Se avecinan excelentes condiciones!';
 
   @override
-  String get insightsSummaryRain => 'Rainy day incoming—prepare accordingly';
+  String get insightsSummaryRain => 'Se avecina un día lluvioso: prepárense';
 
   @override
-  String get insightsSummaryHeat => 'Hot and intense—stay cool';
+  String get insightsSummaryHeat => 'Caliente e intenso: mantente fresco';
 
   @override
-  String get insightsSummaryCold => 'Frigid conditions—bundle up';
+  String get insightsSummaryCold => 'Condiciones gélidas: abríguese bien';
 
   @override
-  String get insightsSummaryWind => 'Windy day—hold onto your hat';
+  String get insightsSummaryWind => 'Día ventoso: sujétate bien el sombrero';
 
   @override
-  String get insightsSummaryUV => 'Strong UV—protect yourself';
+  String get insightsSummaryUV => 'Fuerte radiación UV: protégete';
 
   @override
-  String get insightsSummaryAir => 'Air quality is poor—take it easy outside';
+  String get insightsSummaryAir =>
+      'La calidad del aire es mala; tómelo con calma al salir';
 
   @override
-  String get insightsSummaryVariable => 'Variable conditions expected';
+  String get insightsSummaryVariable => 'Se esperan condiciones variables';
 
   @override
-  String get weatherChoreographer => 'Today\'s Events';
+  String get weatherChoreographer => 'Eventos de hoy';
 
   @override
-  String get tomorrowsEvents => 'Tomorrow\'s Events';
+  String get tomorrowsEvents => 'Eventos de mañana';
 
   @override
   String get weatherChoreographerSubtitle =>
-      'Show weather for your calendar events';
+      'Consulta el pronóstico del tiempo para los eventos de tu calendario';
 
   @override
-  String get calendarSettingsTitle => 'Calendar Sync';
+  String get calendarSettingsTitle => 'Sincronización del calendario';
 
   @override
-  String get calendarSettingsSubtitle => 'Calendar Sync';
+  String get calendarSettingsSubtitle => 'Sincronización del calendario';
 
   @override
   String get calendarSettingsDescription =>
-      'When enabled, WeatherFast will scan your selected calendars for events that have a location specified. It will then display tailored weather insights right below the main weather card for those locations.\n\nPrivacy Note: No calendar data is ever sent outside your device from WeatherFast, and all processing happens completely on device.';
+      'Cuando está activada, WeatherFast escanea los calendarios seleccionados en busca de eventos con una ubicación específica. A continuación, muestra información meteorológica personalizada justo debajo de la tarjeta principal del tiempo para esas ubicaciones.\n\nNota de privacidad: WeatherFast nunca envía datos del calendario fuera de tu dispositivo; todo el procesamiento se realiza completamente en tu dispositivo.';
 
   @override
-  String get enableChoreographer => 'Enable Calendar Sync';
+  String get enableChoreographer =>
+      'Habilitar la sincronización del calendario';
 
   @override
-  String get showWeatherForCalendarEvents => 'Show weather for calendar events';
+  String get showWeatherForCalendarEvents =>
+      'Mostrar el pronóstico del tiempo para los eventos del calendario';
 
   @override
-  String get selectCalendars => 'Select Calendars';
+  String get selectCalendars => 'Seleccionar calendarios';
 
   @override
-  String get noCalendarsFound => 'No calendars found or permission denied.';
+  String get noCalendarsFound =>
+      'No se encontraron calendarios o se denegó el permiso.';
 
   @override
-  String get unnamedCalendar => 'Unnamed Calendar';
+  String get unnamedCalendar => 'Calendario sin nombre';
 
   @override
-  String get newWeatherChoreographer => 'New: Calendar Sync';
+  String get newWeatherChoreographer =>
+      'Novedad: Sincronización del calendario';
 
   @override
   String get weatherChoreographerPromoDescription =>
-      'WeatherFast can now sync with your calendar to show you weather forecasts for your upcoming events right on the home screen.';
+      'Ahora WeatherFast puede sincronizarse con tu calendario para mostrarte los pronósticos meteorológicos de tus próximos eventos directamente en la pantalla de inicio.';
 
   @override
   String get weatherChoreographerPromoPrivacy =>
-      'Privacy Note: All calendar data is processed securely on your device and never sent to any servers.';
+      'Nota sobre privacidad: Todos los datos del calendario se procesan de forma segura en su dispositivo y nunca se envían a ningún servidor.';
 
   @override
-  String get notNow => 'Not Now';
+  String get notNow => 'Ahora no';
 
   @override
-  String get enable => 'Enable';
+  String get enable => 'Permitir';
 
   @override
-  String get resetCalendarPromo => 'Reset Calendar Promo';
+  String get resetCalendarPromo => 'Promoción de reinicio del calendario';
 
   @override
   String get resetCalendarPromoSubtitle =>
-      'Reset the shown state of the Calendar Sync bottom sheet';
+      'Restablecer el estado mostrado de la hoja inferior de Sincronización del calendario';
 
   @override
-  String get calendarPromoReset => 'Calendar promo preferences reset';
+  String get calendarPromoReset =>
+      'Restablecimiento de las preferencias de promoción del calendario';
 
   @override
-  String get eventDetails => 'Event Details';
+  String get eventDetails => 'Detalles del evento';
 
   @override
   String weatherForArea(String area) {
-    return 'Weather for $area';
+    return 'El tiempo en $area';
   }
 
   @override
-  String get loadingWeather => 'Loading weather details...';
+  String get loadingWeather => 'Cargando detalles meteorológicos...';
 
   @override
   String get noWeatherAvailable =>
-      'Weather details currently unavailable for this location.';
+      'Actualmente no se dispone de información meteorológica para esta ubicación.';
 
   @override
-  String get meetingEnvironment => 'Meeting Environment';
+  String get meetingEnvironment => 'Entorno de reunión';
 
   @override
-  String get indoor => 'Indoor';
+  String get indoor => 'Interior';
 
   @override
-  String get outdoor => 'Outdoor';
+  String get outdoor => 'Exterior';
 
   @override
-  String get smartRecommendations => 'Smart Recommendations';
+  String get smartRecommendations => 'Recomendaciones inteligentes';
 
   @override
   String get recCommuteRain =>
-      'Rain is forecast. Don\'t forget an umbrella or raincoat for your commute!';
+      'Se pronostican lluvias. ¡No olvides llevar un paraguas o un impermeable para tu trayecto!';
 
   @override
   String recCommuteHot(int temp) {
-    return 'Outside is very hot ($temp°). Dress in light, breathable clothing for your commute, but carry a light layer as indoor air conditioning might be chilly!';
+    return 'Afuera hace mucho calor ($temp°). Vístete con ropa ligera y transpirable para ir al trabajo, ¡pero lleva una prenda de abrigo ligera, ya que el aire acondicionado en interiores podría estar frío!';
   }
 
   @override
   String recCommuteCold(int temp) {
-    return 'Outside is cold ($temp°). Wear warm layers so you can easily adjust once you enter the heated venue.';
+    return 'Afuera hace frío ($temp°). Vístase con varias capas de ropa abrigada para que pueda aclimatarse fácilmente una vez que entre al recinto climatizado.';
   }
 
   @override
   String get recIndoorAllClear =>
-      '🏢 Since your meeting is indoors, you\'ll be comfortable and protected from the elements. Enjoy your meeting!';
+      '🏢 Como la reunión se celebra en interiores, estarás cómodo y protegido de las inclemencias del tiempo. ¡Disfruta de la reunión!';
 
   @override
   String get recIndoorCommuteHeader =>
-      '🏢 Protected Indoors: Once inside, you\'ll be shielded from the weather. For your commute:\n';
+      '🏢 Protegido en interiores: Una vez dentro, estarás protegido de las inclemencias del tiempo. Para tu trayecto diario:\n';
 
   @override
   String get recOutdoorRain =>
-      '⚠️ Rain is expected! We strongly recommend bringing an umbrella or moving the meeting indoors/under shelter.';
+      '⚠️ ¡Se esperan lluvias! Recomendamos encarecidamente traer un paraguas o trasladar la reunión a un lugar cubierto.';
 
   @override
   String recOutdoorHot(int temp) {
-    return '🥵 It\'s hot outside ($temp°). We suggest seeking shade, wearing breathable clothing, and staying hydrated.';
+    return '🥵 Hace calor afuera ($temp°). Le sugerimos buscar sombra, usar ropa transpirable y mantenerse hidratado.';
   }
 
   @override
   String recOutdoorCold(int temp) {
-    return '🥶 It\'s chilly outside ($temp°). Dress warmly with a jacket, and consider a warm beverage.';
+    return '🥶 Hace frío afuera ($temp°). Abrígate bien con una chaqueta y considera tomar una bebida caliente.';
   }
 
   @override
   String recOutdoorWindy(String wind) {
-    return '💨 Expect gusty winds (up to $wind km/h). Secure any loose papers or materials.';
+    return '💨 Se esperan vientos fuertes (hasta $wind km/h). Asegure bien cualquier papel o material suelto.';
   }
 
   @override
   String get recOutdoorAllClear =>
-      '🌳 Perfect weather for an outdoor meeting! Enjoy the pleasant condition and fresh air.';
+      '🌳 ¡Clima perfecto para una reunión al aire libre! Disfruta del clima agradable y del aire fresco.';
 
   @override
-  String get recOutdoorHeader => '🌳 Outdoor Notice:\n';
+  String get recOutdoorHeader => '🌳 Aviso para exteriores:\n';
 
   @override
-  String get savedLocations => 'Saved Locations';
+  String get savedLocations => 'Ubicaciones guardadas';
 
   @override
-  String get saveLocation => 'Save Location';
+  String get saveLocation => 'Guardar ubicación';
 
   @override
-  String get removeLocation => 'Remove Location';
+  String get removeLocation => 'Eliminar ubicación';
 
   @override
-  String get noSavedLocations => 'No saved locations';
+  String get noSavedLocations => 'No hay ubicaciones guardadas';
 
   @override
-  String get locations => 'Locations';
+  String get locations => 'Ubicaciones';
 
   @override
-  String get currentLocation => 'Current Location';
+  String get currentLocation => 'Ubicación actual';
 
   @override
   String locationSavedMessage(String location) {
-    return 'Saved $location';
+    return 'Guardado $location';
   }
 }
