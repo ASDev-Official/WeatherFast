@@ -489,10 +489,10 @@ packages:
     dependency: "direct main"
     description:
       name: m3e_core
-      sha256: "7af0095aa9675607e6e9e80a49a72ada33a348cb1dd06b9aca31e3d5655ec1c6"
+      sha256: "2f6376e65fdf250d2ecf7b889a76f0476189f0a0f546219f5f0b95b3f1414311"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   mapbox_maps_flutter:
     dependency: "direct main"
     description:
