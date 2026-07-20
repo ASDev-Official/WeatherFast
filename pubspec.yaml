@@ -31,7 +31,7 @@ dependencies:
   skeletonizer: ^2.1.3
   in_app_review: ^2.0.12
   lottie: ^3.5.1
-  m3e_core: ^0.1.2
+  m3e_core: ^0.1.3
   device_calendar: ^4.3.3
 
 dev_dependencies:
