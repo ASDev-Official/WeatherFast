@@ -1,0 +1,485 @@
+{
+    "insightsBestTimeSingaporeDesc": "Ideální podmínky pro venkovní aktivity v Singapuru",
+    "currentLocation": "Aktuální poloha",
+    "smartRecommendations": "Chytrá doporučení",
+    "airQuality": "Kvalita ovzduší",
+    "insightsHealthOptimalTitle": "Ideální podmínky",
+    "weekAhead": "Příští týden",
+    "insightsActivityOutdoorSportsDesc": "Ideální podmínky pro venkovní aktivity a sport",
+    "suggestFeature": "Navrhněte novou funkci pro WeatherFast",
+    "adviceClearNight": "Dnes v noci bude jasná obloha.",
+    "insightsActivityIndoorTitle": "Aktivity v interiéru",
+    "close": "Zavřít",
+    "activitySuggestions": "Návrhy aktivit",
+    "failedToLoadWeather": "Počasí se nepodařilo načíst: {error}",
+    "@failedToLoadWeather": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "baseMapsMapbox": "Podkladové mapy poskytuje Mapbox.",
+    "locations": "Místa",
+    "futureAdviceStorm": "Během několika hodin hrozí bouřka. Venkovní činnosti brzy dokončete.",
+    "unitMph": "mph",
+    "reportBug": "Nahlásit chybu nebo problém",
+    "futureAdviceRain": "Asi za 3 hodiny bude pravděpodobně pršet. Mějte po ruce deštník.",
+    "notificationTitle": "Oznámení",
+    "insightsWeekWarm": "Po celý týden bude většinou teplo.",
+    "failedToLoadNotifications": "Oznámení se nepodařilo načíst: {error}",
+    "@failedToLoadNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "calendarPromoReset": "Předvolby nabídky kalendáře byly resetovány",
+    "insightsClothingHot": "Lehké prodyšné oblečení. Doporučujeme klobouk a sluneční brýle.",
+    "highLowTemp": "Max. {high}°  ·  Min. {low}°",
+    "@highLowTemp": {
+        "placeholders": {
+            "high": {
+                "type": "String"
+            },
+            "low": {
+                "type": "String"
+            }
+        }
+    },
+    "unitMiles": "Míle (mi)",
+    "insightsSummaryAllClear": "Vše je v pořádku — čekají vás skvělé podmínky!",
+    "insightsRecHeatHigh": "🌡️ Dodržujte pitný režim — varování před horkem",
+    "dataFromNea": "Data od NEA",
+    "night": "Noc",
+    "temperature": "Teplota",
+    "insightsTimeAM": "{hour} dop.",
+    "@insightsTimeAM": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            }
+        }
+    },
+    "useCurrentLocation": "Použít aktuální polohu",
+    "openSourceLicenses": "Licence otevřeného softwaru",
+    "adviceRain": "Vezměte si lehkou bundu do deště a nezastavujte se.",
+    "noNewNotifications": "Žádná nová oznámení",
+    "insightsActivityGeneralDesc": "Mírné počasí — podle toho plánujte",
+    "outdoor": "Venku",
+    "loadingNotificationTitle": "Načítání názvu oznámení…",
+    "weatherForArea": "Počasí pro oblast {area}",
+    "@weatherForArea": {
+        "placeholders": {
+            "area": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsHourlyMorningChilly": "Chladný začátek dne — vezměte si další vrstvu",
+    "nextDays": "{count}denní předpověď",
+    "@nextDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "unitKmh": "km/h",
+    "insightsRecPleasant": "✨ Očekává se příjemné počasí",
+    "insightsSummaryCold": "Mrazivé podmínky — teple se oblékněte",
+    "noWeatherAvailable": "Podrobnosti o počasí pro toto místo nejsou momentálně k dispozici.",
+    "resetRatingPreferences": "Resetovat předvolby hodnocení",
+    "tapToViewAllAlerts": "Klepnutím zobrazíte všechna varování",
+    "incompleteLocalisationMessage": "Lokalizace pro jazyk {language} není dokončena.",
+    "@incompleteLocalisationMessage": {
+        "placeholders": {
+            "language": {
+                "type": "String"
+            }
+        }
+    },
+    "weatherChoreographerPromoPrivacy": "Poznámka k soukromí: Veškerá data kalendáře se bezpečně zpracovávají ve vašem zařízení a nikdy se neodesílají na žádné servery.",
+    "insightsTimeNoon": "12 odp.",
+    "insightsRecAir": "😷 Kvalita ovzduší je špatná — omezte venkovní námahu",
+    "newWeatherChoreographer": "Novinka: synchronizace kalendáře",
+    "apiDocs": "Dokumentace API",
+    "insightsClothingCold": "Teplá bunda je nezbytná. Pro pohodlí se oblékněte ve vrstvách.",
+    "insightsHealthAirQualityDesc": "Venku zvažte roušku a omezte intenzivní aktivitu, dokud se ovzduší nezlepší.",
+    "calendarSettingsTitle": "Synchronizace kalendáře",
+    "featureRequest": "Návrh funkce",
+    "recOutdoorHeader": "🌳 Upozornění pro pobyt venku:\n",
+    "mapSettings": "Nastavení mapy",
+    "visibility": "Dohlednost",
+    "website": "Webové stránky",
+    "dataFromOpenMeteo": "Data od Open-Meteo",
+    "tapToViewInteractiveRadar": "Klepnutím zobrazíte interaktivní radar",
+    "adviceClear": "Venku je skvělé světlo. Doporučujeme sluneční brýle.",
+    "usedInWeatherFastVersion": " použitých ve WeatherFast {version}",
+    "@usedInWeatherFastVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsHourlyMorningComfort": "Příjemné ranní teploty",
+    "notificationsTooltip": "Oznámení",
+    "insightsHourlyAfternoonPleasant": "Očekává se příjemné odpoledne",
+    "clear": "Jasno",
+    "unitKilometers": "Kilometry (km)",
+    "precipChance": "Pravděpodobnost srážek",
+    "selectLocationFromHome": "Vyberte místo na domovské obrazovce",
+    "insightsHealthUVDesc": "Každé 2 hodiny naneste opalovací krém SPF 30+. Noste sluneční brýle a klobouk.",
+    "dataSources": "Zdroje dat",
+    "bugReport": "Hlášení chyby",
+    "updatingWeather": "Aktualizace počasí…",
+    "weatherChoreographerPromoDescription": "WeatherFast nyní umí synchronizovat váš kalendář a přímo na domovské obrazovce zobrazit předpověď počasí pro nadcházející události.",
+    "recCommuteHot": "Venku je velké horko ({temp}°). Na cestu si vezměte lehké prodyšné oblečení, ale přibalte si i lehkou vrstvu, protože klimatizace v interiéru může být chladná!",
+    "@recCommuteHot": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarSettingsSubtitle": "Synchronizace kalendáře",
+    "resetShownCountAndTimestamps": "Resetovat počet zobrazení a časová razítka",
+    "unitKnots": "uzly",
+    "insightsWeekCool": "Přetrvává chladné počasí.",
+    "helpLocalizeWeatherFast": "Pomozte lokalizovat WeatherFast",
+    "bestTimesTitle": "Nejlepší časy",
+    "savedLocations": "Uložená místa",
+    "reloadWidgetDataWarning": "Znovu načíst data widgetu (POUŽÍVEJTE STŘÍDMĚ!)",
+    "healthAndSafety": "Zdraví a bezpečnost",
+    "insightsClothingCool": "Budete potřebovat bundu nebo svetr. Doporučujeme dlouhé kalhoty.",
+    "insightsBestTimeLimitedDesc": "Hodinová data nejsou k dispozici",
+    "unableToFetchLocation": "Počasí pro dané místo se nepodařilo načíst. Zkuste to prosím znovu.",
+    "insightsHourlyAfternoonHot": "Vrchol horka — vyhledejte stín",
+    "performanceMode": "Režim výkonu",
+    "insightsRecUV": "🛡️ Vysoké UV — chraňte svou pokožku",
+    "insightsActivityLimitOutdoorTitle": "Omezte venkovní námahu",
+    "description": "Popis",
+    "simulateSuccessfulWeatherFetchTrigger": "Simulovat úspěšné načtení počasí",
+    "loadingLocation": "Načítání místa…",
+    "precipPercent": "Srážky: {percent} %",
+    "@precipPercent": {
+        "placeholders": {
+            "percent": {
+                "type": "String"
+            }
+        }
+    },
+    "resetCalendarPromoSubtitle": "Resetovat stav zobrazení spodního panelu synchronizace kalendáře",
+    "insightsActivityHikingDesc": "Chladné a příjemné počasí na procházku přírodou",
+    "toTime": "do {time}",
+    "@toTime": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "preferences": "Předvolby",
+    "futureAdviceSnow": "Později dnes bude sněžit — na cestu si vyhraďte více času.",
+    "terms": "Podmínky použití",
+    "resetCalendarPromo": "Resetovat nabídku kalendáře",
+    "insightsHealthColdDesc": "Dávejte pozor na omrzliny. Oblékněte se ve vrstvách a zakryjte končetiny.",
+    "insightsBestTimeNoDataDesc": "Nejlepší časy nelze určit",
+    "searchLocation": "Hledat místo",
+    "instruction": "Pokyny",
+    "insightsHourlyEveningCool": "Chladný večer — vezměte si bundu",
+    "insightsSummaryWind": "Větrný den — přidržte si klobouk",
+    "showingFahrenheit": "Zobrazuje se °F",
+    "noSavedLocations": "Žádná uložená místa",
+    "disableExtraVisualEffects": "Vypnout další vizuální efekty",
+    "enableChoreographer": "Zapnout synchronizaci kalendáře",
+    "insightsActivityBeachTitle": "Den na pláži",
+    "toViewDetailedInsights": "pro zobrazení podrobné analýzy",
+    "insightsRecCold": "🧊 Teple se oblékněte — čeká vás chladné počasí",
+    "units": "Jednotky",
+    "recOutdoorRain": "⚠️ Očekává se déšť! Důrazně doporučujeme vzít si deštník nebo přesunout schůzku do interiéru či pod přístřešek.",
+    "dummyTime": "Po, 1. ledna • 12:00",
+    "adviceCloud": "Dnes mírná oblačnost — ideální počasí na procházku.",
+    "insightsClothingRainSuffix": " Vezměte si nepromokavé vybavení.",
+    "insightsHealthHeatTitle": "Dodržujte pitný režim",
+    "visibilityKm": "{dist} km",
+    "@visibilityKm": {
+        "placeholders": {
+            "dist": {
+                "type": "String"
+            }
+        }
+    },
+    "cityRegionOrCoordinates": "Město, region nebo souřadnice",
+    "support": "Podpora",
+    "insightsTimePM": "{hour} odp.",
+    "@insightsTimePM": {
+        "placeholders": {
+            "hour": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsBestTimeNoData": "Žádná data",
+    "insightsHealthColdTitle": "Upozornění na chladné počasí",
+    "rateAppDescription": "Pokud se vám naše aplikace líbí, věnujte prosím chvíli jejímu hodnocení v Obchodě Play. Vaše podpora pro nás moc znamená!",
+    "checkOperationalStatusOfServices": "Zkontrolovat provozní stav služeb",
+    "forceRefreshWidgets": "Vynutit aktualizaci widgetů",
+    "insightsWeekDataUnavailable": "Data předpovědi nejsou k dispozici",
+    "ok": "OK",
+    "insightsSummaryVariable": "Očekávají se proměnlivé podmínky",
+    "insightsRecHeatMid": "☀️ Použijte opalovací krém",
+    "eventDetails": "Podrobnosti události",
+    "mapLayers": "Vrstvy mapy:",
+    "insightsHealthAirQualityTitle": "Upozornění na kvalitu ovzduší",
+    "remindMeLater": "Připomenout za 2 dny",
+    "adviceSnow": "Oblékněte se ve vrstvách a pozor na kluzké cesty.",
+    "debug": "Ladění",
+    "getItOnPlayStore": "Získat v Obchodě Play",
+    "adviceStorm": "Zůstaňte uvnitř; hrozí blesky.",
+    "insightsClothingFreeze": "Je nutný těžký zimní kabát, rukavice a teplé vrstvy.",
+    "insightsActivityLimitOutdoorDesc": "Kvalita ovzduší je špatná — upřednostněte nenáročné aktivity nebo pobyt uvnitř",
+    "retry": "Zkusit znovu",
+    "feelsLike": "Pocitová teplota",
+    "insightsSummaryAir": "Kvalita ovzduší je špatná — venku se nepřepínejte",
+    "weather": "Počasí",
+    "insightsHealthWindTitle": "Upozornění na vítr",
+    "widgetRefreshFailed": "Aktualizace widgetu se nezdařila: {error}",
+    "@widgetRefreshFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "showingCelsius": "Zobrazuje se °C",
+    "enjoyingWeatherFast": "Líbí se vám WeatherFast?",
+    "insightsActivityBeachDesc": "Ideální počasí na pláž — vezměte si opalovací krém!",
+    "insightsActivityCyclingDesc": "Skvělé počasí na projížďku na kole — mírné teploty a jasná obloha",
+    "notifications": "Oznámení",
+    "versionBuildNumber": "Verze {version} ({buildNumber})",
+    "@versionBuildNumber": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            },
+            "buildNumber": {
+                "type": "String"
+            }
+        }
+    },
+    "insights": "Přehledy",
+    "noCalendarsFound": "Nebyly nalezeny žádné kalendáře nebo bylo odepřeno oprávnění.",
+    "sgOpenDataLicence": "Singapurská licence pro otevřená data verze 1.0",
+    "dewPoint": "Rosný bod",
+    "insightsHealthOptimalDesc": "Ideální počasí pro fyzickou aktivitu a pobyt venku.",
+    "failedToLoadInsights": "Analýzu se nepodařilo načíst: {error}",
+    "@failedToLoadInsights": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsWeekLimitedData": "K dispozici jsou omezená data předpovědi",
+    "regionalOutlook": "Výhled pro region",
+    "recCommuteRain": "Předpovídá se déšť. Nezapomeňte si na cestu vzít deštník nebo pláštěnku!",
+    "tomorrow": "Zítra",
+    "recOutdoorHot": "🥵 Venku je horko ({temp}°). Doporučujeme vyhledat stín, obléct si prodyšné oblečení a dodržovat pitný režim.",
+    "@recOutdoorHot": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "todaysTimeline": "Dnešní časová osa",
+    "neaAttribution": "Obsahuje informace z dvouhodinové, čtyřiadvacetihodinové a čtyřdenní předpovědi počasí, o teplotě vzduchu, srážkách, relativní vlhkosti, relativní vlhkosti, rychlosti větru a indexu znečištění ovzduší (PSI) v Singapuru od National Environment Agency a o povodňových výstrahách v Singapuru od PUB, singapurské národní vodohospodářské agentury, získané {date}; tyto informace jsou k dispozici podle podmínek ",
+    "@neaAttribution": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsClothingMild": "Doporučujeme dlouhý rukáv nebo lehkou bundu.",
+    "about": "O aplikaci",
+    "severity": "Závažnost",
+    "windSpeedLabel": "Rychlost větru",
+    "temperatureWindVisibility": "Teplota, vítr, dohlednost",
+    "systemDefault": "Výchozí nastavení systému",
+    "unnamedCalendar": "Kalendář bez názvu",
+    "insightsBestTimeSingapore": "Nejlepší čas: 7–9 h a 17–20 h",
+    "insightsClothingWarm": "Pohodlné letní oblečení. Ráno a večer lehké vrstvy.",
+    "windSpeed": "{speed} km/h {dir}",
+    "@windSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            },
+            "dir": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsWeekModerate": "Převládají mírné teploty.",
+    "errorLoadingNotifications": "Chyba při načítání oznámení: {error}",
+    "@errorLoadingNotifications": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsWeekVariableSwing": "Čeká nás proměnlivý týden s výkyvem teploty {swing} °C. ",
+    "@insightsWeekVariableSwing": {
+        "placeholders": {
+            "swing": {
+                "type": "String"
+            }
+        }
+    },
+    "rateNow": "Ohodnotit nyní",
+    "tomorrowsEvents": "Zítřejší události",
+    "neaWebsite": "Web NEA",
+    "insightsBestTimeLimited": "Omezená data",
+    "insightsHourlyAfternoon": "Odpoledne",
+    "adviceDefault": "Zůstaňte v pohodlí a za několik hodin se podívejte znovu.",
+    "weatherMap": "Mapa počasí",
+    "whatToWear": "Co si obléct",
+    "weatherMapsUnavailableOnWeb": "Mapy počasí nejsou na webu k dispozici",
+    "recOutdoorAllClear": "🌳 Ideální počasí pro venkovní schůzku! Užijte si příjemné podmínky a čerstvý vzduch.",
+    "insightsActivityIndoorDesc": "Navštivte muzeum, kavárnu nebo zábavu v interiéru",
+    "insightsBestTimeAt": "Nejlepší čas: {time}",
+    "@insightsBestTimeAt": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "insightsBestTimeDesc": "Ideální podmínky pro venkovní aktivity",
+    "recOutdoorCold": "🥶 Venku je chladno ({temp}°). Teple se oblékněte a zvažte teplý nápoj.",
+    "@recOutdoorCold": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "home": "Domů",
+    "weatherChoreographer": "Dnešní události",
+    "loadingWeather": "Načítání podrobností o počasí…",
+    "insightsRecWarming": "📈 Trend oteplování — oblékněte se ve vrstvách",
+    "activeWarnings": "Počet aktivních varování: {count}",
+    "@activeWarnings": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsSummaryHeat": "Horko a intenzivní slunce — udržujte se v chladu",
+    "searchPlace": "Hledat místo",
+    "activeFloodAlerts": "Aktivní povodňová varování",
+    "insightsHourlyEveningMild": "Mírné večerní podmínky",
+    "showWeatherForCalendarEvents": "Zobrazovat počasí pro události v kalendáři",
+    "saveLocation": "Uložit místo",
+    "locationPermissionDenied": "Oprávnění k poloze bylo odepřeno. Zapněte ho, aby aplikace mohla určit vaši polohu.",
+    "insightsActivityOutdoorSportsTitle": "Venkovní sport",
+    "weatherInsights": "Přehledy počasí",
+    "insightsHourlyMorning": "Ráno",
+    "testRatingBottomSheet": "Otestovat spodní panel hodnocení",
+    "enable": "Zapnout",
+    "livePrecipitationRainviewer": "Živé radarové vrstvy srážek poskytuje RainViewer.",
+    "loadingTempF": "72 °F",
+    "recIndoorAllClear": "🏢 Jelikož je schůzka uvnitř, budete v pohodlí a chráněni před počasím. Užijte si schůzku!",
+    "insightsHourlyEvening": "Večer",
+    "weatherChoreographerSubtitle": "Zobrazovat počasí pro události v kalendáři",
+    "insightsActivityHikingTitle": "Počasí na turistiku",
+    "calendarSettingsDescription": "Po zapnutí WeatherFast prohledá vybrané kalendáře a najde události se zadaným místem. Pro tato místa pak přímo pod hlavní kartou počasí zobrazí přizpůsobené meteorologické přehledy.\n\nPoznámka k soukromí: WeatherFast nikdy neodesílá data kalendáře mimo vaše zařízení a veškeré zpracování probíhá přímo v zařízení.",
+    "language": "Jazyk",
+    "viewLicensesForOpenSourcePackages": "Zobrazit licence balíčků s otevřeným zdrojovým kódem",
+    "response": "Odpověď",
+    "hourlyForecast": "Hodinová předpověď",
+    "insightsSummaryUV": "Silné UV — chraňte se",
+    "recIndoorCommuteHeader": "🏢 V bezpečí uvnitř: Po příchodu budete chráněni před počasím. Na cestu:\n",
+    "openLink": "Otevřít odkaz",
+    "meetingEnvironment": "Prostředí schůzky",
+    "insightsRecCooling": "📉 Čeká nás ochlazení",
+    "insightsActivityCyclingTitle": "Ideální na cyklistiku",
+    "todaysSuggestion": "Dnešní doporučení",
+    "insightsSummaryRain": "Blíží se deštivý den — podle toho se připravte",
+    "getHelpOrSendFeedback": "Získat pomoc nebo odeslat zpětnou vazbu",
+    "humidity": "Vlhkost",
+    "locationServicesDisabled": "Služby určování polohy jsou vypnuté. Zapněte je v Nastavení.",
+    "area": "Oblast",
+    "attributionText": "© Mapbox, © přispěvatelé OpenStreetMap, © RainViewer.",
+    "settings": "Nastavení",
+    "loading": "Načítání…",
+    "notNow": "Teď ne",
+    "insightsHealthUVTitle": "Ochrana před UV je zásadní",
+    "systemStatus": "Stav systému",
+    "analyzingConditions": "Probíhá analýza podmínek…",
+    "weatherDataProvidedByOM": "Data o počasí poskytuje Open-Meteo",
+    "couldNotOpenLink": "Odkaz se nepodařilo otevřít",
+    "removeLocation": "Odebrat místo",
+    "celsius": "Celsia (°C)",
+    "dummyHighLow": "Max. 80° · Min. 60°",
+    "weatherData": "Data o počasí:",
+    "loadingNotificationDesc": "Načítání popisu oznámení…",
+    "insightsRecWind": "💨 Zajistěte volně položené předměty — silný vítr",
+    "recCommuteCold": "Venku je chladno ({temp}°). Oblečte si teplé vrstvy, které můžete po příchodu do vytápěného místa snadno upravit.",
+    "@recCommuteCold": {
+        "placeholders": {
+            "temp": {
+                "type": "int"
+            }
+        }
+    },
+    "daytime": "Den",
+    "insightsHealthWindDesc": "Zajistěte volně položené předměty. Při řízení buďte opatrní.",
+    "noThanks": "Ne, děkuji",
+    "helpAndFeedback": "Nápověda a zpětná vazba",
+    "dataGovSg": "Data.gov.sg",
+    "locationSavedMessage": "Uloženo: {location}",
+    "@locationSavedMessage": {
+        "placeholders": {
+            "location": {
+                "type": "String"
+            }
+        }
+    },
+    "floodAlert": "Povodňové varování",
+    "loadingClearWeather": "Jasno",
+    "uvIndex": "UV index",
+    "radarOpacity": "Průhlednost radaru",
+    "futureAdviceClear": "V příštích hodinách bude počasí stabilní — vhodná doba být venku.",
+    "fahrenheit": "Fahrenheita (°F)",
+    "insightsActivityGeneralTitle": "Obecné aktivity",
+    "attribution": "Uvedení zdroje:",
+    "unitMs": "m/s",
+    "flashFloodWarning": "Varování před přívalovou povodní!",
+    "insightsHealthHeatDesc": "Pravidelně pijte vodu. Mezi 11:00 a 15:00 se vyhněte dlouhému pobytu na slunci.",
+    "useFahrenheit": "Použít stupně Fahrenheita",
+    "ratingPreferencesReset": "Předvolby hodnocení byly resetovány",
+    "interactiveWeatherRadarDescription": "Interaktivní meteorologický radar a mapy ve vysokém rozlišení jsou optimalizované pro mobilní prostředí.",
+    "indoor": "Uvnitř",
+    "selectCalendars": "Vybrat kalendáře",
+    "insightsWeekStable": "Očekávají se stabilní podmínky a stálé teploty. ",
+    "today": "Dnes",
+    "multipleFloodAlerts": "Více povodňových varování",
+    "widgetsRefreshed": "Widgety byly aktualizovány",
+    "recOutdoorWindy": "💨 Očekávejte nárazový vítr (až {wind} km/h). Zajistěte volné papíry a materiály.",
+    "@recOutdoorWindy": {
+        "placeholders": {
+            "wind": {
+                "type": "String"
+            }
+        }
+    },
+    "wind": "Vítr",
+    "insightsRecRain": "☔ Vezměte si deštník — déšť je pravděpodobný"
+}

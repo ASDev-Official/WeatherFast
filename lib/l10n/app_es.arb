@@ -23,7 +23,7 @@
         }
     },
     "dataFromNea": "Datos de NEA",
-    "night": "Noche estos momentos",
+    "night": "Noche",
     "useCurrentLocation": "Usar ubicación actual",
     "adviceRain": "Toma un paraguas y continúa con tu día.",
     "nextDays": "Proximos {count} dias",
