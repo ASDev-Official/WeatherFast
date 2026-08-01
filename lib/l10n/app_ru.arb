@@ -11,7 +11,7 @@
     },
     "futureAdviceStorm": "Через несколько часов ожидается шторм. Завершите дела на улице как можно скорее.",
     "futureAdviceRain": "Дождь будет примерно через ~3 часа. Захватите с собой зонтик.",
-    "highLowTemp": "H {high}°  ·  L {low}°",
+    "highLowTemp": "Макс. {high}°  ·  Мин. {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
@@ -38,7 +38,7 @@
     "dataFromOpenMeteo": "Данные от Open-Meteo",
     "adviceClear": "На улице яркое солнце. Рекомендуется надеть солнцезащитные очки.",
     "adviceClearNight": "Ясное небо сегодня вечером.",
-    "clear": "Чистое",
+    "clear": "Ясно",
     "precipChance": "Вероятность осадков",
     "updatingWeather": "Обновление погоды…",
     "unableToFetchLocation": "Не удалось получить данные о погоде в вашем регионе. Пожалуйста, попробуйте ещё раз.",
@@ -51,7 +51,7 @@
             }
         }
     },
-    "toTime": "к {time}",
+    "toTime": "до {time}",
     "@toTime": {
         "placeholders": {
             "time": {
@@ -99,14 +99,14 @@
     "humidity": "Влажность",
     "locationServicesDisabled": "Местоположение отключено. Включите показ местоположения в настройках.",
     "settings": "Настройки",
-    "dummyHighLow": "H 80° · L 60°",
+    "dummyHighLow": "Макс. 80° · Мин. 60°",
     "daytime": "Дневное время",
     "futureAdviceClear": "В ближайшие несколько часов погода останется стабильной. Самое время выйти на улицу.",
     "today": "Сегодня",
     "wind": "Ветер",
     "weekAhead": "Week Ahead",
     "suggestFeature": "Suggest a new feature for WeatherFast",
-    "activitySuggestions": "Activity Suggestions",
+    "activitySuggestions": "Подходит для занятий",
     "baseMapsMapbox": "Base maps are provided by Mapbox.",
     "reportBug": "Report a bug or issue",
     "notificationTitle": "Notification",
