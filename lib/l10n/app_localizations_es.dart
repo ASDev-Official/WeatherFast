@@ -65,7 +65,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get daytime => 'Día';
 
   @override
-  String get night => 'Noche estos momentos';
+  String get night => 'Noche';
 
   @override
   String get dummyHighLow => 'H 80° · L 60°';
