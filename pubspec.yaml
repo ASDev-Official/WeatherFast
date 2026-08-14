@@ -19,7 +19,7 @@ dependencies:
   geolocator: ^14.0.3
   package_info_plus: ^10.2.1
   permission_handler: ^13.0.0
-  intl: ^0.20.2
+  intl: ^0.20.3
   timezone: ^0.9.4
   flutter_inappwebview: ^6.1.5
   shared_preferences: ^2.5.5
