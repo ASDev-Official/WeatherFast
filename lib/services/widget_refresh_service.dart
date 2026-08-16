@@ -14,6 +14,7 @@ import '../weather_service.dart';
 const String _refreshTaskName = 'weatherfast_widget_refresh';
 const String _periodicRefreshId = 'weatherfast_widget_refresh_periodic';
 
+const String _kLastLocationQuery = 'wf_last_location_query';
 const String _kLocationQuery = 'wf_location_query';
 const String _kLocationName = 'wf_location_name';
 const String _kConditionText = 'wf_condition_text';
@@ -52,7 +53,7 @@ void widgetRefreshCallbackDispatcher() {
   Workmanager().executeTask((task, _) async {
     WidgetsFlutterBinding.ensureInitialized();
     if (task == _refreshTaskName) {
-      await WidgetRefreshService.refreshFromBackground();
+      return await WidgetRefreshService.refreshFromBackground();
     }
     return true;
   });
@@ -60,7 +61,11 @@ void widgetRefreshCallbackDispatcher() {
 
 @pragma('vm:entry-point')
 Future<void> homeWidgetBackgroundCallback(Uri? uri) async {
-  if (uri?.host == 'refresh') {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (uri == null ||
+      uri.host == 'refresh' ||
+      uri.path.contains('refresh') ||
+      uri.toString().contains('refresh')) {
     await WidgetRefreshService.refreshFromBackground();
   }
 }
@@ -90,7 +95,7 @@ class WidgetRefreshService {
       _refreshTaskName,
       frequency: const Duration(minutes: 15),
       initialDelay: const Duration(minutes: 5),
-      existingWorkPolicy: ExistingWorkPolicy.replace,
+      existingWorkPolicy: ExistingWorkPolicy.keep,
       constraints: Constraints(networkType: NetworkType.connected),
     );
 
@@ -100,6 +105,7 @@ class WidgetRefreshService {
   static Future<void> storeAndRefresh({
     required Map<String, dynamic> weatherData,
     required bool useFahrenheit,
+    String? locationQuery,
   }) async {
     if (kIsWeb) {
       return;
@@ -109,6 +115,14 @@ class WidgetRefreshService {
     final country = (weatherData['location']?['country'] ?? '').toString();
     final isSgWidget = country.toLowerCase().contains('singapore') || locationName.toLowerCase().contains('singapore');
     await HomeWidget.saveWidgetData<bool>('wf_is_singapore', isSgWidget);
+
+    final lat = weatherData['location']?['lat'];
+    final lon = weatherData['location']?['lon'];
+    if (locationQuery != null && locationQuery.isNotEmpty) {
+      await HomeWidget.saveWidgetData<String>(_kLastLocationQuery, locationQuery);
+    } else if (lat != null && lon != null) {
+      await HomeWidget.saveWidgetData<String>(_kLastLocationQuery, '$lat,$lon');
+    }
 
     final condition =
         (weatherData['current']?['condition']?['text'] ?? 'Unknown').toString();
@@ -408,83 +422,112 @@ class WidgetRefreshService {
     await _pushUpdate();
   }
 
-  static Future<void> refreshFromBackground() async {
+  static Future<bool> refreshFromBackground() async {
     if (kIsWeb) {
-      return;
+      return true;
     }
 
-    final widgetLocation = await PreferencesService.loadWidgetLocation();
-    
-    String? locationToFetch;
-    if (widgetLocation == 'Current Location') {
-      try {
-        final position = await Geolocator.getCurrentPosition(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.high,
-          ),
-        );
-        locationToFetch = '${position.latitude},${position.longitude}';
-      } catch (e) {
-        locationToFetch = await HomeWidget.getWidgetData<String>(_kLocationQuery);
+    try {
+      // 1. Synchronize in-memory units and settings for the background isolate
+      final useFahrenheit = await PreferencesService.loadUseFahrenheit();
+      GlobalData.useFahrenheit = useFahrenheit;
+      GlobalData.windUnit = await PreferencesService.loadWindUnit();
+      GlobalData.visibilityUnit = await PreferencesService.loadVisibilityUnit();
+      GlobalData.widgetFontScale = await PreferencesService.loadWidgetFontScale();
+
+      final widgetLocation = await PreferencesService.loadWidgetLocation();
+      
+      String? locationToFetch;
+      if (widgetLocation == 'Current Location') {
+        // Step 1: Fast non-blocking location lookup from OS cache
+        try {
+          final lastKnown = await Geolocator.getLastKnownPosition();
+          if (lastKnown != null) {
+            locationToFetch = '${lastKnown.latitude},${lastKnown.longitude}';
+          }
+        } catch (_) {}
+
+        // Step 2: Attempt quick location with strict 4s timeout if no cached position
+        if (locationToFetch == null || locationToFetch.isEmpty) {
+          try {
+            final position = await Geolocator.getCurrentPosition(
+              locationSettings: const LocationSettings(
+                accuracy: LocationAccuracy.low,
+                timeLimit: Duration(seconds: 4),
+              ),
+            );
+            locationToFetch = '${position.latitude},${position.longitude}';
+          } catch (_) {}
+        }
+
+        // Step 3: Fallback to last successful query / coordinates
+        if (locationToFetch == null || locationToFetch.isEmpty) {
+          locationToFetch = await PreferencesService.loadLastLocationQuery();
+        }
+        if (locationToFetch == null || locationToFetch.isEmpty) {
+          locationToFetch = await HomeWidget.getWidgetData<String>(_kLastLocationQuery);
+        }
+        if (locationToFetch == null || locationToFetch.isEmpty) {
+          locationToFetch = await HomeWidget.getWidgetData<String>(_kLocationQuery);
+        }
+      } else {
+        locationToFetch = widgetLocation;
       }
-    } else {
-      locationToFetch = widgetLocation;
-    }
 
-    if (locationToFetch == null || locationToFetch.isEmpty) {
-      await HomeWidget.saveWidgetData<String>(
-        _kConditionText,
-        'Open app to set location',
+      if (locationToFetch == null || locationToFetch.isEmpty) {
+        final existingCondition = await HomeWidget.getWidgetData<String>(_kConditionText);
+        if (existingCondition == null || existingCondition.isEmpty) {
+          await _clearWidgetData('Open app to set location');
+        }
+        return false;
+      }
+
+      final weatherService = WeatherService();
+      final weatherData = await weatherService.fetchWeather(locationToFetch);
+      final forecastData = await weatherService.fetchForecast(locationToFetch);
+
+      await PreferencesService.saveLastLocationQuery(locationToFetch);
+      await WeatherCacheService.saveSnapshot(
+        locationQuery: locationToFetch,
+        weatherData: weatherData,
+        forecastData: forecastData,
       );
-      await HomeWidget.saveWidgetData<String>(_kTemperature, '--');
-      await HomeWidget.saveWidgetData<String>(_kHighLow, '-- / --');
-      await HomeWidget.saveWidgetData<String>(_kConditionGlyph, '...');
-      await HomeWidget.saveWidgetData<String>(_kFeelsLike, '--');
-      await HomeWidget.saveWidgetData<String>(_kHumidity, '--');
-      await HomeWidget.saveWidgetData<String>(_kWind, '--');
-      await HomeWidget.saveWidgetData<String>(_kAqi, '--');
-      await HomeWidget.saveWidgetData<String>('wf_hourly_source_transition', '');
-      await HomeWidget.saveWidgetData<String>('wf_daily_source_transition', '');
-      for (int index = 1; index <= 24; index++) {
-        await HomeWidget.saveWidgetData<String>('wf_hour_$index', '--');
-        await HomeWidget.saveWidgetData<String>(
-          'wf_hour_icon_$index',
-          'partly',
-        );
-        await HomeWidget.saveWidgetData<String>('wf_hour_temp_$index', '--');
-        await HomeWidget.saveWidgetData<String>('wf_hour_condition_$index', '');
-      }
-      await HomeWidget.saveWidgetData<String>(_kDayName1, '--');
-      await HomeWidget.saveWidgetData<String>(_kDayName2, '--');
-      await HomeWidget.saveWidgetData<String>(_kDayName3, '--');
-      await HomeWidget.saveWidgetData<String>(_kDayTemp1, '-- / --');
-      await HomeWidget.saveWidgetData<String>(_kDayTemp2, '-- / --');
-      await HomeWidget.saveWidgetData<String>(_kDayTemp3, '-- / --');
-      await HomeWidget.saveWidgetData<String>(_kDayIcon1, 'partly');
-      await HomeWidget.saveWidgetData<String>(_kDayIcon2, 'partly');
-      await HomeWidget.saveWidgetData<String>(_kDayIcon3, 'partly');
-      await _pushUpdate();
-      return;
+
+      await storeAndRefresh(
+        weatherData: weatherData,
+        useFahrenheit: useFahrenheit,
+        locationQuery: locationToFetch,
+      );
+      return true;
+    } catch (e, st) {
+      debugPrint('WidgetRefreshService.refreshFromBackground error: $e\n$st');
+      return false;
     }
+  }
 
-    final useFahrenheit = await PreferencesService.loadUseFahrenheit();
-    final weatherService = WeatherService();
-    final weatherData = await weatherService.fetchWeather(locationToFetch);
-    final forecastData = await weatherService.fetchForecast(locationToFetch);
-
-    GlobalData.useFahrenheit = useFahrenheit;
-
-    await PreferencesService.saveLastLocationQuery(locationToFetch);
-    await WeatherCacheService.saveSnapshot(
-      locationQuery: locationToFetch,
-      weatherData: weatherData,
-      forecastData: forecastData,
-    );
-
-    await storeAndRefresh(
-      weatherData: weatherData,
-      useFahrenheit: useFahrenheit,
-    );
+  static Future<void> _clearWidgetData(String message) async {
+    await HomeWidget.saveWidgetData<String>(_kConditionText, message);
+    await HomeWidget.saveWidgetData<String>(_kTemperature, '--');
+    await HomeWidget.saveWidgetData<String>(_kHighLow, '-- / --');
+    await HomeWidget.saveWidgetData<String>(_kConditionGlyph, '...');
+    await HomeWidget.saveWidgetData<String>(_kFeelsLike, '--');
+    await HomeWidget.saveWidgetData<String>(_kHumidity, '--');
+    await HomeWidget.saveWidgetData<String>(_kWind, '--');
+    await HomeWidget.saveWidgetData<String>(_kAqi, '--');
+    await HomeWidget.saveWidgetData<String>('wf_hourly_source_transition', '');
+    await HomeWidget.saveWidgetData<String>('wf_daily_source_transition', '');
+    for (int index = 1; index <= 24; index++) {
+      await HomeWidget.saveWidgetData<String>('wf_hour_$index', '--');
+      await HomeWidget.saveWidgetData<String>('wf_hour_icon_$index', 'partly');
+      await HomeWidget.saveWidgetData<String>('wf_hour_temp_$index', '--');
+      await HomeWidget.saveWidgetData<String>('wf_hour_condition_$index', '');
+    }
+    for (int index = 1; index <= 7; index++) {
+      await HomeWidget.saveWidgetData<String>('wf_day_name_$index', '--');
+      await HomeWidget.saveWidgetData<String>('wf_day_temp_$index', '-- / --');
+      await HomeWidget.saveWidgetData<String>('wf_day_icon_$index', 'partly');
+    }
+    await _pushUpdate();
   }
 
   static Future<void> _pushUpdate() async {

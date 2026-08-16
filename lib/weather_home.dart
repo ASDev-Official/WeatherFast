@@ -1036,6 +1036,7 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
         await WidgetRefreshService.storeAndRefresh(
           weatherData: weather,
           useFahrenheit: GlobalData.useFahrenheit,
+          locationQuery: location,
         );
       }
       // Notify parent of location change

@@ -437,7 +437,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get terms => 'Условия';
 
   @override
-  String get loadingClearWeather => 'Прозрачный';
+  String get loadingClearWeather => 'Ясно';
 
   @override
   String get loadingTempF => '72°F';
@@ -502,7 +502,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get helpLocalizeWeatherFast => 'Помогите локализовать WeatherFast';
 
   @override
-  String get ok => 'Ладно';
+  String get ok => 'Хорошо';
 
   @override
   String get notificationsTooltip => 'Уведомления';
@@ -882,7 +882,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notNow => 'Не сейчас';
 
   @override
-  String get enable => 'Давать возможность';
+  String get enable => 'Включить';
 
   @override
   String get resetCalendarPromo => 'Сбросить календарную акцию';

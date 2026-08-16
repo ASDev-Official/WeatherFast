@@ -30,7 +30,7 @@ class WeatherFastSmallWidgetProvider : AppWidgetProvider() {
                 // Show progress
                 val views = RemoteViews(context.packageName, R.layout.weather_widget_small_host)
                 views.setDisplayedChild(R.id.widget_refresh_flipper_sg, 1)
-                appWidgetManager.updateAppWidget(widgetId, views)
+                appWidgetManager.partiallyUpdateAppWidget(widgetId, views)
 
                 try {
                     val bgIntent = Intent()
