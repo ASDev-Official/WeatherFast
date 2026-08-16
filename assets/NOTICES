@@ -1,6 +1,6 @@
 ## License
 
-Mapbox Maps for Flutter version 2.27.0
+Mapbox Maps for Flutter version 2.28.0
 Mapbox Maps Flutter SDK
 
 Copyright &copy; 2022 - 2026 Mapbox, Inc. All rights reserved.
@@ -103,7 +103,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ### flutter_plugin_android_lifecycle, https://github.com/flutter/packages/tree/main/packages/flutter_plugin_android_lifecycle
 
 ```
-Copyright 2013 The Flutter Authors. All rights reserved.
+Copyright 2013 The Flutter Authors
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -134,7 +134,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## License
 
-Mapbox Maps for iOS version 11.27.0
+Mapbox Maps for iOS version 11.28.0
 Mapbox Maps iOS SDK
 
 Copyright &copy; 2021 - 2026 Mapbox, Inc. All rights reserved.
@@ -165,7 +165,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ---
 
-### MapboxCoreMaps,11.27.0,Mapbox ToS,Mapbox,https://www.mapbox.com/
+### MapboxCoreMaps,11.28.0,Mapbox ToS,Mapbox,https://www.mapbox.com/
 
 ```
 Mapbox Core Maps version 11.0
@@ -1625,7 +1625,7 @@ DEALINGS IN THE SOFTWARE.
 
 ### License
 
-Mapbox Maps for Android version 11.27.0
+Mapbox Maps for Android version 11.28.0
 Mapbox Maps Android SDK
 
 Copyright &copy; 2021 - 2026 Mapbox, Inc. All rights reserved.
@@ -2113,7 +2113,7 @@ License: [The Apache Software License, Version 2.0](http://www.apache.org/licens
 
 ===========================================================================
 
-### MapboxCoreMaps,11.27.0,Mapbox ToS,Mapbox,https://www.mapbox.com/
+### MapboxCoreMaps,11.28.0,Mapbox ToS,Mapbox,https://www.mapbox.com/
 
 ```
 Mapbox Core Maps version 11.0
@@ -3619,7 +3619,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-### meshoptimizer,1.1.1,MIT,zeux,https://github.com/zeux/meshoptimizer
+### meshoptimizer,1.2,MIT,zeux,https://github.com/zeux/meshoptimizer
 
 ```
 MIT License
@@ -4073,7 +4073,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-### meshoptimizer,1.1.1,MIT,zeux,https://github.com/zeux/meshoptimizer
+### meshoptimizer,1.2,MIT,zeux,https://github.com/zeux/meshoptimizer
 
 ```
 MIT License
@@ -4287,7 +4287,7 @@ freely, subject to the following restrictions:
 
 ---
 
-### shaderc,v2026.2,Apache-2.0,google,https://github.com/google/shaderc
+### shaderc,v2026.3,Apache-2.0,google,https://github.com/google/shaderc
 
 ```
                                  Apache License
