@@ -91,7 +91,7 @@
         }
     },
     "adviceDefault": "Stay comfortable and check again in a few hours.",
-    "home": "Home",
+    "home": "主页",
     "searchPlace": "Search a place",
     "locationPermissionDenied": "Location permission denied. Enable it to auto-locate you.",
     "hourlyForecast": "Hourly Forecast",
