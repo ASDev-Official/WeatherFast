@@ -3,7 +3,7 @@ description: "WeatherFast"
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 3.9.6
+version: 3.10.0
 
 environment:
   sdk: ^3.10.4
@@ -19,6 +19,7 @@ dependencies:
   geolocator: ^14.0.3
   package_info_plus: ^10.2.1
   permission_handler: ^13.0.2
+  flutter_local_notifications: ^18.0.1
   intl: ^0.20.2
   timezone: ^0.9.4
   flutter_inappwebview: ^6.1.5

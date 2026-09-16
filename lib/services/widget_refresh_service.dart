@@ -9,6 +9,7 @@ import 'global_data.dart';
 import 'unit_converter.dart';
 import 'preferences_service.dart';
 import 'weather_cache_service.dart';
+import 'weather_alert_engine.dart';
 import '../weather_service.dart';
 
 const String _refreshTaskName = 'weatherfast_widget_refresh';
@@ -498,6 +499,10 @@ class WidgetRefreshService {
         useFahrenheit: useFahrenheit,
         locationQuery: locationToFetch,
       );
+
+      // Evaluate weather alerts & flood alerts in the background
+      await WeatherAlertEngine().evaluateAlerts();
+
       return true;
     } catch (e, st) {
       debugPrint('WidgetRefreshService.refreshFromBackground error: $e\n$st');

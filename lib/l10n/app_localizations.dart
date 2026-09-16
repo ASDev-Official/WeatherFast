@@ -24,6 +24,7 @@ import 'app_localizations_nl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
 import 'app_localizations_sv.dart';
+import 'app_localizations_ta.dart';
 import 'app_localizations_th.dart';
 import 'app_localizations_tl.dart';
 import 'app_localizations_tr.dart';
@@ -135,6 +136,7 @@ abstract class AppLocalizations {
     Locale('pt'),
     Locale('ru'),
     Locale('sv'),
+    Locale('ta'),
     Locale('th'),
     Locale('tl'),
     Locale('tr'),
@@ -1851,6 +1853,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saved {location}'**
   String locationSavedMessage(String location);
+
+  /// No description provided for @weatherAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Alerts'**
+  String get weatherAlerts;
+
+  /// No description provided for @weatherAlertsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Beta • Notifications may not work as expected'**
+  String get weatherAlertsSubtitle;
+
+  /// No description provided for @weatherAlertsBetaNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications is a beta feature and may not work as expected.'**
+  String get weatherAlertsBetaNotice;
+
+  /// No description provided for @enableAlertsForLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Alerts for this Location'**
+  String get enableAlertsForLocation;
+
+  /// No description provided for @enableAlertsForLocationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive notifications based on weather conditions here'**
+  String get enableAlertsForLocationDesc;
+
+  /// No description provided for @floodAndSevere.
+  ///
+  /// In en, this message translates to:
+  /// **'Severe Weather & Floods'**
+  String get floodAndSevere;
+
+  /// No description provided for @floodAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flood & Flash Flood Warnings'**
+  String get floodAlertsTitle;
+
+  /// No description provided for @floodAlertsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Immediate warnings for water-level and flash flood risks'**
+  String get floodAlertsDesc;
+
+  /// No description provided for @severeStormsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thunderstorms & Severe Storms'**
+  String get severeStormsTitle;
+
+  /// No description provided for @severeStormsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts for lightning, heavy thundery showers, and squalls'**
+  String get severeStormsDesc;
+
+  /// No description provided for @highWindTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'High Wind Warnings'**
+  String get highWindTitle;
+
+  /// No description provided for @highWindDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert when sustained wind speed exceeds {speed}'**
+  String highWindDesc(String speed);
+
+  /// No description provided for @rainAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Impending Rain Alerts'**
+  String get rainAlertsTitle;
+
+  /// No description provided for @rainAlertsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Get notified before rain starts in your area'**
+  String get rainAlertsDesc;
+
+  /// No description provided for @rainChanceThresholdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain Probability Threshold'**
+  String get rainChanceThresholdTitle;
+
+  /// No description provided for @temperatureAndSun.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature & Sun'**
+  String get temperatureAndSun;
+
+  /// No description provided for @extremeHeatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Extreme Heat Advisory'**
+  String get extremeHeatTitle;
+
+  /// No description provided for @extremeHeatDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert when temperatures rise above {temp}'**
+  String extremeHeatDesc(String temp);
+
+  /// No description provided for @coldSnapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cold Temperature Warning'**
+  String get coldSnapTitle;
+
+  /// No description provided for @coldSnapDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert when temperatures drop below {temp}'**
+  String coldSnapDesc(String temp);
+
+  /// No description provided for @uvAlertTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'High UV Index Warning'**
+  String get uvAlertTitle;
+
+  /// No description provided for @uvAlertDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert when UV index reaches {uv} or higher'**
+  String uvAlertDesc(String uv);
+
+  /// No description provided for @airQualityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Air Quality Advisories'**
+  String get airQualityTitle;
+
+  /// No description provided for @airQualityDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert when air quality (AQI / PSI) reaches unhealthy levels'**
+  String get airQualityDesc;
+
+  /// No description provided for @dailyBriefingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Forecast Briefing'**
+  String get dailyBriefingTitle;
+
+  /// No description provided for @dailyBriefingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive a morning summary of today\'s weather forecast'**
+  String get dailyBriefingDesc;
+
+  /// No description provided for @briefingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Briefing Time'**
+  String get briefingTime;
+
+  /// No description provided for @quietHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet Hours'**
+  String get quietHours;
+
+  /// No description provided for @quietHoursDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute non-critical alerts between scheduled hours'**
+  String get quietHoursDesc;
+
+  /// No description provided for @sendTestAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Test Alert'**
+  String get sendTestAlert;
+
+  /// No description provided for @testAlertSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Test notification sent! Check your notification shade.'**
+  String get testAlertSent;
+
+  /// No description provided for @onboardingAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather Alerts & Advisories'**
+  String get onboardingAlertsTitle;
+
+  /// No description provided for @onboardingAlertsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.'**
+  String get onboardingAlertsDesc;
+
+  /// No description provided for @onboardingAlertsFeature1.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash flood advisories & severe storm warnings'**
+  String get onboardingAlertsFeature1;
+
+  /// No description provided for @onboardingAlertsFeature2.
+  ///
+  /// In en, this message translates to:
+  /// **'Timely rain alerts before you step outside'**
+  String get onboardingAlertsFeature2;
+
+  /// No description provided for @onboardingAlertsFeature3.
+  ///
+  /// In en, this message translates to:
+  /// **'Separate, custom alert settings for every location'**
+  String get onboardingAlertsFeature3;
+
+  /// No description provided for @onboardingAlertsPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather and flood data are evaluated securely on your device.'**
+  String get onboardingAlertsPrivacy;
+
+  /// No description provided for @enableWeatherAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Weather Alerts'**
+  String get enableWeatherAlerts;
 }
 
 class _AppLocalizationsDelegate
@@ -1883,6 +2113,7 @@ class _AppLocalizationsDelegate
     'pt',
     'ru',
     'sv',
+    'ta',
     'th',
     'tl',
     'tr',
@@ -1935,6 +2166,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsRu();
     case 'sv':
       return AppLocalizationsSv();
+    case 'ta':
+      return AppLocalizationsTa();
     case 'th':
       return AppLocalizationsTh();
     case 'tl':

@@ -976,4 +976,140 @@ class AppLocalizationsFr extends AppLocalizations {
   String locationSavedMessage(String location) {
     return 'Saved $location';
   }
+
+  @override
+  String get weatherAlerts => 'Weather Alerts';
+
+  @override
+  String get weatherAlertsSubtitle =>
+      'Beta • Notifications may not work as expected';
+
+  @override
+  String get weatherAlertsBetaNotice =>
+      'Notifications is a beta feature and may not work as expected.';
+
+  @override
+  String get enableAlertsForLocation => 'Enable Alerts for this Location';
+
+  @override
+  String get enableAlertsForLocationDesc =>
+      'Receive notifications based on weather conditions here';
+
+  @override
+  String get floodAndSevere => 'Severe Weather & Floods';
+
+  @override
+  String get floodAlertsTitle => 'Flood & Flash Flood Warnings';
+
+  @override
+  String get floodAlertsDesc =>
+      'Immediate warnings for water-level and flash flood risks';
+
+  @override
+  String get severeStormsTitle => 'Thunderstorms & Severe Storms';
+
+  @override
+  String get severeStormsDesc =>
+      'Alerts for lightning, heavy thundery showers, and squalls';
+
+  @override
+  String get highWindTitle => 'High Wind Warnings';
+
+  @override
+  String highWindDesc(String speed) {
+    return 'Alert when sustained wind speed exceeds $speed';
+  }
+
+  @override
+  String get rainAlertsTitle => 'Impending Rain Alerts';
+
+  @override
+  String get rainAlertsDesc => 'Get notified before rain starts in your area';
+
+  @override
+  String get rainChanceThresholdTitle => 'Rain Probability Threshold';
+
+  @override
+  String get temperatureAndSun => 'Temperature & Sun';
+
+  @override
+  String get extremeHeatTitle => 'Extreme Heat Advisory';
+
+  @override
+  String extremeHeatDesc(String temp) {
+    return 'Alert when temperatures rise above $temp';
+  }
+
+  @override
+  String get coldSnapTitle => 'Cold Temperature Warning';
+
+  @override
+  String coldSnapDesc(String temp) {
+    return 'Alert when temperatures drop below $temp';
+  }
+
+  @override
+  String get uvAlertTitle => 'High UV Index Warning';
+
+  @override
+  String uvAlertDesc(String uv) {
+    return 'Alert when UV index reaches $uv or higher';
+  }
+
+  @override
+  String get airQualityTitle => 'Air Quality Advisories';
+
+  @override
+  String get airQualityDesc =>
+      'Alert when air quality (AQI / PSI) reaches unhealthy levels';
+
+  @override
+  String get dailyBriefingTitle => 'Daily Forecast Briefing';
+
+  @override
+  String get dailyBriefingDesc =>
+      'Receive a morning summary of today\'s weather forecast';
+
+  @override
+  String get briefingTime => 'Briefing Time';
+
+  @override
+  String get quietHours => 'Quiet Hours';
+
+  @override
+  String get quietHoursDesc =>
+      'Mute non-critical alerts between scheduled hours';
+
+  @override
+  String get sendTestAlert => 'Send Test Alert';
+
+  @override
+  String get testAlertSent =>
+      'Test notification sent! Check your notification shade.';
+
+  @override
+  String get onboardingAlertsTitle => 'Weather Alerts & Advisories';
+
+  @override
+  String get onboardingAlertsDesc =>
+      'Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.';
+
+  @override
+  String get onboardingAlertsFeature1 =>
+      'Flash flood advisories & severe storm warnings';
+
+  @override
+  String get onboardingAlertsFeature2 =>
+      'Timely rain alerts before you step outside';
+
+  @override
+  String get onboardingAlertsFeature3 =>
+      'Separate, custom alert settings for every location';
+
+  @override
+  String get onboardingAlertsPrivacy =>
+      'Weather and flood data are evaluated securely on your device.';
+
+  @override
+  String get enableWeatherAlerts => 'Enable Weather Alerts';
 }

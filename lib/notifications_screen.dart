@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 import 'l10n/app_localizations.dart';
 import 'package:m3e_core/m3e_core.dart';
+import 'weather_alerts_screen.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -60,6 +61,20 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.notifications),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.tune_rounded),
+            tooltip: AppLocalizations.of(context)!.weatherAlerts,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const WeatherAlertsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: _buildBody(),
     );

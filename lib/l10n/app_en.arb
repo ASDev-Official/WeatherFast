@@ -481,5 +481,71 @@
         "type": "String"
       }
     }
-  }
+  },
+  "weatherAlerts": "Weather Alerts",
+  "weatherAlertsSubtitle": "Beta • Notifications may not work as expected",
+  "weatherAlertsBetaNotice": "Notifications is a beta feature and may not work as expected.",
+  "enableAlertsForLocation": "Enable Alerts for this Location",
+  "enableAlertsForLocationDesc": "Receive notifications based on weather conditions here",
+  "floodAndSevere": "Severe Weather & Floods",
+  "floodAlertsTitle": "Flood & Flash Flood Warnings",
+  "floodAlertsDesc": "Immediate warnings for water-level and flash flood risks",
+  "severeStormsTitle": "Thunderstorms & Severe Storms",
+  "severeStormsDesc": "Alerts for lightning, heavy thundery showers, and squalls",
+  "highWindTitle": "High Wind Warnings",
+  "highWindDesc": "Alert when sustained wind speed exceeds {speed}",
+  "@highWindDesc": {
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
+  },
+  "rainAlertsTitle": "Impending Rain Alerts",
+  "rainAlertsDesc": "Get notified before rain starts in your area",
+  "rainChanceThresholdTitle": "Rain Probability Threshold",
+  "temperatureAndSun": "Temperature & Sun",
+  "extremeHeatTitle": "Extreme Heat Advisory",
+  "extremeHeatDesc": "Alert when temperatures rise above {temp}",
+  "@extremeHeatDesc": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      }
+    }
+  },
+  "coldSnapTitle": "Cold Temperature Warning",
+  "coldSnapDesc": "Alert when temperatures drop below {temp}",
+  "@coldSnapDesc": {
+    "placeholders": {
+      "temp": {
+        "type": "String"
+      }
+    }
+  },
+  "uvAlertTitle": "High UV Index Warning",
+  "uvAlertDesc": "Alert when UV index reaches {uv} or higher",
+  "@uvAlertDesc": {
+    "placeholders": {
+      "uv": {
+        "type": "String"
+      }
+    }
+  },
+  "airQualityTitle": "Air Quality Advisories",
+  "airQualityDesc": "Alert when air quality (AQI / PSI) reaches unhealthy levels",
+  "dailyBriefingTitle": "Daily Forecast Briefing",
+  "dailyBriefingDesc": "Receive a morning summary of today's weather forecast",
+  "briefingTime": "Briefing Time",
+  "quietHours": "Quiet Hours",
+  "quietHoursDesc": "Mute non-critical alerts between scheduled hours",
+  "sendTestAlert": "Send Test Alert",
+  "testAlertSent": "Test notification sent! Check your notification shade.",
+  "onboardingAlertsTitle": "Weather Alerts & Advisories",
+  "onboardingAlertsDesc": "Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.",
+  "onboardingAlertsFeature1": "Flash flood advisories & severe storm warnings",
+  "onboardingAlertsFeature2": "Timely rain alerts before you step outside",
+  "onboardingAlertsFeature3": "Separate, custom alert settings for every location",
+  "onboardingAlertsPrivacy": "Weather and flood data are evaluated securely on your device.",
+  "enableWeatherAlerts": "Enable Weather Alerts"
 }

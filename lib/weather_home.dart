@@ -26,6 +26,7 @@ import 'weather_service_sg.dart';
 import 'services/calendar_service.dart';
 import 'calendar_settings_screen.dart';
 import 'calendar_event_details_screen.dart';
+import 'ui/weather_alerts_onboarding_modal.dart';
 import 'package:m3e_core/m3e_core.dart';
 
 class WeatherHome extends StatefulWidget {
@@ -624,15 +625,33 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
     super.initState();
     _initializeExpandedDays();
     _hydrateAndRefresh();
-    _checkCalendarPromo();
+    _checkOnboardingPromos();
   }
 
-  Future<void> _checkCalendarPromo() async {
+  Future<void> _checkOnboardingPromos() async {
     if (kIsWeb) return;
-    final promoShown = await PreferencesService.loadCalendarPromoShown();
-    if (!promoShown && mounted) {
+    final calendarPromoShown = await PreferencesService.loadCalendarPromoShown();
+    if (!calendarPromoShown && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showCalendarPromoModal();
+      });
+      return;
+    }
+
+    final alertsPromptShown = await PreferencesService.loadWeatherAlertsPromptShown();
+    if (!alertsPromptShown && mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        WeatherAlertsOnboardingModal.show(context);
+      });
+    }
+  }
+
+  void _checkWeatherAlertsPromptAfterCalendar() async {
+    if (kIsWeb) return;
+    final alertsPromptShown = await PreferencesService.loadWeatherAlertsPromptShown();
+    if (!alertsPromptShown && mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        WeatherAlertsOnboardingModal.show(context);
       });
     }
   }
@@ -738,7 +757,9 @@ class _WeatherPageContentState extends State<_WeatherPageContent> with Automatic
           ),
         );
       },
-    );
+    ).then((_) {
+      _checkWeatherAlertsPromptAfterCalendar();
+    });
   }
 
   void _initializeExpandedDays() {

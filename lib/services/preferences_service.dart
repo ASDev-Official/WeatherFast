@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/location_alert_config.dart';
 
 class PreferencesService {
   static const String _kUseFahrenheit = 'use_fahrenheit';
@@ -189,5 +190,70 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_kWidgetLocation, value);
   }
+
+  static const String _kWeatherAlertsPromptShown = 'weather_alerts_prompt_shown_v1';
+
+  static Future<bool> loadWeatherAlertsPromptShown() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_kWeatherAlertsPromptShown) ?? false;
+  }
+
+  static Future<void> saveWeatherAlertsPromptShown(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kWeatherAlertsPromptShown, value);
+  }
+
+  static String _alertConfigKey(String locationId) => 'wf_alert_config_${locationId.trim().toLowerCase()}';
+
+  static Future<LocationAlertConfig> loadLocationAlertConfig(
+    String locationId, {
+    String? defaultName,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonStr = prefs.getString(_alertConfigKey(locationId));
+    if (jsonStr != null && jsonStr.isNotEmpty) {
+      try {
+        return LocationAlertConfig.fromJson(jsonStr);
+      } catch (_) {}
+    }
+    return LocationAlertConfig(
+      locationId: locationId,
+      locationName: defaultName ?? (locationId == 'current_location' ? 'Current Location' : locationId),
+      enabled: false,
+    );
+  }
+
+  static Future<void> saveLocationAlertConfig(LocationAlertConfig config) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_alertConfigKey(config.locationId), config.toJson());
+  }
+
+  static String _alertTimestampKey(String locationId, String alertType) =>
+      'wf_last_alert_${locationId.trim().toLowerCase()}_$alertType';
+
+  static Future<DateTime?> loadLastAlertTimestamp(String locationId, String alertType) async {
+    final prefs = await SharedPreferences.getInstance();
+    final ms = prefs.getInt(_alertTimestampKey(locationId, alertType));
+    if (ms == null) return null;
+    return DateTime.fromMillisecondsSinceEpoch(ms);
+  }
+
+  static Future<void> saveLastAlertTimestamp(String locationId, String alertType, DateTime time) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_alertTimestampKey(locationId, alertType), time.millisecondsSinceEpoch);
+  }
+
+  static const String _kLastFloodAlertIds = 'wf_last_flood_alert_ids';
+
+  static Future<List<String>> loadLastFloodAlertIds() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList(_kLastFloodAlertIds) ?? [];
+  }
+
+  static Future<void> saveLastFloodAlertIds(List<String> ids) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_kLastFloodAlertIds, ids);
+  }
 }
+
 

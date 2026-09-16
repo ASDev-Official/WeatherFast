@@ -11,6 +11,7 @@ import 'detail_screen.dart';
 import 'services/global_data.dart';
 import 'services/preferences_service.dart';
 import 'services/widget_refresh_service.dart';
+import 'services/notification_service.dart';
 import 'settings_screen.dart';
 import 'time_utils.dart';
 import 'weather_home.dart';
@@ -32,6 +33,7 @@ Future<void> main() async {
   await TimeUtils.initialize();
   await WidgetRefreshService.initialize();
   await RatingService.initialize();
+  await NotificationService().initialize();
   GlobalData.useFahrenheit = await PreferencesService.loadUseFahrenheit();
   GlobalData.windUnit = await PreferencesService.loadWindUnit();
   GlobalData.visibilityUnit = await PreferencesService.loadVisibilityUnit();
