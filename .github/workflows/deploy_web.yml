@@ -63,16 +63,21 @@ jobs:
           set -e
           DEPLOY_BRANCH="web-deploy/${{ github.run_number }}"
 
+          # Discard local build modifications (e.g. pubspec.lock touched by pub get, .env, build/)
+          git reset --hard
+          git clean -fdx
+
           if git ls-remote --exit-code --heads origin web; then
             git fetch origin web --depth=1
-            git checkout -B "$DEPLOY_BRANCH" origin/web
+            git checkout --force -B "$DEPLOY_BRANCH" origin/web
           else
             echo "web branch does not exist yet — creating orphan"
             git checkout --orphan "$DEPLOY_BRANCH"
           fi
 
-          # Wipe tracked files so we start clean
+          # Wipe tracked and untracked files so we start completely clean
           git rm -rf . --quiet || true
+          git clean -fdx --quiet || true
 
           # Copy new build output into the working tree
           cp -r /tmp/flutter-web-build/. .
