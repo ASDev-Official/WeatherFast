@@ -3,6 +3,7 @@
 [![Flutter CI](https://github.com/ASDev-Official/weatherfast/actions/workflows/flutter_ci.yml/badge.svg)](https://github.com/ASDev-Official/weatherfast/actions/workflows/flutter_ci.yml)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fweatherfast.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fweatherfast?ref=badge_shield)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FASDev-Official%2Fweatherfast.svg?type=shield&issueType=security)](https://app.fossa.com/projects/git%2Bgithub.com%2FASDev-Official%2Fweatherfast?ref=badge_shield)
+[![Open Source Helpers](https://www.codetriage.com/asdev-official/weatherfast/badges/users.svg)](https://www.codetriage.com/asdev-official/weatherfast)
 
 Fast, focused weather app built with Flutter. Get instant conditions, intelligent insights, and a clean animated experience across Android, iOS, web, and desktop.
 
