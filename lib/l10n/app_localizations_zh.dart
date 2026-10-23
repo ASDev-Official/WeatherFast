@@ -75,10 +75,10 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get feelsLike => 'Feels like';
+  String get feelsLike => '体感';
 
   @override
-  String get humidity => 'Humidity';
+  String get humidity => '湿度';
 
   @override
   String get uvIndex => '紫外线指数';

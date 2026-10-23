@@ -981,7 +981,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get weatherAlertsBetaNotice =>
-      'Notifications is a beta feature and may not work as expected.';
+      'Notifications is a beta feature and may not work as expected।';
 
   @override
   String get enableAlertsForLocation => 'Enable Alerts for this Location';
@@ -1080,14 +1080,14 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get testAlertSent =>
-      'Test notification sent! Check your notification shade.';
+      'Test notification sent! Check your notification shade।';
 
   @override
   String get onboardingAlertsTitle => 'Weather Alerts & Advisories';
 
   @override
   String get onboardingAlertsDesc =>
-      'Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.';
+      'Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations।';
 
   @override
   String get onboardingAlertsFeature1 =>
@@ -1103,7 +1103,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboardingAlertsPrivacy =>
-      'Weather and flood data are evaluated securely on your device.';
+      'Weather and flood data are evaluated securely on your device।';
 
   @override
   String get enableWeatherAlerts => 'Enable Weather Alerts';
