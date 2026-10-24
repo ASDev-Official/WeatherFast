@@ -11,7 +11,7 @@
     },
     "futureAdviceStorm": "Posible tormenta en las próximas horas. Termina tus actividades al aire libre pronto.",
     "futureAdviceRain": "Probabilidad de lluvia en ~ 3 horas. Mantén un paraguas cercas.",
-    "highLowTemp": "Max{high}° · · · · · Min {low}°",
+    "highLowTemp": "Max {high}° · · · · · Min {low}°",
     "@highLowTemp": {
         "placeholders": {
             "high": {
