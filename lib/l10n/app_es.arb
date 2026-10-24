@@ -187,7 +187,7 @@
         }
     },
     "todaysTimeline": "Linea del tiempo para hoy",
-    "neaAttribution": "Contiene información de pronósticos meteorológicos de 2 horas, pronósticos meteorológicos de 24 horas, pronósticos meteorológicos de 4 días, temperatura del aire en Singapur, precipitaciones en Singapur, humedad relativa en Singapur, humedad relativa en Singapur, velocidad del viento en Singapur e índice de estándares de contaminantes (PSI) consultados el {date} de la Agencia Nacional de Medio Ambiente, que se pone a disposición bajo los términos de la  · ",
+    "neaAttribution": "Contiene información de pronósticos meteorológicos de 2 horas, pronósticos meteorológicos de 24 horas, pronósticos meteorológicos de 4 días, temperatura del aire en Singapur, precipitaciones en Singapur, humedad relativa en Singapur, humedad relativa en Singapur, velocidad del viento en Singapur e índice de estándares de contaminantes (PSI) consultados el {date} de la Agencia Nacional de Medio Ambiente, que se pone a disposición bajo los términos de la ",
     "@neaAttribution": {
         "placeholders": {
             "date": {
@@ -482,20 +482,20 @@
             }
         }
     },
-    "onboardingAlertsDesc": "Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.",
-    "temperatureAndSun": "Temperature & Sun",
-    "severeStormsDesc": "Alerts for lightning, heavy thundery showers, and squalls",
-    "enableAlertsForLocation": "Enable Alerts for this Location",
-    "enableAlertsForLocationDesc": "Receive notifications based on weather conditions here",
-    "quietHoursDesc": "Mute non-critical alerts between scheduled hours",
-    "rainAlertsDesc": "Get notified before rain starts in your area",
-    "floodAndSevere": "Severe Weather & Floods",
-    "onboardingAlertsTitle": "Weather Alerts & Advisories",
-    "dailyBriefingDesc": "Receive a morning summary of today's weather forecast",
-    "extremeHeatTitle": "Extreme Heat Advisory",
-    "quietHours": "Quiet Hours",
-    "highWindTitle": "High Wind Warnings",
-    "extremeHeatDesc": "Alert when temperatures rise above {temp}",
+    "onboardingAlertsDesc": "Anticípese a los cambios meteorológicos con alertas de inundaciones repentinas en tiempo real, avisos de lluvia inminente y notificaciones personalizables para cada una de sus ubicaciones.",
+    "temperatureAndSun": "Temperatura y Sol",
+    "severeStormsDesc": "Alertas por rayos, fuertes chubascos tormentosos y rachas de viento",
+    "enableAlertsForLocation": "Activar alertas para esta ubicación",
+    "enableAlertsForLocationDesc": "Recibir notificaciones basadas en el clima aquí",
+    "quietHoursDesc": "Silenciar las alertas no críticas entre las horas programadas",
+    "rainAlertsDesc": "Recibe una notificación antes de que empiece a llover en tu zona",
+    "floodAndSevere": "Clima Severo e Inundaciones",
+    "onboardingAlertsTitle": "Alertas de Clima y Consejos",
+    "dailyBriefingDesc": "Recibe un resumen matutino del pronóstico meteorológico de hoy",
+    "extremeHeatTitle": "Aviso de Calor Extremo",
+    "quietHours": "Horas de silencio",
+    "highWindTitle": "Alertas por Vientos Fuertes",
+    "extremeHeatDesc": "Avisar cuando las temperaturas superen {temp}",
     "@extremeHeatDesc": {
         "placeholders": {
             "temp": {
@@ -503,7 +503,7 @@
             }
         }
     },
-    "uvAlertDesc": "Alert when UV index reaches {uv} or higher",
+    "uvAlertDesc": "Avisar cuando el índice UV alcance {uv} o más",
     "@uvAlertDesc": {
         "placeholders": {
             "uv": {
@@ -511,19 +511,19 @@
             }
         }
     },
-    "onboardingAlertsFeature3": "Separate, custom alert settings for every location",
-    "dailyBriefingTitle": "Daily Forecast Briefing",
-    "sendTestAlert": "Send Test Alert",
-    "uvAlertTitle": "High UV Index Warning",
-    "coldSnapTitle": "Cold Temperature Warning",
-    "weatherAlerts": "Weather Alerts",
-    "floodAlertsTitle": "Flood & Flash Flood Warnings",
-    "weatherAlertsSubtitle": "Beta • Notifications may not work as expected",
-    "testAlertSent": "Test notification sent! Check your notification shade.",
-    "briefingTime": "Briefing Time",
-    "airQualityDesc": "Alert when air quality (AQI / PSI) reaches unhealthy levels",
-    "onboardingAlertsPrivacy": "Weather and flood data are evaluated securely on your device.",
-    "coldSnapDesc": "Alert when temperatures drop below {temp}",
+    "onboardingAlertsFeature3": "Configuración de alertas personalizada e independiente para cada ubicación",
+    "dailyBriefingTitle": "Resumen del pronóstico diario",
+    "sendTestAlert": "Enviar Alerta de Prueba",
+    "uvAlertTitle": "Advertencia de índice UV alto",
+    "coldSnapTitle": "Advertencia de Bajas Temperaturas",
+    "weatherAlerts": "Alertas de Clima",
+    "floodAlertsTitle": "Avisos de Inundación e Inundación repentina",
+    "weatherAlertsSubtitle": "Beta • Las notificaciones pueden no funcionar como deberían",
+    "testAlertSent": "Notificación de prueba enviada! Revisa tus notificaciones.",
+    "briefingTime": "Hora del Resumen",
+    "airQualityDesc": "Recibir una alerta cuando la calidad del aire (AQI / PSI) alcance niveles poco saludables",
+    "onboardingAlertsPrivacy": "Los datos meteorológicos y de inundaciones se analizan de forma segura en su dispositivo.",
+    "coldSnapDesc": "Alerta cuando las temperaturas bajen de {temp}",
     "@coldSnapDesc": {
         "placeholders": {
             "temp": {
@@ -531,14 +531,14 @@
             }
         }
     },
-    "rainChanceThresholdTitle": "Rain Probability Threshold",
-    "onboardingAlertsFeature1": "Flash flood advisories & severe storm warnings",
-    "enableWeatherAlerts": "Enable Weather Alerts",
-    "onboardingAlertsFeature2": "Timely rain alerts before you step outside",
-    "severeStormsTitle": "Thunderstorms & Severe Storms",
-    "airQualityTitle": "Air Quality Advisories",
-    "floodAlertsDesc": "Immediate warnings for water-level and flash flood risks",
-    "highWindDesc": "Alert when sustained wind speed exceeds {speed}",
+    "rainChanceThresholdTitle": "Umbral de probabilidad de lluvia",
+    "onboardingAlertsFeature1": "Avisos de inundaciones repentinas y alertas de tormentas severas",
+    "enableWeatherAlerts": "Habilitar alertas meteorológicas",
+    "onboardingAlertsFeature2": "Reciba alertas de lluvia oportunas antes de salir a la calle",
+    "severeStormsTitle": "Tormentas eléctricas y Tormentas Severas",
+    "airQualityTitle": "Avisos sobre la calidad del aire",
+    "floodAlertsDesc": "Aviso inmediato por riesgos de nivel del mar y riesgo de inundación",
+    "highWindDesc": "Alertar cuando la velocidad sostenida del viento supere {speed}",
     "@highWindDesc": {
         "placeholders": {
             "speed": {
@@ -546,6 +546,6 @@
             }
         }
     },
-    "rainAlertsTitle": "Impending Rain Alerts",
-    "weatherAlertsBetaNotice": "Notifications is a beta feature and may not work as expected."
+    "rainAlertsTitle": "Alertas de lluvia inminente",
+    "weatherAlertsBetaNotice": "Las notificaciones son una función beta y podrían no funcionar como deberían."
 }
