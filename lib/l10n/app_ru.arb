@@ -470,8 +470,8 @@
     },
     "currentLocation": "Текущее место",
     "locations": "Места",
-    "savedLocations": "Сохраненные места",
-    "noSavedLocations": "Сохраненные местоположения отсутствуют",
+    "savedLocations": "Сохранённые места",
+    "noSavedLocations": "Сохранённые места отсутствуют",
     "saveLocation": "Сохранить местоположение",
     "removeLocation": "Удалить местоположение",
     "locationSavedMessage": "Сохранено {location}",
@@ -482,20 +482,20 @@
             }
         }
     },
-    "onboardingAlertsDesc": "Stay ahead of changing weather with real-time flash flood warnings, impending rain alerts, and customizable notifications for each of your locations.",
-    "temperatureAndSun": "Temperature & Sun",
-    "severeStormsDesc": "Alerts for lightning, heavy thundery showers, and squalls",
-    "enableAlertsForLocation": "Enable Alerts for this Location",
-    "enableAlertsForLocationDesc": "Receive notifications based on weather conditions here",
-    "quietHoursDesc": "Mute non-critical alerts between scheduled hours",
-    "rainAlertsDesc": "Get notified before rain starts in your area",
-    "floodAndSevere": "Severe Weather & Floods",
-    "onboardingAlertsTitle": "Weather Alerts & Advisories",
-    "dailyBriefingDesc": "Receive a morning summary of today's weather forecast",
-    "extremeHeatTitle": "Extreme Heat Advisory",
-    "quietHours": "Quiet Hours",
-    "highWindTitle": "High Wind Warnings",
-    "extremeHeatDesc": "Alert when temperatures rise above {temp}",
+    "onboardingAlertsDesc": "Будьте в курсе меняющейся погоды благодаря предупреждениям о внезапных паводках в реальном времени, оповещениям о приближающемся дожде и настраиваемым уведомлениям для каждого из ваших местоположений.",
+    "temperatureAndSun": "Температура и солнце",
+    "severeStormsDesc": "Оповещения о молниях, сильных грозовых ливнях и шквалах",
+    "enableAlertsForLocation": "Включить оповещения для этого местоположения",
+    "enableAlertsForLocationDesc": "Получать уведомления о погодных условиях здесь",
+    "quietHoursDesc": "Отключать некритичные оповещения в заданные часы",
+    "rainAlertsDesc": "Получать уведомление до начала дождя в вашем районе",
+    "floodAndSevere": "Опасная погода и наводнения",
+    "onboardingAlertsTitle": "Погодные оповещения и уведомления",
+    "dailyBriefingDesc": "Получать утреннюю сводку прогноза погоды на сегодня",
+    "extremeHeatTitle": "Предупреждение об экстремальной жаре",
+    "quietHours": "Тихие часы",
+    "highWindTitle": "Предупреждения о сильном ветре",
+    "extremeHeatDesc": "Оповещать, когда температура поднимается выше {temp}",
     "@extremeHeatDesc": {
         "placeholders": {
             "temp": {
@@ -503,7 +503,7 @@
             }
         }
     },
-    "uvAlertDesc": "Alert when UV index reaches {uv} or higher",
+    "uvAlertDesc": "Оповещать, когда УФ-индекс достигает {uv} или выше",
     "@uvAlertDesc": {
         "placeholders": {
             "uv": {
@@ -511,19 +511,19 @@
             }
         }
     },
-    "onboardingAlertsFeature3": "Separate, custom alert settings for every location",
-    "dailyBriefingTitle": "Daily Forecast Briefing",
-    "sendTestAlert": "Send Test Alert",
-    "uvAlertTitle": "High UV Index Warning",
-    "coldSnapTitle": "Cold Temperature Warning",
-    "weatherAlerts": "Weather Alerts",
-    "floodAlertsTitle": "Flood & Flash Flood Warnings",
-    "weatherAlertsSubtitle": "Beta • Notifications may not work as expected",
-    "testAlertSent": "Test notification sent! Check your notification shade.",
-    "briefingTime": "Briefing Time",
-    "airQualityDesc": "Alert when air quality (AQI / PSI) reaches unhealthy levels",
-    "onboardingAlertsPrivacy": "Weather and flood data are evaluated securely on your device.",
-    "coldSnapDesc": "Alert when temperatures drop below {temp}",
+    "onboardingAlertsFeature3": "Отдельные настраиваемые параметры оповещений для каждого местоположения",
+    "dailyBriefingTitle": "Ежедневная сводка прогноза",
+    "sendTestAlert": "Отправить тестовое оповещение",
+    "uvAlertTitle": "Предупреждение о высоком УФ-индексе",
+    "coldSnapTitle": "Предупреждение о низкой температуре",
+    "weatherAlerts": "Погодные оповещения",
+    "floodAlertsTitle": "Предупреждения о наводнениях и внезапных паводках",
+    "weatherAlertsSubtitle": "Бета • Уведомления могут работать некорректно",
+    "testAlertSent": "Тестовое уведомление отправлено! Проверьте панель уведомлений.",
+    "briefingTime": "Время сводки",
+    "airQualityDesc": "Оповещать, когда качество воздуха (AQI / PSI) достигает нездорового уровня",
+    "onboardingAlertsPrivacy": "Погодные данные и данные о наводнениях безопасно обрабатываются на вашем устройстве.",
+    "coldSnapDesc": "Оповещать, когда температура опускается ниже {temp}",
     "@coldSnapDesc": {
         "placeholders": {
             "temp": {
@@ -531,14 +531,14 @@
             }
         }
     },
-    "rainChanceThresholdTitle": "Rain Probability Threshold",
-    "onboardingAlertsFeature1": "Flash flood advisories & severe storm warnings",
-    "enableWeatherAlerts": "Enable Weather Alerts",
-    "onboardingAlertsFeature2": "Timely rain alerts before you step outside",
-    "severeStormsTitle": "Thunderstorms & Severe Storms",
-    "airQualityTitle": "Air Quality Advisories",
-    "floodAlertsDesc": "Immediate warnings for water-level and flash flood risks",
-    "highWindDesc": "Alert when sustained wind speed exceeds {speed}",
+    "rainChanceThresholdTitle": "Порог вероятности дождя",
+    "onboardingAlertsFeature1": "Уведомления о внезапных паводках и предупреждения о сильных штормах",
+    "enableWeatherAlerts": "Включить погодные оповещения",
+    "onboardingAlertsFeature2": "Своевременные оповещения о дожде перед выходом на улицу",
+    "severeStormsTitle": "Грозы и сильные штормы",
+    "airQualityTitle": "Уведомления о качестве воздуха",
+    "floodAlertsDesc": "Немедленные предупреждения о рисках уровня воды и внезапных паводков",
+    "highWindDesc": "Оповещать, когда устойчивая скорость ветра превышает {speed}",
     "@highWindDesc": {
         "placeholders": {
             "speed": {
@@ -546,6 +546,6 @@
             }
         }
     },
-    "rainAlertsTitle": "Impending Rain Alerts",
-    "weatherAlertsBetaNotice": "Notifications is a beta feature and may not work as expected."
+    "rainAlertsTitle": "Оповещения о приближающемся дожде",
+    "weatherAlertsBetaNotice": "Уведомления — бета-функция и могут работать некорректно."
 }
