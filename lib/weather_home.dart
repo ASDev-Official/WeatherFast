@@ -439,9 +439,12 @@ class _WeatherHomeState extends State<WeatherHome> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        appBarTitle,
-                        style: Theme.of(context).textTheme.titleLarge,
+                      Flexible(
+                        child: Text(
+                          appBarTitle,
+                          style: Theme.of(context).textTheme.titleLarge,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                       if (isCurrentLocation) ...[
                         const SizedBox(width: 6),
@@ -456,11 +459,17 @@ class _WeatherHomeState extends State<WeatherHome> {
                   Builder(builder: (context) {
                     final activeTime = _resolvedTimes[activeKey] ?? _localTime;
                     if (activeTime == null) return const SizedBox.shrink();
-                    return Text(
-                      '${DateFormat('EEEE, MMM d').format(activeTime)} • ${DateFormat('h:mm a').format(activeTime)}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                    return FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${DateFormat('EEE, MMM d').format(activeTime)} • ${DateFormat('h:mm a').format(activeTime)}',
+                        maxLines: 1,
+                        softWrap: false,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                      ),
                     );
                   }),
                 ],

@@ -1,4 +1,4 @@
-import 'package:device_calendar/device_calendar.dart';
+import 'package:device_calendar_plus/device_calendar_plus.dart';
 import 'preferences_service.dart';
 
 class CalendarEventItem {
@@ -18,25 +18,23 @@ class CalendarEventItem {
 }
 
 class CalendarService {
-  static final DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+  static final DeviceCalendar _deviceCalendar = DeviceCalendar.instance;
 
   static Future<bool> requestPermissions() async {
-    var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
-    if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
-      permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-      if (!permissionsGranted.isSuccess || !permissionsGranted.data!) {
-        return false;
-      }
-    }
-    return true;
+    final status = await _deviceCalendar.requestPermissions();
+    return status == CalendarPermissionStatus.granted ||
+        status == CalendarPermissionStatus.writeOnly;
   }
 
   static Future<List<Calendar>> getCalendars() async {
     final hasPermissions = await requestPermissions();
     if (!hasPermissions) return [];
     
-    final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
-    return calendarsResult.data ?? [];
+    try {
+      return await _deviceCalendar.listCalendars();
+    } catch (_) {
+      return [];
+    }
   }
 
   static Future<List<CalendarEventItem>> getTodayEventsWithLocation() async {
@@ -55,30 +53,26 @@ class CalendarService {
 
     List<CalendarEventItem> events = [];
 
-    for (String calendarId in enabledIds) {
-      try {
-        final eventsResult = await _deviceCalendarPlugin.retrieveEvents(
-          calendarId,
-          RetrieveEventsParams(startDate: startDate, endDate: endDate),
-        );
+    try {
+      final calendarEvents = await _deviceCalendar.listEvents(
+        startDate,
+        endDate,
+        calendarIds: enabledIds,
+      );
 
-        final calendarEvents = eventsResult.data;
-        if (calendarEvents != null) {
-          for (var event in calendarEvents) {
-            if (event.location != null && event.location!.isNotEmpty) {
-              events.add(CalendarEventItem(
-                title: event.title ?? 'Event',
-                location: event.location!,
-                startTime: event.start ?? DateTime.now(),
-                endTime: event.end,
-                description: event.description,
-              ));
-            }
-          }
+      for (var event in calendarEvents) {
+        if (event.location != null && event.location!.trim().isNotEmpty) {
+          events.add(CalendarEventItem(
+            title: event.title.isNotEmpty ? event.title : 'Event',
+            location: event.location!,
+            startTime: event.startDate,
+            endTime: event.endDate,
+            description: event.description,
+          ));
         }
-      } catch (_) {
-        // Skip calendar retrieval errors defensively
       }
+    } catch (_) {
+      // Skip calendar retrieval errors defensively
     }
 
     events.sort((a, b) => a.startTime.compareTo(b.startTime));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:m3e_core/m3e_core.dart';
 import 'services/preferences_service.dart';
 import 'services/calendar_service.dart';
-import 'package:device_calendar/device_calendar.dart';
+import 'package:device_calendar_plus/device_calendar_plus.dart';
 import 'l10n/app_localizations.dart';
 
 class CalendarSettingsScreen extends StatefulWidget {
@@ -169,13 +169,15 @@ class _CalendarSettingsScreenState extends State<CalendarSettingsScreen> {
                 innerRadius: 12.0,
                 color: cardColor,
                 children: _calendars.map((calendar) {
-                  final hasValidId = calendar.id != null && calendar.id!.isNotEmpty;
+                  final hasValidId = calendar.id.isNotEmpty;
                   return SwitchListTile(
-                    title: Text(calendar.name ?? AppLocalizations.of(context)!.unnamedCalendar),
+                    title: Text(calendar.name.isNotEmpty
+                        ? calendar.name
+                        : AppLocalizations.of(context)!.unnamedCalendar),
                     subtitle: Text(calendar.accountName ?? ''),
                     value: hasValidId && _enabledCalendarIds.contains(calendar.id),
                     onChanged: hasValidId
-                        ? (value) => _toggleCalendar(calendar.id!, value)
+                        ? (value) => _toggleCalendar(calendar.id, value)
                         : null,
                   );
                 }).toList(),
