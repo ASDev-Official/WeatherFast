@@ -15,11 +15,11 @@ dependencies:
     sdk: flutter
   http: ^1.6.0
   dynamic_color: ^1.9.0
-  flutter_typeahead: ^6.0.0
+  flutter_typeahead: ^7.0.1
   geolocator: ^14.1.2
   package_info_plus: ^10.2.2
   permission_handler: ^13.0.2
-  flutter_local_notifications: ^18.0.1
+  flutter_local_notifications: ^23.0.4
   intl: ^0.20.2
   timezone: ^0.11.2
   flutter_inappwebview: ^6.1.5
